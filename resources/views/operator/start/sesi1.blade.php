@@ -20,15 +20,6 @@
 <body>
     <h2>Sesi 1</h2>
 	<center>
-	<!-- <br> -->
-	<!-- <br> -->
-	<!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Logo_of_People%27s_Consultative_Assembly_Indonesia.png/1200px-Logo_of_People%27s_Consultative_Assembly_Indonesia.png" width="150">
-	<br>
-	<br> -->
-	<!-- <h1>Cerdas Cermat</h1> -->
-	<!-- <div style="position: absolute; margin: 310px 42% 0px 42%; ">
-		<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Logo_of_People%27s_Consultative_Assembly_Indonesia.png/1200px-Logo_of_People%27s_Consultative_Assembly_Indonesia.png" width="200px">
-	</div> -->
 	<canvas id="canvas" width="800px" height="800px" style="z-index: 999"></canvas>
 	</center>
 	

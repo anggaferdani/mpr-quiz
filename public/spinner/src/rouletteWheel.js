@@ -129,7 +129,7 @@ $.widget('javobyte.rouletteWheel', {
         ctx.strokeStyle = "black";
         ctx.lineWidth = 2;
 
-        ctx.font = 'bold 30px Helvetica, Arial';
+        ctx.font = 'bold 20px Helvetica, Arial';
 
         var text, textWidth;
         var i = 0;
@@ -204,14 +204,14 @@ $.widget('javobyte.rouletteWheel', {
         spinButtonImg.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Logo_of_People%27s_Consultative_Assembly_Indonesia.png/1200px-Logo_of_People%27s_Consultative_Assembly_Indonesia.png'; // Provide the URL of your image
         spinButtonImg.onload = function () {
             var aspectRatio = spinButtonImg.width / spinButtonImg.height;
-            var resizedWidth = 230; // Width to resize the image to
+            var resizedWidth = 200; // Width to resize the image to
             var resizedHeight = resizedWidth / aspectRatio;
             ctx.drawImage(spinButtonImg, cx - resizedWidth / 2, cy - resizedHeight / 2, resizedWidth, resizedHeight);
         };
 
         if (!this.is_rotating()) {
             ctx.save();
-            ctx.font = 'bold 30px Helvetica, Arial';
+            ctx.font = 'bold 20px Helvetica, Arial';
             var text = this.options.spinText;
             ctx.fillText(text, cx - ctx.measureText(text).width / 2, cy + 10);
             ctx.restore();
