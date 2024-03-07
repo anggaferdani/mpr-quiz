@@ -68,12 +68,12 @@ $.widget('javobyte.rouletteWheel', {
             this.options.colors = colors;
 
             var w, h;
-            w = this.element.width();
-            h = this.element.height();
+            w = this.element.width()/.81;
+            h = this.element.height()/.81;
 
             var base = Math.min(w, h);
-            this._options.centerX = w / 2;
-            this._options.centerY = h / 2;
+            this._options.centerX = w / 2.49;
+            this._options.centerY = h / 2.49;
 
             this._options.radius = base * 0.8 / 2;
             this._options.innerRadius = base * 0.3 / 2;
@@ -195,7 +195,6 @@ $.widget('javobyte.rouletteWheel', {
         }
 
         ctx.fillStyle = 'black';
-
         ctx.drawImage(this.options.pointer, cx + 320, cy - radius + 300, 50, 50);
 
         // Replace the spin text with an image loaded from a URL
@@ -260,6 +259,7 @@ $.widget('javobyte.rouletteWheel', {
 
         // Remove the selected item from the options
         this.options.items.splice(index, 1);
+        // console.log('this.options.items.splice(index, 1);', this.options.items.splice(index, 1))
 
         // Redraw the wheel without the removed item
         this._options.itemsToDraw--;

@@ -25,3 +25,5 @@ Route::get('/soal', function () {return view('operator.start.soal');});
 Route::get('/sesi1', function () {return view('FE.s1');});
 Route::get('/sesi1-spin', function () {return view('FE.s1-spin');});
 Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');});
+Route::get('/sesi2', function () {return view('FE.s2');});
+Route::get('/sesi2-soal', function () {return view('FE.s2-soal');});

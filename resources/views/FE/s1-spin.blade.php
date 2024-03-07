@@ -10,9 +10,6 @@
     swal2-popup swal2-modal swal2-show{
         padding: 1.5em 3em !important;
     }
-    #canvas{
-        transform: translateY(-17.5%);
-    }
 </style>
 <style>
     .top-content h2{
@@ -24,11 +21,14 @@
         height: auto;
         object-fit: contain;
     }
+    .spinwheel{
+        margin-top: -2.5%;
+    }
 </style>
 
 @section('content')
     <div class="container">
-        <div class="top-content d-flex align-items-center justify-content-between my-2">
+        <div class="top-content d-flex align-items-center justify-content-between mb-2">
             <h2>SESI 1</h2>
             <div class="d-flex align-items-center gap-4 logo-top">
                 <img src="../images/mpr.png" alt="">
@@ -36,50 +36,105 @@
             </div>
         </div>
     </div>
-    <center>
+
+    <div class="spinwheel d-flex align-items-center justify-content-center">
         <canvas id="canvas" width="650px" height="650px" style="z-index: 999"></canvas>
-        </center>
+        <img src="../images/panah.png" alt="">
+    </div>
         
         <script type="text/javascript" src="{{asset('spinner/src/rouletteWheel.js')}}"></script>
         <script type="text/javascript">
-            $(function(){
-    
-                // var items = ["NKRI", "Sejarah", "Ekonomi", "Pendidikan", "Pemerintahan","Pengetahuan Umum"];
-                var items = [
-                        { name: 'NKRI', color: '#F7F6BB' },
-                        { name: 'Sejarah', color: '#C5EBAA' },
-                        { name: 'Ekonomi', color: '#ababab' },
-                        { name: 'Pendidikan', color: '#9AD0C2' },
-                        { name: 'Pemerintahan', color: '#ECB159' },
-                        { name: 'Pengetahuan Umum', color: '#FFEECC' },
-                    ];
-    
-              $('#canvas').rouletteWheel({
-                items : items,
-                selected : function(key, value){
-                      Swal.fire({
-                      title: value.name,
-                      width: 600,
-                      padding: "3em",
-                      color: "#0000",
-                      background: "#fff url(/images/trees.png)",
-                      backdrop: `
+           $(function() {
+    var item = [
+        { name: 'NKRI', color: '#F7F6BB' },
+        { name: 'Sejarah', color: '#C5EBAA' },
+        { name: 'Ekonomi', color: '#ababab' },
+        { name: 'Pendidikan', color: '#9AD0C2' },
+        { name: 'Pemerintahan', color: '#ECB159' },
+        { name: 'Pengetahuan Umum', color: '#FFEECC' },
+    ];
+
+    // Simpan data ke local storage jika belum ada
+    if (!localStorage.getItem('wheelItem')) {
+        var saveToLocal = JSON.stringify(item);
+        localStorage.setItem('wheelItem', saveToLocal);
+    }
+
+    // Inisialisasi spinwheel dan ambil data dari local storage
+    initSpinwheel();
+
+    // Fungsi untuk inisialisasi spinwheel dan ambil data dari local storage
+    function initSpinwheel() {
+        // Ambil data dari local storage
+        var itemJSON = localStorage.getItem('wheelItem');
+        var itemsFromLocal = JSON.parse(itemJSON);
+
+        // Inisialisasi spinwheel dengan item yang ada di local storage
+        $('#canvas').rouletteWheel({
+            items: itemsFromLocal,
+            selected: function(key, value) {
+                // Simpan nama item yang dipilih ke dalam variabel selectedName
+                var selectedName = value.name;
+
+                // Hapus item yang memiliki nama yang sesuai dari local storage
+                deleteSelectedItem(selectedName);
+
+                // Tampilkan informasi item yang dipilih
+                Swal.fire({
+                    title: selectedName,
+                    width: 600,
+                    padding: "3em",
+                    color: "#0000",
+                    background: "#fff url(/images/trees.png)",
+                    backdrop: `
                         rgba(0,0,123,0.4)
                         url("/images/nyan-cat.gif")
                         left top
                         no-repeat
-                      `
-                    }).then((result) => {
-                    // Check if the user clicked "OK"
+                    `
+                }).then((result) => {
+                    // Redirect ke halaman quiz jika tombol OK diklik
                     if (result.isConfirmed) {
-                        // Use Laravel's route function to generate the URL
-                        window.location.href = '{{ url("/pilih-pertanyaan") }}';
+                        window.location.href = '{{ url("/sesi1-quiz") }}';
                     }
                 });
-                },
-                spinText : '',
-              });
-    
-            });
+
+                // Simpan data terbaru ke local storage
+                localStorage.setItem('wheelItem', JSON.stringify(itemsFromLocal));
+            },
+            spinText: '',
+        });
+    }
+
+    // Fungsi untuk mencari dan menghapus item yang memiliki nama yang sesuai
+    function deleteSelectedItem(selectedName) {
+        // Ambil data dari local storage
+        var itemJSON = localStorage.getItem('wheelItem');
+        var itemsFromLocal = JSON.parse(itemJSON);
+
+        // Filter item yang memiliki nama yang sesuai
+        itemsFromLocal = itemsFromLocal.filter(function(item) {
+            return item.name !== selectedName;
+        });
+
+        // Simpan kembali data yang telah dihapus ke local storage
+        localStorage.setItem('wheelItem', JSON.stringify(itemsFromLocal));
+    }
+
+    // Membersihkan event handler ketika meninggalkan halaman
+    $(window).on('unload', function() {
+        $(document).off('keydown');
+    });
+
+    $(document).keydown(function(event) {
+        // Pastikan tombol yang ditekan adalah spasi (keyCode 32)
+        if (event.keyCode === 32) {
+            // Panggil metode untuk memutar spinwheel
+            $('#canvas').rouletteWheel('spin');
+        }
+    });
+});
+
+
         </script>
 @endsection

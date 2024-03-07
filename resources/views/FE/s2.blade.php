@@ -23,13 +23,14 @@
         .text-sesi h3{
             font-family: "Poppins", sans-serif;
             font-weight: bold;
-            font-size: 3.6vw;
+            font-size: 3vw;
             color: #FF3421;
         }
-        .triple-tanya{
-            width: 100%;
+
+        .tanya-sesi2{
             height: 100vh;
-            object-fit: contain
+            width: 100%;
+            object-fit: contain;
         }
     </style>
 
@@ -39,11 +40,11 @@
    <div class="container">
         <div class="row align-items-center">
             <div class="col-7 text-sesi">
-                <h1>SESI 1</h1>
-                <h3>WAWASAN EMPAT PILAR</h3>
+                <h1>SESI 2</h1>
+                <h3>TEMATIK EMPAT PILAR MPR RI</h3>
             </div>
             <div class="col-5">
-                <img class="w-100 triple-tanya" src="../images/triple-tanya.png" alt="">
+                <img class="tanya-sesi2" src="../images/tanya-sesi2.png" alt="">
             </div>
         </div>
    </div>
@@ -51,12 +52,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+
     <script>
         document.addEventListener('keydown', function(event) {
             // Pastikan tombol yang ditekan adalah tombol panah kanan (keyCode 39)
             if (event.keyCode === 39) {
                 // Lakukan pengalihan ke URL route yang diinginkan
-                window.location.href = '/sesi1-spin';
+                window.location.href = '/sesi2-soal';
             } 
             if (event.keyCode === 37) {
             // Lakukan navigasi ke URL sebelumnya dalam riwayat browser
@@ -64,5 +66,6 @@
         }
         });
     </script>
+
   </body>
 </html>

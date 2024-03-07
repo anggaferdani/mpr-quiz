@@ -15,6 +15,10 @@
 
 
     <style>
+        .top-content h2{
+            font-family: 'Press Start 2P', system-ui;
+            color: #5785DD;
+        }
         .text-sesi h1{
             font-family: 'Press Start 2P', system-ui;
             font-size: 7.5vw;
@@ -23,27 +27,39 @@
         .text-sesi h3{
             font-family: "Poppins", sans-serif;
             font-weight: bold;
-            font-size: 3.6vw;
+            font-size: 3vw;
             color: #FF3421;
         }
-        .triple-tanya{
-            width: 100%;
+
+        .tanya-sesi2{
             height: 100vh;
-            object-fit: contain
+            width: 100%;
+            object-fit: contain;
         }
+
     </style>
 
   </head>
-  <body class="d-flex align-items-center" style="height: 100vh; background-image: url(../images/bg-angin.png); background-repeat: no-repeat; object-fit: contain">
+  <body style="height: 100vh; background-image: url(../images/bg-angin.png); background-repeat: no-repeat; object-fit: contain">
+
+    
+    <div class="d-flex justify-content-center">
+        <div class="top-content d-flex align-items-center justify-content-between mb-2" style="position: absolute; top: 0; width: 85%">
+            <h2>SESI 2</h2>
+            <div class="d-flex align-items-center gap-4 logo-top">
+                <img src="../images/mpr.png" alt="">
+                <img src="../images/kemendikbud.png" alt="">
+            </div>
+        </div>
+    </div>
 
    <div class="container">
         <div class="row align-items-center">
-            <div class="col-7 text-sesi">
-                <h1>SESI 1</h1>
-                <h3>WAWASAN EMPAT PILAR</h3>
+            <div class="col-7">
+                <h2 class="fw-bolder">Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!</h2>
             </div>
             <div class="col-5">
-                <img class="w-100 triple-tanya" src="../images/triple-tanya.png" alt="">
+                <img class="tanya-sesi2" src="../images/tanya-sesi2.png" alt="">
             </div>
         </div>
    </div>
@@ -51,18 +67,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-    <script>
-        document.addEventListener('keydown', function(event) {
-            // Pastikan tombol yang ditekan adalah tombol panah kanan (keyCode 39)
-            if (event.keyCode === 39) {
-                // Lakukan pengalihan ke URL route yang diinginkan
-                window.location.href = '/sesi1-spin';
-            } 
-            if (event.keyCode === 37) {
-            // Lakukan navigasi ke URL sebelumnya dalam riwayat browser
-            window.history.back();
-        }
-        });
-    </script>
   </body>
 </html>
