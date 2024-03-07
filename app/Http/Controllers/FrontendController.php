@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\TemaPertanyaan;
+use App\Models\Jawaban;
 use App\Models\Pertanyaan;
 
 
 use Illuminate\Http\Request;
+use App\Models\TemaPertanyaan;
 
 class FrontendController extends Controller
 {
@@ -29,7 +30,8 @@ class FrontendController extends Controller
     public function quizSesi1($id)
     {
         $quiz = Pertanyaan::where('id_tema', $id)->first();
-        return view('FE.s1-quiz', compact('quiz'));
+        $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
+        return view('FE.s1-quiz', compact('quiz', 'jawaban'));
     }
 
     /**

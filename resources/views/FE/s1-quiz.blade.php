@@ -114,35 +114,12 @@
         </div>
 
         <div class="jawaban ">
-
-            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="1">
-                <h5 class="mb-0">1.</h5>
-                <h5 class="mb-0 text-center w-100">Jawaban</h5>
+            @foreach($jawaban as $jw)
+            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="{{$loop->iteration}}">
+                <h5 class="mb-0">{{$loop->iteration}}.</h5>
+                <h5 class="mb-0 text-center w-100">{{$jw->jawaban}}</h5>
             </div>
-            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="2">
-                <h5 class="mb-0">2.</h5>
-                <h5 class="mb-0 text-center w-100">Jawaban</h5>
-            </div>
-            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="3">
-                <h5 class="mb-0">3.</h5>
-                <h5 class="mb-0 text-center w-100">Jawaban</h5>
-            </div>
-            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="4">
-                <h5 class="mb-0">4.</h5>
-                <h5 class="mb-0 text-center w-100">Jawaban</h5>
-            </div>
-            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="5">
-                <h5 class="mb-0">5.</h5>
-                <h5 class="mb-0 text-center w-100">Jawaban</h5>
-            </div>
-            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="6">
-                <h5 class="mb-0">6.</h5>
-                <h5 class="mb-0 text-center w-100">Jawaban</h5>
-            </div>
-            <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="7">
-                <h5 class="mb-0">7.</h5>
-                <h5 class="mb-0 text-center w-100">Jawaban</h5>
-            </div>
+            @endforeach
 
         </div>
     </div>

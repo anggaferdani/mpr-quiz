@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jawaban;
+use App\Models\Pertanyaan;
 use Illuminate\Http\Request;
 
 class JawabanController extends Controller
@@ -10,7 +11,7 @@ class JawabanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
         $jawaban = Jawaban::where('id_pertanyaan', $id)->get();
         return view('operator.jenispertanyaan.listjawaban', compact('jawaban'));
@@ -35,9 +36,16 @@ class JawabanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Jawaban $jawaban)
+    public function show($id)
     {
-        //
+        $pertanyaan = Pertanyaan::find($id);
+        $jawaban = Jawaban::where('id_pertanyaan', $id)->get();
+
+        if($pertanyaan->sesi == 1){
+            return view('operator.jenispertanyaan.listjawaban', compact('jawaban', 'pertanyaan'));
+        }else{
+            return view('operator.jenispertanyaan.listpoinsesi2', compact('jawaban', 'pertanyaan'));
+        }
     }
 
     /**

@@ -70,7 +70,7 @@
                    <tr>
                        <td class="text-center">{{$loop->iteration}}</td>
                        <td class="text-center">{{$item->pertanyaan}}</td>
-                       <td class="text-center"> <a href="#" class="btn btn-primary btn-sm-lg text-white">Pilih</a></td>
+                       <td class="text-center"> <a href="{{url('/op/list-jawaban/'.$item->id)}}" class="btn btn-primary btn-sm-lg text-white">Pilih</a></td>
                    </tr>
                    @endforeach
                 </tbody>

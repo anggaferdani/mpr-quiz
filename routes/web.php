@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\TemaPertanyaanController;
-use App\Http\Controllers\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,9 @@ Route::get('/', [QuizController::class, 'quiz'])->name('quiz');
 // Route::get('/op/sesi-2', function () {return view('operator.jenispertanyaan.sesi2');});
 
 Route::resource('/op/sesi-1', TemaPertanyaanController::class);
-Route::get('/op/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
 Route::resource('/op/pilih-pertanyaan', PertanyaanController::class);
+Route::resource('/op/list-jawaban', JawabanController::class);
+Route::get('/op/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
 
 Route::get('/sesi1', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
 Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
