@@ -68,12 +68,12 @@ $.widget('javobyte.rouletteWheel', {
             this.options.colors = colors;
 
             var w, h;
-            w = this.element.width();
-            h = this.element.height();
+            w = this.element.width()/.81;
+            h = this.element.height()/.81;
 
             var base = Math.min(w, h);
-            this._options.centerX = w / 2;
-            this._options.centerY = h / 2;
+            this._options.centerX = w / 2.49;
+            this._options.centerY = h / 2.49;
 
             this._options.radius = base * 0.8 / 2;
             this._options.innerRadius = base * 0.3 / 2;
@@ -129,7 +129,7 @@ $.widget('javobyte.rouletteWheel', {
         ctx.strokeStyle = "black";
         ctx.lineWidth = 2;
 
-        ctx.font = 'bold 30px Helvetica, Arial';
+        ctx.font = 'bold 20px Helvetica, Arial';
 
         var text, textWidth;
         var i = 0;
@@ -195,7 +195,6 @@ $.widget('javobyte.rouletteWheel', {
         }
 
         ctx.fillStyle = 'black';
-
         ctx.drawImage(this.options.pointer, cx + 320, cy - radius + 300, 50, 50);
 
         // Replace the spin text with an image loaded from a URL
@@ -204,14 +203,14 @@ $.widget('javobyte.rouletteWheel', {
         spinButtonImg.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Logo_of_People%27s_Consultative_Assembly_Indonesia.png/1200px-Logo_of_People%27s_Consultative_Assembly_Indonesia.png'; // Provide the URL of your image
         spinButtonImg.onload = function () {
             var aspectRatio = spinButtonImg.width / spinButtonImg.height;
-            var resizedWidth = 230; // Width to resize the image to
+            var resizedWidth = 200; // Width to resize the image to
             var resizedHeight = resizedWidth / aspectRatio;
             ctx.drawImage(spinButtonImg, cx - resizedWidth / 2, cy - resizedHeight / 2, resizedWidth, resizedHeight);
         };
 
         if (!this.is_rotating()) {
             ctx.save();
-            ctx.font = 'bold 30px Helvetica, Arial';
+            ctx.font = 'bold 20px Helvetica, Arial';
             var text = this.options.spinText;
             ctx.fillText(text, cx - ctx.measureText(text).width / 2, cy + 10);
             ctx.restore();
@@ -260,6 +259,7 @@ $.widget('javobyte.rouletteWheel', {
 
         // Remove the selected item from the options
         this.options.items.splice(index, 1);
+        // console.log('this.options.items.splice(index, 1);', this.options.items.splice(index, 1))
 
         // Redraw the wheel without the removed item
         this._options.itemsToDraw--;
