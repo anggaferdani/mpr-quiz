@@ -55,10 +55,16 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
-            <li class="sidebar-item {{ (request()->is('operator/jenis-pertanyaan')) ? 'active' :  '' }}">
-                <a href="/operator/jenis-pertanyaan" class='sidebar-link'>
-                <i class="bi bi-chat-left-heart"></i>
-                    <span>Jenis Pertanyaan</span>
+            <li class="sidebar-item {{ (request()->is('op/sesi-1')) ? 'active' :  '' }}">
+                <a href="/op/sesi-1" class='sidebar-link'>
+                <i class="bi bi-1-square"></i>
+                    <span>Sesi 1</span>
+                </a>
+            </li>
+            <li class="sidebar-item {{ (request()->is('op/sesi-2')) ? 'active' :  '' }}">
+                <a href="/op/sesi-2" class='sidebar-link'>
+                <i class="bi bi-2-square"></i>
+                    <span>Sesi 2</span>
                 </a>
             </li>
         </ul>

@@ -1,6 +1,6 @@
-@extends('operator.template')
+@extends('operator.layout')
 @section('title', 'Sesi 1')
-@section('template')
+@section('layout')
 <div id="pertanyaan1" class="card">
     <div class="card-header">
     <h4 class="card-title">Sesi 1</h4>
