@@ -104,13 +104,13 @@
                 <img src="../images/mpr.png" alt="">
                 <img src="../images/kemendikbud.png" alt="">
             </div>
-            <div class="countdown px-3 py-2 d-flex align-items-center">
-                <h1 id="countdown" class="mb-0">60</h1>
+            <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
+                <h1 id="countdown" class="mb-0">30</h1>
             </div>
         </div>
 
         <div class="soal d-flex justify-content-center mt-5">
-            <h4>Sebutkan pecahan uang kertas dan uang koin TE (Tahun Emisi) 2022!</h4>
+            <h4>{{ $quiz->pertanyaan }}</h4>
         </div>
 
         <div class="jawaban ">

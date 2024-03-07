@@ -45,14 +45,12 @@
         <script type="text/javascript" src="{{asset('spinner/src/rouletteWheel.js')}}"></script>
         <script type="text/javascript">
            $(function() {
-    var item = [
-        { name: 'NKRI', color: '#F7F6BB' },
-        { name: 'Sejarah', color: '#C5EBAA' },
-        { name: 'Ekonomi', color: '#ababab' },
-        { name: 'Pendidikan', color: '#9AD0C2' },
-        { name: 'Pemerintahan', color: '#ECB159' },
-        { name: 'Pengetahuan Umum', color: '#FFEECC' },
-    ];
+            var item = [
+                @foreach ($tema as $t)
+                    { id: '{{ $t->id }}' ,name: '{{ $t->tema }}' },
+                @endforeach
+            ];
+            console.log('item', item)
 
     // Simpan data ke local storage jika belum ada
     if (!localStorage.getItem('wheelItem')) {
@@ -75,6 +73,7 @@
             selected: function(key, value) {
                 // Simpan nama item yang dipilih ke dalam variabel selectedName
                 var selectedName = value.name;
+                var selectedid = value.id;
 
                 // Hapus item yang memiliki nama yang sesuai dari local storage
                 deleteSelectedItem(selectedName);
@@ -82,6 +81,7 @@
                 // Tampilkan informasi item yang dipilih
                 Swal.fire({
                     title: selectedName,
+                    id : selectedid,
                     width: 600,
                     padding: "3em",
                     color: "#0000",
@@ -95,7 +95,7 @@
                 }).then((result) => {
                     // Redirect ke halaman quiz jika tombol OK diklik
                     if (result.isConfirmed) {
-                        window.location.href = '{{ url("/sesi1-quiz") }}';
+                        window.location.href = "/sesi1-quiz/" + selectedid;
                     }
                 });
 

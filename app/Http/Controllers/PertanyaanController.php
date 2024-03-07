@@ -30,7 +30,7 @@ class PertanyaanController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
         // dd($request);
         $this->validate($request,[
@@ -40,7 +40,7 @@ class PertanyaanController extends Controller
         ]);
 
         $pertanyaan = new Pertanyaan();
-        $pertanyaan->id_tema = $id;
+        $pertanyaan->id_tema = $request->id_tema;
         $pertanyaan->pertanyaan = $request->pertanyaan;
         $pertanyaan->save();
 
@@ -61,9 +61,11 @@ class PertanyaanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pertanyaan $pertanyaan)
+    public function show($id)
     {
-        //
+        $tema = TemaPertanyaan::find($id);
+        $pertanyaan = Pertanyaan::where('id_tema', $id)->latest()->get();
+        return view('operator.jenispertanyaan.pertanyaan', compact('pertanyaan', 'tema'));
     }
 
     /**

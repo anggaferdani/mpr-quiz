@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\TemaPertanyaanController;
+use App\Http\Controllers\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +24,13 @@ Route::get('/', [QuizController::class, 'quiz'])->name('quiz');
 
 Route::resource('/op/sesi-1', TemaPertanyaanController::class);
 Route::get('/op/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
-Route::resource('/op/pilih-pertanyaan/{id}', PertanyaanController::class);
-// Route::get('/op/jawaban/{id}', [JawabanController::class, 'listjawaban']);
-Route::get('/sesi1', function () {return view('FE.s1');});
-Route::get('/sesi1-spin', function () {return view('FE.s1-spin');});
-Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');});
+Route::resource('/op/pilih-pertanyaan', PertanyaanController::class);
+
+Route::get('/sesi1', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
+Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
+Route::get('/sesi1-quiz/{id}', [FrontendController::class, 'quizSesi1'])->name('quizSesi1');
+// Route::get('/sesi1', function () {return view('FE.s1');});
+// Route::get('/sesi1-spin', function () {return view('FE.s1-spin');});
+// Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');});
 Route::get('/sesi2', function () {return view('FE.s2');});
 Route::get('/sesi2-soal', function () {return view('FE.s2-soal');});

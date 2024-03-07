@@ -9,8 +9,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form action="{{ url('/op/pilih-pertanyaan/'.$tema->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('/op/pilih-pertanyaan') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            <input type="hidden" name="id_tema" value="{{$tema->id}}">
             <div class="form-group">
                 <label for="exampleInputUsername1" class="fw-bold">Pertanyaan<span class="text-danger">*</span></label>
                 <input type="text" class="form-control" value="{{ old('pertanyaan') }}" id="exampleInputUsername1" placeholder="Input Pertanyaan..." name="pertanyaan">
