@@ -28,11 +28,11 @@
 
 @section('content')
     <div class="container">
-        <div class="top-content d-flex align-items-center justify-content-between mb-2">
+        <div class="top-content d-flex align-items-center justify-content-between my-2">
             <h2>SESI 1</h2>
             <div class="d-flex align-items-center gap-4 logo-top">
-                <img src="../images/mpr.png" alt="">
-                <img src="../images/kemendikbud.png" alt="">
+                {{-- <img src="../images/mpr.png" alt="">
+                <img src="../images/kemendikbud.png" alt=""> --}}
             </div>
         </div>
     </div>
@@ -121,6 +121,17 @@
         localStorage.setItem('wheelItem', JSON.stringify(itemsFromLocal));
     }
 
+    // Fungsi untuk mengembalikan data local storage ke nilai awalnya
+    function resetLocalStorage() {
+        var item = [
+            @foreach ($tema as $t)
+                { id: '{{ $t->id }}' ,name: '{{ $t->tema }}' },
+            @endforeach
+        ];
+        var saveToLocal = JSON.stringify(item);
+        localStorage.setItem('wheelItem', saveToLocal);
+    }
+
     // Membersihkan event handler ketika meninggalkan halaman
     $(window).on('unload', function() {
         $(document).off('keydown');
@@ -133,8 +144,30 @@
             $('#canvas').rouletteWheel('spin');
         }
     });
+
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'r') {
+            // Reset data local storage ke nilai awalnya
+            resetLocalStorage();
+            // Inisialisasi ulang spinwheel
+            initSpinwheel();
+            console.log('Local storage berhasil dikembalikan ke nilai awal.');
+
+            location.reload();
+
+        }
+    });
+
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'F2') {
+        // Arahkan pengguna ke route sesi2
+        window.location.href = "/sesi2";
+    }
 });
 
 
+
         </script>
-@endsection
+@endsection 

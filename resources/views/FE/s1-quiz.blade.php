@@ -98,11 +98,11 @@
 @section('content')
 <div class="salah-jawaban"></div>
     <div class="container">
-        <div class="top-content d-flex align-items-center justify-content-between mb-2">
+        <div class="top-content d-flex align-items-center justify-content-between my-2">
             <h2>SESI 1</h2>
             <div class="d-flex align-items-center gap-4 logo-top">
-                <img src="../images/mpr.png" alt="">
-                <img src="../images/kemendikbud.png" alt="">
+                {{-- <img src="../images/mpr.png" alt="">
+                <img src="../images/kemendikbud.png" alt=""> --}}
             </div>
             <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
                 <h1 id="countdown" class="mb-0">30</h1>
@@ -202,6 +202,12 @@
     }
 });
 
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'F2') {
+        // Arahkan pengguna ke route sesi2
+        window.location.href = "/sesi2";
+    }
+});
 
 
 
