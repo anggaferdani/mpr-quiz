@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PertanyaanController;
@@ -23,10 +24,17 @@ Route::get('/', [QuizController::class, 'quiz'])->name('quiz');
 // Route::get('/op/sesi-1', function () {return view('operator.jenispertanyaan.index');});
 // Route::get('/op/sesi-2', function () {return view('operator.jenispertanyaan.sesi2');});
 
-Route::resource('/op/sesi-1', TemaPertanyaanController::class);
-Route::resource('/op/pilih-pertanyaan', PertanyaanController::class);
-Route::resource('/op/list-jawaban', JawabanController::class);
-Route::get('/op/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
+
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/postlogin', [LoginController::class, 'postlogin']);
+
+Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
+    Route::resource('/sesi-1', TemaPertanyaanController::class);
+    Route::resource('/pilih-pertanyaan', PertanyaanController::class);
+    Route::resource('/list-jawaban', JawabanController::class);
+    Route::get('/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
+    Route::get('/logout', [LoginController::class, 'logout']);
+});
 
 Route::get('/sesi1', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
 Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
