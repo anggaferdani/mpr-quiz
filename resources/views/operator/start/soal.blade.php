@@ -1,6 +1,25 @@
 @extends('operator.template')
 @section('title', 'Sesi 1')
 @section('template')
+<div class="modal fade" id="automaticModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Automatic Modal</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This modal will appear automatically when the page loads.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="pertanyaan1" class="card">
     <div class="card-header">
     <h4 class="card-title">Sesi 1</h4>
@@ -74,7 +93,7 @@
     </div>
     </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
         function check(button) {
             var hasSuccessClass = button.classList.contains('btn-success');
@@ -90,4 +109,9 @@
             }
         }
     </script>
+    <script>
+    $(document).ready(function(){
+        $('#automaticModal').modal('show');
+    });
+</script>
 @endsection

@@ -31,6 +31,8 @@
   </div>
 </div>
 
+
+
 <div class="page-heading">
     <h3>Tema Pertanyaan</h3>
 </div>
@@ -58,7 +60,7 @@
                    <tr>
                        <td class="text-center">{{$loop->iteration}}</td>
                        <td class="text-center">{{$item->tema}}</td>
-                       <td class="text-center"> <a href="{{url('/op/pilih-pertanyaan',$item->id)}}" class="btn btn-primary btn-sm-lg text-white">Mulai</a></td>
+                       <td class="text-center"> <a href="{{url('/op/pilih-pertanyaan/'.$item->id)}}" class="btn btn-primary btn-sm-lg text-white px-4">Mulai</a></td>
                    </tr>
                    @endforeach
                 </tbody>

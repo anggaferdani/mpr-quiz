@@ -57,7 +57,26 @@
                    <tr>
                        <td class="text-center">{{$loop->iteration}}</td>
                        <td class="text-center">{{$item->tema}}</td>
-                       <td class="text-center">  <a href="{{url('/op/pilih-pertanyaan',$item->id)}}" class="btn btn-primary btn-sm-lg text-white">Mulai</a></td>
+                       <td class="text-center"> <a data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-lg btn-icon-text">Mulai</a></td>
+<div class="modal fade" id="Backdrop{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Team</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <div class="row justify-content-center gap-2">
+                @foreach($team as $tim)
+                <div class="col-3">
+                <a href="{{url('/op/pilih-pertanyaan/'.$item->id)}}" class="btn btn-primary btn-sm-lg text-white px-4">{{$tim->name}}</a>
+                </div>
+                @endforeach
+            </div>
+      </div>
+    </div>
+  </div>
+</div>
                    </tr>
                    @endforeach
                 </tbody>

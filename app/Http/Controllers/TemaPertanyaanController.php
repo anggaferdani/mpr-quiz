@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TemaPertanyaan;
+use App\Models\Team;
 use Illuminate\Http\Request;
+use App\Models\TemaPertanyaan;
 
 class TemaPertanyaanController extends Controller
 {
@@ -13,13 +14,15 @@ class TemaPertanyaanController extends Controller
     public function index()
     {
         $tema = TemaPertanyaan::where('sesi', 1)->latest()->get();
-        return view('operator.jenispertanyaan.index', compact('tema'));
+        $team = Team::all();
+        return view('operator.jenispertanyaan.index', compact('tema', 'team'));
     }
 
     public function sesi2()
     {
         $tema = TemaPertanyaan::where('sesi', 2)->latest()->get();
-        return view('operator.jenispertanyaan.sesi2', compact('tema'));
+        $team = Team::all();
+        return view('operator.jenispertanyaan.sesi2', compact('tema', 'team'));
     }
 
     /**
