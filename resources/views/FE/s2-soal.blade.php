@@ -36,6 +36,17 @@
             width: 100%;
             object-fit: contain;
         }
+        .countdown{
+        width: 5rem;
+        height: 5rem;
+        border: 1px solid red;
+        border-radius: 10px;
+    }
+    .countdown h1{
+        color: red;
+        font-weight: bold;
+        margin-bottom: 0 !important;
+    }
 
     </style>
 
@@ -46,9 +57,12 @@
     <div class="d-flex justify-content-center">
         <div class="top-content d-flex align-items-center justify-content-between mb-2" style="position: absolute; top: 0; width: 85%">
             <h2>SESI 2</h2>
-            <div class="d-flex align-items-center gap-4 logo-top">
+            {{-- <div class="d-flex align-items-center gap-4 logo-top">
                 <img src="../images/mpr.png" alt="">
                 <img src="../images/kemendikbud.png" alt="">
+            </div> --}}
+            <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
+                <h1 id="countdown" class="mb-0">30</h1>
             </div>
         </div>
     </div>
