@@ -20,7 +20,7 @@
                 @enderror
             </div>
             <div class="form-group" id="jawaban">
-                <label for="exampleInputUsername1" class="fw-bold">Jawaban<span class="text-danger">*</span></label>
+                <label for="exampleInputUsername1" class="fw-bold">Poin Poin<span class="text-danger">*</span></label>
                 <div class="row">
                     <div class="col">
                         <input type="text" class="form-control" name="jawaban[]" placeholder="Input Jawaban...">
