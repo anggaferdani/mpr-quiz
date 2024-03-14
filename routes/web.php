@@ -39,6 +39,7 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
 Route::get('/sesi1', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
 Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
 Route::get('/sesi1-quiz/{id}', [FrontendController::class, 'quizSesi1'])->name('quizSesi1');
+Route::get('/sesi1-nilai', [FrontendController::class, 'nilaiquizSesi1'])->name('nilaiquizSesi1');
 // Route::get('/sesi1', function () {return view('FE.s1');});
 // Route::get('/sesi1-spin', function () {return view('FE.s1-spin');});
 // Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');});

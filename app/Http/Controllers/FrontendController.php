@@ -34,6 +34,11 @@ class FrontendController extends Controller
         return view('FE.s1-quiz', compact('quiz', 'jawaban'));
     }
 
+    public function nilaiquizSesi1()
+    {
+        return view('FE.s1-nilai');
+    }
+
     /**
      * Store a newly created resource in storage.
      */
