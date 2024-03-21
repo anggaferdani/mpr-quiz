@@ -21,4 +21,8 @@ class Pertanyaan extends Model
     public function pertanyaan(){
         return $this->hasMany(Jawaban::class, 'id_pertanyaan');
     }
+
+    public function participant(){
+        return $this->hasMany(Participant::class, 'id_pertanyaan');
+    }
 }

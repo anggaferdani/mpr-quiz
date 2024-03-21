@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Participant;
+use App\Models\Team;
+use App\Models\Sesi3;
 use Illuminate\Http\Request;
 
-class ParticipantController extends Controller
+class Sesi3Controller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $team = Team::all();
+        $sesi3 = Sesi3::all();
+
+        return view('operator.jenispertanyaan.sesi3', compact('team', 'sesi3'));
     }
 
     /**
@@ -28,18 +32,13 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $newParticipant = new Participant();
-            
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Participant $participant)
+    public function show(Sesi3 $sesi3)
     {
         //
     }
@@ -47,7 +46,7 @@ class ParticipantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Participant $participant)
+    public function edit(Sesi3 $sesi3)
     {
         //
     }
@@ -55,7 +54,7 @@ class ParticipantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Participant $participant)
+    public function update(Request $request, Sesi3 $sesi3)
     {
         //
     }
@@ -63,7 +62,7 @@ class ParticipantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Participant $participant)
+    public function destroy(Sesi3 $sesi3)
     {
         //
     }

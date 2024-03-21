@@ -17,4 +17,8 @@ class TemaPertanyaan extends Model
     public function pertanyaan(){
         return $this->hasMany(Pertanyaan::class, 'id_tema');
     }
+
+    public function participant(){
+        return $this->hasMany(Participant::class, 'id_tema');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Team;
 use App\Models\Jawaban;
 use App\Models\Pertanyaan;
 use Illuminate\Http\Request;
@@ -42,11 +43,12 @@ class JawabanController extends Controller
         $pertanyaan = Pertanyaan::find($id);
         $jawaban = Jawaban::where('id_pertanyaan', $id)->get();
         $tema = TemaPertanyaan::where('id', $pertanyaan->id_tema)->first();
+        $team = Team::all();
 
         if($tema->sesi == 1){
-            return view('operator.jenispertanyaan.listjawaban', compact('jawaban', 'pertanyaan'));
+            return view('operator.jenispertanyaan.listjawaban', compact('jawaban', 'pertanyaan', 'tema', 'team'));
         }else{
-            return view('operator.jenispertanyaan.listpoinsesi2', compact('jawaban', 'pertanyaan'));
+            return view('operator.jenispertanyaan.listpoinsesi2', compact('jawaban', 'pertanyaan', 'tema', 'team'));
         }
     }
 

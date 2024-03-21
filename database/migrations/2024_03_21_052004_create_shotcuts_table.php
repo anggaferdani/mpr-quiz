@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('participants', function (Blueprint $table) {
-            $table->date('tanggal');
-            $table->integer('sesi');
+        Schema::create('shotcuts', function (Blueprint $table) {
+            $table->id();
+            $table->string('shortcut');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('participants', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('shotcuts');
     }
 };

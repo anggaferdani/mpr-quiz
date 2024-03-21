@@ -13,4 +13,12 @@ class Team extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function participant(){
+        return $this->hasMany(Participant::class, 'id_team');
+    }
+
+    public function sesi3(){
+        return $this->hasMany(Sesi3::class, 'id_team');
+    }
 }

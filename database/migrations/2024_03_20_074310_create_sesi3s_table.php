@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('participants', function (Blueprint $table) {
-            $table->date('tanggal');
-            $table->integer('sesi');
+        Schema::create('sesi3s', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('id_team');
+            $table->bigInteger('poin');
+            $table->date('date');
+            $table->timestamps();
         });
     }
 
@@ -22,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('participants', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('sesi3s');
     }
 };

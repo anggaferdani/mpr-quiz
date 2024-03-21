@@ -3,9 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Sesi3Controller;
 use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\ShotcutController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TemaPertanyaanController;
 
 /*
@@ -32,9 +35,14 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::resource('/sesi-1', TemaPertanyaanController::class);
     Route::resource('/pilih-pertanyaan', PertanyaanController::class);
     Route::resource('/list-jawaban', JawabanController::class);
+    Route::post('/savepoin', [ParticipantController::class, 'store']);
     Route::get('/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
+    Route::get('/sesi-3', [Sesi3Controller::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);
+    Route::resource('/shortcut', ShotcutController::class);
 });
+Route::post('/setpoin', [Sesi3Controller::class, 'setpoin'])->name('setpoin');
+Route::post('/minpoin', [Sesi3Controller::class, 'minpoin'])->name('minpoin');
 
 Route::get('/', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
 Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
