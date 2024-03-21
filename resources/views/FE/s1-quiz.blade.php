@@ -12,9 +12,14 @@
     .logo-top{
         width: 25%;
     }
+    .wrap-countdown{
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+    }
     .countdown{
-        width: 5rem;
-        height: 5rem;
+        width: 15vw;
+        height: 15vw;
         border: 1px solid red;
         border-radius: 10px;
     }
@@ -22,13 +27,25 @@
         color: red;
         font-weight: bold;
         margin-bottom: 0 !important;
+        font-size: 8vw;
     }
 
-    .soal h4{
+    .soal h2{
         font-weight: 600;
         width: 75%;
         text-align: center;
     }
+    .animate-text {
+    overflow: hidden; /* Membuat teks terpotong dan tidak terlihat */
+    animation: revealText .01s steps(20, end); /* Menggunakan animasi dengan 20 langkah untuk mengungkapkan teks */
+}
+
+@keyframes revealText {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+
 
     .jawaban{
         width: 75%;
@@ -98,22 +115,28 @@
 @section('content')
 <div class="salah-jawaban"></div>
     <div class="container">
+        <div id="countdown-div" style="display: none;">
+            Waktu Habis!
+        </div>
+
         <div class="top-content d-flex align-items-center justify-content-between my-2">
             <h2>SESI 1</h2>
             <div class="d-flex align-items-center gap-4 logo-top">
                 {{-- <img src="../images/mpr.png" alt="">
                 <img src="../images/kemendikbud.png" alt=""> --}}
             </div>
-            <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
+            {{-- <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
                 <h1 id="countdown" class="mb-0">30</h1>
-        </div>
+            </div> --}}
         </div>
 
         <div class="soal d-flex justify-content-center mt-5">
-            <h4>{{ $quiz->pertanyaan }}</h4>
+            <h2 class="animate-text">{{ $quiz->pertanyaan }}</h2>
         </div>
 
-        <div class="jawaban ">
+       
+
+        {{-- <div class="jawaban ">
             @foreach($jawaban as $jw)
             <div class="list-jawaban d-flex align-items-center gap-3 px-5 py-3 my-2" id="{{$loop->iteration}}">
                 <h5 class="mb-0">{{$loop->iteration}}.</h5>
@@ -121,49 +144,70 @@
             </div>
             @endforeach
 
+        </div> --}}
+    </div>
+    <div class="wrap-countdown d-flex justify-content-center">
+        <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
+            <h1 id="countdown" class="mb-0">30</h1>
         </div>
     </div>
 
-    
-
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Waktu awal hitungan mundur (dalam detik)
-            var countdownSeconds = 30;
-    
-            // Update elemen dengan ID 'countdown' setiap detik
-            var countdownInterval = setInterval(function () {
-                // Mendapatkan elemen dengan ID 'countdown'
+        document.addEventListener("DOMContentLoaded", function() {
+    var text = document.querySelector('.animate-text');
+    var textContent = text.textContent;
+    text.innerHTML = '';
+
+    for (var i = 0; i < textContent.length; i++) {
+        (function(i) {
+            setTimeout(function() {
+                var span = document.createElement('span');
+                span.textContent = textContent[i];
+                span.classList.add('fade-in');
+                text.appendChild(span);
+            }, 75 * i); // Ubah 100 sesuai dengan kecepatan yang Anda inginkan
+        })(i);
+    }
+});
+
+    </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+        var countdownInterval;
+
+        function startCountdown() {
+            countdownInterval = setInterval(function () {
                 var countdownElement = document.getElementById('countdown');
-    
-                // Mengurangi waktu hitungan mundur setiap detik
                 countdownSeconds--;
-    
-                // Menetapkan teks hitungan mundur ke elemen
                 countdownElement.innerText = countdownSeconds;
-    
-                // Menghentikan hitungan mundur jika sudah mencapai 0
+
                 if (countdownSeconds <= 0) {
                     clearInterval(countdownInterval);
-                    // Tampilkan popup
-                    var popup = document.createElement('div');
-                    popup.classList.add('popup'); // Tambahkan kelas 'popup' untuk gaya CSS
-                    popup.innerHTML = '<div class="wrap-count-point"><h1>80 POINT</h1></div>';
-                    popup.setAttribute('tabindex', '1'); // Tambahkan atribut tabindex
-                    document.body.appendChild(popup);
-                    // Fokuskan popup agar pengguna dapat menekan Enter
-                    popup.focus();
+                    var countdownDiv = document.getElementById('countdown-div');
+                    countdownDiv.style.display = 'block';
                     // Tambahkan event listener untuk menangani tombol Enter
-                    popup.addEventListener('keydown', function(event) {
-                        if (event.key === 'Enter') {
-                            window.location.href = '/sesi1-spin'; // Arahkan ke rute sesi1-spin
-                        }
-                    });
-
+                    document.addEventListener('keydown', handleEnterKey);
                 }
-            }, 1000); // Memperbarui setiap 1 detik (1000 milidetik)
+            }, 1000);
+        }
+
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                window.location.href = '/sesi1-nilai';
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === ' ') {
+                startCountdown();
+            }
         });
-    </script>
+    });
+</script>
+
+
 
     <script>
         document.addEventListener('keydown', function(event) {
