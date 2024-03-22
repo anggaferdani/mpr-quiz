@@ -18,7 +18,7 @@ class Pertanyaan extends Model
         return $this->belongsTo(TemaPertanyaan::class, 'id_tema');
     }
 
-    public function pertanyaan(){
+    public function jawaban(){
         return $this->hasMany(Jawaban::class, 'id_pertanyaan');
     }
 

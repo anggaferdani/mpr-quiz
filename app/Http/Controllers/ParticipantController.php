@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class ParticipantController extends Controller
 {
@@ -28,12 +29,15 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        
             $newParticipant = new Participant();
-            
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
+            $newParticipant->id_team = $request->id_team;
+            $newParticipant->poin = $request->poin;
+            $newParticipant->id_pertanyaan = $request->id_pertanyaan;
+            $newParticipant->tanggal = Carbon::now();
+            $newParticipant->sesi = $request->sesi;
+            $newParticipant->save();
+            return back();
     }
 
     /**

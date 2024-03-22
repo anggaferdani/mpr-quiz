@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('participants', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_tema');
             $table->bigInteger('id_pertanyaan');
             $table->bigInteger('id_team');
             $table->integer('poin');

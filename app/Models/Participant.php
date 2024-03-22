@@ -11,12 +11,8 @@ class Participant extends Model
     protected $table= 'participants';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id_tema', 'id_pertanyaan', 'id_team', 'poin', 'tanggal'
+        'id_pertanyaan', 'id_team', 'poin', 'tanggal'
     ];
-
-    public function tema(){
-        return $this->belongsTo(TemaPertanyaan::class, 'id_tema');
-    }
 
     public function pertanyaan(){
         return $this->belongsTo(Pertanyaan::class, 'id_pertanyaan');

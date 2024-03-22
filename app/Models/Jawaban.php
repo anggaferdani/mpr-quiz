@@ -14,7 +14,7 @@ class Jawaban extends Model
         'id_pertanyaan', 'jawaban'
     ];
     
-    public function jawaban(){
+    public function pertanyaan(){
         return $this->belongsTo(Pertanyaan::class, 'id_pertanyaan');
     }
 }
