@@ -13,6 +13,6 @@ class Sesi3 extends Model
     protected $fillable = ['id_team', 'poin', 'date'];
 
     public function team(){
-        return $this->belongsTo(Team::class, 'id_team');
+        return $this->belongsTo(Team::class);
     }
 }

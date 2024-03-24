@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Team;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 use App\Models\TemaPertanyaan;
+use Illuminate\Support\Carbon;
 
 class TemaPertanyaanController extends Controller
 {
@@ -15,7 +17,10 @@ class TemaPertanyaanController extends Controller
     {
         $tema = TemaPertanyaan::where('sesi', 1)->latest()->get();
         $team = Team::all();
-        return view('operator.jenispertanyaan.index', compact('tema', 'team'));
+        $date = Carbon::now()->format('Y-m-d');
+        $participant = Participant::where('tanggal', $date)->get();
+        // dd($participant);
+        return view('operator.jenispertanyaan.index', compact('tema', 'team', 'participant', 'date'));
     }
 
     public function sesi2()

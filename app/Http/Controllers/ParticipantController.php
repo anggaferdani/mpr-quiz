@@ -29,6 +29,7 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         
             $newParticipant = new Participant();
             $newParticipant->id_team = $request->id_team;

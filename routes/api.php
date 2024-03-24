@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/team', [MprController::class, 'team']);
+Route::get('/tema-pertanyaan', [MprController::class, 'tema-pertanyaan']);
+Route::get('/pertanyaan/{id}', [MprController::class, 'pertanyaan']);
+Route::get('/jawaban/{id}', [MprController::class, 'jawaban']);
+Route::post('/sesi-2/{id}', [MprController::class, 'sesi2']);

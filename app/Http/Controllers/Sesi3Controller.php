@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Team;
 use App\Models\Sesi3;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class Sesi3Controller extends Controller
 {
@@ -13,10 +14,49 @@ class Sesi3Controller extends Controller
      */
     public function index()
     {
-        $team = Team::all();
+        $now = Carbon::now()->format('Y-m-d');
+        $team = Team::with(['sesi3' => function ($query) use ($now) {
+            $query->whereDate('date', $now);
+        }])->get();
+        // dd($team);
+        
         $sesi3 = Sesi3::all();
 
         return view('operator.jenispertanyaan.sesi3', compact('team', 'sesi3'));
+    }
+
+    public function setpoin(Request $request)
+    {
+        $team = Team::findOrFail($request->team_id);
+        $now = Carbon::now()->format('Y-m-d');
+        $sesi = Sesi3::where('date', $now)->where('id_team', $request->team_id)->first();
+
+        if($sesi){
+            $sesi->poin += 10;
+            $sesi->save();
+        }else{
+            $sesi = new sesi3();
+            $sesi->poin += 10; // Increment points by 10
+            $sesi->date = Carbon::now(); // Set points to 10
+            $sesi->id_team = $team->id;
+            $sesi->save();
+        }
+
+        return response()->json(['points' => $sesi->poin]);
+    }
+
+    public function minpoin(Request $request)
+    {
+        $now = Carbon::now()->format('Y-m-d');
+        $team = Team::findOrFail($request->team_id);
+        $sesi = Sesi3::where('date', $now)->where('id_team', $request->team_id)->first();
+
+        if ($sesi && $sesi->poin >= 10) {
+            $sesi->poin -= 10; // Decrement points by 10
+            $sesi->save();
+        }
+        
+        return response()->json(['points' => $sesi->poin]);
     }
 
     /**

@@ -23,19 +23,23 @@
                    <tr>
                        <td class="text-center fw-bold">{{$loop->iteration}}</td>
                        <td class="text-center fw-bold">{{$item->name}}</td>
-                       <td class="text-center fw-bold">
+                       <td class="text-center fw-bold" id="points{{$item->id}}">
                         @if ($item->sesi3->isNotEmpty())
-                            {{$item->sesi3->first()->poin}}
+                            @foreach($item->sesi3 as $sesi3)
+                                {{ $sesi3->poin }}
+                            @endforeach
                         @else
                             0
                         @endif</td>
                         <td>
-                            <button class="btn btn-success increment-points" data-team-id="{{ $item->id }}">
-                                <i class="fa fa-check"></i>
-                            </button>
-                            <button class="btn btn-danger decrement-points" data-team-id="{{ $item->id }}" {{ $item->sesi3 && $item->sesi3->poin == 0 ? 'disabled' : '' }}>
-                                <i class="fa fa-times"></i>
-                            </button>
+                            <div class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-success increment-points" data-team-id="{{ $item->id }}">
+                                    <i class="bi bi-check-lg"></i>
+                                </button>
+                                <button class="btn btn-danger decrement-points" data-team-id="{{ $item->id }}" {{ $item->sesi3->isEmpty() || !$item->sesi3->contains('poin', '>', 0) ? 'disabled' : '' }}>
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
                         </td>
                    </tr>
                    @endforeach
@@ -44,4 +48,50 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.increment-points').click(function() {
+            var teamId = $(this).data('team-id');
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("setpoin") }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    team_id: teamId
+                },
+                success: function(response) {
+                    $('#points' + teamId).text(response.points);
+                    if (response.points == 0) {
+                        $('.decrement-points[data-team-id=' + teamId + ']').prop('disabled', true);
+                    }else{
+                        $('.decrement-points[data-team-id=' + teamId + ']').prop('disabled', false);
+                    }
+                }
+            });
+        });
+
+        $('.decrement-points').click(function() {
+            var teamId = $(this).data('team-id');
+            $.ajax({
+                type: 'POST',
+                url: '{{ route("minpoin") }}',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    team_id: teamId
+                },
+                success: function(response) {
+                    $('#points' + teamId).text(response.points);
+                    if (response.points == 0) {
+                        $('.decrement-points[data-team-id=' + teamId + ']').prop('disabled', true);
+                    }else{
+                        $('.decrement-points[data-team-id=' + teamId + ']').prop('disabled', false);
+                    }
+                }
+            });
+        });
+    });
+</script>
 @endsection
