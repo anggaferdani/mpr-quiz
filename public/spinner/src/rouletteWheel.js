@@ -68,12 +68,12 @@ $.widget('javobyte.rouletteWheel', {
             this.options.colors = colors;
 
             var w, h;
-            w = this.element.width()/.81;
-            h = this.element.height()/.81;
+            w = this.element.width()/.850;
+            h = this.element.height()/.850;
 
             var base = Math.min(w, h);
-            this._options.centerX = w / 2.49;
-            this._options.centerY = h / 2.49;
+            this._options.centerX = w / 2.3;
+            this._options.centerY = h / 2.3;
 
             this._options.radius = base * 0.8 / 2;
             this._options.innerRadius = base * 0.3 / 2;

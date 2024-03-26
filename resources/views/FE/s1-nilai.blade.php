@@ -35,7 +35,7 @@
   </head>
   <body>
     <div class="content text-center">
-        <h1>80</h1>
+        <h1>{{$nilai->poin}}</h1>
         <h2>POINT</h2>
     </div>
 

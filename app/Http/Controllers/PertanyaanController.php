@@ -7,6 +7,8 @@ use App\Models\Pertanyaan;
 use Illuminate\Http\Request;
 use App\Models\TemaPertanyaan;
 
+use App\Events\MessageSent;
+
 class PertanyaanController extends Controller
 {
     /**
@@ -65,6 +67,7 @@ class PertanyaanController extends Controller
     {
         $tema = TemaPertanyaan::find($id);
         $pertanyaan = Pertanyaan::where('id_tema', $id)->latest()->get();
+        // Kirim event ke Pusher dengan data pertanyaan yang telah dipilih
         return view('operator.jenispertanyaan.pertanyaan', compact('pertanyaan', 'tema'));
     }
 

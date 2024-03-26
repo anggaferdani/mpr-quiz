@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PusherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,5 @@ Route::get('/tema-pertanyaan', [MprController::class, 'tema-pertanyaan']);
 Route::get('/pertanyaan/{id}', [MprController::class, 'pertanyaan']);
 Route::get('/jawaban/{id}', [MprController::class, 'jawaban']);
 Route::post('/sesi-2/{id}', [MprController::class, 'sesi2']);
+
+Route::post('/pusher', [PusherController::class, 'kirimPertanyaan']);

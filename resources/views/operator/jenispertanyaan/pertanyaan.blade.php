@@ -70,7 +70,10 @@
                    <tr>
                        <td class="text-center">{{$loop->iteration}}</td>
                        <td class="text-center">{{$item->pertanyaan}}</td>
-                       <td class="text-center"> <a href="{{url('/op/list-jawaban/'.$item->id)}}" class="btn btn-primary btn-sm-lg text-white">Pilih</a></td>
+                       {{-- <td class="text-center"> <a href="{{url('/op/list-jawaban/'.$item->id)}}" class="btn btn-primary btn-sm-lg text-white">Pilih</a></td> --}}
+                       <td class="text-center">
+                        <button onclick="getPertanyaan({{ $item->id }})" class="btn btn-primary btn-sm-lg text-white">Pilih</button>
+                        </td>
                    </tr>
                    @endforeach
                 </tbody>
@@ -94,4 +97,30 @@
         $(this).parents(".form-row").remove();
     });
 </script>
+
+{{-- KIRIM PARAMETER ID SOAL --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    function getPertanyaan(id) {
+        // Kirim permintaan AJAX
+        $.ajax({
+            url: '/op/get-pertanyaan/' + id,
+            type: 'GET',
+            success: function(response) {
+                // Tangani data yang diterima
+                var pertanyaan = response.pertanyaan;
+                // Lakukan sesuatu dengan data pertanyaan, misalnya, cetak ke konsol
+                console.log(pertanyaan);
+            },
+            error: function(xhr, status, error) {
+                // Tangani kesalahan jika ada
+                console.error(error);
+            }
+        });
+    }
+</script>
+
+{{-- ----------------------------------------------- --}}
+
 @endsection

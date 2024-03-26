@@ -91,17 +91,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($item->pertanyaan as $tanya)
+                            {{-- @foreach($item->pertanyaan as $tanya)
                             <tr>
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">{{$tanya->pertanyaan}}</td>
                                 <td class="text-center"> 
                                     <div class="d-flex justify-content-center">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
+                                        <button onclick="simpanIsiPertanyaan('{{$tanya->pertanyaan}}')" type="button" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach --}}
+                            @foreach($item->pertanyaan as $tanya)
+                                <tr>
+                                    <td class="text-center">{{$loop->iteration}}</td>
+                                    <td class="text-center">{{$tanya->pertanyaan}}</td>
+                                    <td class="text-center"> 
+                                        <div class="d-flex justify-content-center">
+                                            <button onclick="kirimPertanyaan('{{$tanya->pertanyaan}}')" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" type="button" class="btn btn-primary btn-icon-text">Pilih</button>
+                                        </div>
+                                    </td>
+                                </tr>
                             @endforeach
+
+                            
                         </tbody>
                     </table>
                 </div>
@@ -131,6 +144,7 @@
                                 <!-- Pass the ID of the hidden input field to the addPoints function -->
                                 <button type="button" class="btn btn-primary" onclick="addPoints(this, 'poin{{$tanya->id}}')">Benar</button>
                             </div>
+                            {{-- <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->id_pertanyaan}}</div> --}}
                             <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
                         </div>
                     </label>
@@ -293,4 +307,24 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#Tim').val(selectedTeam);
     });
 </script>
+
+{{-- KIRIM PARAMETER SOAL KE FILE FRONTEND --}}
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+<script>
+    // Menginisialisasi Pusher dengan kunci aplikasi yang sesuai
+    var pusher = new Pusher('38cfe3d83066a917afe6', {
+        cluster: 'ap1',
+        encrypted: true // Gunakan enkripsi jika diaktifkan di konfigurasi Pusher Anda
+    });
+
+    // Mengirim data pertanyaan ke saluran 'pertanyaan-channel'
+    function kirimPertanyaan(pertanyaan) {
+        const channel = pusher.channel('my-channel'); // Replace 'my-channel' and 'my-event' with your channel and event names
+        const message = pertanyaan; // Replace 'message' with your message payload
+        channel.trigger('my-event', message); // Trigger the event with the message payload
+    }
+</script>
+
+
 @endsection

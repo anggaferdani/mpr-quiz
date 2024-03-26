@@ -10,6 +10,10 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TemaPertanyaanController;
+use App\Events\MessageSent;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +50,22 @@ Route::post('/minpoin', [Sesi3Controller::class, 'minpoin'])->name('minpoin');
 
 Route::get('/', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
 Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
-Route::get('/sesi1-quiz/{id}', [FrontendController::class, 'quizSesi1'])->name('quizSesi1');
+// Route::get('/sesi1-quiz/{id}', [FrontendController::class, 'quizSesi1'])->name('quizSesi1');
+Route::get('/sesi1-quiz', [FrontendController::class, 'showquizsesi1'])->name('quizSesi1');
+// Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');})->name('quizsesi1');
 Route::get('/sesi1-nilai', [FrontendController::class, 'nilaiquizSesi1'])->name('nilaiquizSesi1');
-// Route::get('/sesi1', function () {return view('FE.s1');});
-// Route::get('/sesi1-spin', function () {return view('FE.s1-spin');});
-// Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');});
 Route::get('/sesi2', function () {return view('FE.s2');});
 Route::get('/sesi2-soal', function () {return view('FE.s2-soal');});
+
+// Route::get('/testing', [FrontendController::class, 'testpusher']);
+
+Route::get('/sesi1-juri', function () {return view('FE.Juri.sesi-1');});
+Route::get('/sesi2-juri', function () {return view('FE.Juri.sesi-2');});
+Route::get('/sesi3-juri', function () {return view('FE.Juri.sesi-3');});
+
+// Route::get('/testing', function () {
+//     event(new MessageSent('hello world'));
+//     echo "test";
+// });
+// Route::get('/sesi1-spin', function () {return view('FE.s1-spin');});
+// Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');});

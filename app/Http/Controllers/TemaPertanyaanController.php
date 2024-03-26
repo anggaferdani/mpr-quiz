@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+// use App\Events\MessageSent;
+use App\Events\MessageSent;
 use App\Models\Team;
 use App\Models\Participant;
 use Illuminate\Http\Request;
@@ -13,13 +15,13 @@ class TemaPertanyaanController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $tema = TemaPertanyaan::where('sesi', 1)->latest()->get();
         $team = Team::all();
         $date = Carbon::now()->format('Y-m-d');
         $participant = Participant::where('tanggal', $date)->get();
-        // dd($participant);
+
         return view('operator.jenispertanyaan.index', compact('tema', 'team', 'participant', 'date'));
     }
 

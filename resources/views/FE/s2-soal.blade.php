@@ -62,7 +62,7 @@
                 <img src="../images/kemendikbud.png" alt="">
             </div> --}}
             <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
-                <h1 id="countdown" class="mb-0">30</h1>
+                <h1 id="countdown" class="mb-0">120</h1>
             </div>
         </div>
     </div>
