@@ -76,7 +76,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan</h1>
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan <span class="textteam"></span></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -103,6 +103,9 @@
                             </tr>
                             @endforeach --}}
                             @foreach($item->pertanyaan as $tanya)
+                            @php
+                                $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
+                            @endphp
                                 <tr>
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">{{$tanya->pertanyaan}}</td>
@@ -123,19 +126,19 @@
     </div>
 </div>
 @foreach($item->pertanyaan as $tanya)
-<div class="modal fade" id="jawaban{{$tanya->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="jawaban{{$tanya->id}}" data-modal-id="{{$tanya->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="{{url('/op/savepoin')}}" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">List Jawaban</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">List Jawaban - <span class="textteam"></span></h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <input type="hidden" value="1" name="sesi">
                     <input type="hidden" value="{{$tanya->id}}" name="id_pertanyaan">
-                    <input type="hidden" id="Tim" name="id_team">
+                    <input type="hidden" class="teamteam" name="id_team">
                     <input type="hidden"  value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
                     @foreach($tanya->jawaban as $jwb)
                     <label class="form-selectgroup-item flex-fill">
@@ -207,14 +210,21 @@
         <h5>Pilih Team</h5>
         <div class="d-flex gap-2">
             @foreach($team as $item)
+            @php
+                $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
+            @endphp
             <div class="form-check">
-                <input class="form-check-input id_tim" type="radio" name="idtim" id="team{{$item->id}}" value="{{$item->id}}">
-                <label class="form-check-label" for="team{{$item->id}}">
+            @if($selectedTeam)
+                <input class="form-check-input" type="checkbox" checked disabled>
+            @else
+                <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
+            @endif
+            <label class="form-check-label" for="team{{$item->name}}">
                 {{$item->name}}
-                </label>
-            </div>
-            @endforeach
+            </label>
         </div>
+        @endforeach
+    </div>
     </div>
 </div>
 

@@ -65,7 +65,7 @@
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan</h1>
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan - <span class="textteam"></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -81,12 +81,18 @@
                                         </thead>
                                         <tbody>
                                             @foreach($item->pertanyaan as $tanya)
+                                            @php
+                                                $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
+                                            @endphp
                                             <tr>
                                                 <td class="text-center">{{$loop->iteration}}</td>
                                                 <td class="text-center">{{$tanya->pertanyaan}}</td>
                                                 <td class="text-center"> <div class="d-flex justify-content-center">
-                                                <button type="button" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
-                                                </div>
+                                                @if($participant)
+                                                    <button type="button" class="btn btn-success btn-icon-text" disabled><i class="bi bi-check-all"></i></button>
+                                                @else
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
+                                                @endif
                                                 
                                             </td>
                                             </tr>
@@ -98,25 +104,36 @@
                             </div>
                         </div>
                         </div>
-                        <div class="modal fade" id="jawaban{{$tanya->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        @foreach($item->pertanyaan as $tanya)
+                        <div class="modal fade" id="jawaban{{$tanya->id}}" data-modal-id="{{$tanya->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">List Jawaban</h1>
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Poin Poin - <span class="textteam"></h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
+                                                    <form action="{{url('/op/savepoin')}}" method="post">
+                                                        {{ csrf_field() }}
                                                     <div class="modal-body">
                                                         @foreach($tanya->jawaban as $jwb)
-                                                        <p>{{$jwb->jawaban}}</p><br>
+                                                        <p class="fw-bold">{{$jwb->jawaban}}</p><br>
                                                         @endforeach
+                                                            
+                                                        <input type="hidden" value="2" name="sesi">
+                                                        <input type="hidden" value="{{$tanya->id}}" name="id_pertanyaan">
+                                                        <input type="hidden" class="teamteam" name="id_team">
+                                                        <label for="">Input Nilai<span class="text-danger">*</span></label>
+                                                        <input type="number" class="form-control" name="poin">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save Poin</button>
+                                                        <button type="submit" class="btn btn-primary">Save Poin</button>
                                                     </div>
+                                                </form>
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endforeach
                         <div class="modal fade" id="tanya{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tanyaLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -167,21 +184,28 @@
         <h5>Pilih Team</h5>
         <div class="d-flex gap-2">
             @foreach($team as $item)
+            @php
+                $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
+            @endphp
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="id_team" id="team{{$item->id}}" value="{{$item->id}}">
-                <label class="form-check-label" for="team{{$item->id}}">
+            @if($selectedTeam)
+                <input class="form-check-input" type="checkbox" checked disabled>
+            @else
+            <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
+            @endif
+            <label class="form-check-label" for="team{{$item->name}}">
                 {{$item->name}}
-                </label>
-            </div>
-            @endforeach
+            </label>
         </div>
+        @endforeach
+    </div>
     </div>
 </div>
 
 <script>
 // Add event listener to check if any radio button is selected
 document.addEventListener('DOMContentLoaded', function() {
-    var radioButtons = document.querySelectorAll('input[name="id_team"]');
+    var radioButtons = document.querySelectorAll('input[name="idtim"]');
     var startButtons = document.querySelectorAll('.btn.btn-primary.btn-icon-text');
 
     radioButtons.forEach(function(radioButton) {
@@ -195,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).on('click', '.tambahjawaban', function(){
@@ -220,5 +243,35 @@ document.addEventListener('DOMContentLoaded', function() {
     $("body").on("click",".delete2",function(){ 
         $(this).parents(".form-row").remove();
     });
+</script>
+
+<script>
+   $(document).ready(function() {
+    // Additional code for setting the value from the foreach loop
+    var teamName = $('[name="idtim"]:checked').data('team-name');
+    var selectedTeamId = $('input[name="idtim"]:checked').val();
+    console.log("Selected Team Name: " + teamName);
+
+    // Iterate over each modal to set input field values
+    $('.modal').each(function() {
+        var modalId = $(this).data('modal-id');
+        var inputValue = selectedTeamId;
+        // Set the value of the input field
+        $('#jawaban' + modalId).find('input[name="id_team"]').val(inputValue);
+        $('#jawaban' + modalId).find('.textteam').text(teamName);
+    });
+
+    // Handle change event for .id_tim elements
+    $(document).on('change', '.id_tim', function() {
+        // Get the value of the selected team ID
+        var selectedTeamId = $(this).val();
+        var teamName = $('[name="idtim"]:checked').data('team-name');
+        console.log("Selected Team ID: " + selectedTeamId);
+
+        // Set the value of the hidden input field
+        $('.teamteam').val(selectedTeamId);
+        $('.textteam').text(teamName);
+    });
+});
 </script>
 @endsection

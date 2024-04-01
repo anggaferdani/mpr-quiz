@@ -1,0 +1,169 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Dokumentasi API",
+        "description": "API MPR Quiz",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/team": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "Get list of Team",
+                "operationId": "48c18641d125c43c21006e83dbc97228",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "/api/tema-pertanyaan": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "Get list of Question Theme",
+                "operationId": "da5622f32260dee3c09f3842204c9fb8",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        },
+        "/api/pertanyaan/{id_tema}": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "Get a list of Pertanyaan filter by id_tema",
+                "operationId": "b323399464aa06ae181525111b7b1598",
+                "parameters": [
+                    {
+                        "name": "id_tema",
+                        "in": "path",
+                        "description": "Theme ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Data not found"
+                    }
+                }
+            }
+        },
+        "/api/jawaban/{id_pertanyaan}": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "Get a list of Jawbaan filter by id_pertanyaan",
+                "operationId": "d2e0461c64345cc770e78fc2edd88ec3",
+                "parameters": [
+                    {
+                        "name": "id_pertanyaan",
+                        "in": "path",
+                        "description": "Question ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Data not found"
+                    }
+                }
+            }
+        },
+        "/api/sesi-2": {
+            "post": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "Save Poin Sesi 2",
+                "operationId": "6f18ea950cbf053474f81d32f8926300",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "id_pertanyaan": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "id_team": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "sesi": {
+                                        "type": "integer",
+                                        "example": 2
+                                    },
+                                    "poin": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "tanggal": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2024-03-25"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Resource created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/poin": {
+            "get": {
+                "tags": [
+                    "Data"
+                ],
+                "summary": "Get list of Team Poin",
+                "operationId": "4856d99d17a0d8d0a31c8e580b0c6c34",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Resource not found"
+                    }
+                }
+            }
+        }
+    }
+}
