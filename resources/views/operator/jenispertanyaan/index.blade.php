@@ -82,6 +82,7 @@
             <div class="modal-body">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#tanya{{$item->id}}" class="btn d-block btn-primary btn-icon-text">Buat Pertanyaan</button>
                 <div class="table-responsive">
+                <input type="text" id="searchInput" class="mt-2 mb-1 border border-1 rounded filterPertanyaan" data-modalid="{{$item->id}}" placeholder="Search Pertanyaan">
                     <table class="table">
                         <thead>
                             <tr>
@@ -106,12 +107,16 @@
                             @php
                                 $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
                             @endphp
-                                <tr>
+                                <tr class="filterPertanyaan{{$item->id}}">
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">{{$tanya->pertanyaan}}</td>
                                     <td class="text-center"> 
                                         <div class="d-flex justify-content-center">
-                                            <button data-pertanyaan="{{ $tanya->pertanyaan }}" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" type="button" class="btn btn-primary btn-icon-text button-pertanyaan">Pilih</button>
+                                        @if($participant)
+                                            <button type="button" class="btn btn-success btn-icon-text" disabled><i class="bi bi-check-all"></i></button>
+                                        @else
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
+                                        @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -141,15 +146,11 @@
                     <input type="hidden" class="teamteam" name="id_team">
                     <input type="hidden"  value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
                     @foreach($tanya->jawaban as $jwb)
-                    <label class="form-selectgroup-item flex-fill">
-                        <div class="form-selectgroup-label d-flex align-items-center p-3">
-                            <div class="me-3">
-                                <!-- Pass the ID of the hidden input field to the addPoints function -->
-                                <button type="button" class="btn btn-primary" onclick="addPoints(this, 'poin{{$tanya->id}}')">Benar</button>
-                            </div>
-                            {{-- <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->id_pertanyaan}}</div> --}}
-                            <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
-                        </div>
+                    <label class="form-selectgroup-item flex-fill d-flex gap-2 justify-content-between">
+                        <!-- Pass the ID of the hidden input field to the addPoints function -->
+                        <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}')">Benar</button>
+                        <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
+                        <button type="button" class="btn btn-danger batal" onclick="cancelPoints(this, 'poin{{$tanya->id}}')"><i class="bi bi-x"></i></button>
                     </label>
                     @endforeach
                 </div>
@@ -278,12 +279,56 @@ document.addEventListener('DOMContentLoaded', function() {
         button.classList.add('btn-success');
         button.disabled = true;
 
+        var cancelButton = button.nextElementSibling; // Assuming the cancelPoints button is located immediately after the addPoints button
+        cancelButton.disabled = false;
         // Update click count for this button
         clickCounts[inputId] = clickCount + 1;
+    }
+    function cancelPoints(button, inputId) {
+        // Get the hidden input field corresponding to this button
+        var poinInput = document.getElementById(inputId);
+
+        // Set the points to 0
+        poinInput.value = 0;
+
+        // Update button text and classes
+        var addButton = button.previousElementSibling.previousElementSibling; // Assuming the addPoints button is located before the cancelPoints button
+        addButton.textContent = 'Benar';
+        addButton.classList.remove('btn-success');
+        addButton.classList.add('btn-primary');
+        addButton.disabled = false;
     }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+$(document).ready(function() {
+    // Script untuk filter input pada saat modal muncul
+    $('input[data-modalid]').on('input', function () {
+        // Mendapatkan nilai ID modal yang terkait dari atribut data
+        var modalId = $(this).data('modalid');
+
+        // Membuat ID input sesuai dengan ID modal yang terkait
+        var inputId = 'searchInput' + modalId;
+
+        // Lakukan filter atau manipulasi sesuai kebutuhan Anda
+        var inputValue = $(this).val(); 
+        console.log('Input value for modal ' + modalId + ': ' + inputValue);
+        // Lakukan sesuatu dengan nilai input ...
+    });
+
+    // Script untuk filter tabel
+    $('.filterPertanyaan').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+        var modalId = $(this).data('modalid');
+        // Menggunakan selektor yang tepat untuk mencari elemen yang perlu difilter
+        $('table tr.filterPertanyaan'+modalId).filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>
+
 <script>
     $(document).on('click', '.tambahjawaban', function(){
     addInputField();
