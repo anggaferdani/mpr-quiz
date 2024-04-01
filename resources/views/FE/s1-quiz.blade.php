@@ -167,7 +167,7 @@
 
   </head>
   <body>
-    <img class="bg-gif" src="../images/bg-baru.gif" alt="">
+    <img class="bg-gif" src="../images/sesi-1-quiz.gif" alt="">
     <div class="wrap-countdown d-flex justify-content-center">
         <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
             <h3 id="countdown" class="mb-0">30</h3>
