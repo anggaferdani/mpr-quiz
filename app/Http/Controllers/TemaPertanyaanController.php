@@ -91,8 +91,11 @@ class TemaPertanyaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TemaPertanyaan $temaPertanyaan)
+    public function destroy($id)
     {
-        //
+        $delete = TemaPertanyaan::find($id);
+        $delete->delete();
+        return back();
+        
     }
 }

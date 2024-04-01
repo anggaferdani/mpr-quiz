@@ -90,8 +90,10 @@ class PertanyaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pertanyaan $pertanyaan)
+    public function destroy($id)
     {
-        //
+        $delete = Pertanyaan::find($id);
+        $delete->delete();
+        return back();
     }
 }
