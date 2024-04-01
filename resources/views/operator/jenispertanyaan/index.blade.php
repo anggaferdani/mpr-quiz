@@ -108,7 +108,7 @@
                                     <td class="text-center">{{$tanya->pertanyaan}}</td>
                                     <td class="text-center"> 
                                         <div class="d-flex justify-content-center">
-                                            <button onclick="kirimPertanyaan('{{$tanya->pertanyaan}}')" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" type="button" class="btn btn-primary btn-icon-text">Pilih</button>
+                                            <button data-pertanyaan="{{ $tanya->pertanyaan }}" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" type="button" class="btn btn-primary btn-icon-text button-pertanyaan">Pilih</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -299,6 +299,100 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script>
 <script>
+   // Variabel global untuk menyimpan pertanyaan
+    // let selectedQuestions = [];
+    // Menambahkan event onclick untuk memanggil fungsi kirimPertanyaan
+    // $("#btnKirimPertanyaan").click(function() {
+    //     var pertanyaan = $(this).data('value');
+    //     console.log('pertanyaan', pertanyaan);
+    //     kirimPertanyaan(pertanyaan);
+
+    // });
+
+    // $(document).ready(function() {
+    //     // Ketika tombol Pilih diklik
+    //     $('button[data-bs-toggle="modal"]').on('click', function() {
+    //         // Ambil nilai pertanyaan dari kolom kedua
+    //         var pertanyaan = $(this).closest('tr').find('td:nth-child(2)').text().trim();
+    //         console.log('pertanyaan',pertanyaan)
+    //         // Kirim pertanyaan ke route lain melalui AJAX
+    //         $.ajax({
+    //             url: 'api/pusher', // Ganti dengan URL tujuan route Anda
+    //             type: 'POST', // Atur metode HTTP yang sesuai
+    //             data: {
+    //                 pertanyaan: pertanyaan // Kirim nilai pertanyaan
+    //             },
+    //             success: function(response) {
+    //                 // Tanggapan berhasil dari server
+    //                 console.log(response);
+    //                 // Lakukan tindakan lain jika diperlukan
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 // Tanggapan gagal dari server
+    //                 console.error(xhr.responseText);
+    //                 // Tampilkan pesan kesalahan jika diperlukan
+    //             }
+    //         });
+    //     });
+    // });
+
+    // Membuat variabel global untuk menyimpan data
+//     var selectedQuestion = "";
+
+// // Menambahkan event listener saat dokumen siap
+// document.addEventListener("DOMContentLoaded", function() {
+//     var buttons = document.querySelectorAll('.btnKirimPertanyaan');
+
+//     buttons.forEach(function(button) {
+//         button.addEventListener('click', function() {
+//             selectedQuestion = this.getAttribute('data-value');
+//         });
+//     });
+// });
+//     // Fungsi untuk menambahkan pertanyaan ke variabel global
+//     function kirimPertanyaan(pertanyaan) {
+//         // Mengirim data ke server menggunakan Ajax
+//         console.log('pertanyaan', pertanyaan)
+//         $.ajax({
+//             url: '/api/pusher', // Ganti '/route/laravel' dengan URL yang sesuai
+//             method: 'POST', // Anda dapat menggunakan metode POST atau metode yang sesuai
+//             data: pertanyaan
+//             success: function(response) {
+//                 console.log('Data berhasil dikirim');
+//             },
+//             error: function(xhr, status, error) {
+//                 console.error('Terjadi kesalahan:', error);
+//                 // Tangani kesalahan jika diperlukan
+//             }
+//         });
+//     }
+
+</script>
+
+<script>
+    $(document).ready(function(){
+    $(".button-pertanyaan").click(function(){
+        var pertanyaan = $(this).data("pertanyaan"); // Mengambil nilai atribut data-pertanyaan dari tombol
+        console.log('pertanyaan', pertanyaan)
+        $.ajax({
+            url: "/kirim-pertanyaan",
+            type: "POST",
+            data: { pertanyaan: pertanyaan }, // Mengirim nilai pertanyaan ke server
+            success: function(response){
+                // Handle the response here
+                console.log(response);
+            },
+            error: function(xhr, status, error){
+                // Handle errors here
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+
+</script>
+
+<script>
     // Use jQuery to update the hidden input field with the selected team value
     $('.id_tim').change(function() {
         var selectedTeam = $('.id_tim:checked').val();
@@ -309,22 +403,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 {{-- KIRIM PARAMETER SOAL KE FILE FRONTEND --}}
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
 
-<script>
-    // Menginisialisasi Pusher dengan kunci aplikasi yang sesuai
-    var pusher = new Pusher('38cfe3d83066a917afe6', {
-        cluster: 'ap1',
-        encrypted: true // Gunakan enkripsi jika diaktifkan di konfigurasi Pusher Anda
-    });
-
-    // Mengirim data pertanyaan ke saluran 'pertanyaan-channel'
-    function kirimPertanyaan(pertanyaan) {
-        const channel = pusher.channel('my-channel'); // Replace 'my-channel' and 'my-event' with your channel and event names
-        const message = pertanyaan; // Replace 'message' with your message payload
-        channel.trigger('my-event', message); // Trigger the event with the message payload
-    }
-</script>
 
 
 @endsection

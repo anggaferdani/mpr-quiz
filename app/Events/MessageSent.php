@@ -3,6 +3,7 @@ namespace App\Events;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class MessageSent implements ShouldBroadcast
@@ -18,7 +19,7 @@ class MessageSent implements ShouldBroadcast
 
   public function broadcastOn()
   {
-      return ['my-channel'];
+      return new Channel ('my-channel');
   }
 
   public function broadcastAs()

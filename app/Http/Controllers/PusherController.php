@@ -7,8 +7,9 @@ use Illuminate\Http\Request;
 
 class PusherController extends Controller
 {
-    public function kirimPertanyaan()
+    public function kirimPertanyaan(Request $request)
     {
-        event(new MessageSent('hello world'));
+        event(new MessageSent($request->pertanyaan));
+        return response()->json(['status' => 'success']);
     }
 }
