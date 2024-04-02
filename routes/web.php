@@ -10,6 +10,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TemaPertanyaanController;
+use App\Http\Controllers\PusherController;
 use App\Events\MessageSent;
 
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin']);
 
 Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
+// Route::middleware(['op', 'auth:web'])->group(function(){
     Route::resource('/sesi-1', TemaPertanyaanController::class);
     Route::resource('/pilih-pertanyaan', PertanyaanController::class);
     Route::resource('/list-jawaban', JawabanController::class);
@@ -63,6 +65,18 @@ Route::get('/sesi2-soal', function () {return view('FE.s2-soal');});
 Route::get('/sesi1-juri', function () {return view('FE.Juri.sesi-1');});
 Route::get('/sesi2-juri', function () {return view('FE.Juri.sesi-2');});
 Route::get('/sesi3-juri', function () {return view('FE.Juri.sesi-3');});
+
+// Route::get('/pusher', [PusherController::class, 'kirimPertanyaan']);
+Route::post('/kirim-pertanyaan', [PusherController::class, 'kirimPertanyaan']);
+
+
+
+
+
+
+
+
+
 
 // Route::get('/testing', function () {
 //     event(new MessageSent('hello world'));

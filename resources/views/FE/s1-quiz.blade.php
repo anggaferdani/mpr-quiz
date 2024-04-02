@@ -6,23 +6,10 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     {{-- PUSHER --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    <script>
-
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
-
-        var pusher = new Pusher('38cfe3d83066a917afe6', {
-        cluster: 'ap1'
-        });
-
-        var channel = pusher.subscribe('my-channel');
-        channel.bind('my-event', function(data) {
-        alert(JSON.stringify(data));
-        });
-    </script>
-    {{-- END PUSHER --}}
-
+    {{-- <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script> --}}
+    @vite(['resources/css/app.css' , 'resources/js/app.js'])
     <style>
         /* body{
             background-image: url('../images/bg-baru.gif');
@@ -154,9 +141,33 @@
             }
     </style>
 
+    {{-- PUSHER --}}
+    <script>
+        var pusher = new Pusher('d0c13db38b1d3aee0d7a', {
+            cluster: 'ap1',
+            encrypted: true
+        });
+        console.log('pusher', pusher)
+
+        var channel = pusher.subscribe('my-channel');
+        console.log('channel', channel)
+        channel.bind('my-event', function(data) {
+            // Update question container with received question
+            console.log('data', data);
+            document.getElementById('question-container').innerHTML = data.message;
+            
+            // You can also use data.message to further process the received question
+            // For example, if you want to log it or use it in some other way:
+            var pertanyaan = data.message;
+            console.log("Pertanyaan received:", pertanyaan);
+
+            // Now you can use the pertanyaan variable to handle the received question further
+        });
+    </script>
+
   </head>
   <body>
-    <img class="bg-gif" src="../images/bg-baru.gif" alt="">
+    <img class="bg-gif" src="../images/sesi-1-quiz.gif" alt="">
     <div class="wrap-countdown d-flex justify-content-center">
         <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
             <h3 id="countdown" class="mb-0">30</h3>
@@ -181,8 +192,7 @@
             </div>
 
             <div class="soal">
-                {{-- <h1 class="animate-text">{{ $quiz->pertanyaan }}</h1> --}}
-                <h1 class="animate-text">{{ $pertanyaan }}</h1>
+                <h1 class="animate-text" id="question-container"></h1>
             </div>
 
             
@@ -201,6 +211,7 @@
 
     </div>
 
+    {{-- ANIMASI TEXT --}}
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var text = document.querySelector('.animate-text');
@@ -220,6 +231,7 @@
         });
     </script>
 
+    {{-- COUNTDOWN --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
@@ -255,6 +267,7 @@
         });
     </script>
 
+    {{-- SHORTCUT --}}
     <script>
         document.addEventListener('keydown', function(event) {
             // Mendapatkan kode tombol yang ditekan
@@ -299,6 +312,9 @@
             }
         });
     </script>
+
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
