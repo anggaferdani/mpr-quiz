@@ -71,6 +71,7 @@
                             <div class="modal-body">
                             <button type="button" data-bs-toggle="modal" data-bs-target="#tanya{{$item->id}}" class="btn d-block btn-primary btn-icon-text">Buat Pertanyaan</button>
                                 <div class="table-responsive">
+                                <input type="text" id="searchInput" class="mt-2 mb-1 border border-1 rounded filterPertanyaan" data-modalid="{{$item->id}}">
                                     <table id="table1" class="table">
                                         <thead>
                                             <tr>
@@ -84,7 +85,7 @@
                                             @php
                                                 $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
                                             @endphp
-                                            <tr>
+                                            <tr class="filterPertanyaan{{$item->id}}">
                                                 <td class="text-center">{{$loop->iteration}}</td>
                                                 <td class="text-center">{{$tanya->pertanyaan}}</td>
                                                 <td class="text-center"> <div class="d-flex justify-content-center">
@@ -122,7 +123,7 @@
                                                         <input type="hidden" value="2" name="sesi">
                                                         <input type="hidden" value="{{$tanya->id}}" name="id_pertanyaan">
                                                         <input type="hidden" class="teamteam" name="id_team">
-                                                        <label for="">Input Nilai<span class="text-danger">*</span></label>
+                                                        <label for="">Input Poin<span class="text-danger">*</span></label>
                                                         <input type="number" class="form-control" name="poin">
                                                     </div>
                                                     <div class="modal-footer">
@@ -220,6 +221,33 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+$(document).ready(function() {
+    // Script untuk filter input pada saat modal muncul
+    $('input[data-modalid]').on('input', function () {
+        // Mendapatkan nilai ID modal yang terkait dari atribut data
+        var modalId = $(this).data('modalid');
+
+        // Membuat ID input sesuai dengan ID modal yang terkait
+        var inputId = 'searchInput' + modalId;
+
+        // Lakukan filter atau manipulasi sesuai kebutuhan Anda
+        var inputValue = $(this).val(); 
+        console.log('Input value for modal ' + modalId + ': ' + inputValue);
+        // Lakukan sesuatu dengan nilai input ...
+    });
+
+    // Script untuk filter tabel
+    $('.filterPertanyaan').on('keyup', function() {
+        var value = $(this).val().toLowerCase();
+        var modalId = $(this).data('modalid');
+        // Menggunakan selektor yang tepat untuk mencari elemen yang perlu difilter
+        $('table tr.filterPertanyaan'+modalId).filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>
 <script>
     $(document).on('click', '.tambahjawaban', function(){
     addInputField();

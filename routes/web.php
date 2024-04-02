@@ -45,6 +45,7 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::get('/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
     Route::get('/sesi-3', [Sesi3Controller::class, 'index']);
     Route::get('/logout', [LoginController::class, 'logout']);
+    Route::resource('/perolehan-nilai', ParticipantController::class);
     Route::resource('/shortcut', ShotcutController::class);
 });
 Route::post('/setpoin', [Sesi3Controller::class, 'setpoin'])->name('setpoin');

@@ -144,7 +144,7 @@
                     <input type="hidden" class="teamteam" name="id_team">
                     <input type="hidden"  value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
                     @foreach($tanya->jawaban as $jwb)
-                    <label class="form-selectgroup-item my-2 flex-fill d-flex gap-2 justify-content-between">
+                    <label class="form-selectgroup-item flex-fill my-2 d-flex gap-2 justify-content-between">
                         <!-- Pass the ID of the hidden input field to the addPoints function -->
                         <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}')">Benar</button>
                         <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>

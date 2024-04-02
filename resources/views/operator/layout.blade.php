@@ -72,16 +72,16 @@
                     <span>Sesi 2</span>
                 </a>
             </li>
+            <li class="sidebar-item {{ (request()->is('op/perolehan-nilai')) ? 'active' :  '' }}">
+                <a href="/op/perolehan-nilai" class='sidebar-link'>
+                <i class="bi bi-check-circle"></i>                    
+                <span>Perolehan Nilai</span>
+                </a>
+            </li>
             <li class="sidebar-item {{ (request()->is('op/sesi-3')) ? 'active' :  '' }}">
                 <a href="/op/sesi-3" class='sidebar-link'>
                 <i class="bi bi-3-square"></i>
                     <span>Sesi 3</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ (request()->is('op/shortcut')) ? 'active' :  '' }}">
-                <a href="/op/shortcut" class='sidebar-link'>
-                <i class="bi bi-pin"></i>                    
-                <span>Shortcut</span>
                 </a>
             </li>
             <li class="sidebar-item ">
