@@ -41,6 +41,7 @@
         <div class="row align-items-center">
             <div class="col-7 text-sesi">
                 <h1>SESI 2</h1>
+                {{-- <h1>{{ $pertanyaan }}</h1> --}}
                 <h3>TEMATIK EMPAT PILAR MPR RI</h3>
             </div>
             <div class="col-5">
@@ -54,18 +55,39 @@
 
 
     <script>
+        
+    </script>
+
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('d0c13db38b1d3aee0d7a', {
+        cluster: 'ap1'
+    });
+
+    var channel = pusher.subscribe('channelKirimPertanyaanS2');
+    channel.bind('eventKirimPertanyaanS2', function(data) {
+        console.log(JSON.stringify(data));
+
         document.addEventListener('keydown', function(event) {
             // Pastikan tombol yang ditekan adalah tombol panah kanan (keyCode 39)
             if (event.keyCode === 39) {
                 // Lakukan pengalihan ke URL route yang diinginkan
-                window.location.href = '/sesi2-soal';
+                // Lakukan pengalihan ke URL route yang diinginkan dengan menyertakan variabel data sebagai query string
+                var dataString = JSON.stringify(data.message.pertanyaan); // Ganti 'data' dengan variabel yang ingin Anda bawa
+                window.location.href = '/sesi2-soal?data=' + encodeURIComponent(dataString);
             } 
             if (event.keyCode === 37) {
             // Lakukan navigasi ke URL sebelumnya dalam riwayat browser
             window.history.back();
         }
         });
+    });
     </script>
+
 
   </body>
 </html>

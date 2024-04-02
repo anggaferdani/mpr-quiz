@@ -6,6 +6,49 @@
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+            encrypted: true
+        });
+
+        const channel = pusher.subscribe('channel-kirim-pertanyaan');
+        channel.bind('event-kirim-pertanyaan', function(data) {
+            // Handle received quiz data
+            console.log('Received quiz data:', data);
+            // Now you can update your UI with received quiz data
+            // Update UI with received quiz data
+            const tampilkanPertanyaanElement = document.getElementById('tampilkanPertanyaan');
+            if (tampilkanPertanyaanElement) {
+                tampilkanPertanyaanElement.innerHTML = data.quiz.pertanyaan;
+            }
+
+            // Handle received answers data
+            const tampilkanJawabanElement = document.getElementById('tampilkanJawaban');
+            if (tampilkanJawabanElement) {
+                let jawabanHTML = '';
+                data.jawaban.forEach(function(jawaban, index) {
+                    jawabanHTML += '<div class="jawaban d-flex my-2 px-4 py-3">';
+                    jawabanHTML += '<p class="mb-0">' + (index + 1) + '.</p>';
+                    jawabanHTML += '<p class="mb-0">' + jawaban.jawaban + '</p>';
+                    jawabanHTML += '</div>';
+                });
+                tampilkanJawabanElement.innerHTML = jawabanHTML;
+            }
+        });
+
+        const channel2 = pusher.subscribe('channel-button-click-pertanyaan');
+        channel2.bind('event-button-click-pertanyaan', function(data) {
+            // Handle received quiz data
+            console.log('Received quiz data ID:', data);
+        });
+    </script>
+
+    <script>
+
+    </script>
+
     <style>
         .container{
             max-width: 45vw;
@@ -101,30 +144,9 @@
                     </div>
                 </div>
                 <div class="content">
-                    <h3 class="fw-bold text-center">Sebutkan pecahan uang kertas dan uang koin TE (Tahun Emisi) 2022!</h3>
-                    <div class="jawaban d-flex my-2 px-4 py-3">
-                        <p class="mb-0">1.</p>
-                        <p class="mb-0">Rp.100.000</p>
-                    </div>
-                    <div class="jawaban d-flex my-2 px-4 py-3">
-                        <p class="mb-0">1.</p>
-                        <p class="mb-0">Rp.100.000</p>
-                    </div>
-                    <div class="jawaban my-2 jawaban-benar d-flex px-4 py-3">
-                        <p class="mb-0">1.</p>
-                        <p class="mb-0">Rp.100.000</p>
-                    </div>
-                    <div class="jawaban d-flex my-2 px-4 py-3">
-                        <p class="mb-0">1.</p>
-                        <p class="mb-0">Rp.100.000</p>
-                    </div>
-                    <div class="jawaban d-flex my-2 px-4 py-3">
-                        <p class="mb-0">1.</p>
-                        <p class="mb-0">Rp.100.000</p>
-                    </div>
-                    <div class="jawaban d-flex my-2 px-4 py-3">
-                        <p class="mb-0">1.</p>
-                        <p class="mb-0">Rp.100.000</p>
+                    <h3 class="fw-bold text-center" id="tampilkanPertanyaan"></h3>
+                    <div id="tampilkanJawaban">
+                        
                     </div>
                 </div>
                 <div class="info d-flex justify-content-between">

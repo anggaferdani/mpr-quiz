@@ -104,9 +104,9 @@
                             </tr>
                             @endforeach --}}
                             @foreach($item->pertanyaan as $tanya)
-                            @php
-                                $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
-                            @endphp
+                                @php
+                                    $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
+                                @endphp
                                 <tr class="filterPertanyaan{{$item->id}}">
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">{{$tanya->pertanyaan}}</td>
@@ -121,8 +121,6 @@
                                     </td>
                                 </tr>
                             @endforeach
-
-                            
                         </tbody>
                     </table>
                 </div>
@@ -133,7 +131,7 @@
 @foreach($item->pertanyaan as $tanya)
 <div class="modal fade" id="jawaban{{$tanya->id}}" data-modal-id="{{$tanya->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{url('/op/savepoin')}}" method="post">
+        <form action="{{url('/op/savepoin')}}" method="post">x
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">List Jawaban - <span class="textteam"></span></h1>
@@ -146,7 +144,7 @@
                     <input type="hidden" class="teamteam" name="id_team">
                     <input type="hidden"  value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
                     @foreach($tanya->jawaban as $jwb)
-                    <label class="form-selectgroup-item flex-fill d-flex gap-2 justify-content-between">
+                    <label class="form-selectgroup-item my-2 flex-fill d-flex gap-2 justify-content-between">
                         <!-- Pass the ID of the hidden input field to the addPoints function -->
                         <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}')">Benar</button>
                         <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
@@ -284,6 +282,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update click count for this button
         clickCounts[inputId] = clickCount + 1;
     }
+    
     function cancelPoints(button, inputId) {
         // Get the hidden input field corresponding to this button
         var poinInput = document.getElementById(inputId);
@@ -353,76 +352,36 @@ $(document).ready(function() {
         $(this).parents(".form-row").remove();
     });
 </script>
+
 <script>
-   // Variabel global untuk menyimpan pertanyaan
-    // let selectedQuestions = [];
-    // Menambahkan event onclick untuk memanggil fungsi kirimPertanyaan
-    // $("#btnKirimPertanyaan").click(function() {
-    //     var pertanyaan = $(this).data('value');
-    //     console.log('pertanyaan', pertanyaan);
-    //     kirimPertanyaan(pertanyaan);
-
-    // });
-
-    // $(document).ready(function() {
-    //     // Ketika tombol Pilih diklik
-    //     $('button[data-bs-toggle="modal"]').on('click', function() {
-    //         // Ambil nilai pertanyaan dari kolom kedua
-    //         var pertanyaan = $(this).closest('tr').find('td:nth-child(2)').text().trim();
-    //         console.log('pertanyaan',pertanyaan)
-    //         // Kirim pertanyaan ke route lain melalui AJAX
-    //         $.ajax({
-    //             url: 'api/pusher', // Ganti dengan URL tujuan route Anda
-    //             type: 'POST', // Atur metode HTTP yang sesuai
-    //             data: {
-    //                 pertanyaan: pertanyaan // Kirim nilai pertanyaan
-    //             },
-    //             success: function(response) {
-    //                 // Tanggapan berhasil dari server
-    //                 console.log(response);
-    //                 // Lakukan tindakan lain jika diperlukan
-    //             },
-    //             error: function(xhr, status, error) {
-    //                 // Tanggapan gagal dari server
-    //                 console.error(xhr.responseText);
-    //                 // Tampilkan pesan kesalahan jika diperlukan
-    //             }
-    //         });
-    //     });
-    // });
-
-    // Membuat variabel global untuk menyimpan data
-//     var selectedQuestion = "";
-
-// // Menambahkan event listener saat dokumen siap
-// document.addEventListener("DOMContentLoaded", function() {
-//     var buttons = document.querySelectorAll('.btnKirimPertanyaan');
-
-//     buttons.forEach(function(button) {
-//         button.addEventListener('click', function() {
-//             selectedQuestion = this.getAttribute('data-value');
-//         });
-//     });
-// });
-//     // Fungsi untuk menambahkan pertanyaan ke variabel global
-//     function kirimPertanyaan(pertanyaan) {
-//         // Mengirim data ke server menggunakan Ajax
-//         console.log('pertanyaan', pertanyaan)
-//         $.ajax({
-//             url: '/api/pusher', // Ganti '/route/laravel' dengan URL yang sesuai
-//             method: 'POST', // Anda dapat menggunakan metode POST atau metode yang sesuai
-//             data: pertanyaan
-//             success: function(response) {
-//                 console.log('Data berhasil dikirim');
-//             },
-//             error: function(xhr, status, error) {
-//                 console.error('Terjadi kesalahan:', error);
-//                 // Tangani kesalahan jika diperlukan
-//             }
-//         });
-//     }
-
-</script>
+    $(document).ready(function() {
+     // Additional code for setting the value from the foreach loop
+     var teamName = $('[name="idtim"]:checked').data('team-name');
+     var selectedTeamId = $('input[name="idtim"]:checked').val();
+     console.log("Selected Team Name: " + teamName);
+ 
+     // Iterate over each modal to set input field values
+     $('.modal').each(function() {
+         var modalId = $(this).data('modal-id');
+         var inputValue = selectedTeamId;
+         // Set the value of the input field
+         $('#jawaban' + modalId).find('input[name="id_team"]').val(inputValue);
+         $('#jawaban' + modalId).find('.textteam').text(teamName);
+     });
+ 
+     // Handle change event for .id_tim elements
+     $(document).on('change', '.id_tim', function() {
+         // Get the value of the selected team ID
+         var selectedTeamId = $(this).val();
+         var teamName = $('[name="idtim"]:checked').data('team-name');
+         console.log("Selected Team ID: " + selectedTeamId);
+ 
+         // Set the value of the hidden input field
+         $('.teamteam').val(selectedTeamId);
+         $('.textteam').text(teamName);
+     });
+ });
+ </script>
 
 <script>
     $(document).ready(function(){

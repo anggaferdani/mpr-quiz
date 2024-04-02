@@ -99,51 +99,66 @@
     var itemsFromLocal = JSON.parse(itemJSON);
 
     // Inisialisasi spinwheel dengan item yang ada di local storage
-    $('#canvas').rouletteWheel({
-        items: itemsFromLocal,
-        selected: function(key, value) {
-            // Simpan nama item yang dipilih ke dalam variabel selectedName
-            var selectedName = value.name;
-            var selectedId = value.id;
+$('#canvas').rouletteWheel({
+    items: itemsFromLocal,
+    selected: function (key, value) {
+        // Simpan nama item yang dipilih ke dalam variabel selectedName
+        var selectedName = value.name;
+        var selectedId = value.id;
 
-            // Hapus item yang memiliki nama yang sesuai dari local storage
-            deleteSelectedItem(selectedName);
+        // Hapus item yang memiliki nama yang sesuai dari local storage
+        deleteSelectedItem(selectedName);
 
-            var selectedDiv = '<div id="selectedDiv" style="padding: 20px; color: black;">';
-                selectedDiv += '<h1>' + selectedName + '</h1>';
-                selectedDiv += '</div>';
-            
-                // Tampilkan div yang berisi informasi item yang dipilih
-                    $('body').append(selectedDiv);
+        var selectedDiv = '<div id="selectedDiv" style="padding: 20px; color: black;">';
+            selectedDiv += '<h1>' + selectedName + '</h1>';
+            selectedDiv += '</div>';
+        
+            // Tampilkan div yang berisi informasi item yang dipilih
+                $('body').append(selectedDiv);
 
-            // Tampilkan informasi item yang dipilih
-            Swal.fire({
-                // html: selectedDiv,
-                title: selectedName,
-                id : selectedId,
-                width: 600,
-                padding: "3em",
-                color: "#000",
-                background: "#fff url(/images/trees.png)",
-                backdrop: `
-                    rgba(0,0,123,0.4)
-                    url("/images/nyan-cat.gif")
-                    left top
-                    no-repeat
-                `
-            }).then((result) => {
-                // Redirect ke halaman quiz jika tombol OK diklik
-                if (result.isConfirmed) {
-                    window.location.href = "/sesi1-quiz/";
-                    // window.location.href = "/sesi1-quiz/" + selectedId;
-                }
-            });
+        // Tampilkan informasi item yang dipilih
+        Swal.fire({
+            // html: selectedDiv,
+            title: selectedName,
+            id : selectedId,
+            width: 600,
+            padding: "3em",
+            color: "#000",
+            background: "#fff url(/images/trees.png)",
+            backdrop: `
+                rgba(0,0,123,0.4)
+                url("/images/nyan-cat.gif")
+                left top
+                no-repeat
+            `
+        }).then((result) => {
+            // Redirect ke halaman quiz jika tombol OK diklik
+            if (result.isConfirmed) {
+                // window.location.href = "/sesi1-quiz/";
+                window.location.href = "/sesi1-quiz/" + selectedId;
+            }
+        });
 
-            // Simpan data terbaru ke local storage
-            localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
-        },
-        spinText: '',
-    });
+        // Simpan data terbaru ke local storage
+        localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
+    },
+    spinText: '',
+    onItemRender: function (item, elem) {
+        // Berikan warna acak untuk setiap elemen spinner
+        elem.css('background-color', getRandomColor());
+    }
+});
+
+// Fungsi untuk menghasilkan warna acak
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 }
 
     // Fungsi untuk mencari dan menghapus item yang memiliki nama yang sesuai

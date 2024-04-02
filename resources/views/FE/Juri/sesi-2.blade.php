@@ -115,17 +115,11 @@
                     </div>
                 </div>
                 <div class="pertanyaan">
-                    <p class="fw-bold">Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!</p>
+                    <p class="fw-bold" id="soalSesi2"></p>
                 </div>
                 <div class="pointer p-3">
                     <p class="fw-bold">POINTER :</p>
                     <p class="isi-pointer">1. Penyelidikan usaha-usaha kemerdekaan Indonesia</p>
-                    <p class="isi-pointer">2. Mempersiapkan Kemerdekaan</p>
-                    <p class="isi-pointer">3. Merumuskan Dasar Negara</p>
-                    <p class="isi-pointer">4. Penyusunan Naskah Konstitusi</p>
-                    <p class="isi-pointer">5. Menyelidiki Situasi Politik Dan Sosial</p>
-                    <p class="isi-pointer">6. Merumuskan Tujuan Dan Cita-Cita Kemerdekaan</p>
-                    <p class="isi-pointer">7. Konsultasi Dengan Berbagai Pihak</p>
                 </div>
               </div>
           </div>
@@ -200,5 +194,22 @@
       </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('d0c13db38b1d3aee0d7a', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('channelKirimPertanyaanS2');
+        channel.bind('eventKirimPertanyaanS2', function(data) {
+            console.log(JSON.stringify(data));
+
+            document.getElementById('soalSesi2').innerText = data.message.pertanyaan;
+        });
+    </script>
   </body>
 </html>

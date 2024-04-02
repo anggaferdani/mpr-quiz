@@ -91,7 +91,7 @@
                                                 @if($participant)
                                                     <button type="button" class="btn btn-success btn-icon-text" disabled><i class="bi bi-check-all"></i></button>
                                                 @else
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
+                                                    <button type="button" onclick="pilihPertanyaan('{{$tanya->id}}', '{{$tanya->pertanyaan}}')" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
                                                 @endif
                                                 
                                             </td>
@@ -274,4 +274,49 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+<script>
+    // function pilihPertanyaan(pertanyaan) {
+    //     var pusher = new Pusher('{{ env("PUSHER_APP_KEY") }}', {
+    //         cluster: '{{ env("PUSHER_APP_CLUSTER") }}',
+    //         encrypted: true
+    //     });
+
+    //     var channel = pusher.subscribe('channelKirimPertanyaanS2');
+
+    //     channel.trigger('client-eventKirimPertanyaanS2', {
+    //         pertanyaan: pertanyaan
+    //     });
+    // }
+    // const pusherAppKey = "{{ env('PUSHER_APP_KEY') }}";
+
+    // Initialize Pusher with Pusher app key from .env
+    const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+    const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+    const pusher = new Pusher(pusherKey, {
+        cluster: pusherCluster,
+        encrypted: true, // Add this if you have encryption enabled on Pusher
+    });
+
+    // Function to send a question
+    function pilihPertanyaan(id, pertanyaan) {
+        $.ajax({
+            method: 'GET',
+            url: '/sesi2',
+            data: {
+                _token: '{{ csrf_token() }}',
+                id: id,
+                pertanyaan: pertanyaan,
+            },
+            success: function(response) {
+                console.log('Question successfully sent to Pusher.');
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to send question to Pusher:', error);
+            }
+        });
+    }
+
+</script>
+
 @endsection

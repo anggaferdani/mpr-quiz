@@ -60,6 +60,33 @@
             margin-bottom: 0 !important;
             font-size: 5vw;
         }
+        #countdown-div{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100vw;
+            height: 100vh;
+        }
+        .background-waktu-habis{
+            position: relative;
+            background-color: red;
+            opacity: 50%;
+            width: 100%;
+            height: 100%;
+        }
+        #countdown-div h1{
+            background-color: red;
+            padding: 5rem;
+            border-radius: 25px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            color: white;
+            font-weight: bold;
+        }
     
         .soal h1{
             font-weight: 600;
@@ -177,7 +204,8 @@
         <div class="salah-jawaban"></div>
         <div class="container">
             <div id="countdown-div" style="display: none;">
-                Waktu Habis!
+                <div class="background-waktu-habis"></div>
+                <h1>Waktu Habis!</h1>
             </div>
 
             <div class="top-content d-flex align-items-center justify-content-between my-2">
@@ -192,7 +220,7 @@
             </div>
 
             <div class="soal">
-                <h1 class="animate-text" id="question-container"></h1>
+                <h1 class="animate-text">{{ $quiz->pertanyaan}}</h1>
             </div>
 
             
@@ -234,7 +262,7 @@
     {{-- COUNTDOWN --}}
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownSeconds = 5; // Ubah kembali ke 20 jika menggunakan detik
             var countdownInterval;
 
             function startCountdown() {

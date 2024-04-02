@@ -29,3 +29,12 @@ window.Echo.channel('my-channel')
     .listen('.my-event',(e)=>{
         console.log('e',e)
     });
+
+window.Echo.channel('channel-button-click-pertanyaan')
+    .listen('.event-button-click-pertanyaan',(e)=>{
+        console.log('e',e)
+    });
+window.Echo.channel('channelKirimPertanyaanS2')
+    .listen('.eventKirimPertanyaanS2',(e)=>{
+        console.log('e',e)
+    });
