@@ -13,7 +13,16 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        //
+        $now = Carbon::now()->format('Y-m-d');
+        $participants = Participant::select('id_team')
+        ->selectRaw('SUM(CASE WHEN sesi = 1 THEN poin ELSE 0 END) AS poin_sesi_1')
+        ->selectRaw('SUM(CASE WHEN sesi = 2 THEN poin ELSE 0 END) AS poin_sesi_2')
+        ->where('tanggal', $now)
+        ->groupBy('id_team')
+        ->orderBy('id_team')
+        ->get();
+
+        return view('operator.jenispertanyaan.nilai', compact('participants', 'now'));
     }
 
     /**
