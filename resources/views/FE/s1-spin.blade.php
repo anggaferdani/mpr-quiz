@@ -77,7 +77,11 @@
            $(function() {
             var item = [
                 @foreach ($tema as $t)
-                { id: '{{ $t->id }}' ,name: '{{ $t->tema }}' },
+                { 
+                    id: '{{ $t->id }}', 
+                    name: '{{ $t->tema }}',
+                    color: @if ($t->id % 2 !== 0) 'FB6D48' @else '#ffffff' @endif
+                },
                 @endforeach
             ];
             // console.log($t->id)
@@ -105,6 +109,7 @@ $('#canvas').rouletteWheel({
         // Simpan nama item yang dipilih ke dalam variabel selectedName
         var selectedName = value.name;
         var selectedId = value.id;
+        var selectedColor = value.color;
 
         // Hapus item yang memiliki nama yang sesuai dari local storage
         deleteSelectedItem(selectedName);
@@ -121,10 +126,12 @@ $('#canvas').rouletteWheel({
             // html: selectedDiv,
             title: selectedName,
             id : selectedId,
+            color : selectedColor,
             width: 600,
             padding: "3em",
-            color: "#000",
-            background: "#fff url(/images/trees.png)",
+            // color: "#000",
+            // background: "#fff url(/images/trees.png)",
+            background: selectedColor,
             backdrop: `
                 rgba(0,0,123,0.4)
                 url("/images/nyan-cat.gif")

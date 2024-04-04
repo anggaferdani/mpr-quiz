@@ -119,7 +119,7 @@
                 </div>
                 <div class="pointer p-3">
                     <p class="fw-bold">POINTER :</p>
-                    <p class="isi-pointer">1. Penyelidikan usaha-usaha kemerdekaan Indonesia</p>
+                    <p class="isi-pointer" id="loopingJawabanArray"></p>
                 </div>
               </div>
           </div>
@@ -129,66 +129,18 @@
                   <h4 class="mb-0 fw-bold">POINT</h4>
               </div>
               <div class="row justify-content-center">
-                  <div class="col-md-5 d-flex justify-content-center my-2">
-                      <div class="group">
+                @foreach ($team as $item)
+                    <div class="col-md-4 d-flex justify-content-center my-2" data-id="{{ $item->id }}">
+                        <div class="group">
                         <div class="nama-group py-2">
-                            <p class="mb-0">GROUP A</p>
+                            <p class="mb-0">{{ $item->name }}</p>
                         </div>
                         <div class="nilai-group py-3">
-                            <h4>70</h4>
+                            <h4 id="poin_{{ $item->id }}">{{ $item->participant->sum('poin') }}</h4>
                         </div>
-                      </div>
-                  </div>
-                  <div class="col-md-5 d-flex justify-content-center my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP B</p>
                         </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-5 d-flex justify-content-center my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP A</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-5 d-flex justify-content-center my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP B</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-5 d-flex justify-content-center my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP A</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-5 d-flex justify-content-center my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP B</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
+                    </div>
+                @endforeach
               </div>
           </div>
       </div>
@@ -209,6 +161,53 @@
             console.log(JSON.stringify(data));
 
             document.getElementById('soalSesi2').innerText = data.message.pertanyaan;
+            var jawabanArrayString = data.message.jawabanArray; // String JSON dari server
+            var jawabanArray = JSON.parse(jawabanArrayString); // Ubah string JSON menjadi array JavaScript
+
+            var jawabanElement = document.getElementById('loopingJawabanArray');
+            jawabanElement.innerHTML = ''; // Clear existing content
+
+            // Loop through the jawabanArray and create <p> elements for each jawaban
+            for (var i = 0; i < jawabanArray.length; i++) {
+                var jawabanItem = jawabanArray[i];
+                var jawabanText = (i + 1) + '. ' + jawabanItem;
+                var jawabanParagraph = document.createElement('p');
+                jawabanParagraph.textContent = jawabanText;
+                jawabanElement.appendChild(jawabanParagraph);
+            }
+
+        });
+
+        // PUSHER STORE NILAI TIM TERBARU
+        var channel2 = pusher.subscribe('my-KirimPointStoreS1');
+        channel2.bind('my-KirimPointStoreS1', function(data) {
+            // Update tampilan dengan data yang diterima dari Pusher
+            console.log('KirimPointStoreS1', data);
+            
+            // Dapatkan id tim dan poin yang diterima dari Pusher
+            var teamId = data.id_team;
+            console.log('teamId', teamId)
+            var poinBaru = data.poin;
+            console.log('poinBaru', poinBaru)
+
+            // Dapatkan elemen HTML yang sesuai dengan id tim
+            var poinElement = document.getElementById('poin_' + teamId);
+
+            if (poinElement) {
+                // Dapatkan poin yang sudah ada di halaman
+                var poinLama = parseInt(poinElement.innerText);
+                // Ensure poinBaru is also an integer
+                var poinBaru2 = parseInt(poinBaru);
+
+                // Tambahkan poin yang baru diterima dari Pusher dengan poin yang sudah ada
+                var totalPoin = poinLama + poinBaru2;
+
+                // Hapus angka 0 di depan poin jika total poin sudah berjalan
+                var formattedPoin = totalPoin.toString().replace(/^0+/, '');
+
+                // Perbarui tampilan dengan total poin yang diformat
+                poinElement.innerText = formattedPoin;
+            }
         });
     </script>
   </body>

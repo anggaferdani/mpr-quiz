@@ -61,7 +61,7 @@ Route::get('/sesi1-nilai', [FrontendController::class, 'nilaiquizSesi1'])->name(
 Route::get('/sesi2', [FrontendController::class, 'openingSesi2'])->name('openingSesi2');
 Route::get('/sesi2-soal', [FrontendController::class, 'soalSesi2'])->name('soalSesi2');
 
-Route::get('/sesi1-juri', function () {return view('FE.Juri.sesi-1');});
+Route::get('/sesi1-juri', [FrontendController::class, 'openingSesi1Juri'])->name('openingSesi1Juri');
 Route::get('/sesi2-juri', [FrontendController::class, 'openingSesi2Juri'])->name('openingSesi2Juri');
 Route::get('/sesi3-juri', function () {return view('FE.Juri.sesi-3');});
 

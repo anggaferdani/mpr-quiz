@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 use App\Models\Jawaban;
 use App\Models\Pertanyaan;
 use App\Models\Participant;
+use App\Models\Team;
 
 use Pusher\Pusher;
 use App\Events\MessageSent;
 use App\Events\KirimPertanyaanS2;
+use App\Events\addPoints;
 
 use Illuminate\Http\Request;
 use App\Models\TemaPertanyaan;
@@ -51,6 +54,17 @@ class FrontendController extends Controller
         return view('FE.s1-quiz', compact('quiz'));
     }
     
+    
+    public function openingSesi1Juri(Request $request) 
+    {
+        $jawaban = $request->input('jawaban');
+        $team = Team::all();
+
+        event(new addPoints(['jawaban' => $jawaban]));
+        
+        return view('FE.Juri.sesi-1', compact('team'));
+    }
+    
     public function openingSesi2(Request $request)
     {
         // Mengambil data yang dikirimkan melalui AJAX
@@ -60,19 +74,20 @@ class FrontendController extends Controller
 
         return view('FE.s2');
     }
-
     public function openingSesi2Juri(Request $request) 
     {
         $id = $request->input('id');
         // $pertanyaan = Pertanyaan::find($id);
         // Mengambil jawaban berdasarkan id pertanyaan
-        $jawaban = Jawaban::where('id_pertanyaan', $id)->get();
         $pertanyaan = $request->input('pertanyaan');
+        $jawabanArray = $request->input('jawabanArray');
+        $team = Team::all();
+
         
         // Semua variabel memiliki nilai yang valid, kirimkan event
-        event(new KirimPertanyaanS2(['id' => $id, 'pertanyaan' => $pertanyaan, 'jawaban' => $jawaban]));
+        event(new KirimPertanyaanS2(['id' => $id, 'pertanyaan' => $pertanyaan, 'jawabanArray' => $jawabanArray]));
 
-        return view('FE.Juri.sesi-2');
+        return view('FE.Juri.sesi-2', compact('team'));
     }
 
 

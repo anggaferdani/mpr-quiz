@@ -84,6 +84,12 @@
                                             @foreach($item->pertanyaan as $tanya)
                                             @php
                                                 $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
+                                                $jawabanArray = [];
+                                                foreach ($tanya->jawaban as $jawaban) {
+                                                    $jawabanArray[] = $jawaban->jawaban;
+                                                }
+                                                // @dd($jawabanArray)
+
                                             @endphp
                                             <tr class="filterPertanyaan{{$item->id}}">
                                                 <td class="text-center">{{$loop->iteration}}</td>
@@ -92,7 +98,7 @@
                                                 @if($participant)
                                                     <button type="button" class="btn btn-success btn-icon-text" disabled><i class="bi bi-check-all"></i></button>
                                                 @else
-                                                    <button type="button" onclick="pilihPertanyaan('{{$tanya->id}}', '{{$tanya->pertanyaan}}')" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
+                                                    <button type="button" onclick="pilihPertanyaan('{{$tanya->id}}', '{{$tanya->pertanyaan}}', {{ json_encode($jawabanArray) }})" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
                                                 @endif
                                                 
                                             </td>
@@ -327,7 +333,7 @@ $(document).ready(function() {
     });
 
     // Function to send a question
-    function pilihPertanyaan(id, pertanyaan) {
+    function pilihPertanyaan(id, pertanyaan, jawabanArray) {
         $.ajax({
             method: 'GET',
             url: '/sesi2',
@@ -335,6 +341,25 @@ $(document).ready(function() {
                 _token: '{{ csrf_token() }}',
                 id: id,
                 pertanyaan: pertanyaan,
+                jawabanArray: JSON.stringify(jawabanArray),
+            },
+            success: function(response) {
+                console.log('Question successfully sent to Pusher.');
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to send question to Pusher:', error);
+            }
+        });
+    }
+    function pilihPertanyaan(id, pertanyaan, jawabanArray) {
+        $.ajax({
+            method: 'GET',
+            url: '/sesi2-juri',
+            data: {
+                _token: '{{ csrf_token() }}',
+                id: id,
+                pertanyaan: pertanyaan,
+                jawabanArray: JSON.stringify(jawabanArray),
             },
             success: function(response) {
                 console.log('Question successfully sent to Pusher.');

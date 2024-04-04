@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Pusher\Pusher;
+
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -47,6 +49,31 @@ class ParticipantController extends Controller
             $newParticipant->tanggal = Carbon::now();
             $newParticipant->sesi = $request->sesi;
             $newParticipant->save();
+
+            // Mengirim data ke Pusher
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                [
+                    'cluster' => env('PUSHER_APP_CLUSTER'),
+                    'useTLS' => true,
+                ]
+            );
+
+            // Data yang akan dikirimkan ke Pusher
+            $data = [
+                'id' => $newParticipant->id,
+                'id_team' => $newParticipant->id_team,
+                'poin' => $newParticipant->poin,
+                'id_pertanyaan' => $newParticipant->id_pertanyaan,
+                'tanggal' => $newParticipant->tanggal,
+                'sesi' => $newParticipant->sesi,
+            ];
+
+            // Mengirim pesan ke Pusher
+            $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
+
             return back();
     }
 

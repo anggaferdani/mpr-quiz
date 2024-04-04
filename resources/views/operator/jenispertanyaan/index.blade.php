@@ -146,7 +146,7 @@
                     @foreach($tanya->jawaban as $jwb)
                     <label class="form-selectgroup-item flex-fill my-2 d-flex gap-2 justify-content-between">
                         <!-- Pass the ID of the hidden input field to the addPoints function -->
-                        <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}')">Benar</button>
+                        <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar</button>
                         <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
                         <button type="button" class="btn btn-danger batal" onclick="cancelPoints(this, 'poin{{$tanya->id}}')"><i class="bi bi-x"></i></button>
                     </label>
@@ -250,9 +250,10 @@ document.addEventListener('DOMContentLoaded', function() {
     var clickCounts = {};
 
     // Function to add points
-    function addPoints(button, inputId) {
+    function addPoints(button, inputId, jawaban) {
         // Get the click count for this button
         var clickCount = clickCounts[inputId] || 0;
+        // console.log('inputId', inputId)
 
         // Exit function if maximum clicks reached
         if (clickCount >= 10) {
@@ -281,6 +282,30 @@ document.addEventListener('DOMContentLoaded', function() {
         cancelButton.disabled = false;
         // Update click count for this button
         clickCounts[inputId] = clickCount + 1;
+
+         // Initialize Pusher with Pusher app key from .env
+        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        const pusher = new Pusher(pusherKey, {
+            cluster: pusherCluster,
+            encrypted: true, // Add this if you have encryption enabled on Pusher
+        });
+            $.ajax({
+                method: 'GET',
+                url: '/sesi1-juri',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    // status: 'Benar',
+                    jawaban: jawaban,
+                },
+                success: function(response) {
+                    console.log('Data jawaban successfully sent to Pusher.');
+                    console.log('jawaban', jawaban)
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to send Data jawaban to Pusher:', error);
+                }
+            });
     }
     
     function cancelPoints(button, inputId) {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
     <script>
@@ -31,7 +32,7 @@
                 data.jawaban.forEach(function(jawaban, index) {
                     jawabanHTML += '<div class="jawaban d-flex my-2 px-4 py-3">';
                     jawabanHTML += '<p class="mb-0">' + (index + 1) + '.</p>';
-                    jawabanHTML += '<p class="mb-0">' + jawaban.jawaban + '</p>';
+                    jawabanHTML += '<p class="mb-0 JawabanJuri">' + jawaban.jawaban + '</p>';
                     jawabanHTML += '</div>';
                 });
                 tampilkanJawabanElement.innerHTML = jawabanHTML;
@@ -42,6 +43,53 @@
         channel2.bind('event-button-click-pertanyaan', function(data) {
             // Handle received quiz data
             console.log('Received quiz data ID:', data);
+        });
+
+        const channel3 = pusher.subscribe('channel-addPoints');
+        channel3.bind('event-addPoints', function(data) {
+            // Handle received quiz data
+            console.log('Jawaban diterima:', data);
+            $('.jawaban .JawabanJuri').each(function() {
+                // Get the value of class JawabanJuri
+                var jawabanJuri = $(this).text().trim();
+                
+                // Check if the value matches with data.message.jawaban
+                if (jawabanJuri === data.message.jawaban) {
+                    // Add the class 'JawabanJuriAktif' to the parent div
+                    $(this).closest('.jawaban').addClass('JawabanJuriAktif');
+                }
+            });
+        });
+
+        // PUSHER STORE NILAI TIM TERBARU
+        var channel4 = pusher.subscribe('my-KirimPointStoreS1');
+        channel4.bind('my-KirimPointStoreS1', function(data) {
+            // Update tampilan dengan data yang diterima dari Pusher
+            console.log('KirimPointStoreS1', data);
+            
+            // Dapatkan id tim dan poin yang diterima dari Pusher
+            var teamId = data.id_team;
+            console.log('teamId', teamId)
+            var poinBaru = data.poin;
+            console.log('poinBaru', poinBaru)
+
+            // Dapatkan elemen HTML yang sesuai dengan id tim
+            var poinElement = document.getElementById('poin_' + teamId);
+
+            if (poinElement) {
+                // Dapatkan poin yang sudah ada di halaman
+                var poinLama = parseInt(poinElement.innerText);
+                var poinBaru2 = parseInt(poinBaru);
+
+                // Tambahkan poin yang baru diterima dari Pusher dengan poin yang sudah ada
+                var totalPoin = poinLama + poinBaru2;
+
+                // Hapus angka 0 di depan poin jika total poin sudah berjalan
+                var formattedPoin = totalPoin.toString().replace(/^0+/, '');
+
+                // Perbarui tampilan dengan total poin yang diformat
+                poinElement.innerText = formattedPoin;
+            }
         });
     </script>
 
@@ -75,7 +123,7 @@
             width: 100%;
             text-align: center;
         }
-        .jawaban-benar{
+        .JawabanJuriAktif{
             background: rgb(232, 55, 45);
             background: linear-gradient(0deg, rgba(232, 55, 45, 1) 13%, rgba(255, 127, 35, 1) 59%);
         }
@@ -167,97 +215,19 @@
                   <h4 class="mb-0">GROUP</h4>
               </div>
               <div class="row justify-content-center">
-                  <div class="col-md-4 my-2">
+                  @foreach ($team as $item)
+                    <div class="col-md-4 my-2" data-id="{{ $item->id }}">
                       <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP A</p>
+                            <div class="nama-group py-2">
+                                <p class="mb-0">{{ $item->name }}</p>
+                            </div>
+                            <div class="nilai-group py-3">
+                               <h4 id="poin_{{ $item->id }}">{{ $item->participant->sum('poin') }}</h4> 
+                            </div>
                         </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP B</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP C</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP D</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP E</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP F</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP G</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP H</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-                  <div class="col-md-4 my-2">
-                      <div class="group">
-                        <div class="nama-group py-2">
-                            <p class="mb-0">GROUP I</p>
-                        </div>
-                        <div class="nilai-group py-3">
-                            <h4>70</h4>
-                        </div>
-                      </div>
-                  </div>
-              </div>
+                    </div>
+                    @endforeach
+                </div>
           </div>
       </div>
 
