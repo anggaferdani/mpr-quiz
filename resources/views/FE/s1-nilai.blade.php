@@ -35,16 +35,31 @@
   </head>
   <body>
     <div class="content text-center">
-        <h1>{{$nilai->poin}}</h1>
+        <h1 id="lastNumber">{{$nilai->poin}}</h1>
         <h2>POINT</h2>
+        <p id="lastNumber"></p>
     </div>
 
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
     <script>
+
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 // Arahkan pengguna ke route sesi2
                 window.location.href = "/sesi1-spin";
             }
+        });
+
+        $(document).ready(function() {
+            // Mendapatkan parameter URL terakhir
+            var lastParameter = window.location.href.split('/').pop(); // Mengambil bagian terakhir dari URL
+
+            // Mengambil angka dari parameter terakhir
+            var lastNumber = lastParameter.match(/\d+/); // Menggunakan regular expression untuk mencocokkan angka
+
+            // Menampilkan angka tersebut di halaman
+            $('#lastNumber').text(lastNumber);
         });
     </script>
 

@@ -91,10 +91,33 @@
                 poinElement.innerText = formattedPoin;
             }
         });
-    </script>
 
-    <script>
+        // PUSHER TERIMA NILAI 
+        var channel5 = pusher.subscribe('channel-kirim-nilai-s1');
+        channel5.bind('event-kirim-nilai-s1', function(data) {
+            // Update tampilan dengan data yang diterima dari Pusher
+            console.log('channel-kirim-nilai-s1', data);
 
+            // Periksa apakah data.command berisi 'pindah'
+            if (data.command === 'pindah') {
+                // Buat objek FormData untuk mengirim data ke controller
+                var formData = data.nilai;
+                console.log('formData', formData)
+
+                // Periksa apakah data.command berisi 'pindah'
+                if (data.command === 'pindah') {
+                    // Buat objek FormData untuk mengirim data ke controller
+                    var formData = data.nilai;
+                    console.log('formData', formData);
+
+                    // Buat query string dari objek formData
+                    // console.log('queryString', queryString)
+
+                    // Redirect ke halaman tujuan dengan menyertakan data sebagai parameter query string
+                    window.location.href = "/sesi1-juri-nilai";
+                }
+            }
+        });
     </script>
 
     <style>
