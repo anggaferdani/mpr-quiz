@@ -59,8 +59,17 @@ return [
             'driver' => 'log',
         ],
 
-        'null' => [
-            'driver' => 'null',
+        // 'null' => [
+        //     'driver' => 'null',
+        // ],
+
+        'options' => [
+            'cluster' => 'mt1',
+            'encrypted' => true,
+            'verify_peer' => true,
+            'verify_peer_name' => true,
+            // 'cafile' => '/path/to/your/cacert.pem',
+            'cafile' => 'C:/xampp/php/extras/ssl/cacert.pem',
         ],
 
     ],

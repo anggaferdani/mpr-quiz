@@ -47,13 +47,13 @@
                                 @php
                                 $result = $item->participant()
     ->leftJoin('teams', 'participants.id_team', '=', 'teams.id')
-    ->select('teams.name', DB::raw('COALESCE(sum(participants.poin), 0) as total_poin'))
+    ->select('teams.name','teams.id', DB::raw('COALESCE(sum(participants.poin), 0) as total_poin'))
     ->whereDate('tanggal', '=', now())
-    ->groupBy('teams.name')
+    ->groupBy('teams.name','teams.id')
     ->get();
     if ($result->isEmpty()) {
         $defaultResult = [
-            ['name' => $item->name, 'total_poin' => 0]
+            ['name' => $item->name, 'id' => $item->id, 'total_poin' => 0]
         ];
         $result = collect($defaultResult);
     }
@@ -83,6 +83,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
+
 // Document 1
 $(document).ready(function() {
     $(".send-data1").on("click", function() {
@@ -112,30 +113,30 @@ $(document).ready(function() {
 
 <script>
 // Document 2
-$(document).ready(function() {
-    $(".send-data2").on("click", function() {
-        let data = $(this).data('team');
-        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
-        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
-        const pusher = new Pusher(pusherKey, {
-            cluster: pusherCluster,
-            encrypted: true, // Add this if you have encryption enabled on Pusher
-        });
-        $.ajax({
-            url: "/post-device-2",
-            type: "POST",
-            data: { data: data }, // Mengirim nilai pertanyaan ke server
-            success: function(response) {
-                // Handle the response here
-                console.log(response);
-            },
-            error: function(xhr, status, error) {
-                // Handle errors here
-                console.error(xhr.responseText);
-            }
+    $(document).ready(function() {
+        $(".send-data2").on("click", function() {
+            let data = $(this).data('team');
+            const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+            const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+            const pusher = new Pusher(pusherKey, {
+                cluster: pusherCluster,
+                encrypted: true, // Add this if you have encryption enabled on Pusher
+            });
+            $.ajax({
+                url: "/post-device-2",
+                type: "POST",
+                data: { data: data }, // Mengirim nilai pertanyaan ke server
+                success: function(response) {
+                    // Handle the response here
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors here
+                    console.error(xhr.responseText);
+                }
+            });
         });
     });
-});
 </script>
 
 <script>

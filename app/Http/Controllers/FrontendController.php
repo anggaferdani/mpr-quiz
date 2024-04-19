@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Pusher\Pusher;
 use App\Models\Team;
-use App\Events\Device1;
+use App\Events\DeviceSatu;
 use App\Models\Jawaban;
 use App\Events\addPoints;
 
@@ -49,7 +49,7 @@ class FrontendController extends Controller
             'cluster' => env('PUSHER_APP_CLUSTER'),
             'useTLS' => true
             ]
-        );
+    );
         
         $pusher->trigger('channel-kirim-pertanyaan', 'event-kirim-pertanyaan', ['quiz' => $quiz, 'jawaban' => $jawaban]);
         
@@ -145,9 +145,17 @@ class FrontendController extends Controller
         return view('FE.s1-nilai', compact('nilai'));
     }
 
-    public function device1(){
-        
+    public function device1(Request $request){
+        return view('FE.Juri.device1');
     }
+    public function device2(Request $request){
+        return view('FE.Juri.device2');
+    }
+    public function device3(Request $request){
+        return view('FE.Juri.device3');
+    }
+    
+    
 
     // public function testpusher()
     // {
