@@ -35,6 +35,7 @@ class FrontendController extends Controller
         return view('FE.s1-spin', compact('tema'));
     }
 
+
     public function quizSesi1($id)
 {
     $quiz = Pertanyaan::where('id_tema', $id)->first();
@@ -64,6 +65,13 @@ class FrontendController extends Controller
         event(new addPoints(['jawaban' => $jawaban]));
         
         return view('FE.Juri.sesi-1', compact('team'));
+    }
+    public function nilaiSesi1Juri(Request $request) 
+    {
+        // Ambil nilai dari permintaan (request)
+        $nilai = Participant::get()->last();
+        // dd($nilai);
+        return view('FE.Juri.sesi-1-nilai', compact('nilai'));
     }
     
     public function openingSesi2(Request $request)
@@ -114,6 +122,26 @@ class FrontendController extends Controller
     public function nilaiquizSesi1()
     {
         $nilai = Participant::get()->last();
+
+        // Inisialisasi Pusher dengan kredensial dari file .env
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'encrypted' => true
+            ]
+        );
+
+        // Kirim data ke kanal Pusher
+        $pusher->trigger('channel-kirim-nilai-s1', 'event-kirim-nilai-s1', [
+            'command' => 'pindah',
+            'nilai' => $nilai->poin,
+        ]);
+
+        // return response()->json(['message' => 'Nilai berhasil dikirim ke Pusher']);
+
         return view('FE.s1-nilai', compact('nilai'));
     }
 
