@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Pusher\Pusher;
 
+use App\Models\Team;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -16,6 +17,7 @@ class ParticipantController extends Controller
     public function index()
     {
         $now = Carbon::now()->format('Y-m-d');
+        $team = Team::all();
         $participants = Participant::select('id_team')
         ->selectRaw('SUM(CASE WHEN sesi = 1 THEN poin ELSE 0 END) AS poin_sesi_1')
         ->selectRaw('SUM(CASE WHEN sesi = 2 THEN poin ELSE 0 END) AS poin_sesi_2')
@@ -24,7 +26,7 @@ class ParticipantController extends Controller
         ->orderBy('id_team')
         ->get();
 
-        return view('operator.jenispertanyaan.nilai', compact('participants', 'now'));
+        return view('operator.jenispertanyaan.nilai', compact('participants', 'now', 'team'));
     }
 
     /**

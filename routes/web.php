@@ -1,20 +1,23 @@
 <?php
 
+use App\Events\Device2;
+use App\Events\Device3;
+use App\Events\DeviceSatu;
+use App\Events\MessageSent;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Sesi3Controller;
+use App\Http\Controllers\PusherController;
+
 use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\ShotcutController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PertanyaanController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TemaPertanyaanController;
-use App\Http\Controllers\PusherController;
-use App\Events\MessageSent;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,8 +68,26 @@ Route::get('/sesi1-juri', [FrontendController::class, 'openingSesi1Juri'])->name
 Route::get('/sesi2-juri', [FrontendController::class, 'openingSesi2Juri'])->name('openingSesi2Juri');
 Route::get('/sesi3-juri', function () {return view('FE.Juri.sesi-3');});
 
+
+
+Route::post('/post-device-1', function(Request $request){
+    event(new DeviceSatu($request->data));
+    return ['success'=>true, 'data'=>$request->data];
+});
+Route::post('/post-device-2', function(Request $request){
+    event(new Device2($request->data));
+    return ['success'=>true, 'data'=>$request->data];
+});
+Route::post('/post-device-3', function(Request $request){
+    event(new Device3($request->data));
+    return ['success'=>true, 'data'=>$request->data];
+});
+Route::get('/device-1', [FrontendController::class, 'device1'])->name('device1');
+Route::get('/device-2', [FrontendController::class, 'device2'])->name('device2');
+Route::get('/device-3', [FrontendController::class, 'device3'])->name('device3');
 // Route::get('/pusher', [PusherController::class, 'kirimPertanyaan']);
 Route::post('/kirim-pertanyaan', [PusherController::class, 'kirimPertanyaan']);
+
 
 
 

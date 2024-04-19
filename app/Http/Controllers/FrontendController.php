@@ -1,19 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
-use App\Models\Jawaban;
-use App\Models\Pertanyaan;
-use App\Models\Participant;
-use App\Models\Team;
-
 use Pusher\Pusher;
-use App\Events\MessageSent;
-use App\Events\KirimPertanyaanS2;
+use App\Models\Team;
+use App\Events\Device1;
+use App\Models\Jawaban;
 use App\Events\addPoints;
 
+use App\Models\Pertanyaan;
+use App\Events\MessageSent;
+use App\Models\Participant;
 use Illuminate\Http\Request;
+
 use App\Models\TemaPertanyaan;
+use App\Events\KirimPertanyaanS2;
+use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
 {
@@ -114,6 +115,10 @@ class FrontendController extends Controller
     {
         $nilai = Participant::get()->last();
         return view('FE.s1-nilai', compact('nilai'));
+    }
+
+    public function device1(){
+        
     }
 
     // public function testpusher()
