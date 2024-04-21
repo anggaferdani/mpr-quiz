@@ -77,14 +77,17 @@ class FrontendController extends Controller
     public function openingSesi2(Request $request)
     {
         // Mengambil data yang dikirimkan melalui AJAX
+        $berita = $request->input('berita');
         $id = $request->input('id');
         $pertanyaan = $request->input('pertanyaan');
-        event(new KirimPertanyaanS2(['id' => $id, 'pertanyaan' => $pertanyaan]));
+        event(new KirimPertanyaanS2(['berita' => $berita, 'id' => $id, 'pertanyaan' => $pertanyaan]));
 
         return view('FE.s2');
     }
+
     public function openingSesi2Juri(Request $request) 
     {
+        $berita = $request->input('berita');
         $id = $request->input('id');
         // $pertanyaan = Pertanyaan::find($id);
         // Mengambil jawaban berdasarkan id pertanyaan
@@ -94,7 +97,7 @@ class FrontendController extends Controller
 
         
         // Semua variabel memiliki nilai yang valid, kirimkan event
-        event(new KirimPertanyaanS2(['id' => $id, 'pertanyaan' => $pertanyaan, 'jawabanArray' => $jawabanArray]));
+        event(new KirimPertanyaanS2(['berita' => $berita, 'id' => $id, 'pertanyaan' => $pertanyaan, 'jawabanArray' => $jawabanArray]));
 
         return view('FE.Juri.sesi-2', compact('team'));
     }

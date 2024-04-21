@@ -136,7 +136,7 @@
                             <p class="mb-0">{{ $item->name }}</p>
                         </div>
                         <div class="nilai-group py-3">
-                            <h4 id="poin_{{ $item->id }}">{{ $item->participant->sum('poin') }}</h4>
+                            <h4 id="poin_{{ $item->id }}">{{ $item->participant()->whereDate('tanggal', '=', now())->sum('poin') }}</h4>
                         </div>
                         </div>
                     </div>

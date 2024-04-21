@@ -310,20 +310,6 @@ $(document).ready(function() {
 </script>
 
 <script>
-    // function pilihPertanyaan(pertanyaan) {
-    //     var pusher = new Pusher('{{ env("PUSHER_APP_KEY") }}', {
-    //         cluster: '{{ env("PUSHER_APP_CLUSTER") }}',
-    //         encrypted: true
-    //     });
-
-    //     var channel = pusher.subscribe('channelKirimPertanyaanS2');
-
-    //     channel.trigger('client-eventKirimPertanyaanS2', {
-    //         pertanyaan: pertanyaan
-    //     });
-    // }
-    // const pusherAppKey = "{{ env('PUSHER_APP_KEY') }}";
-
     // Initialize Pusher with Pusher app key from .env
     const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
     const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
@@ -334,11 +320,13 @@ $(document).ready(function() {
 
     // Function to send a question
     function pilihPertanyaan(id, pertanyaan, jawabanArray) {
+        let berita = 'move_to_Sesi2';
         $.ajax({
             method: 'GET',
             url: '/sesi2',
             data: {
                 _token: '{{ csrf_token() }}',
+                berita: 'movesesi2',
                 id: id,
                 pertanyaan: pertanyaan,
                 jawabanArray: JSON.stringify(jawabanArray),
@@ -352,11 +340,13 @@ $(document).ready(function() {
         });
     }
     function pilihPertanyaan(id, pertanyaan, jawabanArray) {
+        let berita = 'move_to_Sesi2';
         $.ajax({
             method: 'GET',
-            url: '/sesi2-juri',
+            url: '/sesi2-juri', 
             data: {
                 _token: '{{ csrf_token() }}',
+                berita: 'movesesi2',
                 id: id,
                 pertanyaan: pertanyaan,
                 jawabanArray: JSON.stringify(jawabanArray),

@@ -16,36 +16,39 @@
             cluster: pusherCluster,
             encrypted: true // Tambahkan ini jika Anda mengaktifkan enkripsi di Pusher
         });
-
-        // Langganan ke channel 'channel-device-satu'
         const channel = pusher.subscribe('channel-device-satu');
 
-        // Menangani event 'event-device-satu' yang dikirim dari server
-        // Menangani event 'event-device-satu' yang dikirim dari server
+        // Variabel global untuk menyimpan total poin
+        let totalPoin = 0;
+
+        let lastItem = '';
+        console.log('lastItemGlobal', lastItem)
+        function updateLastItem(item) {
+            lastItem = item;
+            console.log('initial lastItem:', lastItem);
+        }
+
         channel.bind('event-device-satu', function(data) {
-            // Mengambil array dari data terakhir yang diterima
             let dataArray = data.message;
-            console.log('dataArray', dataArray)
+            console.log('dataArray', dataArray);
 
-            // Mengambil data terakhir dari array
-            let lastItem = dataArray[dataArray.length - 1];
+            let latestItem = dataArray[dataArray.length - 1];
+            console.log('latestItem', latestItem);
 
-            // Membuat elemen div dengan class deviceShow
-            let $deviceShow = $('<div></div>').addClass('deviceShow');
+            updateLastItem(latestItem);
 
-            // Membuat elemen h2 untuk nama tim
-            let $teamName = $('<h2></h2>').text(`${lastItem.name}`).css('display', 'block');
-
-            // Membuat elemen h1 untuk total poin
-            let $totalPoints = $('<h1></h1>').text(`${lastItem.total_poin}`).css('display', 'block');
-
-            // Menambahkan elemen h2 dan h1 ke dalam div deviceShow
+            let $deviceShow = $('<div></div>').addClass('deviceShow').attr('id', latestItem.id);
+            let $teamName = $('<h2></h2>').text(`${latestItem.name}`).css('display', 'block');
+            let $totalPoints = $('<h1></h1>').text(`${latestItem.total_poin}`).css('display', 'block').addClass('totalPoint');
+            
             $deviceShow.append($teamName);
             $deviceShow.append($totalPoints);
-
-            // Menghapus konten sebelumnya dan menambahkan div deviceShow ke dalam body
+            
+            totalPoin = latestItem.total_poin;
+            
             $('body').empty().append($deviceShow);
         });
+
 
 
         // PUSHER STORE NILAI TIM TERBARU
@@ -59,6 +62,24 @@
             console.log('teamId', teamId)
             var poinBaru = data.poin;
             console.log('poinBaru', poinBaru)
+
+            // Cari elemen dengan class 'deviceShow' dan ambil nilai atribut id-nya
+            var deviceId = $('.deviceShow').attr('id');
+            var totalPoint = $('.totalPoint').text();
+            var totalPointElement = $('.totalPoint');
+            console.log('deviceId', deviceId);
+            console.log('totalPoint', totalPoint);
+
+            // Jika deviceId sama dengan teamId, tambahkan totalPoint dengan poinBaru
+            if (deviceId === teamId) {
+                let parseIntPoinBaru = parseInt(poinBaru);
+                let parseInttotalPoint = parseInt(totalPoint);
+                var totalBaru = parseInttotalPoint + parseIntPoinBaru;
+
+                // Perbarui isi point di class totalPoint
+                totalPointElement.text(totalBaru);
+            }
+
         });
 
     </script>

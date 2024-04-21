@@ -114,7 +114,7 @@
                     // console.log('queryString', queryString)
 
                     // Redirect ke halaman tujuan dengan menyertakan data sebagai parameter query string
-                    window.location.href = "/sesi1-juri-nilai";
+                    // window.location.href = "/sesi1-juri-nilai";
                 }
             }
         });
