@@ -56,6 +56,7 @@ Route::post('/minpoin', [Sesi3Controller::class, 'minpoin'])->name('minpoin');
 
 Route::get('/', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
 Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
+Route::get('/sesi1-spin-data', [FrontendController::class, 'getspinSesi1'])->name('spinSesi1Data');
 Route::get('/sesi1-quiz/{id}', [FrontendController::class, 'quizSesi1'])->name('quizSesi1');
 // Route::get('/sesi1-quiz', [FrontendController::class, 'showquizsesi1'])->name('quizSesi1');
 // Route::get('/sesi1-quiz', function () {return view('FE.s1-quiz');})->name('quizsesi1');

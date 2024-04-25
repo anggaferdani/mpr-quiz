@@ -36,6 +36,12 @@ class FrontendController extends Controller
         return view('FE.s1-spin', compact('tema'));
     }
 
+    public function getspinSesi1()
+    {
+        $tema = TemaPertanyaan::where('sesi', 1)->get();
+        echo json_encode($tema);
+    }
+
 
     public function quizSesi1($id)
 {

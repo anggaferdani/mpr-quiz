@@ -74,153 +74,156 @@
         
         <script type="text/javascript" src="{{asset('spinner/src/rouletteWheel.js')}}"></script>
         <script type="text/javascript">
-           $(function() {
-            var item = [
-                @foreach ($tema as $t)
-                { 
-                    id: '{{ $t->id }}', 
-                    name: '{{ $t->tema }}',
-                    color: @if ($t->id % 2 !== 0) 'FB6D48' @else '#ffffff' @endif
-                },
-                @endforeach
-            ];
-            // console.log($t->id)
-            console.log('item', item)
-
-    // Simpan data ke local storage jika belum ada
-    if (!localStorage.getItem('wheelItem2')) {
-        var saveToLocal = JSON.stringify(item);
-        localStorage.setItem('wheelItem2', saveToLocal);
-    }
-
-    // Inisialisasi spinwheel dan ambil data dari local storage
-    initSpinwheel();
-
-    // Fungsi untuk inisialisasi spinwheel dan ambil data dari local storage
-    function initSpinwheel() {
-    // Ambil data dari local storage
-    var itemJSON = localStorage.getItem('wheelItem2');
-    var itemsFromLocal = JSON.parse(itemJSON);
-
-    // Inisialisasi spinwheel dengan item yang ada di local storage
-$('#canvas').rouletteWheel({
-    items: itemsFromLocal,
-    selected: function (key, item) {
-        // Simpan nama item yang dipilih ke dalam variabel selectedName
-        var selectedName = item.name;
-        var selectedId = item.id;
-        var selectedColor = item.color;
-
-        // Hapus item yang memiliki nama yang sesuai dari local storage
-        deleteSelectedItem(selectedName);
-
-        var selectedDiv = '<div id="selectedDiv" style="padding: 20px; color: black;">';
-            selectedDiv += '<h1>' + selectedName + '</h1>';
-            selectedDiv += '</div>';
-        
-            // Tampilkan div yang berisi informasi item yang dipilih
-                $('body').append(selectedDiv);
-
-        // Tampilkan informasi item yang dipilih
-        Swal.fire({
-            // html: selectedDiv,
-            title: selectedName,
-            id : selectedId,
-            color : selectedColor,
-            width: 600,
-            padding: "3em",
-            // color: "#000",
-            // background: "#fff url(/images/trees.png)",
-            background: selectedColor,
-            backdrop: `
-                rgba(0,0,123,0.4)
-                url("/images/nyan-cat.gif")
-                left top
-                no-repeat
-            `
-        }).then((result) => {
-            // Redirect ke halaman quiz jika tombol OK diklik
-            if (result.isConfirmed) {
-                // window.location.href = "/sesi1-quiz/";
-                window.location.href = "/sesi1-quiz/" + selectedId;
-            }
-        });
-
-        // Simpan data terbaru ke local storage
-        localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
-    },
-    spinText: '',
-    onItemRender: function (item, elem) {
-        // Berikan warna acak untuk setiap elemen spinner
-        elem.css('background-color', getRandomColor());
-    }
-});
-
-// Fungsi untuk menghasilkan warna acak
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
-}
-
-    // Fungsi untuk mencari dan menghapus item yang memiliki nama yang sesuai
-    function deleteSelectedItem(selectedName) {
-        // Ambil data dari local storage
-        var itemJSON = localStorage.getItem('wheelItem2');
-        var itemsFromLocal = JSON.parse(itemJSON);
-
-        // Filter item yang memiliki nama yang sesuai
-        itemsFromLocal = itemsFromLocal.filter(function(item) {
-            return item.name !== selectedName;
-        });
-
-        // Simpan kembali data yang telah dihapus ke local storage
-        localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
-    }
-
-    // Fungsi untuk mengembalikan data local storage ke nilai awalnya
-    function resetLocalStorage() {
         var item = [
             @foreach ($tema as $t)
-                { id: '{{ $t->id }}' ,name: '{{ $t->tema }}' },
+            { 
+                id: '{{ $t->id }}', 
+                name: '{{ $t->tema }}',
+                color: @if ($t->id % 2 !== 0) '#FFBB70' @else '#ffffff' @endif
+            },
             @endforeach
         ];
-        var saveToLocal = JSON.stringify(item);
-        localStorage.setItem('wheelItem2', saveToLocal);
-    }
-
-    // Membersihkan event handler ketika meninggalkan halaman
-    $(window).on('unload', function() {
-        $(document).off('keydown');
-    });
-
-    $(document).keydown(function(event) {
-        // Pastikan tombol yang ditekan adalah spasi (keyCode 32)
-        if (event.keyCode === 32) {
-            // Panggil metode untuk memutar spinwheel
-            $('#canvas').rouletteWheel('spin');
+        // Simpan data ke local storage jika belum ada
+        if (!localStorage.getItem('wheelItem2')) {
+            var saveToLocal = JSON.stringify(item);
+            localStorage.setItem('wheelItem2', saveToLocal);
         }
-    });
+        console.log('item', item)
 
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'r') {
-            // Reset data local storage ke nilai awalnya
-            resetLocalStorage();
-            // Inisialisasi ulang spinwheel
+           $(function() {
+            // console.log($t->id)
+
+
+            // Inisialisasi spinwheel dan ambil data dari local storage
             initSpinwheel();
-            console.log('Local storage berhasil dikembalikan ke nilai awal.');
 
-            location.reload();
+            // Fungsi untuk inisialisasi spinwheel dan ambil data dari local storage
+            function initSpinwheel() {
+            // Ambil data dari local storage
+            var itemJSON = localStorage.getItem('wheelItem2');
+            var itemsFromLocal = JSON.parse(itemJSON);
+            console.log(itemsFromLocal)
 
-        }
-    });
+                // Inisialisasi spinwheel dengan item yang ada di local storage
+            $('#canvas').rouletteWheel({
+                items: itemsFromLocal,
+                selected: function (key, item) {
+                    // Simpan nama item yang dipilih ke dalam variabel selectedName
+                    var selectedName = item.name;
+                    var selectedId = item.id;
+                    var selectedColor = item.color;
 
-});
+                    // Hapus item yang memiliki nama yang sesuai dari local storage
+                    deleteSelectedItem(selectedName);
+
+                    var selectedDiv = '<div id="selectedDiv" style="padding: 20px; color: black;">';
+                        selectedDiv += '<h1>' + selectedName + '</h1>';
+                        selectedDiv += '</div>';
+                    
+                        // Tampilkan div yang berisi informasi item yang dipilih
+                            $('body').append(selectedDiv);
+
+                    // Tampilkan informasi item yang dipilih
+                    Swal.fire({
+                        // html: selectedDiv,
+                        title: selectedName,
+                        id : selectedId,
+                        color : selectedColor,
+                        width: 600,
+                        padding: "3em",
+                        // color: "#000",
+                        // background: "#fff url(/images/trees.png)",
+                        background: selectedColor,
+                        backdrop: `
+                            rgba(0,0,123,0.4)
+                            url("/images/nyan-cat.gif")
+                            left top
+                            no-repeat
+                        `
+                    }).then((result) => {
+                        // Redirect ke halaman quiz jika tombol OK diklik
+                        if (result.isConfirmed) {
+                            // window.location.href = "/sesi1-quiz/";
+                            window.location.href = "/sesi1-quiz/" + selectedId;
+                        }
+                    });
+
+                    // Simpan data terbaru ke local storage
+                    localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
+                },
+                spinText: '',
+                onItemRender: function (item, elem) {
+                    // Berikan warna acak untuk setiap elemen spinner
+                    elem.css('background-color', getRandomColor());
+                }
+            });
+
+            // Fungsi untuk menghasilkan warna acak
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            }
+
+                // Fungsi untuk mencari dan menghapus item yang memiliki nama yang sesuai
+                function deleteSelectedItem(selectedName) {
+                    // Ambil data dari local storage
+                    var itemJSON = localStorage.getItem('wheelItem2');
+                    var itemsFromLocal = JSON.parse(itemJSON);
+
+                    // Filter item yang memiliki nama yang sesuai
+                    itemsFromLocal = itemsFromLocal.filter(function(item) {
+                        return item.name !== selectedName;
+                    });
+
+                    // Simpan kembali data yang telah dihapus ke local storage
+                    localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
+                }
+
+                // Fungsi untuk mengembalikan data local storage ke nilai awalnya
+                function resetLocalStorage() {
+                    // var item = [
+                    //     @foreach ($tema as $t)
+                    //         { id: '{{ $t->id }}' ,name: '{{ $t->tema }}' },
+                    //     @endforeach
+                    // ];
+                    var saveToLocal = JSON.stringify(item);
+                    localStorage.setItem('wheelItem2', saveToLocal);
+                }
+
+                // Membersihkan event handler ketika meninggalkan halaman
+                $(window).on('unload', function() {
+                    $(document).off('keydown');
+                });
+
+                $(document).keydown(function(event) {
+                    // Pastikan tombol yang ditekan adalah spasi (keyCode 32)
+                    if (event.keyCode === 32) {
+                        // Panggil metode untuk memutar spinwheel
+                        $('#canvas').rouletteWheel('spin');
+                    }
+                });
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'r') {
+                        // Reset data local storage ke nilai awalnya
+                        resetLocalStorage();
+                        // Inisialisasi ulang spinwheel
+                        initSpinwheel();
+                        console.log('Local storage berhasil dikembalikan ke nilai awal.');
+
+                        location.reload();
+
+                    }
+                });
+
+            
+            });
 
 document.addEventListener('keydown', function(event) {
     if (event.key === 'F2') {
