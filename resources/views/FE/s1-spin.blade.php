@@ -105,11 +105,11 @@
     // Inisialisasi spinwheel dengan item yang ada di local storage
 $('#canvas').rouletteWheel({
     items: itemsFromLocal,
-    selected: function (key, value) {
+    selected: function (key, item) {
         // Simpan nama item yang dipilih ke dalam variabel selectedName
-        var selectedName = value.name;
-        var selectedId = value.id;
-        var selectedColor = value.color;
+        var selectedName = item.name;
+        var selectedId = item.id;
+        var selectedColor = item.color;
 
         // Hapus item yang memiliki nama yang sesuai dari local storage
         deleteSelectedItem(selectedName);

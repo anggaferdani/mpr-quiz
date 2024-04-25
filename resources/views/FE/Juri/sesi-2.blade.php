@@ -111,7 +111,7 @@
                 <div class="header d-flex justify-content-between align-items-center my-3">
                     <h2>SESI 2</h2>
                     <div class="countdown">
-                        <h3 class="mb-0">120</h3>
+                        <h3 id="countdown" class="mb-0">30</h3>
                     </div>
                 </div>
                 <div class="pertanyaan">
@@ -160,23 +160,40 @@
         channel.bind('eventKirimPertanyaanS2', function(data) {
             console.log(JSON.stringify(data));
 
-            document.getElementById('soalSesi2').innerText = data.message.pertanyaan;
-            var jawabanArrayString = data.message.jawabanArray; // String JSON dari server
-            var jawabanArray = JSON.parse(jawabanArrayString); // Ubah string JSON menjadi array JavaScript
+            // Simpan data baru ke local storage
+            localStorage.setItem('latestData', JSON.stringify(data));
 
-            var jawabanElement = document.getElementById('loopingJawabanArray');
-            jawabanElement.innerHTML = ''; // Clear existing content
+            // Hapus data lama dari local storage
+            localStorage.removeItem('oldData');
+            // Simpan data baru sebagai data lama
+            var oldData = localStorage.getItem('latestData');
+            localStorage.setItem('oldData', oldData);
 
-            // Loop through the jawabanArray and create <p> elements for each jawaban
-            for (var i = 0; i < jawabanArray.length; i++) {
-                var jawabanItem = jawabanArray[i];
-                var jawabanText = (i + 1) + '. ' + jawabanItem;
-                var jawabanParagraph = document.createElement('p');
-                jawabanParagraph.textContent = jawabanText;
-                jawabanElement.appendChild(jawabanParagraph);
+            // Ambil data dari local storage
+            var storedData = localStorage.getItem('latestData');
+            if (storedData) {
+                var data = JSON.parse(storedData);
+
+                // Tampilkan data di halaman pengguna
+                document.getElementById('soalSesi2').innerText = data.message.pertanyaan;
+                var jawabanArrayString = data.message.jawabanArray; // String JSON dari server
+                var jawabanArray = JSON.parse(jawabanArrayString); // Ubah string JSON menjadi array JavaScript
+
+                var jawabanElement = document.getElementById('loopingJawabanArray');
+                jawabanElement.innerHTML = ''; // Clear existing content
+
+                // Loop through the jawabanArray and create <p> elements for each jawaban
+                for (var i = 0; i < jawabanArray.length; i++) {
+                    var jawabanItem = jawabanArray[i];
+                    var jawabanText = (i + 1) + '. ' + jawabanItem;
+                    var jawabanParagraph = document.createElement('p');
+                    jawabanParagraph.textContent = jawabanText;
+                    jawabanElement.appendChild(jawabanParagraph);
+                }
             }
 
         });
+
 
         // PUSHER STORE NILAI TIM TERBARU
         var channel2 = pusher.subscribe('my-KirimPointStoreS1');
@@ -209,6 +226,34 @@
                 poinElement.innerText = formattedPoin;
             }
         });
+
+        var channel3 = pusher.subscribe('channel-start-countdown');
+        channel3.bind('event-start-countdown', function(data) {
+            console.log('event-start-countdown', data.message);
+            if (data.message.pesan === "StartCountdownSesi2") {
+                MulaiCountdown();
+            }
+        });
+
+        function MulaiCountdown(){
+            var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownInterval;
+
+            function startCountdown() {
+                countdownInterval = setInterval(function () {
+                    var countdownElement = document.getElementById('countdown');
+                    countdownSeconds--;
+                    countdownElement.innerText = countdownSeconds;
+
+                    if (countdownSeconds <= 0) {
+                        clearInterval(countdownInterval);
+                    }
+                }, 1000);
+            }
+
+            // Panggil fungsi untuk memulai countdown saat ini
+            startCountdown();
+        }
     </script>
   </body>
 </html>

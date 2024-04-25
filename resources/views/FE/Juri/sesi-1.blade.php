@@ -118,6 +118,36 @@
                 }
             }
         });
+
+        var channel6 = pusher.subscribe('channel-start-countdown');
+        channel6.bind('event-start-countdown', function(data) {
+            console.log('event-start-countdown', data.message);
+            if (data.message.pesan === "StartCountdownSesi1") {
+                MulaiCountdown();
+            }
+        });
+
+        function MulaiCountdown(){
+            var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownInterval;
+
+            function startCountdown() {
+                countdownInterval = setInterval(function () {
+                    var countdownElement = document.getElementById('countdown');
+                    countdownSeconds--;
+                    countdownElement.innerText = countdownSeconds;
+
+                    if (countdownSeconds <= 0) {
+                        clearInterval(countdownInterval);
+                    }
+                }, 1000);
+            }
+
+            // Panggil fungsi untuk memulai countdown saat ini
+            startCountdown();
+        }
+
+        </script>
     </script>
 
     <style>
@@ -211,7 +241,7 @@
                 <div class="header d-flex justify-content-between align-items-center my-3">
                     <h2>SESI 1</h2>
                     <div class="countdown">
-                        <h3 class="mb-0">10</h3>
+                        <h3 id="countdown" class="mb-0">30</h3>
                     </div>
                 </div>
                 <div class="content">

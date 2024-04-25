@@ -6,6 +6,7 @@
     <title>Bootstrap demo</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,6 +90,13 @@
             margin-bottom: 0 !important;
             font-size: 5vw;
         }
+        .countdown h5{
+            /* color: rgb(117, 8, 8); */
+            color: #FF3421;
+            font-weight: bold;
+            /* margin-bottom: -10% !important; */
+            font-size: 3vw;
+        }
         #countdown-div h1{
             background-color: red;
             padding: 5rem;
@@ -109,14 +117,14 @@
 
     <img src="../images/gif-sesi2.gif" class="bg-sesi2-soal" alt="">
     
-    {{-- <div class="d-flex justify-content-center">
+    <!-- {{-- <div class="d-flex justify-content-center">
         <div class="top-content d-flex align-items-center justify-content-between mb-2" style="position: absolute; top: 0; width: 85%">
             <h2>SESI 2</h2>
             <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
-                <h1 id="countdown" class="mb-0">120</h1>
+                <h1 id="countdown" class="mb-0">30</h1>
             </div>
         </div>
-    </div> --}}
+    </div> --}} -->
 
    <div class="container" id="content-soal-sesi2">
         <div class="row align-items-center justify-content-center">
@@ -127,22 +135,94 @@
     </div>
     <div class="wrap-countdown d-flex justify-content-center">
         <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
-            <h3 id="countdown" class="mb-0">30</h3>
+            <h3 id="countdown" class="mb-0">30.</h3>
+            <h5 id="countdown-milidetik">00</h5>
         </div>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    
     <script>
-        // Enable pusher logging - don't include this in production
-        Pusher.logToConsole = true;
+            var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
+            var countdownInterval;
 
-        var pusher = new Pusher('d0c13db38b1d3aee0d7a', {
-            cluster: 'ap1'
+            const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+            const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+            const pusher = new Pusher(pusherKey, {
+                cluster: pusherCluster,
+                encrypted: true, // Add this if you have encryption enabled on Pusher
+            });
+
+            function kirimCountdown() {
+                $.ajax({
+                    method: 'GET',
+                    url: '/sesi1-juri',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        pesan: 'StartCountdownSesi2',
+                    },
+                    success: function(response) {
+                        console.log('Question successfully sent to Pusher.');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to send question to Pusher:', error);
+                    }
+                });
+            }
+
+            function startCountdown() {
+            countdownInterval = setTimeout(function updateCountdown() {
+                var countdownElement = document.getElementById('countdown');
+                var countdownElementMilidetik = document.getElementById('countdown-milidetik');
+                countdownMilliseconds -= 10; // Kurangi 10 milidetik setiap kali update
+                var seconds = Math.floor(countdownMilliseconds / 1000);
+                var milliseconds = Math.floor((countdownMilliseconds % 1000) / 10); // Ambil bagian milidetik
+                if (seconds === 0) {
+                    countdownElement.innerText = seconds;
+                } else {
+                    countdownElement.innerText = seconds + '.';
+                }
+                countdownElementMilidetik.innerText = milliseconds.toString().padStart(2, '0');
+
+                // Periksa apakah nilai detik mencapai 0, jika ya, hilangkan elemen milidetik
+                if (seconds === 0) {
+                    countdownElementMilidetik.style.display = 'none';
+                } else {
+                    countdownElementMilidetik.style.display = 'inline'; // Tampilkan kembali elemen milidetik jika tidak di 0
+                    countdownElementMilidetik.innerText = milliseconds.toString().padStart(2, '0');
+                }
+
+                if (seconds === 0) {
+                    clearInterval(countdownInterval);
+                    var countdownDiv = document.getElementById('countdown-div');
+                    countdownDiv.style.display = 'block';
+                    // Tambahkan event listener untuk menangani tombol Enter
+                    document.addEventListener('keydown', handleEnterKey);
+                } else {
+                    countdownInterval = setTimeout(updateCountdown, 10); // Update setiap 10 milidetik
+                    
+                }
+            }, 10);
+        }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === ' ') {
+                    startCountdown();
+                    kirimCountdown();
+                }
+            });
+    </script>
+    
+    <script>
+        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        const pusher = new Pusher(pusherKey, {
+            cluster: pusherCluster,
+            encrypted: true, // Add this if you have encryption enabled on Pusher
         });
-
         var channel = pusher.subscribe('channelKirimPertanyaanS2');
         channel.bind('eventKirimPertanyaanS2', function(data) {
             console.log(JSON.stringify(data));

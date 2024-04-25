@@ -60,6 +60,13 @@
             margin-bottom: 0 !important;
             font-size: 5vw;
         }
+        .countdown h5{
+            /* color: rgb(117, 8, 8); */
+            color: #FF3421;
+            font-weight: bold;
+            /* margin-bottom: -10% !important; */
+            font-size: 3vw;
+        }
         #countdown-div{
             position: absolute;
             top: 50%;
@@ -196,8 +203,9 @@
   <body>
     <img class="bg-gif" src="../images/sesi-1-quiz.gif" alt="">
     <div class="wrap-countdown d-flex justify-content-center">
-        <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
-            <h3 id="countdown" class="mb-0">30</h3>
+        <div class="countdown px-3 py-2 d-flex align-items-start justify-content-center">
+            <h3 id="countdown" class="mb-0">30.</h3>
+            <h5 id="countdown-milidetik">00</h5>
         </div>
     </div>
     <div class="div-wrap">
@@ -261,39 +269,85 @@
 
     {{-- COUNTDOWN --}}
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var countdownSeconds = 5; // Ubah kembali ke 20 jika menggunakan detik
-            var countdownInterval;
+    document.addEventListener('DOMContentLoaded', function () {
+        var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+        var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
+        var countdownInterval;
 
-            function startCountdown() {
-                countdownInterval = setInterval(function () {
-                    var countdownElement = document.getElementById('countdown');
-                    countdownSeconds--;
-                    countdownElement.innerText = countdownSeconds;
+        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        const pusher = new Pusher(pusherKey, {
+            cluster: pusherCluster,
+            encrypted: true, // Add this if you have encryption enabled on Pusher
+        });
 
-                    if (countdownSeconds <= 0) {
-                        clearInterval(countdownInterval);
-                        var countdownDiv = document.getElementById('countdown-div');
-                        countdownDiv.style.display = 'block';
-                        // Tambahkan event listener untuk menangani tombol Enter
-                        document.addEventListener('keydown', handleEnterKey);
-                    }
-                }, 1000);
-            }
-
-            function handleEnterKey(event) {
-                if (event.key === 'Enter') {
-                    window.location.href = '/sesi1-nilai';
-                }
-            }
-
-            document.addEventListener('keydown', function(event) {
-                if (event.key === ' ') {
-                    startCountdown();
+        function kirimCountdown() {
+            $.ajax({
+                method: 'GET',
+                url: '/sesi1-juri',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    pesan: 'StartCountdownSesi1',
+                },
+                success: function(response) {
+                    console.log('Question successfully sent to Pusher.');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to send question to Pusher:', error);
                 }
             });
+        }
+
+        function startCountdown() {
+            countdownInterval = setTimeout(function updateCountdown() {
+                var countdownElement = document.getElementById('countdown');
+                var countdownElementMilidetik = document.getElementById('countdown-milidetik');
+                countdownMilliseconds -= 10; // Kurangi 10 milidetik setiap kali update
+                var seconds = Math.floor(countdownMilliseconds / 1000);
+                var milliseconds = Math.floor((countdownMilliseconds % 1000) / 10); // Ambil bagian milidetik
+                if (seconds === 0) {
+                    countdownElement.innerText = seconds;
+                } else {
+                    countdownElement.innerText = seconds + '.';
+                }
+                countdownElementMilidetik.innerText = milliseconds.toString().padStart(2, '0');
+
+                // Periksa apakah nilai detik mencapai 0, jika ya, hilangkan elemen milidetik
+                if (seconds === 0) {
+                    countdownElementMilidetik.style.display = 'none';
+                } else {
+                    countdownElementMilidetik.style.display = 'inline'; // Tampilkan kembali elemen milidetik jika tidak di 0
+                    countdownElementMilidetik.innerText = milliseconds.toString().padStart(2, '0');
+                }
+
+                if (seconds === 0) {
+                    clearInterval(countdownInterval);
+                    var countdownDiv = document.getElementById('countdown-div');
+                    countdownDiv.style.display = 'block';
+                    // Tambahkan event listener untuk menangani tombol Enter
+                    document.addEventListener('keydown', handleEnterKey);
+                } else {
+                    countdownInterval = setTimeout(updateCountdown, 10); // Update setiap 10 milidetik
+                    
+                }
+            }, 10);
+        }
+
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                window.location.href = '/sesi1-nilai';
+            }
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === ' ') {
+                startCountdown();
+                kirimCountdown();
+            }
         });
-    </script>
+    });
+</script>
+
 
     {{-- SHORTCUT --}}
     <script>

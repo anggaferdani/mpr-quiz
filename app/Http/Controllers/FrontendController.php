@@ -6,6 +6,7 @@ use App\Models\Team;
 use App\Events\DeviceSatu;
 use App\Models\Jawaban;
 use App\Events\addPoints;
+use App\Events\StartCountdown;
 
 use App\Models\Pertanyaan;
 use App\Events\MessageSent;
@@ -60,9 +61,11 @@ class FrontendController extends Controller
     public function openingSesi1Juri(Request $request) 
     {
         $jawaban = $request->input('jawaban');
+        $pesan = $request->input('pesan');
         $team = Team::all();
 
         event(new addPoints(['jawaban' => $jawaban]));
+        event(new StartCountdown(['pesan' => $pesan]));
         
         return view('FE.Juri.sesi-1', compact('team'));
     }
@@ -80,7 +83,10 @@ class FrontendController extends Controller
         $berita = $request->input('berita');
         $id = $request->input('id');
         $pertanyaan = $request->input('pertanyaan');
+        $pesan = $request->input('pesan');
+
         event(new KirimPertanyaanS2(['berita' => $berita, 'id' => $id, 'pertanyaan' => $pertanyaan]));
+        event(new StartCountdown(['pesan' => $pesan]));
 
         return view('FE.s2');
     }
@@ -89,15 +95,15 @@ class FrontendController extends Controller
     {
         $berita = $request->input('berita');
         $id = $request->input('id');
-        // $pertanyaan = Pertanyaan::find($id);
-        // Mengambil jawaban berdasarkan id pertanyaan
         $pertanyaan = $request->input('pertanyaan');
         $jawabanArray = $request->input('jawabanArray');
+        $pesan = $request->input('pesan');
         $team = Team::all();
 
         
         // Semua variabel memiliki nilai yang valid, kirimkan event
         event(new KirimPertanyaanS2(['berita' => $berita, 'id' => $id, 'pertanyaan' => $pertanyaan, 'jawabanArray' => $jawabanArray]));
+        event(new StartCountdown(['pesan' => $pesan]));
 
         return view('FE.Juri.sesi-2', compact('team'));
     }
