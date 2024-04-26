@@ -78,11 +78,18 @@
             @foreach ($tema as $t)
             { 
                 id: '{{ $t->id }}', 
-                name: '{{ $t->tema }}',
+                name: '{{$t->tema}}',
                 color: @if ($t->id % 2 !== 0) '#FFBB70' @else '#ffffff' @endif
             },
             @endforeach
         ];
+        
+        item.forEach(function(element) {
+            var words = element.name.split(' ');
+            if (words.length > 2) {
+                element.name = words.join('<br>');
+            }
+        });
         // Simpan data ke local storage jika belum ada
         if (!localStorage.getItem('wheelItem2')) {
             var saveToLocal = JSON.stringify(item);
@@ -110,13 +117,14 @@
                 selected: function (key, item) {
                     // Simpan nama item yang dipilih ke dalam variabel selectedName
                     var selectedName = item.name;
+                    var words = selectedName.split(" ");
                     var selectedId = item.id;
                     var selectedColor = item.color;
 
                     // Hapus item yang memiliki nama yang sesuai dari local storage
                     deleteSelectedItem(selectedName);
 
-                    var selectedDiv = '<div id="selectedDiv" style="padding: 20px; color: black;">';
+                    var selectedDiv = '<div id="selectedDiv" style="padding: 20px; color: black; word-wrap: break-word;">';
                         selectedDiv += '<h1>' + selectedName + '</h1>';
                         selectedDiv += '</div>';
                     
