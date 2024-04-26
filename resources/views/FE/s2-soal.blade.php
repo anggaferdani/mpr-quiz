@@ -16,6 +16,18 @@
 
 
     <style>
+         @keyframes scale {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(2);
+            }
+        }
+
+        .scale-animation {
+            animation: scale .5s linear infinite alternate; /* Ganti 1s menjadi durasi yang Anda inginkan */
+        }
         .bg-sesi2-soal{
             position: relative;
             height: 100vh; 
@@ -145,7 +157,7 @@
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     
     <script>
-            var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownSeconds = 12; // Ubah kembali ke 20 jika menggunakan detik
             var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
             var countdownInterval;
 
@@ -173,6 +185,8 @@
                 });
             }
 
+            var alarmCountdown = new Audio('../images/alarmCountdown2.mp3');
+
             function startCountdown() {
             countdownInterval = setTimeout(function updateCountdown() {
                 var countdownElement = document.getElementById('countdown');
@@ -180,6 +194,17 @@
                 countdownMilliseconds -= 10; // Kurangi 10 milidetik setiap kali update
                 var seconds = Math.floor(countdownMilliseconds / 1000);
                 var milliseconds = Math.floor((countdownMilliseconds % 1000) / 10); // Ambil bagian milidetik
+
+                // Tambahkan kelas animasi skala jika detik berada di bawah 10
+                if (seconds <= 10 && seconds !== 0) {
+                    // Memutar audio jika detik kurang dari atau sama dengan 10
+                    alarmCountdown.play();
+                    countdownElement.classList.add('scale-animation');
+                } else {
+                    alarmCountdown.pause();
+                    countdownElement.classList.remove('scale-animation');
+                }
+
                 if (seconds === 0) {
                     countdownElement.innerText = seconds;
                 } else {
@@ -205,7 +230,7 @@
                     countdownInterval = setTimeout(updateCountdown, 10); // Update setiap 10 milidetik
                     
                 }
-            }, 10);
+            }, 7.5);
         }
 
             document.addEventListener('keydown', function(event) {
