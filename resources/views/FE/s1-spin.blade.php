@@ -84,12 +84,12 @@
             @endforeach
         ];
         
-        item.forEach(function(element) {
-            var words = element.name.split(' ');
-            if (words.length > 2) {
-                element.name = words.join('<br>');
-            }
-        });
+        // item.forEach(function(element) {
+        //     var words = element.name.split(' ');
+        //     if (words.length > 2) {
+        //         element.name = words.join('<br>');
+        //     }
+        // });
         // Simpan data ke local storage jika belum ada
         if (!localStorage.getItem('wheelItem2')) {
             var saveToLocal = JSON.stringify(item);
@@ -233,12 +233,12 @@
             
             });
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'F2') {
-        // Arahkan pengguna ke route sesi2
-        window.location.href = "/sesi2";
-    }
-});
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'F2') {
+                    // Arahkan pengguna ke route sesi2
+                    window.location.href = "/sesi2";
+                }
+            });
 
 
 

@@ -55,6 +55,13 @@ $.widget('javobyte.rouletteWheel', {
         if (!this.options.items.length) throw 'No items provided';
 
         var canvas = this.element[0];
+        var spinButtonImg = new Image();
+        spinButtonImg.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Logo_of_People%27s_Consultative_Assembly_Indonesia.png/1200px-Logo_of_People%27s_Consultative_Assembly_Indonesia.png';
+        var widget = this;
+        spinButtonImg.onload = function () {
+            widget._options.spinButtonImg = spinButtonImg; // Menyimpan gambar dalam widget
+            widget._draw(); // Gambar akan digambar setelah dimuat
+        };
 
         if (canvas.getContext) {
             this._options.ctx = canvas.getContext('2d');
@@ -164,6 +171,13 @@ $.widget('javobyte.rouletteWheel', {
         ctx.stroke();
 
         ctx.restore();
+        if (this._options.spinButtonImg) {
+            var spinButtonImg = this._options.spinButtonImg;
+            var aspectRatio = spinButtonImg.width / spinButtonImg.height;
+            var resizedWidth = 200; // Lebar gambar yang diubah
+            var resizedHeight = resizedWidth / aspectRatio;
+            ctx.drawImage(spinButtonImg, cx - resizedWidth / 2, cy - resizedHeight / 2, resizedWidth, resizedHeight);
+        }
 
         for (var item of this.options.items) {
             var angle = currentAngle + i * arc;
@@ -180,15 +194,30 @@ $.widget('javobyte.rouletteWheel', {
 
             ctx.fillStyle = 'black';
 
-            text = item.name;
-            textWidth = ctx.measureText(text).width;
+            var words = item.name.split(' '); // Memisahkan setiap kata
+            var line = '';
+            var lineHeight = 20; // Tinggi baris teks
+            var maxWidth = radius - innerRadius; // Lebar maksimum teks
 
             ctx.translate(cx + Math.cos(angle + arc / 2) * textRadius,
                 cy + Math.sin(angle + arc / 2) * textRadius);
 
             ctx.rotate(angle + arc / 2);
 
-            ctx.fillText(text, textWidth > radius - innerRadius ? innerRadius - textRadius : -textWidth / 2, 0, radius - innerRadius);
+            for (var n = 0; n < words.length; n++) {
+                var testLine = line + words[n] + ' ';
+                var metrics = ctx.measureText(testLine);
+                var testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    ctx.fillText(line, -ctx.measureText(line).width / 2, 0);
+                    line = words[n] + ' ';
+                    ctx.translate(0, lineHeight);
+                } else {
+                    line = testLine;
+                }
+            }
+
+            ctx.fillText(line, -ctx.measureText(line).width / 2, 0);
 
             ctx.restore();
             i++;
@@ -196,17 +225,6 @@ $.widget('javobyte.rouletteWheel', {
 
         ctx.fillStyle = 'black';
         ctx.drawImage(this.options.pointer, cx + 320, cy - radius + 300, 50, 50);
-
-        // Replace the spin text with an image loaded from a URL
-        var spinButtonImg = new Image();
-        // spinButtonImg.src = 'img/transparent.png'; // Provide the URL of your image
-        spinButtonImg.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Logo_of_People%27s_Consultative_Assembly_Indonesia.png/1200px-Logo_of_People%27s_Consultative_Assembly_Indonesia.png'; // Provide the URL of your image
-        spinButtonImg.onload = function () {
-            var aspectRatio = spinButtonImg.width / spinButtonImg.height;
-            var resizedWidth = 200; // Width to resize the image to
-            var resizedHeight = resizedWidth / aspectRatio;
-            ctx.drawImage(spinButtonImg, cx - resizedWidth / 2, cy - resizedHeight / 2, resizedWidth, resizedHeight);
-        };
 
         if (!this.is_rotating()) {
             ctx.save();
