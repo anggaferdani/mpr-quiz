@@ -41,6 +41,7 @@
             position: relative;
         }
         .div-wrap{
+            width: 100%;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -58,7 +59,7 @@
         }
         .wrap-countdown{
             position: absolute;
-            bottom: 5%;
+            bottom: -15%;
             width: 100%;
         }
         .countdown{
@@ -284,7 +285,7 @@
     {{-- COUNTDOWN --}}
     <script>
     document.addEventListener('DOMContentLoaded', function () {
-        var countdownSeconds = 12; // Ubah kembali ke 20 jika menggunakan detik
+        var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
         var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
         var countdownInterval;
 

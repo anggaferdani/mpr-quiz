@@ -282,7 +282,7 @@ $.widget('javobyte.rouletteWheel', {
         // Redraw the wheel without the removed item
         this._options.itemsToDraw--;
 
-        // Adjust colors array if necessary
+        // Adjust colors array if necessar
         if (this.options.colors.length !== this._options.itemsToDraw) {
             var colors = [];
             for (var i = 0; i < this._options.itemsToDraw; i++) {

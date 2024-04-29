@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jawabans', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('id_pertanyaan');
-            $table->string('jawaban');
+            $table->text('jawaban');
             $table->timestamps();
         });
     }

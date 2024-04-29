@@ -8,9 +8,10 @@
     
     <style>
         body{
-            background-image: url(../images/justPeta.png);
+            background-image: url(../images/nilaiJuriBg.png);
+            /* D:\application\mpr-quiz\public\images\bg-nilai-juri.png */
             background-repeat: no-repeat;
-            background-size: contain;
+            background-size: 100% 100%;
             height: 100vh;
             background-position: center center;
             display: flex;
@@ -20,7 +21,7 @@
         .content h1{
             font-size: 25vw;
             line-height: .85;
-            color: #E8372D;
+            color: #CE8F2E;
             font-weight: bolder;
             margin-bottom: 0 !important;
         }

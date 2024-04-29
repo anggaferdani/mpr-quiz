@@ -156,8 +156,8 @@
         }
         body{
             font-family: "Poppins", sans-serif;
-            height: 97vh;
-            overflow: hidden;
+            height: 100% !important;
+            overflow-x: hidden;
         }
         .header h2{
             font-family: 'Press Start 2P', system-ui;

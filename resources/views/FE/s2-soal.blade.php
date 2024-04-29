@@ -78,7 +78,7 @@
     } */
         .wrap-countdown{
             position: absolute;
-            bottom: 5%;
+            bottom: -5%;
             width: 100%;
         }
         .countdown{
@@ -140,14 +140,14 @@
 
    <div class="container" id="content-soal-sesi2">
         <div class="row align-items-center justify-content-center">
-            <div class="col-12">
+            <div class="col-8">
                 <h2 class="fw-bolder text-center" id="showingDataPusher">{{ print_r($data, true) }}</h2>
             </div>
         </div>
     </div>
     <div class="wrap-countdown d-flex justify-content-center">
         <div class="countdown px-3 py-2 d-flex align-items-center justify-content-center">
-            <h3 id="countdown" class="mb-0">30.</h3>
+            <h3 id="countdown" class="mb-0">120.</h3>
             <h5 id="countdown-milidetik">00</h5>
         </div>
     </div>
@@ -157,7 +157,7 @@
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     
     <script>
-            var countdownSeconds = 12; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownSeconds = 120; // Ubah kembali ke 20 jika menggunakan detik
             var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
             var countdownInterval;
 

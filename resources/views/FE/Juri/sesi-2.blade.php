@@ -18,8 +18,9 @@
         }
         body{
             font-family: "Poppins", sans-serif;
-            height: 97vh;
-            overflow: hidden;
+            min-height: 100vh;
+            height: 100%;
+            overflow-x: hidden;
         }
         .header h2{
             font-family: 'Press Start 2P', system-ui;
@@ -111,7 +112,7 @@
                 <div class="header d-flex justify-content-between align-items-center my-3">
                     <h2>SESI 2</h2>
                     <div class="countdown">
-                        <h3 id="countdown" class="mb-0">30</h3>
+                        <h3 id="countdown" class="mb-0">120</h3>
                     </div>
                 </div>
                 <div class="pertanyaan">
@@ -236,7 +237,7 @@
         });
 
         function MulaiCountdown(){
-            var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownSeconds = 120; // Ubah kembali ke 20 jika menggunakan detik
             var countdownInterval;
 
             function startCountdown() {
