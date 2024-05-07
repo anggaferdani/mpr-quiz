@@ -350,6 +350,16 @@
                     countdownElementMilidetik.innerText = milliseconds.toString().padStart(2, '0');
                 }
 
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === '') {
+                        clearInterval(countdownInterval);
+                    var countdownDiv = document.getElementById('countdown-div');
+                    countdownDiv.style.display = 'block';
+                    // Tambahkan event listener untuk menangani tombol Enter
+                    document.addEventListener('keydown', handleEnterKey);
+                    }
+                });
+
                 // Menghentikan countdown dan menampilkan elemen countdown-div saat hitung mundur selesai
                 if (seconds === 0) {
                     clearInterval(countdownInterval);
@@ -361,6 +371,17 @@
                     // Update setiap 10 milidetik
                     countdownInterval = setTimeout(updateCountdown, 10);
                 }
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Shift') {
+                        clearInterval(countdownInterval);
+                        var countdownDiv = document.getElementById('countdown-div');
+                        countdownDiv.style.display = 'block';
+                        // Tambahkan event listener untuk menangani tombol Enter
+                        document.addEventListener('keydown', handleEnterKey);
+                    }
+                });
+
             }, 7.5);
         }
 

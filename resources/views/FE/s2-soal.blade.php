@@ -189,7 +189,7 @@
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     
     <script>
-            var countdownSeconds = 3; // Ubah kembali ke 20 jika menggunakan detik
+            var countdownSeconds = 120; // Ubah kembali ke 20 jika menggunakan detik
             var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
             var countdownInterval;
 
@@ -260,8 +260,18 @@
                     document.addEventListener('keydown', handleEnterKey);
                 } else {
                     countdownInterval = setTimeout(updateCountdown, 10); // Update setiap 10 milidetik
-                    
-                }
+                }   
+
+                document.addEventListener('keydown', function(event) {
+                    if (event.key === 'Shift') {
+                        clearInterval(countdownInterval);
+                        var countdownDiv = document.getElementById('countdown-div');
+                        countdownDiv.style.display = 'block';
+                        // Tambahkan event listener untuk menangani tombol Enter
+                        document.addEventListener('keydown', handleEnterKey);
+                    }
+                });
+
             }, 7.5);
         }
 
