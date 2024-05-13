@@ -12,14 +12,8 @@
     @vite(['resources/css/app.css' , 'resources/js/app.js'])
     <style>
         /* body{
-            background-image: url('../images/bg-baru.gif');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 100vw;
             height: 100vh;
-            margin: 0;
-        } */
+        }  */
         /* CSS */
         @keyframes scale {
             from {
@@ -59,12 +53,13 @@
         }
         .wrap-countdown{
             position: absolute;
-            bottom: -15%;
+            bottom: 7.5%;
             width: 100%;
+            height: max-content;
         }
         .countdown{
             width: 15vw;
-            height: 15vw;
+            /* height: 15vw; */
             /* border: 1px solid red; */
             /* border-radius: 10px; */
         }

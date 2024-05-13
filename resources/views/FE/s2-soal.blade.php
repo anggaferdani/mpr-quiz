@@ -78,12 +78,12 @@
     } */
         .wrap-countdown{
             position: absolute;
-            bottom: -5%;
+            bottom: 7.5%;
             width: 100%;
         }
         .countdown{
             width: 15vw;
-            height: 15vw;
+            /* height: 15vw; */
             /* border: 1px solid red; */
             /* border-radius: 10px; */
         }
