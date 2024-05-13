@@ -81,6 +81,8 @@
 
 
         #kanan{
+            min-height: 100vh;
+            height: auto;
             background-color: #E30000;
             border-left: 10px solid #FFB316;
         }
