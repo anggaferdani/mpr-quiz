@@ -7,6 +7,7 @@ use App\Events\DeviceSatu;
 use App\Models\Jawaban;
 use App\Events\addPoints;
 use App\Events\StartCountdown;
+use App\Events\moveSesi;
 
 use App\Models\Pertanyaan;
 use App\Events\MessageSent;
@@ -73,10 +74,12 @@ class FrontendController extends Controller
     {
         $jawaban = $request->input('jawaban');
         $pesan = $request->input('pesan');
+        $capecape = $request->input('capecape');
         $team = Team::all();
 
         event(new addPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
+        event(new moveSesi(['capecape' => $capecape]));
         
         return view('FE.Juri.sesi-1', compact('team'));
     }

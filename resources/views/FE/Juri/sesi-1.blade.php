@@ -127,6 +127,14 @@
             }
         });
 
+        var channel7 = pusher.subscribe('channel-move-sesi');
+        channel7.bind('event-move-sesi', function(data) {
+            console.log('event-move-sesi', data.message);
+            if (data.message.capecape === "sesi-2") {
+                window.location.href = "/sesi2-juri";
+            }
+        });
+
         function MulaiCountdown(){
             var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
             var countdownInterval;

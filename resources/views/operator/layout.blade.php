@@ -60,14 +60,14 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
-            <li class="sidebar-item {{ (request()->is('op/sesi-1')) ? 'active' :  '' }}">
-                <a href="/op/sesi-1" class='sidebar-link'>
+            <li class="sidebar-item {{ (request()->is('op/sesi-1')) ? 'active' :  '' }}" onclick="movesesimen('sesi-1')">
+                <a href="/op/sesi-1" class='sidebar-link' id="sesi-1-link" >
                 <i class="bi bi-1-square"></i>
                     <span>Sesi 1</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ (request()->is('op/sesi-2')) ? 'active' :  '' }}">
-                <a href="/op/sesi-2" class='sidebar-link'>
+            <li class="sidebar-item {{ (request()->is('op/sesi-2')) ? 'active' :  '' }}" onclick="movesesimen('sesi-2')">
+                <a href="/op/sesi-2" class='sidebar-link' id="sesi-2-link" >
                 <i class="bi bi-2-square"></i>
                     <span>Sesi 2</span>
                 </a>
@@ -101,10 +101,9 @@
                 </a>
             </header>
             
-<div class="main-content">
-    @yield('layout')
-</div>
-
+            <div class="main-content">
+                @yield('layout')
+            </div>
 
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
@@ -133,6 +132,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.5/sweetalert2.all.js" integrity="sha512-AINSNy+d2WG9ts1uJvi8LZS42S8DT52ceWey5shLQ9ArCmIFVi84nXNrvWyJ6bJ+qIb1MnXR46+A4ic/AUcizQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="{{asset('image-uploader/dist/image-uploader.min.js')}}"></script>
 @stack('scripts')
+
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+
+{{-- PUSHER --}}
+
+<script>
+    // Function to send a question
+    function movesesimen(sessionId) {
+        $.ajax({
+            method: 'GET',
+            url: '/sesi1-juri',
+            data: {
+                _token: '{{ csrf_token() }}',
+                capecape: sessionId,
+            },
+            success: function(response) {
+                console.log('Question successfully sent to Pusher.', sessionId);
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to send question to Pusher:', error);
+            }
+        });
+    }
+</script>
+
 <!-- Page Specific JS File -->
 <script type="text/javascript">
     $('.delete').click(function(){
@@ -155,14 +180,15 @@
         }
       });
     });
-  </script>
-  <script>
+</script>
+
+<script>
     $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-      });
-  </script>
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
 
 </body>
 
