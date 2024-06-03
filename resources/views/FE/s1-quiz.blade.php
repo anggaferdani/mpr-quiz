@@ -187,8 +187,8 @@
 
     {{-- PUSHER --}}
     <script>
-        var pusher = new Pusher('d0c13db38b1d3aee0d7a', {
-            cluster: 'ap1',
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
             encrypted: true
         });
         console.log('pusher', pusher)
@@ -206,6 +206,15 @@
             console.log("Pertanyaan received:", pertanyaan);
 
             // Now you can use the pertanyaan variable to handle the received question further
+        });
+        // PUSHER PINDAH HALAMAN KE SESI 2
+
+        var channel7 = pusher.subscribe('channel-move-sesi');
+        channel7.bind('event-move-sesi', function(data) {
+            console.log('event-move-sesi', data.message);
+            if (data.message.capecape === "sesi-2") {
+                window.location.href = "/sesi2";
+            }
         });
     </script>
 

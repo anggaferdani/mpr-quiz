@@ -9,6 +9,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -62,6 +64,19 @@
             // Lakukan navigasi ke URL sebelumnya dalam riwayat browser
             window.history.back();
         }
+        });
+
+        // PUSHER PINDAH HALAMAN KE SESI 2
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+            encrypted: true
+        });
+        var channel7 = pusher.subscribe('channel-move-sesi');
+        channel7.bind('event-move-sesi', function(data) {
+            console.log('event-move-sesi', data.message);
+            if (data.message.capecape === "sesi-2") {
+                window.location.href = "/sesi2";
+            }
         });
     </script>
   </body>

@@ -42,6 +42,20 @@
     </div>
 
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script>
+        // PUSHER PINDAH HALAMAN KE SESI 2
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+            encrypted: true
+        });
+        var channel7 = pusher.subscribe('channel-move-sesi');
+        channel7.bind('event-move-sesi', function(data) {
+            console.log('event-move-sesi', data.message);
+            if (data.message.capecape === "sesi-2") {
+                window.location.href = "/sesi2";
+            }
+        });
+    </script>
 
     <script>
 
@@ -62,6 +76,8 @@
             // Menampilkan angka tersebut di halaman
             $('#lastNumber').text(lastNumber);
         });
+
+        
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
