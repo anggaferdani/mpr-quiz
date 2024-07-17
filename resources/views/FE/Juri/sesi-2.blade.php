@@ -63,7 +63,7 @@
             justify-content: center;
             width: 5vw;
             height: 5vw;
-            border: 2px solid red; 
+            border: 2px solid red;
             border-radius: 10px;
         }
         .countdown h3{
@@ -90,7 +90,7 @@
             width: 75%;
         }
         .list-group{
-            display: flex !important; 
+            display: flex !important;
         }
         .group .nama-group{
             background-color: #990000;
@@ -107,7 +107,7 @@
     </style>
   </head>
   <body>
-    
+
       <div class="row" style="height: 100%">
           <div class="col-7" id="kiri">
               <div class="container">
@@ -155,7 +155,7 @@
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('d0c13db38b1d3aee0d7a', {
+        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
             cluster: 'ap1'
         });
 
@@ -203,7 +203,7 @@
         channel2.bind('my-KirimPointStoreS1', function(data) {
             // Update tampilan dengan data yang diterima dari Pusher
             console.log('KirimPointStoreS1', data);
-            
+
             // Dapatkan id tim dan poin yang diterima dari Pusher
             var teamId = data.id_team;
             console.log('teamId', teamId)
