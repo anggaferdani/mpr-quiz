@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 use Pusher\Pusher;
 use App\Models\Team;
-use App\Events\DeviceSatu;
 use App\Models\Jawaban;
-use App\Events\addPoints;
-use App\Events\StartCountdown;
 use App\Events\moveSesi;
+use App\Events\AddPoints;
 
+use App\Events\DeviceSatu;
 use App\Models\Pertanyaan;
 use App\Events\MessageSent;
 use App\Models\Participant;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+use App\Events\StartCountdown;
 use App\Models\TemaPertanyaan;
 use App\Events\KirimPertanyaanS2;
 use Illuminate\Support\Facades\DB;
@@ -82,7 +82,7 @@ class FrontendController extends Controller
         $capecape = $request->input('capecape');
         $team = Team::all();
 
-        event(new addPoints(['jawaban' => $jawaban]));
+        event(new AddPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
         event(new moveSesi(['capecape' => $capecape]));
 
