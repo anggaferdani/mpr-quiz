@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>MPR Quiz | Sesi II</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -16,15 +16,15 @@
 
     <style>
         .text-sesi h1{
-            font-family: 'Press Start 2P', system-ui;
-            font-size: 7.5vw;
-            color: #00CED4;
+            font-family: 'Poppins', system-ui;
+            font-size: 10vw;
+            color: #CE8F2E;
         }
         .text-sesi h3{
             font-family: "Poppins", sans-serif;
             font-weight: bold;
             font-size: 3vw;
-            color: #FF3421;
+            color: black;
         }
 
         .tanya-sesi2{
@@ -32,20 +32,31 @@
             width: 100%;
             object-fit: contain;
         }
+
+        body{
+            background-image: url(../images/nilaiJuriBg.png);
+            /* D:\application\mpr-quiz\public\images\bg-nilai-juri.png */
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            height: 100vh;
+            background-position: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 
   </head>
-  <body class="d-flex align-items-center" style="height: 100vh; background-image: url(../images/bg-angin.png); background-repeat: no-repeat; object-fit: contain">
+  <body class="d-flex align-items-center" style="height: 100vh; background-repeat: no-repeat; object-fit: contain">
 
-   <div class="container">
-        <div class="row align-items-center">
-            <div class="col-7 text-sesi">
-                <h1>SESI 2</h1>
-                {{-- <h1>{{ $pertanyaan }}</h1> --}}
-                <h3>TEMATIK EMPAT PILAR MPR RI</h3>
-            </div>
-            <div class="col-5">
-                <img class="tanya-sesi2" src="../images/tanya-sesi2.png" alt="">
+   <div class="container" style="display: flex; justify-content: center; align-items: center">
+        <div class="row align-items-center justify-center">
+            <div class="text-sesi w-fit" style="width: fit-content">
+                <div style="display: flex; justify-content: space-between; width: 100%">
+                    <h1>SESI</h1>
+                    <h1>2</h1>
+                </div>
+                <h3 style="width: fit-content;">TEMATIK EMPAT PILAR MPR RI</h3>
             </div>
         </div>
    </div>

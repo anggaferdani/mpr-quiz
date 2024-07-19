@@ -18,7 +18,7 @@ class TemaPertanyaanSeeder extends Seeder
                 'tema' => 'UUD NRI Tahun 1945 dan Ketetapan MPR',
                 'sesi' => 1
             ], [
-                'tema' => 'NKRI & Bhinneka Tunggal Ika',
+                'tema' => 'NKRI dan Bhinneka Tunggal Ika',
                 'sesi' => 1
             ], [
                 'tema' => 'Pengetahuan Umum',

@@ -20,12 +20,12 @@ class moveSesi implements ShouldBroadcast
     {
         $this->message = $message;
     }
-  
+
     public function broadcastOn()
     {
         return new Channel ('channel-move-sesi');
     }
-  
+
     public function broadcastAs()
     {
         return 'event-move-sesi';

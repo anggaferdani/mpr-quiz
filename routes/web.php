@@ -54,7 +54,8 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
 Route::post('/setpoin', [Sesi3Controller::class, 'setpoin'])->name('setpoin');
 Route::post('/minpoin', [Sesi3Controller::class, 'minpoin'])->name('minpoin');
 
-Route::get('/', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
+Route::get('/', function () { return redirect()->route('openingSesi1'); });
+Route::get('/sesi1', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
 Route::get('/sesi1-spin', [FrontendController::class, 'spinSesi1'])->name('spinSesi1');
 Route::get('/sesi1-spin-data', [FrontendController::class, 'getspinSesi1'])->name('spinSesi1Data');
 Route::get('/sesi1-quiz/{id}', [FrontendController::class, 'quizSesi1'])->name('quizSesi1');
@@ -64,6 +65,8 @@ Route::get('/sesi1-nilai', [FrontendController::class, 'nilaiquizSesi1'])->name(
 
 Route::get('/sesi2', [FrontendController::class, 'openingSesi2'])->name('openingSesi2');
 Route::get('/sesi2-soal', [FrontendController::class, 'soalSesi2'])->name('soalSesi2');
+
+Route::get('/sesi3', [FrontendController::class, 'openingSesi3'])->name('openingSesi3');
 
 Route::get('/sesi1-juri', [FrontendController::class, 'openingSesi1Juri'])->name('openingSesi1Juri');
 // Route::get('/sesi1-juri-nilai', [FrontendController::class, 'nilaiSesi1Juri'])->name('nilaiSesi1Juri');

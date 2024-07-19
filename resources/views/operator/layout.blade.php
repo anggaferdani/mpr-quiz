@@ -142,6 +142,23 @@
 <script>
     // Function to send a question
     function movesesimen(sessionId) {
+        // Peserta's view
+        $.ajax({
+            method: 'GET',
+            url: '/sesi1',
+            data: {
+                _token: '{{ csrf_token() }}',
+                capecape: sessionId,
+            },
+            success: function(response) {
+                console.log('Push peserta ke halaman selanjutnya.', sessionId);
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to send question to Pusher:', error);
+            }
+        });
+
+        // Juri's view
         $.ajax({
             method: 'GET',
             url: '/sesi1-juri',
@@ -150,7 +167,7 @@
                 capecape: sessionId,
             },
             success: function(response) {
-                console.log('Question successfully sent to Pusher.', sessionId);
+                console.log('Push juri ke halaman selanjutnya.', sessionId);
             },
             error: function(xhr, status, error) {
                 console.error('Failed to send question to Pusher:', error);

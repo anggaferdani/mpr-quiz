@@ -23,17 +23,22 @@ class FrontendController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function openingSesi1()
+    public function openingSesi1(Request $request)
     {
+        $capecape = $request->input('capecape');
+
+        event(new moveSesi(['capecape' => $capecape]));
+
         return view('FE.s1');
     }
-    
+
     /**
      * Show the form for creating a new resource.
      */
     public function spinSesi1()
     {
         $tema = TemaPertanyaan::where('sesi', 1)->get();
+
         return view('FE.s1-spin', compact('tema'));
     }
 
@@ -45,32 +50,32 @@ class FrontendController extends Controller
 
 
     public function quizSesi1($id)
-{
-    $quiz = Pertanyaan::where('id_tema', $id)->whereNotIn('id', function($query) {
-        $query->select('id_pertanyaan')
-              ->from('participants')
-              ->whereDate('tanggal', today()); // Mengganti today() sesuai dengan cara mendapatkan tanggal sekarang di Laravel Anda
-    })
-    ->first();
-    $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
-    
-    $pusher = new Pusher(
-        env('PUSHER_APP_KEY'),
-        env('PUSHER_APP_SECRET'),
-        env('PUSHER_APP_ID'),
-        [
-            'cluster' => env('PUSHER_APP_CLUSTER'),
-            'useTLS' => true
-            ]
-    );
-        
+    {
+        $quiz = Pertanyaan::where('id_tema', $id)->whereNotIn('id', function($query) {
+            $query->select('id_pertanyaan')
+                ->from('participants')
+                ->whereDate('tanggal', today()); // Mengganti today() sesuai dengan cara mendapatkan tanggal sekarang di Laravel Anda
+        })
+        ->first();
+        $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true
+                ]
+        );
+
         $pusher->trigger('channel-kirim-pertanyaan', 'event-kirim-pertanyaan', ['quiz' => $quiz, 'jawaban' => $jawaban]);
-        
+
         return view('FE.s1-quiz', compact('quiz'));
     }
-    
-    
-    public function openingSesi1Juri(Request $request) 
+
+
+    public function openingSesi1Juri(Request $request)
     {
         $jawaban = $request->input('jawaban');
         $pesan = $request->input('pesan');
@@ -80,17 +85,17 @@ class FrontendController extends Controller
         event(new addPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
         event(new moveSesi(['capecape' => $capecape]));
-        
+
         return view('FE.Juri.sesi-1', compact('team'));
     }
-    public function nilaiSesi1Juri(Request $request) 
+    public function nilaiSesi1Juri(Request $request)
     {
         // Ambil nilai dari permintaan (request)
         $nilai = Participant::get()->last();
         // dd($nilai);
         return view('FE.Juri.sesi-1-nilai', compact('nilai'));
     }
-    
+
     public function openingSesi2(Request $request)
     {
         // Mengambil data yang dikirimkan melalui AJAX
@@ -105,7 +110,7 @@ class FrontendController extends Controller
         return view('FE.s2');
     }
 
-    public function openingSesi2Juri(Request $request) 
+    public function openingSesi2Juri(Request $request)
     {
         $berita = $request->input('berita');
         $id = $request->input('id');
@@ -114,7 +119,7 @@ class FrontendController extends Controller
         $pesan = $request->input('pesan');
         $team = Team::all();
 
-        
+
         // Semua variabel memiliki nilai yang valid, kirimkan event
         event(new KirimPertanyaanS2(['berita' => $berita, 'id' => $id, 'pertanyaan' => $pertanyaan, 'jawabanArray' => $jawabanArray]));
         event(new StartCountdown(['pesan' => $pesan]));
@@ -140,6 +145,11 @@ class FrontendController extends Controller
 
        // Tampilkan tampilan /sesi2-soal
        return view('FE.s2-soal', ['data' => $data]); // Mengirimkan data ke tampilan
+    }
+
+    public function openingSesi3(Request $request)
+    {
+        return view('FE.s3');
     }
 
     public function nilaiquizSesi1()
@@ -177,8 +187,8 @@ class FrontendController extends Controller
     public function device3(Request $request){
         return view('FE.Juri.device3');
     }
-    
-    
+
+
 
     // public function testpusher()
     // {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>MPR Quiz | Roulette</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <script type="text/javascript" src="{{asset('spinner/src/jquery.1.11.3.min.js')}}"></script>
@@ -17,15 +17,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
-    body{
-        height: 100vh;
-        width: 100vw;
-        overflow: hidden;
-        background-image: url('../images/gif-s1-spin.gif'); /* Set the URL of your GIF */
-            background-size: cover; /* Set the size */
-            background-repeat: no-repeat; /* Set the repeat behavior */
-            background-position: center; /* Set the position */
-    }
+        body{
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-image: url('../images/gif-s1-spin.gif'); /* Set the URL of your GIF */
+                background-size: cover; /* Set the size */
+                background-repeat: no-repeat; /* Set the repeat behavior */
+                background-position: center; /* Set the position */
+        }
         div:where(.swal2-container) h2:where(.swal2-title){
             color: #ffff !important;
             font-size: 82px;
@@ -34,8 +34,7 @@
         swal2-popup swal2-modal swal2-show{
             padding: 1.5em 3em !important;
         }
-    </style>
-    <style>
+
         .swal2-show{
             width: max-content !important;
             padding: 5rem !important;
@@ -72,8 +71,9 @@
         <img src="../images/panah.png" alt="">
     </div>
 
-        <script type="text/javascript" src="{{asset('spinner/src/rouletteWheel.js')}}"></script>
-        <script type="text/javascript">
+    <script type="text/javascript" src="{{asset('spinner/src/rouletteWheel.js')}}"></script>
+
+    <script type="text/javascript">
         var item = [
             @foreach ($tema as $t)
             {
@@ -84,34 +84,25 @@
             @endforeach
         ];
 
-        // item.forEach(function(element) {
-        //     var words = element.name.split(' ');
-        //     if (words.length > 2) {
-        //         element.name = words.join('<br>');
-        //     }
-        // });
         // Simpan data ke local storage jika belum ada
         if (!localStorage.getItem('wheelItem2')) {
             var saveToLocal = JSON.stringify(item);
             localStorage.setItem('wheelItem2', saveToLocal);
         }
-        // console.log('item1', item)
 
         $(function() {
-            // console.log($t->id)
-
-
             // Inisialisasi spinwheel dan ambil data dari local storage
             initSpinwheel();
 
             // Fungsi untuk inisialisasi spinwheel dan ambil data dari local storage
             function initSpinwheel() {
+
             // Ambil data dari local storage
             var itemJSON = localStorage.getItem('wheelItem2');
             var itemsFromLocal = JSON.parse(itemJSON);
-            console.log(itemsFromLocal)
+            console.log(itemsFromLocal);
 
-                // Inisialisasi spinwheel dengan item yang ada di local storage
+            // Inisialisasi spinwheel dengan item yang ada di local storage
             $('#canvas').rouletteWheel({
                 items: itemsFromLocal,
                 selected: function (key, item) {
@@ -124,16 +115,8 @@
                     // Hapus item yang memiliki nama yang sesuai dari local storage
                     deleteSelectedItem(selectedName);
 
-                    var selectedDiv = '<div id="selectedDiv" style="padding: 20px; color: black; word-wrap: break-word;">';
-                        selectedDiv += '<h1>' + selectedName + '</h1>';
-                        selectedDiv += '</div>';
-
-                        // Tampilkan div yang berisi informasi item yang dipilih
-                            $('body').append(selectedDiv);
-
                     // Tampilkan informasi item yang dipilih
                     Swal.fire({
-                        // html: selectedDiv,
                         title: selectedName,
                         id : selectedId,
                         color : selectedColor,
@@ -175,71 +158,68 @@
                 }
                 return color;
             }
+        }
 
+            // Fungsi untuk mencari dan menghapus item yang memiliki nama yang sesuai
+            function deleteSelectedItem(selectedName) {
+                // Ambil data dari local storage
+                var itemJSON = localStorage.getItem('wheelItem2');
+                var itemsFromLocal = JSON.parse(itemJSON);
+
+                // Filter item yang memiliki nama yang sesuai
+                itemsFromLocal = itemsFromLocal.filter(function(item) {
+                    return item.name !== selectedName;
+                });
+
+                // Simpan kembali data yang telah dihapus ke local storage
+                localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
             }
 
-                // Fungsi untuk mencari dan menghapus item yang memiliki nama yang sesuai
-                function deleteSelectedItem(selectedName) {
-                    // Ambil data dari local storage
-                    var itemJSON = localStorage.getItem('wheelItem2');
-                    var itemsFromLocal = JSON.parse(itemJSON);
+            // Fungsi untuk mengembalikan data local storage ke nilai awalnya
+            function resetLocalStorage() {
+                // var item = [
+                //     @foreach ($tema as $t)
+                //         { id: '{{ $t->id }}' ,name: '{{ $t->tema }}' },
+                //     @endforeach
+                // ];
+                var saveToLocal = JSON.stringify(item);
+                localStorage.setItem('wheelItem2', saveToLocal);
+            }
 
-                    // Filter item yang memiliki nama yang sesuai
-                    itemsFromLocal = itemsFromLocal.filter(function(item) {
-                        return item.name !== selectedName;
-                    });
+            // Membersihkan event handler ketika meninggalkan halaman
+            $(window).on('unload', function() {
+                $(document).off('keydown');
+            });
 
-                    // Simpan kembali data yang telah dihapus ke local storage
-                    localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
+            $(document).keydown(function(event) {
+                // Pastikan tombol yang ditekan adalah spasi (keyCode 32)
+                if (event.keyCode === 32) {
+                    // Panggil metode untuk memutar spinwheel
+                    $('#canvas').rouletteWheel('spin');
                 }
-
-                // Fungsi untuk mengembalikan data local storage ke nilai awalnya
-                function resetLocalStorage() {
-                    // var item = [
-                    //     @foreach ($tema as $t)
-                    //         { id: '{{ $t->id }}' ,name: '{{ $t->tema }}' },
-                    //     @endforeach
-                    // ];
-                    var saveToLocal = JSON.stringify(item);
-                    localStorage.setItem('wheelItem2', saveToLocal);
-                }
-
-                // Membersihkan event handler ketika meninggalkan halaman
-                $(window).on('unload', function() {
-                    $(document).off('keydown');
-                });
-
-                $(document).keydown(function(event) {
-                    // Pastikan tombol yang ditekan adalah spasi (keyCode 32)
-                    if (event.keyCode === 32) {
-                        // Panggil metode untuk memutar spinwheel
-                        $('#canvas').rouletteWheel('spin');
-                    }
-                });
-
-                document.addEventListener('keydown', function(event) {
-                    if (event.key === 'r') {
-                        // Reset data local storage ke nilai awalnya
-                        resetLocalStorage();
-                        // Inisialisasi ulang spinwheel
-                        initSpinwheel();
-                        console.log('Local storage berhasil dikembalikan ke nilai awal.');
-
-                        location.reload();
-
-                    }
-                });
-
-
             });
 
             document.addEventListener('keydown', function(event) {
-                if (event.key === 'F2') {
-                    // Arahkan pengguna ke route sesi2
-                    window.location.href = "/sesi2";
+                if (event.key === 'r') {
+                    // Reset data local storage ke nilai awalnya
+                    resetLocalStorage();
+                    // Inisialisasi ulang spinwheel
+                    initSpinwheel();
+                    console.log('Local storage berhasil dikembalikan ke nilai awal.');
+
+                    location.reload();
+
                 }
             });
-        </script>
+        });
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'F2') {
+                // Arahkan pengguna ke route sesi2
+                window.location.href = "/sesi2";
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
