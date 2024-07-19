@@ -60,7 +60,7 @@
         <tr>
             <td class="text-center">{{$loop->iteration}}</td>
             <td class="text-center">{{$item->tema}}</td>
-            <td class=""> 
+            <td class="">
                 <div class="d-flex justify-content-center">
                     <button type="button" data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-icon-text" disabled>Mulai</button>
                 </div>
@@ -77,7 +77,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan <span class="textteam"></span></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Tutup</button>
             </div>
             <div class="modal-body">
                 <button type="button" data-bs-toggle="modal" data-bs-target="#tanya{{$item->id}}" class="btn d-block btn-primary btn-icon-text">Buat Pertanyaana</button>
@@ -96,7 +96,7 @@
                             <tr>
                                 <td class="text-center">{{$loop->iteration}}</td>
                                 <td class="text-center">{{$tanya->pertanyaan}}</td>
-                                <td class="text-center"> 
+                                <td class="text-center">
                                     <div class="d-flex justify-content-center">
                                         <button onclick="simpanIsiPertanyaan('{{$tanya->pertanyaan}}')" type="button" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
                                     </div>
@@ -110,7 +110,7 @@
                                 <tr class="filterPertanyaan{{$item->id}}">
                                     <td class="text-center">{{$loop->iteration}}</td>
                                     <td class="text-center">{{$tanya->pertanyaan}}</td>
-                                    <td class="text-center"> 
+                                    <td class="text-center">
                                         <div class="d-flex justify-content-center">
                                         @if($participant)
                                             <button type="button" class="btn btn-success btn-icon-text" disabled><i class="bi bi-check-all"></i></button>
@@ -135,7 +135,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">List Jawaban - <span class="textteam"></span></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Tutup</button>
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
@@ -167,7 +167,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Pertanyaan</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Tutup</button>
             </div>
             <div class="modal-body">
                 <form action="{{ url('/op/pilih-pertanyaan') }}" method="post" enctype="multipart/form-data">
@@ -204,26 +204,26 @@
     </div>
 </div>
 @endforeach
-
-        </div>
-        <h5>Pilih Team</h5>
-        <div class="d-flex gap-2">
-            @foreach($team as $item)
-            @php
-                $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
-            @endphp
-            <div class="form-check">
-            @if($selectedTeam)
-                <input class="form-check-input" type="checkbox" checked disabled>
-            @else
-                <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
-            @endif
-            <label class="form-check-label" for="team{{$item->name}}">
-                {{$item->name}}
-            </label>
-        </div>
-        @endforeach
     </div>
+        <h5>Pilih Team</h5>
+
+        <div class="d-flex gap-4">
+            @foreach($team as $item)
+                @php
+                    $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
+                @endphp
+                <div class="form-check">
+                @if($selectedTeam)
+                    <input class="form-check-input" type="checkbox" checked disabled>
+                @else
+                    <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
+                @endif
+                <label class="form-check-label" for="team{{$item->id}}">
+                    {{$item->name}}
+                </label>
+            </div>
+            @endforeach
+        </div>
     </div>
 </div>
 
@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
     }
-    
+
     function cancelPoints(button, inputId) {
         // Get the hidden input field corresponding to this button
         var poinInput = document.getElementById(inputId);
@@ -336,7 +336,7 @@ $(document).ready(function() {
         var inputId = 'searchInput' + modalId;
 
         // Lakukan filter atau manipulasi sesuai kebutuhan Anda
-        var inputValue = $(this).val(); 
+        var inputValue = $(this).val();
         console.log('Input value for modal ' + modalId + ': ' + inputValue);
         // Lakukan sesuatu dengan nilai input ...
     });
@@ -373,7 +373,7 @@ $(document).ready(function() {
       $('.jawab').append(inputField);
     };
 
-    $("body").on("click",".delete2",function(){ 
+    $("body").on("click",".delete2",function(){
         $(this).parents(".form-row").remove();
     });
 </script>
@@ -384,7 +384,7 @@ $(document).ready(function() {
      var teamName = $('[name="idtim"]:checked').data('team-name');
      var selectedTeamId = $('input[name="idtim"]:checked').val();
      console.log("Selected Team Name: " + teamName);
- 
+
      // Iterate over each modal to set input field values
      $('.modal').each(function() {
          var modalId = $(this).data('modal-id');
@@ -393,14 +393,14 @@ $(document).ready(function() {
          $('#jawaban' + modalId).find('input[name="id_team"]').val(inputValue);
          $('#jawaban' + modalId).find('.textteam').text(teamName);
      });
- 
+
      // Handle change event for .id_tim elements
      $(document).on('change', '.id_tim', function() {
          // Get the value of the selected team ID
          var selectedTeamId = $(this).val();
          var teamName = $('[name="idtim"]:checked').data('team-name');
          console.log("Selected Team ID: " + selectedTeamId);
- 
+
          // Set the value of the hidden input field
          $('.teamteam').val(selectedTeamId);
          $('.textteam').text(teamName);
