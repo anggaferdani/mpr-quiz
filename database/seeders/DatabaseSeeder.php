@@ -6,9 +6,7 @@ namespace Database\Seeders;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Database\Seeders\JawabanSeeder;
-use Database\Seeders\PertanyaanSeeder;
-use Database\Seeders\TemaPertanyaanSeeder;
+use Database\Seeders\PertanyaanKotaSemarangSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -63,8 +61,6 @@ class DatabaseSeeder extends Seeder
             Team::create($seed);
         }
 
-        $this->call(TemaPertanyaanSeeder::class);
-        $this->call(PertanyaanSeeder::class);
-        $this->call(JawabanSeeder::class);
+        $this->call(PertanyaanKotaSemarangSeeder::class);
     }
 }
