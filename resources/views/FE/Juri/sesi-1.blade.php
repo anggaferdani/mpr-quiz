@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>MPR Quiz | Juri I</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -52,7 +52,7 @@
             $('.jawaban .JawabanJuri').each(function() {
                 // Get the value of class JawabanJuri
                 var jawabanJuri = $(this).text().trim();
-                
+
                 // Check if the value matches with data.message.jawaban
                 if (jawabanJuri === data.message.jawaban) {
                     // Add the class 'JawabanJuriAktif' to the parent div
@@ -66,7 +66,7 @@
         channel4.bind('my-KirimPointStoreS1', function(data) {
             // Update tampilan dengan data yang diterima dari Pusher
             console.log('KirimPointStoreS1', data);
-            
+
             // Dapatkan id tim dan poin yang diterima dari Pusher
             var teamId = data.id_team;
             console.log('teamId', teamId)
@@ -92,7 +92,7 @@
             }
         });
 
-        // PUSHER TERIMA NILAI 
+        // PUSHER TERIMA NILAI
         var channel5 = pusher.subscribe('channel-kirim-nilai-s1');
         channel5.bind('event-kirim-nilai-s1', function(data) {
             // Update tampilan dengan data yang diterima dari Pusher
@@ -208,7 +208,7 @@
             justify-content: center;
             width: 5vw;
             height: 5vw;
-            border: 2px solid red; 
+            border: 2px solid red;
             border-radius: 10px;
         }
         .countdown h3{
@@ -227,7 +227,7 @@
             width: 85%;
         }
         .list-group{
-            display: flex !important; 
+            display: flex !important;
         }
         .group .nama-group{
             background-color: #990000;
@@ -244,7 +244,7 @@
     </style>
   </head>
   <body>
-    
+
       <div class="row" style="height: 100%">
           <div class="col-7">
               <div class="container">
@@ -257,7 +257,7 @@
                 <div class="content">
                     <h3 class="fw-bold text-center" id="tampilkanPertanyaan"></h3>
                     <div id="tampilkanJawaban">
-                        
+
                     </div>
                 </div>
                 <div class="info d-flex justify-content-between">
@@ -285,7 +285,7 @@
                                 <p class="mb-0">{{ $item->name }}</p>
                             </div>
                             <div class="nilai-group py-3">
-                               <h4 id="poin_{{ $item->id }}">{{ $item->participant()->whereDate('tanggal', '=', now())->sum('poin') }}</h4> 
+                               <h4 id="poin_{{ $item->id }}">{{ $item->participant()->whereDate('tanggal', '=', now())->sum('poin') }}</h4>
                             </div>
                         </div>
                     </div>

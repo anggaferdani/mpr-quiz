@@ -47,7 +47,7 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::post('/savepoin', [ParticipantController::class, 'store']);
     Route::get('/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
     Route::get('/sesi-3', [Sesi3Controller::class, 'index']);
-    Route::get('/logout', [LoginController::class, 'logout']);
+    Route::get('/logout', [LoginController::class, 'logout'])->name('operator.logout');
     Route::resource('/perolehan-nilai', ParticipantController::class);
     Route::resource('/shortcut', ShotcutController::class);
 });
@@ -65,6 +65,7 @@ Route::get('/sesi1-nilai', [FrontendController::class, 'nilaiquizSesi1'])->name(
 
 Route::get('/sesi2', [FrontendController::class, 'openingSesi2'])->name('openingSesi2');
 Route::get('/sesi2-soal', [FrontendController::class, 'soalSesi2'])->name('soalSesi2');
+Route::get('/sesi2-nilai', [FrontendController::class, 'nilaiquizSesi2'])->name('nilaiquizSesi2');
 
 Route::get('/sesi3', [FrontendController::class, 'openingSesi3'])->name('openingSesi3');
 

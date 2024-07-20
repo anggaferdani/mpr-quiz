@@ -86,7 +86,7 @@
                 </a>
             </li>
             <li class="sidebar-item ">
-                <a href="/admin/logout" class='sidebar-link text-danger'>
+                <a href="{{ Route('operator.logout') }}" class='sidebar-link text-danger'>
                 <i class="bi bi-box-arrow-left text-danger"></i>
                     <span>Logout</span>
                 </a>

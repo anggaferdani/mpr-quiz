@@ -22,7 +22,7 @@ class LoginController extends Controller
             'password.min' => 'Password Harus Diisi Minimal 8 Karakter',
        ]);
 
-        $infologin = [ 
+        $infologin = [
             'email' => $request->email,
             'password' => $request->password,
         ];
@@ -36,6 +36,6 @@ class LoginController extends Controller
 
     public function logout(){
         Auth::logout();
-        return redirect('/');
+        return redirect('/login');
     }
 }
