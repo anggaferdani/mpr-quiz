@@ -61,13 +61,20 @@
             height: 100vh;
             margin-top: -2.5%;
         }
+
+        @media only screen and (max-width: 700px) {
+            .spinwheel {
+            /* #canvas { */
+                scale: 60%;
+            }
+        }
     </style>
 
   </head>
   <body>
 
     <div class="spinwheel d-flex align-items-center justify-content-center">
-        <canvas id="canvas" width="650px" height="650px" style="z-index: 999"></canvas>
+        <canvas id="canvas" width="650px" height="650px" style="z-index: 999;"></canvas>
         <img src="../images/panah.png" alt="">
     </div>
 
