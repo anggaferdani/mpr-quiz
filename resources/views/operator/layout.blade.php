@@ -18,23 +18,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
-<link rel="stylesheet" href="{{asset('dist/assets/extensions/simple-datatables/style.css')}}">
-<link rel="stylesheet" href="{{asset('dist/assets/css/pages/simple-datatables.css')}}">
-<link rel="stylesheet" href="{{asset('dist/assets/css/shared/iconly.css')}}')}}">
-<link rel="stylesheet" href="{{asset('dist/assets/extensions/filepond/filepond.css')}}">
-<link rel="stylesheet" href="{{asset('dist/assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css')}}">
-<link rel="stylesheet" href="{{asset('dist/assets/extensions/toastify-js/src/toastify.css')}}">
-<link rel="stylesheet" href="{{asset('dist/assets/css/pages/filepond.css')}}">
-
-
-
-
+    <link rel="stylesheet" href="{{asset('dist/assets/extensions/simple-datatables/style.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/assets/css/pages/simple-datatables.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/assets/css/shared/iconly.css')}}')}}">
+    <link rel="stylesheet" href="{{asset('dist/assets/extensions/filepond/filepond.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/assets/extensions/toastify-js/src/toastify.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/assets/css/pages/filepond.css')}}">
 </head>
+
 <style>
     .sidebar-wrapper .sidebar-header img{
         height: auto!important;
     }
+
+    @media only screen and (max-width: 700px) {
+        .team-selection {
+            flex-direction: column;
+        }
+    }
 </style>
+
 <body>
     <div id="app">
         <div id="sidebar" class="active">

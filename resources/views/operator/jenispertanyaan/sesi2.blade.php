@@ -57,7 +57,7 @@
                    <tr>
                        <td class="text-center">{{$loop->iteration}}</td>
                        <td class="text-center">{{$item->tema}}</td>
-                       <td class=""> 
+                       <td class="">
                         <div class="d-flex justify-content-center">
                        <button type="button" data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled>Mulai</button>
                        </div>
@@ -100,7 +100,7 @@
                                                 @else
                                                     <button type="button" onclick="pilihPertanyaan('{{$tanya->id}}', '{{$tanya->pertanyaan}}', {{ json_encode($jawabanArray) }})" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
                                                 @endif
-                                                
+
                                             </td>
                                             </tr>
                                             @endforeach
@@ -125,7 +125,7 @@
                                                         @foreach($tanya->jawaban as $jwb)
                                                         <p class="fw-bold">{{$jwb->jawaban}}</p><br>
                                                         @endforeach
-                                                            
+
                                                         <input type="hidden" value="2" name="sesi">
                                                         <input type="hidden" value="{{$tanya->id}}" name="id_pertanyaan">
                                                         <input type="hidden" class="teamteam" name="id_team">
@@ -189,7 +189,7 @@
             </table>
         </div>
         <h5>Pilih Team</h5>
-        <div class="d-flex gap-2">
+        <div class="team-selection d-flex gap-4">
             @foreach($team as $item)
             @php
                 $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
@@ -200,7 +200,7 @@
             @else
             <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
             @endif
-            <label class="form-check-label" for="team{{$item->name}}">
+            <label class="form-check-label" for="team{{$item->id}}">
                 {{$item->name}}
             </label>
         </div>
@@ -238,7 +238,7 @@ $(document).ready(function() {
         var inputId = 'searchInput' + modalId;
 
         // Lakukan filter atau manipulasi sesuai kebutuhan Anda
-        var inputValue = $(this).val(); 
+        var inputValue = $(this).val();
         console.log('Input value for modal ' + modalId + ': ' + inputValue);
         // Lakukan sesuatu dengan nilai input ...
     });
@@ -274,7 +274,7 @@ $(document).ready(function() {
       $('.jawab').append(inputField);
     };
 
-    $("body").on("click",".delete2",function(){ 
+    $("body").on("click",".delete2",function(){
         $(this).parents(".form-row").remove();
     });
 </script>
@@ -343,7 +343,7 @@ $(document).ready(function() {
         let berita = 'move_to_Sesi2';
         $.ajax({
             method: 'GET',
-            url: '/sesi2-juri', 
+            url: '/sesi2-juri',
             data: {
                 _token: '{{ csrf_token() }}',
                 berita: 'movesesi2',

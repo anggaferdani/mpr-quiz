@@ -1,5 +1,7 @@
 @extends('operator.layout')
+
 @section('title', 'Tema Pertanyaan')
+
 @section('layout')
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -207,7 +209,7 @@
     </div>
         <h5>Pilih Team</h5>
 
-        <div class="d-flex gap-4">
+        <div class="team-selection d-flex gap-4">
             @foreach($team as $item)
                 @php
                     $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
