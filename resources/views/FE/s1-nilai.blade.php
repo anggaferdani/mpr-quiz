@@ -41,14 +41,25 @@
         <p id="lastNumber"></p>
     </div>
 
+    {{-- Pusher script --}}
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
     <script>
-        // PUSHER PINDAH HALAMAN KE SESI 2
         const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
             cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
             encrypted: true
         });
+
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi != 1) { window.location.href = `/sesi${sesi}`; }
+        });
+
         var channel7 = pusher.subscribe('channel-move-sesi');
+
         channel7.bind('event-move-sesi', function(data) {
             console.log('event-move-sesi', data.message);
             if (data.message.capecape === "sesi-2") {
@@ -56,6 +67,7 @@
             }
         });
     </script>
+    {{-- /Pusher script --}}
 
     <script>
 

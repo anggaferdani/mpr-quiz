@@ -159,6 +159,13 @@
             cluster: 'ap1'
         });
 
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi == 1) { window.location.href = `/sesi${sesi}-juri`; }
+        });
+
         var channel = pusher.subscribe('channelKirimPertanyaanS2');
         channel.bind('eventKirimPertanyaanS2', function(data) {
             console.log(JSON.stringify(data));

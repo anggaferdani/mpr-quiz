@@ -10,23 +10,38 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {{-- Pusher script --}}
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
     <script>
-        // PUSHER PINDAH HALAMAN KE SESI 2
+        // Initiate pusher
         const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
             cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
             encrypted: true
         });
 
-        var moveSesi = pusher.subscribe('channel-move-sesi');
-        moveSesi.bind('event-move-sesi', function (data) {
-            console.log('event-move-sesi', data.message);
+        // Pindah sesi by operator
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
 
-            if (data.message.capecape === "sesi-2") {
-                window.location.href = "/sesi2";
-            }
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi != 1) { window.location.href = `/sesi${sesi}`; }
+        });
+
+        // Pindah sesi by Admin menu
+        var moveSesi = pusher.subscribe('channel-move-sesi');
+
+        moveSesi.bind('event-move-sesi', function (data) {
+            // console.log('event-move-sesi', data.message);
+
+            // if (data.message.capecape === "sesi-2") {
+            //     window.location.href = "/sesi2";
+            // }
         });
     </script>
+    {{-- /Pusher script --}}
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
@@ -92,6 +107,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script>

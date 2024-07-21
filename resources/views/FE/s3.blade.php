@@ -67,12 +67,21 @@
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
     <script>
-        var pusher = new Pusher('{{ env('PUSHER_APP_KEY ') }}', {
-                cluster: 'ap1'
-            });
+        // Initiate pusher
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+            encrypted: true
+        });
+
+        // Pindah sesi by operator
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi != 3) { window.location.href = `/sesi${sesi}`; }
+        });
 
         var channel = pusher.subscribe('channelKirimPertanyaanS2');
-
         channel.bind('eventKirimPertanyaanS2', function (data) {
             console.log(JSON.stringify(data));
 

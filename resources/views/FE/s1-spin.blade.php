@@ -3,11 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MPR Quiz | Roulette</title>
+    <title>MPR Quiz | Spinner</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <script type="text/javascript" src="{{asset('spinner/src/jquery.1.11.3.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('spinner/jquery-ui.min.js')}}"></script>
+
 	<script src="{{asset('spinner/src/swal2.min.js')}}"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +16,36 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    {{-- Pusher script --}}
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+    <script>
+        console.log('Action keys');
+
+        console.table({
+            'Reload spinner data': 'r',
+            'Spin the wheel': '[space]',
+            'open selected sub tema': '[enter]',
+            'To `sesi 2` page': '[F2]'
+        });
+
+        // Initiate pusher
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+            encrypted: true
+        });
+
+        // Pindah sesi by operator
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi != 1) { window.location.href = `/sesi${sesi}`; }
+        });
+    </script>
+    {{-- /Pusher script --}}
 
     <style>
         body{
@@ -107,7 +138,7 @@
             // Ambil data dari local storage
             var itemJSON = localStorage.getItem('wheelItem2');
             var itemsFromLocal = JSON.parse(itemJSON);
-            console.log(itemsFromLocal);
+            // console.log(itemsFromLocal);
 
             // Inisialisasi spinwheel dengan item yang ada di local storage
             $('#canvas').rouletteWheel({

@@ -36,7 +36,9 @@
 
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card-body">
-        <div class="card-title d-flex justify-content-end mb-5">
+        <div class="card-title d-flex justify-content-between mb-5">
+            <x-tombol-pindah-sesi text="Arahkan ke sesi 2" sesi-tujuan="2"/>
+
             <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btn-lg btn-icon-text">
                 <i class="mdi mdi-upload btn-icon-prepend"></i>
                 +

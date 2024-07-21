@@ -50,6 +50,7 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::get('/logout', [LoginController::class, 'logout'])->name('operator.logout');
     Route::resource('/perolehan-nilai', ParticipantController::class);
     Route::resource('/shortcut', ShotcutController::class);
+    Route::post('/pindah-sesi', [FrontendController::class, 'pindahSesi'])->name('pindah.sesi');
 });
 Route::post('/setpoin', [Sesi3Controller::class, 'setpoin'])->name('setpoin');
 Route::post('/minpoin', [Sesi3Controller::class, 'minpoin'])->name('minpoin');

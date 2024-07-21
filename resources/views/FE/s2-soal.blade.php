@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>MPR Quiz | Tematik</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
@@ -30,11 +30,11 @@
         }
         .bg-sesi2-soal{
             position: relative;
-            height: 100vh; 
+            height: 100vh;
             width: 100%;
-            background-image: url(../images/gif-sesi2.gif); 
-            background-repeat: no-repeat; 
-            object-fit: cover;  
+            background-image: url(../images/gif-sesi2.gif);
+            background-repeat: no-repeat;
+            object-fit: cover;
         }
         #content-soal-sesi2{
             position: absolute;
@@ -156,7 +156,7 @@
   <body>
 
     <img src="../images/gif-sesi2.gif" class="bg-sesi2-soal" alt="">
-    
+
     <!-- {{-- <div class="d-flex justify-content-center">
         <div class="top-content d-flex align-items-center justify-content-between mb-2" style="position: absolute; top: 0; width: 85%">
             <h2>SESI 2</h2>
@@ -187,7 +187,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    
+
     <script>
             var countdownSeconds = 120; // Ubah kembali ke 20 jika menggunakan detik
             var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
@@ -198,6 +198,14 @@
             const pusher = new Pusher(pusherKey, {
                 cluster: pusherCluster,
                 encrypted: true, // Add this if you have encryption enabled on Pusher
+            });
+
+            // Pindah sesi by operator
+            const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+            ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+                const sesi = data.message.sesi;
+
+                if (sesi != 2) { window.location.href = `/sesi${sesi}`; }
             });
 
             function kirimCountdown() {
@@ -260,7 +268,7 @@
                     document.addEventListener('keydown', handleEnterKey);
                 } else {
                     countdownInterval = setTimeout(updateCountdown, 10); // Update setiap 10 milidetik
-                }   
+                }
 
                 document.addEventListener('keydown', function(event) {
                     if (event.key === 'Shift') {
@@ -287,7 +295,7 @@
                 }
             });
     </script>
-    
+
     <script>
         const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
         const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";

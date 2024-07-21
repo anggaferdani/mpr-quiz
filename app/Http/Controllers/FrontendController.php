@@ -1,21 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use Pusher\Pusher;
-use App\Models\Team;
-use App\Models\Jawaban;
-use App\Events\moveSesi;
-use App\Events\AddPoints;
 
+use Pusher\Pusher;
+
+use App\Events\AddPoints;
 use App\Events\DeviceSatu;
-use App\Models\Pertanyaan;
+use App\Events\KirimPertanyaanS2;
 use App\Events\MessageSent;
+use App\Events\moveSesi;
+use App\Events\PindahSesi;
+use App\Events\StartCountdown;
+
+use App\Models\Jawaban;
 use App\Models\Participant;
+use App\Models\Pertanyaan;
+use App\Models\Team;
+use App\Models\TemaPertanyaan;
 
 use Illuminate\Http\Request;
-use App\Events\StartCountdown;
-use App\Models\TemaPertanyaan;
-use App\Events\KirimPertanyaanS2;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
@@ -188,13 +192,15 @@ class FrontendController extends Controller
         return view('FE.Juri.device3');
     }
 
+    /**
+     * Pindahkan sesi dari operator.
+     */
+    public function pindahSesi(Request $request)
+    {
+        event(new PindahSesi(['sesi' => $request->sesi]));
 
-
-    // public function testpusher()
-    // {
-    //     event(new MessageSent('hello world'));
-    // }
-
+        return response()->json($request->sesi, 200);
+    }
 
     /**
      * Store a newly created resource in storage.

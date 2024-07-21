@@ -5,6 +5,8 @@
     <h3>Sesi 3</h3>
 </div>
 
+<x-tombol-pindah-sesi text="Arahkan ke sesi 3" sesi-tujuan="3"/>
+
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card-body">
 

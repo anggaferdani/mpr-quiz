@@ -33,15 +33,15 @@
   </div>
 </div>
 
-
-
 <div class="page-heading">
     <h3>Tema Pertanyaan</h3>
 </div>
 
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card-body">
-        <div class="card-title d-flex justify-content-end mb-5">
+        <div class="card-title d-flex justify-content-between mb-5">
+            <x-tombol-pindah-sesi text="Arahkan ke sesi 1" sesi-tujuan="1"/>
+
             <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btn-lg btn-icon-text">
                 <i class="mdi mdi-upload btn-icon-prepend"></i>
                 +
@@ -327,6 +327,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
 $(document).ready(function() {
     // Script untuk filter input pada saat modal muncul

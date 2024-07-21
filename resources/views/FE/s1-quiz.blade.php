@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title>MPR Quiz | Pertanyaan</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     {{-- PUSHER --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-    {{-- <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script> --}}
+
     @vite(['resources/css/app.css' , 'resources/js/app.js'])
+
     <style>
         /* body{
             height: 100vh;
@@ -104,7 +105,7 @@
             color: white;
             font-weight: bold;
         }
-    
+
         .soal h1{
             font-weight: 600;
             width: 100%;
@@ -114,12 +115,12 @@
             overflow: hidden; /* Membuat teks terpotong dan tidak terlihat */
             animation: revealText .0005s steps(20, end); /* Menggunakan animasi dengan 20 langkah untuk mengungkapkan teks */
         }
-    
+
         @keyframes revealText {
             from { width: 0; }
             to { width: 100%; }
         }
-    
+
         .jawaban{
             width: 75%;
             margin: 0 auto;
@@ -136,7 +137,7 @@
         .jawaban-benar h5:nth-child(2){
             display: block !important;
         animation: slideRight 1s ease forwards;
-    
+
         }
         @keyframes slideRight {
             0% {
@@ -185,21 +186,29 @@
             }
     </style>
 
-    {{-- PUSHER --}}
+    {{-- Pusher script --}}
     <script>
         const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
             cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
             encrypted: true
         });
-        console.log('pusher', pusher)
+
+        // Pindah sesi by operator
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi != 1) { window.location.href = `/sesi${sesi}`; }
+        });
 
         var channel = pusher.subscribe('my-channel');
-        console.log('channel', channel)
+
         channel.bind('my-event', function(data) {
             // Update question container with received question
             console.log('data', data);
             document.getElementById('question-container').innerHTML = data.message;
-            
+
             // You can also use data.message to further process the received question
             // For example, if you want to log it or use it in some other way:
             var pertanyaan = data.message;
@@ -207,9 +216,10 @@
 
             // Now you can use the pertanyaan variable to handle the received question further
         });
-        // PUSHER PINDAH HALAMAN KE SESI 2
 
+        // PUSHER PINDAH HALAMAN KE SESI 2
         var channel7 = pusher.subscribe('channel-move-sesi');
+
         channel7.bind('event-move-sesi', function(data) {
             console.log('event-move-sesi', data.message);
             if (data.message.capecape === "sesi-2") {
@@ -217,6 +227,7 @@
             }
         });
     </script>
+    {{-- /Pusher script --}}
 
   </head>
   <body>
@@ -250,7 +261,7 @@
                 <h1 class="animate-text">{{ $quiz->pertanyaan}}</h1>
             </div>
 
-            
+
 
             {{-- <div class="jawaban ">
                 @foreach($jawaban as $jw)
@@ -452,9 +463,8 @@
         });
     </script>
 
-  <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
