@@ -27,17 +27,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($pertanyaanSesi3s as $pertanyaanSesi3)
-                   <tr>
-                       <td class="text-center fw-bold">{{$loop->iteration}}</td>
-                       <td class="fw-bold">{{$pertanyaanSesi3->pertanyaan}}</td>
-                        <td>
-                            <div class="d-flex justify-content-center gap-2">
+                  @foreach($pertanyaanSesi3s as $pertanyaanSesi3)
+                  <tr>
+                      <td class="text-center fw-bold">{{$loop->iteration}}</td>
+                      <td class="fw-bold">{{$pertanyaanSesi3->pertanyaan}}</td>
+                      <td>
+                          <div class="d-flex justify-content-center gap-2">
                               <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahPoin{{ $pertanyaanSesi3->id }}">Pilih</button>
-                            </div>
-                        </td>
-                   </tr>
-                   @endforeach
+                          </div>
+                      </td>
+                  </tr>
+                  @endforeach
                 </tbody>
             </table>
         </div>
@@ -79,36 +79,36 @@
 @foreach ($pertanyaanSesi3s as $pertanyaanSesi3)
 <div class="modal fade" id="modalTambahPoin{{ $pertanyaanSesi3->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">Pilih</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Pilih</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="poinForm{{ $pertanyaanSesi3->id }}" action="" method="POST">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div>{{ $pertanyaanSesi3->pertanyaan }}</div>
+                        <div class="">Jawaban : <span class="fw-bold text-danger">{{ $pertanyaanSesi3->jawaban }}</span></div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Pilih grup<span class="text-danger">*</span></label>
+                        <select class="form-control" name="id_team" id="" required>
+                            <option value="" disabled selected>Select</option>
+                            @foreach ($teams as $team)
+                            <option value="{{ $team->id }}">{{ $team->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('jawaban')<p class="text-danger">{{ $message }}</p>@enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary w-100" id="btnTidakMenjawab{{ $pertanyaanSesi3->id }}">Tidak Menjawab</button>
+                    <button type="button" class="btn btn-danger w-100" id="btnSalah{{ $pertanyaanSesi3->id }}">Salah</button>
+                    <button type="button" class="btn btn-primary w-100" id="btnBenar{{ $pertanyaanSesi3->id }}">Benar</button>
+                </div>
+            </form>
         </div>
-        <form id="poinForm{{ $pertanyaanSesi3->id }}" action="" method="POST">
-          @csrf
-          <div class="modal-body">
-            <div class="mb-3">
-              <div>{{ $pertanyaanSesi3->pertanyaan }}</div>
-              <div class="">Jawaban : <span class="fw-bold text-danger">{{ $pertanyaanSesi3->jawaban }}</span></div>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Pilih grup<span class="text-danger">*</span></label>
-              <select class="form-control" name="id_team" id="" required>
-                <option value="" disabled selected>Select</option>
-                @foreach ($teams as $team)
-                  <option value="{{ $team->id }}">{{ $team->name }}</option>
-                @endforeach
-              </select>
-              @error('jawaban')<p class="text-danger">{{ $message }}</p>@enderror
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary w-100" id="btnTidakMenjawab{{ $pertanyaanSesi3->id }}">Tidak Menjawab</button>
-            <button type="button" class="btn btn-danger w-100" id="btnSalah{{ $pertanyaanSesi3->id }}">Salah</button>
-            <button type="button" class="btn btn-primary w-100" id="btnBenar{{ $pertanyaanSesi3->id }}">Benar</button>
-          </div>
-        </form>
-      </div>
     </div>
 </div>
 @endforeach
@@ -117,26 +117,42 @@
 @endsection
 @push('scripts')
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('poinForm{{ $pertanyaanSesi3->id ?? '-' }}');
-    const btnBenar = document.getElementById('btnBenar{{ $pertanyaanSesi3->id ?? '-' }}');
-    const btnSalah = document.getElementById('btnSalah{{ $pertanyaanSesi3->id ?? '-' }}');
-    const btnTidakMenjawab = document.getElementById('btnTidakMenjawab{{ $pertanyaanSesi3->id ?? '-' }}');
+  $(document).ready(function() {
+      $('[id^=modalTambahPoin]').each(function() {
+          const formId = $(this).attr('id').replace('modalTambahPoin', '');
+          const form = $('#poinForm' + formId);
+          const btnBenar = $('#btnBenar' + formId);
+          const btnSalah = $('#btnSalah' + formId);
+          const btnTidakMenjawab = $('#btnTidakMenjawab' + formId);
 
-    btnBenar.addEventListener('click', function () {
-      form.action = '{{ route('operator.sesi3.setpoin') }}';
-      form.submit();
-    });
+          function submitForm(action) {
+              $.ajax({
+                  url: action,
+                  type: 'POST',
+                  data: form.serialize(),
+                  success: function(response) {
+                      alert('Berhasil menambahkan poin');
+                      console.log('Success:', response);
+                  },
+                  error: function(error) {
+                      alert('Pilih grup');
+                      console.error('Error:', error);
+                  }
+              });
+          }
 
-    btnSalah.addEventListener('click', function () {
-      form.action = '{{ route('operator.sesi3.minpoin') }}';
-      form.submit();
-    });
+          btnBenar.on('click', function () {
+              submitForm('{{ route('operator.sesi3.setpoin') }}');
+          });
 
-    btnTidakMenjawab.addEventListener('click', function () {
-      form.action = '{{ route('operator.sesi3.minpoin') }}';
-      form.submit();
-    });
+          btnSalah.on('click', function () {
+              submitForm('{{ route('operator.sesi3.minpoin') }}');
+          });
+
+          btnTidakMenjawab.on('click', function () {
+              submitForm('{{ route('operator.sesi3.minpoin') }}');
+          });
+      });
   });
 </script>
 @endpush
