@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Pernyataan;
 use App\Models\Setting;
 use App\Models\Team;
 use App\Models\User;
@@ -77,5 +78,19 @@ class DatabaseSeeder extends Seeder
                 'nama_wilayah' => $role,
             ]);
         }
+
+
+        Pernyataan::create([
+            "pernyataan" => "Pasar gelap",
+            "sisi" => "Kontra"
+        ],
+            [
+                "pernyataan" => "Pasar gelap",
+                "sisi" => "Kontra"
+            ],
+            ["pernyataan" => "Pasar gelap",
+                "sisi" => "Kontra"
+            ]
+        );
     }
 }
