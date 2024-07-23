@@ -15,6 +15,14 @@ class TeamController extends Controller
         //
     }
 
+    public function setRun(Request $request)
+    {
+        $team = Team::find($request->team_id);
+        $team->run = $request->run;
+        $team->save();
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */

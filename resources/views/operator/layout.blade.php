@@ -73,7 +73,7 @@
                     <span>Sesi 1</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ (request()->is('op/sesi-2')) ? 'active' :  '' }}" onclick="movesesimen('sesi-2')">
+            <li class="sidebar-item {{ (request()->is('op/sesi-2')) ? 'active' :  '' }}" >
                 <a href="/op/sesi-2" class='sidebar-link' id="sesi-2-link" >
                 <i class="bi bi-2-square"></i>
                     <span>Sesi 2</span>

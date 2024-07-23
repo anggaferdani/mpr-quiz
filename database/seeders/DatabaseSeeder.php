@@ -3,11 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Setting;
 use App\Models\Team;
 use App\Models\User;
 use App\Models\Wilayah;
 use Illuminate\Database\Seeder;
-use Database\Seeders\PertanyaanKotaSemarangSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,37 +30,41 @@ class DatabaseSeeder extends Seeder
 
         $Team = [
             [
-                'name' => 'Tim A',
+                'name' => 'Group A',
             ],
             [
-                'name' => 'Tim B',
+                'name' => 'Group B',
             ],
             [
-                'name' => 'Tim C',
+                'name' => 'Group C',
             ],
             [
-                'name' => 'Tim D',
+                'name' => 'Group D',
             ],
             [
-                'name' => 'Tim E',
+                'name' => 'Group E',
             ],
             [
-                'name' => 'Tim F',
+                'name' => 'Group F',
             ],
             [
-                'name' => 'Tim G',
+                'name' => 'Group G',
             ],
             [
-                'name' => 'Tim H',
+                'name' => 'Group H',
             ],
             [
-                'name' => 'Tim I',
+                'name' => 'Group I',
             ],
         ];
 
         foreach ($Team as $key => $seed) {
             Team::create($seed);
         }
+
+        Setting::create([
+            'run' => 1
+        ]);
 
         $this->call(PertanyaanKotaSemarangSeeder::class);
 

@@ -2,26 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Pusher\Pusher;
-
-use App\Models\Team;
-use App\Models\Jawaban;
-use App\Events\moveSesi;
 use App\Events\AddPoints;
 use App\Events\DeviceSatu;
-use App\Events\PindahSesi;
-use App\Models\Pertanyaan;
-
-use App\Events\MessageSent;
-use App\Models\Participant;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use App\Events\StartCountdown;
-
-use App\Models\TemaPertanyaan;
 use App\Events\JawabanSesiSatu;
 use App\Events\KirimPertanyaanS2;
+use App\Events\MessageSent;
+use App\Events\moveSesi;
+use App\Events\PindahSesi;
+use App\Events\StartCountdown;
+use App\Models\Jawaban;
+use App\Models\Participant;
+use App\Models\Pertanyaan;
+use App\Models\Setting;
+use App\Models\Team;
+use App\Models\TemaPertanyaan;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
+use Pusher\Pusher;
 
 class FrontendController extends Controller
 {
@@ -61,7 +59,8 @@ class FrontendController extends Controller
                 ->from('participants')
                 ->whereDate('tanggal', today()); // Mengganti today() sesuai dengan cara mendapatkan tanggal sekarang di Laravel Anda
         })
-        ->first();
+            ->get()
+            ->random();
         $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
 
         $pusher = new Pusher(
@@ -82,11 +81,14 @@ class FrontendController extends Controller
 
     public function openingSesi1Juri(Request $request)
     {
+
+        $setting = Setting::first();
+//        dd($setting);
         $jawaban = $request->input('jawaban');
         $idJawaban = $request->input('id_jawaban');
         $pesan = $request->input('pesan');
         $capecape = $request->input('capecape');
-        $team = Team::all();
+        $team = Team::where("run", $setting->run)->get();
 
         // Sinkronkan jawaban
         $dataJawaban = [
@@ -99,7 +101,6 @@ class FrontendController extends Controller
         event(new AddPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
         event(new moveSesi(['capecape' => $capecape]));
-
         return view('FE.Juri.sesi-1', compact('team'));
     }
     public function nilaiSesi1Juri(Request $request)
@@ -108,6 +109,12 @@ class FrontendController extends Controller
         $nilai = Participant::get()->last();
         // dd($nilai);
         return view('FE.Juri.sesi-1-nilai', compact('nilai'));
+    }
+
+
+    public function slotSesi2()
+    {
+        return view("FE.s2-slot");
     }
 
     public function openingSesi2(Request $request)
@@ -208,7 +215,6 @@ class FrontendController extends Controller
     public function pindahSesi(Request $request)
     {
         event(new PindahSesi(['sesi' => $request->sesi]));
-
         return response()->json($request->sesi, 200);
     }
 

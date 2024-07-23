@@ -37,7 +37,7 @@ function getColor(index, total) {
 
 $.widget('javobyte.rouletteWheel', {
     options: {
-        pointer: $('<img>').attr('src', 'spinner/img/pointerv3.png')[0],
+        // pointer: $('<img>').attr('src', 'spinner/img/pointerv3.png')[0],
         selected: function () {},
         spinText: '',
         items: [], // Modify to include item names and colors
@@ -115,9 +115,9 @@ $.widget('javobyte.rouletteWheel', {
         }
 
         var widget = this;
-        $(this.options.pointer).on('load', function () {
-            widget._draw();
-        });
+        // $(this.options.pointer).on('load', function () {
+        //     widget._draw();
+        // });
     },
 
     _draw: function () {
@@ -198,6 +198,7 @@ $.widget('javobyte.rouletteWheel', {
             var line = '';
             var lineHeight = 20; // Tinggi baris teks
             var maxWidth = radius - innerRadius; // Lebar maksimum teks
+            ctx.font = 'bold 20px Helvetica, Arial';  // ukuran font
 
             ctx.translate(cx + Math.cos(angle + arc / 2) * textRadius,
                 cy + Math.sin(angle + arc / 2) * textRadius);
@@ -224,7 +225,7 @@ $.widget('javobyte.rouletteWheel', {
         }
 
         ctx.fillStyle = 'black';
-        ctx.drawImage(this.options.pointer, cx + 320, cy - radius + 300, 50, 50);
+        // ctx.drawImage(this.options.pointer, cx + 320, cy - radius + 300, 50, 50);
 
         if (!this.is_rotating()) {
             ctx.save();

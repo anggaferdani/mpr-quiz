@@ -3,21 +3,17 @@
 use App\Events\Device2;
 use App\Events\Device3;
 use App\Events\DeviceSatu;
-use App\Events\MessageSent;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuizController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Sesi3Controller;
-use App\Http\Controllers\PusherController;
-
-use App\Http\Controllers\JawabanController;
-use App\Http\Controllers\ShotcutController;
 use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\PusherController;
+use App\Http\Controllers\Sesi3Controller;
+use App\Http\Controllers\ShotcutController;
 use App\Http\Controllers\TemaPertanyaanController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +65,8 @@ Route::get('/sesi1-quiz/{id}', [FrontendController::class, 'quizSesi1'])->name('
 Route::get('/sesi1-nilai', [FrontendController::class, 'nilaiquizSesi1'])->name('nilaiquizSesi1');
 
 Route::get('/sesi2', [FrontendController::class, 'openingSesi2'])->name('openingSesi2');
+Route::get('/sesi2-slot', [FrontendController::class, 'slotSesi2'])->name('slotSesi2');
+
 Route::get('/sesi2-soal', [FrontendController::class, 'soalSesi2'])->name('soalSesi2');
 Route::get('/sesi2-nilai', [FrontendController::class, 'nilaiquizSesi2'])->name('nilaiquizSesi2');
 
@@ -85,10 +83,12 @@ Route::post('/post-device-1', function(Request $request){
     event(new DeviceSatu($request->data));
     return ['success'=>true, 'data'=>$request->data];
 });
+
 Route::post('/post-device-2', function(Request $request){
     event(new Device2($request->data));
     return ['success'=>true, 'data'=>$request->data];
 });
+
 Route::post('/post-device-3', function(Request $request){
     event(new Device3($request->data));
     return ['success'=>true, 'data'=>$request->data];
@@ -97,9 +97,10 @@ Route::post('/post-device-3', function(Request $request){
 Route::get('/device-1', [FrontendController::class, 'device1'])->name('device1');
 Route::get('/device-2', [FrontendController::class, 'device2'])->name('device2');
 Route::get('/device-3', [FrontendController::class, 'device3'])->name('device3');
-// Route::get('/pusher', [PusherController::class, 'kirimPertanyaan']);
 Route::post('/kirim-pertanyaan', [PusherController::class, 'kirimPertanyaan']);
 
+
+Route::post('/set-run', [\App\Http\Controllers\TeamController::class, 'setRun'])->name("set-run");
 
 
 

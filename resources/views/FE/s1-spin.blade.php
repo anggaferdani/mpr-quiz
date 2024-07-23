@@ -109,9 +109,31 @@
         <img src="../images/panah.png" alt="">
     </div>
 
+    <div class="modal fade modal-xl" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+         data-bs-backdrop="static"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+{{--                <div class="modal-header">--}}
+{{--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                </div>--}}
+                <div class="modal-body text-center">
+                    <p id="modal-text" class="py-4 font-weight-bold" style="font-size: 70px; font-weight: 800"></p>
+                </div>
+{{--                <div class="modal-footer">--}}
+{{--                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"--}}
+{{--                            data-bs-dismiss="modal">Back to first--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+            </div>
+        </div>
+    </div>
+    {{--    <a class="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>--}}
     <script type="text/javascript" src="{{asset('spinner/src/rouletteWheel.js')}}"></script>
 
     <script type="text/javascript">
+        let quizId = 0
+
         var item = [
             @foreach ($tema as $t)
             {
@@ -140,8 +162,25 @@
             var itemsFromLocal = JSON.parse(itemJSON);
             // console.log(itemsFromLocal);
 
-            // Inisialisasi spinwheel dengan item yang ada di local storage
-            $('#canvas').rouletteWheel({
+                var myModal = new bootstrap.Modal(document.getElementById('exampleModalToggle2'), {
+                    keyboard: false
+                })
+
+
+                // Inisialisasi spinwheel dengan item yang ada di local storage
+                $(document).on('keypress', function (e) {
+                    if (e.which == 13) {
+
+
+                        if(quizId !== 0){
+                            window.location.href = "/sesi1-quiz/" + quizId;
+                        }
+
+                        // myModal.hide()
+                    }
+                });
+
+                $('#canvas').rouletteWheel({
                 items: itemsFromLocal,
                 selected: function (key, item) {
                     // Simpan nama item yang dipilih ke dalam variabel selectedName
@@ -154,28 +193,39 @@
                     deleteSelectedItem(selectedName);
 
                     // Tampilkan informasi item yang dipilih
-                    Swal.fire({
-                        title: selectedName,
-                        id : selectedId,
-                        color : selectedColor,
-                        width: 600,
-                        padding: "3em",
-                        // color: "#000",
-                        // background: "#fff url(/images/trees.png)",
-                        background: selectedColor,
-                        backdrop: `
-                            rgba(0,0,123,0.4)
-                            url("/images/nyan-cat.gif")
-                            left top
-                            no-repeat
-                        `
-                    }).then((result) => {
-                        // Redirect ke halaman quiz jika tombol OK diklik
-                        if (result.isConfirmed) {
-                            // window.location.href = "/sesi1-quiz/";
-                            window.location.href = "/sesi1-quiz/" + selectedId;
-                        }
-                    });
+                    // Swal.fire({
+                    //     title: selectedName,
+                    //     id : selectedId,
+                    //     color : selectedColor,
+                    //     width: 600,
+                    //     padding: "3em",
+                    //     // color: "#000",
+                    //     // background: "#fff url(/images/trees.png)",
+                    //     background: selectedColor,
+                    //     backdrop: `
+                    //         rgba(0,0,123,0.4)
+                    //         url("/images/nyan-cat.gif")
+                    //         left top
+                    //         no-repeat
+                    //     `
+                    // }).then((result) => {
+                    //     // Redirect ke halaman quiz jika tombol OK diklik
+                    //     if (result.isConfirmed) {
+                    //         // window.location.href = "/sesi1-quiz/";
+                    //         window.location.href = "/sesi1-quiz/" + selectedId;
+                    //     }
+                    // });
+
+                    quizId = selectedId
+
+                    $("#modal-text").text(selectedName)
+                    // selectedColor
+
+                    let textColor = selectedColor != "#ffffff" ? "#ffffff": "#000000"
+                    console.log(textColor);
+                    $(".modal-content").css("background-color",selectedColor );
+                    $(".modal-content").css("color",textColor );
+                    myModal.show()
 
                     // Simpan data terbaru ke local storage
                     localStorage.setItem('wheelItem2', JSON.stringify(itemsFromLocal));
