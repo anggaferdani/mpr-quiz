@@ -104,6 +104,7 @@ class FrontendController extends Controller
         event(new moveSesi(['capecape' => $capecape]));
         return view('FE.Juri.sesi-1', compact('team'));
     }
+
     public function nilaiSesi1Juri(Request $request)
     {
         // Ambil nilai dari permintaan (request)
@@ -195,6 +196,28 @@ class FrontendController extends Controller
         return view('FE.s3');
     }
 
+    public function openingSesi3Juri(Request $request)
+    {
+
+        $setting = Setting::first();
+        $jawaban = $request->input('jawaban');
+        $idJawaban = $request->input('id_jawaban');
+        $pesan = $request->input('pesan');
+        $capecape = $request->input('capecape');
+        $team = Team::where("run", $setting->run)->get();
+
+        $dataJawaban = [
+            'id_jawaban' => $idJawaban
+        ];
+
+        event(new JawabanSesiSatu($dataJawaban));
+
+        event(new AddPoints(['jawaban' => $jawaban]));
+        event(new StartCountdown(['pesan' => $pesan]));
+        event(new moveSesi(['capecape' => $capecape]));
+        return view('FE.Juri.sesi-3', compact('team'));
+    }
+
     public function nilaiquizSesi1()
     {
         $nilai = Participant::get()->last();
@@ -219,6 +242,31 @@ class FrontendController extends Controller
         // return response()->json(['message' => 'Nilai berhasil dikirim ke Pusher']);
 
         return view('FE.s1-nilai', compact('nilai'));
+    }
+    public function nilaiquizSesi2()
+    {
+        $nilai = Participant::get()->last();
+
+        // Inisialisasi Pusher dengan kredensial dari file .env
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'encrypted' => true
+            ]
+        );
+
+        // Kirim data ke kanal Pusher
+        $pusher->trigger('channel-kirim-nilai-s2', 'event-kirim-nilai-s2', [
+            'command' => 'pindah',
+            'nilai' => $nilai->poin,
+        ]);
+
+        // return response()->json(['message' => 'Nilai berhasil dikirim ke Pusher']);
+
+        return view('FE.s2-nilai', compact('nilai'));
     }
 
     public function device1(Request $request){

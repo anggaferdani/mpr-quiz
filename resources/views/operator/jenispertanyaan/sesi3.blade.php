@@ -33,7 +33,16 @@
                       <td class="fw-bold">{{$pertanyaanSesi3->pertanyaan}}</td>
                       <td>
                           <div class="d-flex justify-content-center gap-2">
-                              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahPoin{{ $pertanyaanSesi3->id }}">Pilih</button>
+                            <button 
+                                class="btn btn-primary"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalTambahPoin{{ $pertanyaanSesi3->id }}"
+                                data-pertanyaan="{{ $pertanyaanSesi3->pertanyaan }}"
+                                data-jawaban="{{ $pertanyaanSesi3->jawaban }}"
+                                onclick="sendPusherData('{{ $pertanyaanSesi3->pertanyaan }}', '{{ $pertanyaanSesi3->jawaban }}')"
+                                >
+                                Pilih
+                            </button>
                           </div>
                       </td>
                   </tr>
@@ -117,6 +126,25 @@
 @endsection
 @push('scripts')
 <script>
+    function sendPusherData(pertanyaan, jawaban) {
+        $.ajax({
+            url: '/sesi-3/pusher/kirim-pertanyaan-sesi3',
+            method: 'POST',
+            data: {
+                pertanyaan: pertanyaan,
+                jawaban: jawaban,
+                _token: $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+</script>
+<script>
   $(document).ready(function() {
       $('[id^=modalTambahPoin]').each(function() {
           const formId = $(this).attr('id').replace('modalTambahPoin', '');
@@ -132,11 +160,11 @@
                   data: form.serialize(),
                   success: function(response) {
                       alert('Berhasil menambahkan poin');
-                      console.log('Success:', response);
+                      console.log(response);
                   },
                   error: function(error) {
-                      alert('Pilih grup');
-                      console.error('Error:', error);
+                      console.error(error);
+                      alert(error);
                   }
               });
           }

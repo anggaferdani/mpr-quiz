@@ -332,7 +332,7 @@
 
         function handleEnterKey(event) {
             if (event.key === 'Enter') {
-                window.location.href = '/sesi1-nilai';
+                window.location.href = '/sesi2-nilai';
             }
         }
         // document.addEventListener('keydown', function(event) {

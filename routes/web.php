@@ -35,6 +35,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin']);
 
+Route::post('/sesi-3/pusher/kirim-pertanyaan-sesi3', [Sesi3Controller::class, 'kirimPertanyaanSesi3'])->name('operator.sesi3.pusher.kirim-pertanyaan-sesi3');
+
 Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
 // Route::middleware(['op', 'auth:web'])->group(function(){
     Route::resource('/sesi-1', TemaPertanyaanController::class);
@@ -75,7 +77,7 @@ Route::get('/sesi3', [FrontendController::class, 'openingSesi3'])->name('opening
 Route::get('/sesi1-juri', [FrontendController::class, 'openingSesi1Juri'])->name('openingSesi1Juri');
 // Route::get('/sesi1-juri-nilai', [FrontendController::class, 'nilaiSesi1Juri'])->name('nilaiSesi1Juri');
 Route::get('/sesi2-juri', [FrontendController::class, 'openingSesi2Juri'])->name('openingSesi2Juri');
-Route::get('/sesi3-juri', function () {return view('FE.Juri.sesi-3');});
+Route::get('/sesi3-juri', [FrontendController::class, 'openingSesi3Juri'])->name('openingSesi3Juri');
 
 
 
