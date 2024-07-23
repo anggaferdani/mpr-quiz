@@ -92,7 +92,7 @@
               <div class="">Jawaban : <span class="fw-bold text-danger">{{ $pertanyaanSesi3->jawaban }}</span></div>
             </div>
             <div class="mb-3">
-              <label class="form-label">Jawaban<span class="text-danger">*</span></label>
+              <label class="form-label">Pilih grup<span class="text-danger">*</span></label>
               <select class="form-control" name="id_team" id="" required>
                 <option value="" disabled selected>Select</option>
                 @foreach ($teams as $team)

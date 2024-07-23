@@ -60,7 +60,7 @@ class Sesi3Controller extends Controller
                 'tanggal' => now(),
                 'sesi' => 3,
             ];
-    
+
             Participant::create($array);
         } else {
             $sesi3->update([
@@ -96,28 +96,41 @@ class Sesi3Controller extends Controller
     public function minpoin(Request $request)
     {
         $request->validate([
-            'id_team' => 'required',
+            'id_team' => 'required'
         ]);
 
-        $sesi3 = Participant::where('id_team', $request->id_team)->where('sesi', 3)->first();
+        $sesi3 = Participant::where('id_team', $request->id_team)->where('sesi', 3)->latest();
 
-        if (!$sesi3) {
-            $sesi3->create([
-                'id_pertanyaan' => null,
-                'id_team' => $request['id_team'],
-                'poin' => -5,
-                'tanggal' => now(),
-                'sesi' => 3,
-            ]);
-        } else {
-            $sesi3->update([
-                'id_pertanyaan' => null,
-                'id_team' => $request['id_team'],
-                'poin' => $sesi3->poin - 5,
-                'tanggal' => now(),
-                'sesi' => 3,
-            ]);
-        }
+        $sesi3 = Participant::firstOrCreate([
+            'id_team' => $request->id_team,
+            'sesi' => 3,
+        ], [
+            'id_pertanyaan' => null,
+            'poin' => 0,
+            'tanggal' => now()
+        ]);
+
+        $sesi3 = $sesi3->update([
+            'poin' => $sesi3->poin - 5
+        ]);
+
+        // if (!$sesi3) {
+        //     $sesi3->create([
+        //         'id_pertanyaan' => null,
+        //         'id_team' => $request['id_team'],
+        //         'poin' => -5,
+        //         'tanggal' => now(),
+        //         'sesi' => 3
+        //     ]);
+        // } else {
+        //     $sesi3->update([
+        //         'id_pertanyaan' => null,
+        //         'id_team' => $request['id_team'],
+        //         'poin' => $sesi3->poin - 5,
+        //         'tanggal' => now(),
+        //         'sesi' => 3
+        //     ]);
+        // }
 
 
         return back()->with('success', 'Success');
@@ -130,7 +143,7 @@ class Sesi3Controller extends Controller
         //     $sesi->poin -= 10; // Decrement points by 10
         //     $sesi->save();
         // }
-        
+
         // return response()->json(['points' => $sesi->poin]);
     }
 
