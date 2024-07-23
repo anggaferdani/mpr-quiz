@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 // use App\Events\MessageSent;
 use App\Events\MessageSent;
-use App\Models\Team;
 use App\Models\Participant;
-use Illuminate\Http\Request;
+use App\Models\Pertanyaan;
+use App\Models\Team;
 use App\Models\TemaPertanyaan;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 class TemaPertanyaanController extends Controller
@@ -27,11 +28,17 @@ class TemaPertanyaanController extends Controller
 
     public function sesi2()
     {
-        $tema = TemaPertanyaan::where('sesi', 2)->latest()->get();
+        $pernyataans = Pertanyaan::whereHas('tema', function ($tema) {
+            $tema->where('sesi', 2);
+        })->get();
 
         $team = Team::all();
 
-        return view('operator.jenispertanyaan.sesi2', compact('tema', 'team'));
+        // !Tema tidak diperlukan
+        $tema = TemaPertanyaan::where('sesi', 2)->latest()->get();
+        // !/Tema tidak diperlukan
+
+        return view('operator.jenispertanyaan.sesi2', compact('tema', 'pernyataans', 'team'));
     }
 
     /**
