@@ -12,6 +12,7 @@ use App\Events\PindahSesi;
 use App\Events\StartCountdown;
 use App\Models\Jawaban;
 use App\Models\Participant;
+use App\Models\Pernyataan;
 use App\Models\Pertanyaan;
 use App\Models\Setting;
 use App\Models\Team;
@@ -114,7 +115,8 @@ class FrontendController extends Controller
 
     public function slotSesi2()
     {
-        return view("FE.s2-slot");
+        $pernyataan = Pernyataan::all();
+        return view("FE.s2-slot", compact('pernyataan'));
     }
 
     public function openingSesi2(Request $request)
