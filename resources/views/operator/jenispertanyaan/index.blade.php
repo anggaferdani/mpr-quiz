@@ -146,7 +146,7 @@
                             <div>
                                 <label class="form-selectgroup-item flex-fill my-2 d-flex gap-2 justify-content-between">
                                     <!-- Pass the ID of the hidden input field to the addPoints function -->
-                                    <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar</button>
+                                    <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}', '{{$jwb->id}}')">Benar</button>
                                     <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
                                     <button type="button" class="btn btn-danger batal" onclick="cancelPoints(this, 'poin{{$tanya->id}}')"><i class="bi bi-x"></i></button>
                                 </label>
@@ -258,7 +258,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var clickCounts = {};
 
     // Function to add points
-    function addPoints(button, inputId, jawaban) {
+    function addPoints(button, inputId, jawaban, idJawaban) {
         // Get the click count for this button
         var clickCount = clickCounts[inputId] || 0;
         // console.log('inputId', inputId)
@@ -298,22 +298,24 @@ document.addEventListener('DOMContentLoaded', function() {
             cluster: pusherCluster,
             encrypted: true, // Add this if you have encryption enabled on Pusher
         });
-            $.ajax({
-                method: 'GET',
-                url: '/sesi1-juri',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    // status: 'Benar',
-                    jawaban: jawaban,
-                },
-                success: function(response) {
-                    console.log('Data jawaban successfully sent to Pusher.');
-                    console.log('jawaban', jawaban)
-                },
-                error: function(xhr, status, error) {
-                    console.error('Failed to send Data jawaban to Pusher:', error);
-                }
-            });
+
+        $.ajax({
+            method: 'GET',
+            url: '/sesi1-juri',
+            data: {
+                _token: '{{ csrf_token() }}',
+                // status: 'Benar',
+                jawaban: jawaban,
+                id_jawaban: idJawaban
+            },
+            success: function(response) {
+                console.log('Data jawaban successfully sent to Pusher.');
+                console.log('jawaban', jawaban)
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to send Data jawaban to Pusher:', error);
+            }
+        });
     }
 
     function cancelPoints(button, inputId) {
@@ -452,7 +454,28 @@ $(document).ready(function() {
 
 {{-- KIRIM PARAMETER SOAL KE FILE FRONTEND --}}
 {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
-
-
-
 @endsection
+
+@push('header.javascript')
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+
+    <script>
+        // Initiate pusher
+        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+            encrypted: true
+        });
+
+        // Sinkronkan pilihan jawaban dengan sesama operator
+        const channelSinkronJawaban = pusher.subscribe('channel-sinkron-jawaban');
+
+        channelSinkronJawaban.bind('event-sinkron-jawaban', function(data) {
+            const idJawaban = data.message.id_jawaban;
+
+            // sinkronkan jawaban
+            // addPoints(button, inputId, jawaban, idJawaban);
+
+            console.log(idJawaban);
+        });
+    </script>
+@endpush

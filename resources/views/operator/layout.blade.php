@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{asset('dist/assets/extensions/filepond-plugin-image-preview/filepond-plugin-image-preview.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/extensions/toastify-js/src/toastify.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/css/pages/filepond.css')}}">
+
+    @stack('header.javascript')
 </head>
 
 <style>

@@ -96,6 +96,6 @@ class TemaPertanyaanController extends Controller
         $delete = TemaPertanyaan::find($id);
         $delete->delete();
         return back();
-        
+
     }
 }

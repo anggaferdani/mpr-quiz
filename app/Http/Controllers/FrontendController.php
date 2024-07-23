@@ -4,22 +4,23 @@ namespace App\Http\Controllers;
 
 use Pusher\Pusher;
 
+use App\Models\Team;
+use App\Models\Jawaban;
+use App\Events\moveSesi;
 use App\Events\AddPoints;
 use App\Events\DeviceSatu;
-use App\Events\KirimPertanyaanS2;
-use App\Events\MessageSent;
-use App\Events\moveSesi;
 use App\Events\PindahSesi;
-use App\Events\StartCountdown;
-
-use App\Models\Jawaban;
-use App\Models\Participant;
 use App\Models\Pertanyaan;
-use App\Models\Team;
-use App\Models\TemaPertanyaan;
 
+use App\Events\MessageSent;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Events\StartCountdown;
+
+use App\Models\TemaPertanyaan;
+use App\Events\JawabanSesiSatu;
+use App\Events\KirimPertanyaanS2;
 use Illuminate\Support\Facades\DB;
 
 class FrontendController extends Controller
@@ -82,10 +83,19 @@ class FrontendController extends Controller
     public function openingSesi1Juri(Request $request)
     {
         $jawaban = $request->input('jawaban');
+        $idJawaban = $request->input('id_jawaban');
         $pesan = $request->input('pesan');
         $capecape = $request->input('capecape');
         $team = Team::all();
 
+        // Sinkronkan jawaban
+        $dataJawaban = [
+            'id_jawaban' => $idJawaban
+        ];
+
+        event(new JawabanSesiSatu($dataJawaban));
+
+        // Aksi terhadap device lain
         event(new AddPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
         event(new moveSesi(['capecape' => $capecape]));
