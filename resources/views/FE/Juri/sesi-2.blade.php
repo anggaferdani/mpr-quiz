@@ -112,17 +112,14 @@
           <div class="col-7" id="kiri">
               <div class="container">
                 <div class="header d-flex justify-content-between align-items-center my-3">
-                    <h2>SESI 2</h2>
-                    <div class="countdown">
-                        <h3 id="countdown" class="mb-0">120</h3>
-                    </div>
+                    <h2 class="py-4">SESI 2</h2>
                 </div>
                 <div class="pertanyaan">
                     <p class="fw-bold" id="soalSesi2"></p>
                 </div>
                 <div class="pointer p-3">
-                    <p class="fw-bold">POINTER :</p>
-                    <p class="isi-pointer" id="loopingJawabanArray"></p>
+                    <p id="sisi-pointer-container" class="fw-bold">POINTER :</p>
+                    <div id="loopingJawabanArray"></div>
                 </div>
               </div>
           </div>
@@ -159,6 +156,48 @@
             cluster: 'ap1'
         });
 
+        const pernyataanJuriChannel = pusher.subscribe('channelKirimPertanyaanS2');
+        pernyataanJuriChannel.bind('eventKirimPertanyaanS2', function(data) {
+
+            const pernyataanText = data.message.pernyataan;
+
+            const pointers = data.message.pointers;
+
+            const sisi = data.message.sisi;
+
+            function printPernyataanText(pernyataanText) {
+                const pernyataanContainer = document.getElementById('soalSesi2');
+
+                pernyataanContainer.innerText = pernyataanText;
+            }
+
+            function printPointerList(pointers) {
+                const pointerContainer = document.getElementById('loopingJawabanArray');
+
+                let lists = '<ul>';
+
+                pointers.forEach(pointer => lists += '<li>' + pointer.penjelasan + '</li>');
+
+                lists += '</ul>';
+
+                pointerContainer.innerHTML = lists;
+            }
+
+            function printSisi(sisi) {
+                const sisiContainer = document.getElementById('sisi-pointer-container');
+
+                const color = sisi == 'Pro' ? 'text-success' : 'text-danger';
+
+                sisiContainer.innerHTML = 'POINTER <span class="' + color + '"><b>' + sisi + '</b></span>:';
+            }
+
+            printPernyataanText(pernyataanText);
+
+            printPointerList(pointers);
+
+            printSisi(sisi)
+        });
+
         const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
             const sesi = data.message.sesi;
@@ -185,11 +224,11 @@
                 var data = JSON.parse(storedData);
 
                 // Tampilkan data di halaman pengguna
-                document.getElementById('soalSesi2').innerText = data.message.pertanyaan;
+                // document.getElementById('soalSesi2').innerText = data.message.pertanyaan;
                 var jawabanArrayString = data.message.jawabanArray; // String JSON dari server
                 var jawabanArray = JSON.parse(jawabanArrayString); // Ubah string JSON menjadi array JavaScript
 
-                var jawabanElement = document.getElementById('loopingJawabanArray');
+                // var jawabanElement = document.getElementById('loopingJawabanArray');
                 jawabanElement.innerHTML = ''; // Clear existing content
 
                 // Loop through the jawabanArray and create <p> elements for each jawaban

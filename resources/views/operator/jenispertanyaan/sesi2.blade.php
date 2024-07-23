@@ -521,27 +521,6 @@ $(document).ready(function() {
             }
         });
     }
-    function pilihPertanyaan(id, pertanyaan, jawabanArray) {
-        let berita = 'move_to_Sesi2';
-        $.ajax({
-            method: 'GET',
-            url: '/sesi2-juri',
-            data: {
-                _token: '{{ csrf_token() }}',
-                berita: 'movesesi2',
-                id: id,
-                pertanyaan: pertanyaan,
-                jawabanArray: JSON.stringify(jawabanArray),
-            },
-            success: function(response) {
-                console.log('Question successfully sent to Pusher.');
-            },
-            error: function(xhr, status, error) {
-                console.error('Failed to send question to Pusher:', error);
-            }
-        });
-    }
-
 </script>
 
 @endsection

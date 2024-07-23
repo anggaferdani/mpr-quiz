@@ -91,12 +91,12 @@
     channel.bind('eventKirimPertanyaanS2', function(data) {
         console.log(JSON.stringify(data));
 
-            if (data.message.berita === 'movesesi2') {
+            // if (data.message.berita === 'movesesi2') {
                 // Lakukan pengalihan ke URL route yang diinginkan
                 // Lakukan pengalihan ke URL route yang diinginkan dengan menyertakan variabel data sebagai query string
-                var dataString = JSON.stringify(data.message.pertanyaan); // Ganti 'data' dengan variabel yang ingin Anda bawa
-                window.location.href = '/sesi2-soal?data=' + encodeURIComponent(dataString);
-            }
+                // var dataString = JSON.stringify(data.message.pertanyaan); // Ganti 'data' dengan variabel yang ingin Anda bawa
+                // window.location.href = '/sesi2-soal?data=' + encodeURIComponent(dataString);
+            // }
     });
     </script>
 

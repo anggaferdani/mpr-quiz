@@ -162,11 +162,29 @@ class FrontendController extends Controller
 
     public function soalSesi2(Request $request)
     {
+        $isAjaxPernyataan = $request->input('data_pernyataan');
+
+        if ($isAjaxPernyataan) {
+            $pernyataanId = isset($isAjaxPernyataan['id']) ? $isAjaxPernyataan['id'] : 0;
+
+            $sisi = isset($isAjaxPernyataan['sisi']) ? $isAjaxPernyataan['sisi'] : 'pro';
+
+            $pernyataan = Pernyataan::with(['pointers' => fn ($pointers) => $pointers->where('sisi', $sisi)])->find($pernyataanId);
+
+            event(new KirimPertanyaanS2([
+                'pernyataan' => $pernyataan->pernyataan,
+                'pointers' => $pernyataan->pointers,
+                'sisi' => $sisi
+            ]));
+
+            return 200;
+        }
+
        // Jika Anda ingin mengakses data yang dilewatkan dari query string, Anda dapat melakukannya di sini
        $dataString = $request->query('data'); // Mendapatkan data dari query string
        $data = json_decode(urldecode($dataString), true); // Mendekode data dari string JSON
 
-        $pernyataan = Pernyataan::all();
+       $pernyataan = Pernyataan::all();
 
         // Tampilkan tampilan /sesi2-soal
        return view('FE.s2-soal', ['data' => $data,'pernyataan'=>$pernyataan]); // Mengirimkan data ke tampilan

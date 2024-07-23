@@ -403,28 +403,29 @@
                 // }
 
                 startCountdown();
+
                 kirimCountdown();
-                console.log(choice); // Hasilnya
+
+                $.ajax({
+                    method: 'GET',
+                    url: '/sesi2-soal',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        data_pernyataan: choice
+                    },
+                    success: function(response) {
+                        console.log('Question successfully sent to Pusher.');
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Failed to send question to Pusher:', error);
+                    }
+                });
             };
 
             startAnimation();
+
             setTimeout(stopAnimation, duration);
         }
     </script>
-
-    <script>
-        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
-        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
-        const pusher = new Pusher(pusherKey, {
-            cluster: pusherCluster,
-            encrypted: true, // Add this if you have encryption enabled on Pusher
-        });
-        var channel = pusher.subscribe('channelKirimPertanyaanS2');
-        channel.bind('eventKirimPertanyaanS2', function(data) {
-            console.log(JSON.stringify(data));
-            document.getElementById('showingDataPusher').innerText = data.message.pertanyaan;
-        });
-    </script>
-
   </body>
 </html>
