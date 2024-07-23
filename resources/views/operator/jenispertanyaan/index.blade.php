@@ -132,7 +132,7 @@
 </div>
 @foreach($item->pertanyaan as $tanya)
 <div class="modal fade" id="jawaban{{$tanya->id}}" data-modal-id="{{$tanya->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <form action="{{url('/op/savepoin')}}" method="post">x
             <div class="modal-content">
                 <div class="modal-header">
@@ -140,19 +140,25 @@
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close">Tutup</button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        @foreach($tanya->jawaban as $jwb)
+                        <div class="col-4 gap-4">
+                            <div>
+                                <label class="form-selectgroup-item flex-fill my-2 d-flex gap-2 justify-content-between">
+                                    <!-- Pass the ID of the hidden input field to the addPoints function -->
+                                    <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar</button>
+                                    <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
+                                    <button type="button" class="btn btn-danger batal" onclick="cancelPoints(this, 'poin{{$tanya->id}}')"><i class="bi bi-x"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                     {{ csrf_field() }}
                     <input type="hidden" value="1" name="sesi">
                     <input type="hidden" value="{{$tanya->id}}" name="id_pertanyaan">
                     <input type="hidden" class="teamteam" name="id_team">
                     <input type="hidden"  value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
-                    @foreach($tanya->jawaban as $jwb)
-                    <label class="form-selectgroup-item flex-fill my-2 d-flex gap-2 justify-content-between">
-                        <!-- Pass the ID of the hidden input field to the addPoints function -->
-                        <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar</button>
-                        <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
-                        <button type="button" class="btn btn-danger batal" onclick="cancelPoints(this, 'poin{{$tanya->id}}')"><i class="bi bi-x"></i></button>
-                    </label>
-                    @endforeach
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
