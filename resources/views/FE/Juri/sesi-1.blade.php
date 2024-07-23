@@ -281,8 +281,8 @@
           </div>
           <div class="col-5" id="kanan">
               <div class="text-center text-white my-4">
-                  <p class="mb-0">POINT</p>
-                  <h4 class="mb-0">GROUP</h4>
+                  <p class="mb-0">POIN</p>
+                  <h4 class="mb-0">GRUP</h4>
               </div>
               <div class="row justify-content-center">
                   @foreach ($team as $item)

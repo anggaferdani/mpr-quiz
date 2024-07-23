@@ -28,7 +28,9 @@ class TemaPertanyaanController extends Controller
     public function sesi2()
     {
         $tema = TemaPertanyaan::where('sesi', 2)->latest()->get();
+
         $team = Team::all();
+
         return view('operator.jenispertanyaan.sesi2', compact('tema', 'team'));
     }
 
