@@ -10,9 +10,7 @@ class Participant extends Model
     use HasFactory;
     protected $table= 'participants';
     protected $primaryKey = 'id';
-    protected $fillable = [
-        'id_pertanyaan', 'id_team', 'poin', 'tanggal'
-    ];
+    protected $guarded = [];
 
     public function pertanyaan(){
         return $this->belongsTo(Pertanyaan::class, 'id_pertanyaan');

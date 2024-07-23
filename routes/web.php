@@ -46,7 +46,11 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::resource('/list-jawaban', JawabanController::class);
     Route::post('/savepoin', [ParticipantController::class, 'store']);
     Route::get('/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
-    Route::get('/sesi-3', [Sesi3Controller::class, 'index']);
+    Route::get('/sesi-3', [Sesi3Controller::class, 'index'])->name('operator.sesi3');
+    Route::post('/post/sesi-3', [Sesi3Controller::class, 'store'])->name('operator.post.sesi3');
+    Route::get('/sesi-3', [Sesi3Controller::class, 'index'])->name('operator.sesi3');
+    Route::post('/sesi-3/setpoin', [Sesi3Controller::class, 'setpoin'])->name('operator.sesi3.setpoin');
+    Route::post('/sesi-3/minpoin', [Sesi3Controller::class, 'minpoin'])->name('operator.sesi3.minpoin');
     Route::get('/logout', [LoginController::class, 'logout'])->name('operator.logout');
     Route::resource('/perolehan-nilai', ParticipantController::class);
     Route::resource('/shortcut', ShotcutController::class);

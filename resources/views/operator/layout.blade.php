@@ -85,11 +85,20 @@
                 <span>Perolehan Nilai</span>
                 </a>
             </li>
-            <li class="sidebar-item {{ (request()->is('op/sesi-3')) ? 'active' :  '' }}">
-                <a href="/op/sesi-3" class='sidebar-link'>
-                <i class="bi bi-3-square"></i>
-                    <span>Sesi 3</span>
+            @php
+                use App\Models\Wilayah;
+                $wilayahs = Wilayah::where('status', 1)->get()
+            @endphp
+            <li class="sidebar-item {{ Route::is('operator.sesi3*') ? 'active' : '' }} has-sub">
+                <a href="#" class="sidebar-link"><i class="bi bi-stack"></i><span>Sesi 3</span>
                 </a>
+                <ul class="submenu {{ Route::is('operator.sesi3*') ? 'active' : '' }} submenu-closed" style="--submenu-height: 774px;">
+                    @foreach ($wilayahs as $wilayah)
+                        <li class="submenu-item {{ Route::is('operator.sesi3*') ? 'active' : '' }}">
+                            <a href="{{ route('operator.sesi3', ['wilayah_id' => $wilayah->id]) }}" class="submenu-link">{{ $wilayah->nama_wilayah }}</a>
+                        </li>
+                    @endforeach
+                </ul>
             </li>
             <li class="sidebar-item ">
                 <a href="{{ Route('operator.logout') }}" class='sidebar-link text-danger'>
