@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Pusher\Pusher;
 use App\Models\Team;
 use App\Models\Sesi3;
+use App\Events\Minpoin;
+use App\Events\Setpoin;
 use App\Models\Wilayah;
+use App\Events\AddPoints;
+use App\Events\PindahSesi;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -72,6 +77,14 @@ class Sesi3Controller extends Controller
             ]);
         }
 
+        $team = Team::where('id', $sesi3->id_team)->first();
+
+        if ($team) {
+            event(new Setpoin([
+                'poin' => $team->participant()->sum('poin'),
+                'id_team' => $request['id_team'],
+            ]));
+        }
 
         return back()->with('success', 'Success');
 
@@ -110,9 +123,18 @@ class Sesi3Controller extends Controller
             'tanggal' => now()
         ]);
 
-        $sesi3 = $sesi3->update([
+        $sesi3->update([
             'poin' => $sesi3->poin - 5
         ]);
+
+        if ($sesi3) {
+            $team = Team::where('id', $sesi3->id_team)->first();
+
+            event(new Minpoin([
+                'poin' => $team->participant()->sum('poin'),
+                'id_team' => $request['id_team'],
+            ]));
+        }
 
         // if (!$sesi3) {
         //     $sesi3->create([
@@ -145,6 +167,16 @@ class Sesi3Controller extends Controller
         // }
 
         // return response()->json(['points' => $sesi->poin]);
+    }
+
+    public function kirimPertanyaanSesi3(Request $request)
+    {
+        event(new PindahSesi([
+            'pertanyaan' => $request->pertanyaan,
+            'jawaban' => $request->jawaban,
+        ]));
+    
+        return response()->json($request, 200);
     }
 
     /**

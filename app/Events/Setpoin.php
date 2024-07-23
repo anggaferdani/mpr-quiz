@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class AddPoints implements ShouldBroadcast
+class Setpoin implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -21,13 +21,13 @@ class AddPoints implements ShouldBroadcast
         $this->message = $message;
     }
 
-    public function broadcastOn()
+    public function broadcastOn()   
     {
-        return new Channel ('channel-addPoints');
+        return new Channel ('channel-setpoin');
     }
 
     public function broadcastAs()
     {
-        return 'event-addPoints';
+        return 'event-setpoin';
     }
 }

@@ -103,6 +103,7 @@ class FrontendController extends Controller
         event(new moveSesi(['capecape' => $capecape]));
         return view('FE.Juri.sesi-1', compact('team'));
     }
+
     public function nilaiSesi1Juri(Request $request)
     {
         // Ambil nilai dari permintaan (request)
@@ -171,6 +172,28 @@ class FrontendController extends Controller
     public function openingSesi3(Request $request)
     {
         return view('FE.s3');
+    }
+
+    public function openingSesi3Juri(Request $request)
+    {
+
+        $setting = Setting::first();
+        $jawaban = $request->input('jawaban');
+        $idJawaban = $request->input('id_jawaban');
+        $pesan = $request->input('pesan');
+        $capecape = $request->input('capecape');
+        $team = Team::where("run", $setting->run)->get();
+
+        $dataJawaban = [
+            'id_jawaban' => $idJawaban
+        ];
+
+        event(new JawabanSesiSatu($dataJawaban));
+
+        event(new AddPoints(['jawaban' => $jawaban]));
+        event(new StartCountdown(['pesan' => $pesan]));
+        event(new moveSesi(['capecape' => $capecape]));
+        return view('FE.Juri.sesi-3', compact('team'));
     }
 
     public function nilaiquizSesi1()
