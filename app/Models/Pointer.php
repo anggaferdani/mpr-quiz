@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pernyataan extends Model
+class Pointer extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function pointers(){
-        return $this->hasMany(Pointer::class);
+    public function pernyataan(){
+        return $this->belongsTo(Pernyataan::class);
     }
 }
