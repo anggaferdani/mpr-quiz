@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="page-heading">
-    <h3>Jenis Pertanyaan</h3>
+    <h3>Tema Pertanyaan</h3>
 </div>
 
 <div class="col-lg-12 grid-margin stretch-card">

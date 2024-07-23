@@ -129,7 +129,7 @@
           <div class="col-5" id="kanan">
               <div class="text-center text-white my-5">
                   {{-- <p class="mb-0">POINT</p> --}}
-                  <h4 class="mb-0 fw-bold">POINT</h4>
+                  <h4 class="mb-0 fw-bold">POIN</h4>
               </div>
               <div class="row justify-content-center">
                 @foreach ($team as $item)
