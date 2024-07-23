@@ -106,7 +106,7 @@
         {{--    <div class="d-flex ">--}}
 
         <div id="randomPernyataan">-</div>
-        <div class="badge bg-warning mt-4" id="randomSisi">-</div>
+        <div class="badge  mt-5" id="randomSisi">-</div>
 
 
         {{--    </div>--}}
@@ -115,16 +115,17 @@
 
 <script>
     // Daftar pernyataan dan sisi
-    const choices = [
-        {
-            pernyataan: 'Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!',
-            sisi: 'Pro'
-        },
-        {
-            pernyataan: 'Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 ',
-            sisi: 'Kontra'
-        }
-    ];
+    const choices =<?php echo json_encode($pernyataan->toArray()); ?>;
+    // const choices = [
+    //     {
+    //         pernyataan: 'Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!',
+    //         sisi: 'Pro'
+    //     },
+    //     {
+    //         pernyataan: 'BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 ',
+    //         sisi: 'Kontra'
+    //     }
+    // ];
 
     $(document).on('keypress', function (e) {
         if (e.which == 32) {

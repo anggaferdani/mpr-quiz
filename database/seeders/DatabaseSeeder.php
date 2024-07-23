@@ -82,14 +82,14 @@ class DatabaseSeeder extends Seeder
 
 
         Pernyataan::insert([
-            [
-                "pernyataan" => "Pembelajaran online lebih efektif.",
-                "sisi" => "Kontra"
-            ],
-            [
-                "pernyataan" => "Energi Nuklir Harus Menjadi Sumber Energi Utama di Masa Depan.",
-                "sisi" => "Pro"
-            ]
+                [
+                    "pernyataan" => "Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!",
+                    "sisi" => "Pro"
+                ],
+                [
+                    "pernyataan" => "BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 ",
+                    "sisi" => "Kontra"
+                ],
         ]);
 
         Pointer::insert([
