@@ -236,7 +236,6 @@
             @endforeach
         </div>
     </div>
-    <button onclick="testing()">testing</button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"

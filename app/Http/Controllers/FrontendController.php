@@ -202,6 +202,31 @@ class FrontendController extends Controller
 
         return view('FE.s1-nilai', compact('nilai'));
     }
+    public function nilaiquizSesi2()
+    {
+        $nilai = Participant::get()->last();
+
+        // Inisialisasi Pusher dengan kredensial dari file .env
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'encrypted' => true
+            ]
+        );
+
+        // Kirim data ke kanal Pusher
+        $pusher->trigger('channel-kirim-nilai-s2', 'event-kirim-nilai-s2', [
+            'command' => 'pindah',
+            'nilai' => $nilai->poin,
+        ]);
+
+        // return response()->json(['message' => 'Nilai berhasil dikirim ke Pusher']);
+
+        return view('FE.s2-nilai', compact('nilai'));
+    }
 
     public function device1(Request $request){
         return view('FE.Juri.device1');
