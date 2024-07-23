@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Wilayah;
 use Illuminate\Database\Seeder;
 use Database\Seeders\PertanyaanKotaSemarangSeeder;
 
@@ -62,5 +63,15 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call(PertanyaanKotaSemarangSeeder::class);
+
+        $wilayahs = [
+            'Semarang',
+        ];
+
+        foreach ($wilayahs as $role) {
+            Wilayah::create([
+                'nama_wilayah' => $role,
+            ]);
+        }
     }
 }

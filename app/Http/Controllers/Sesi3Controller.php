@@ -4,73 +4,140 @@ namespace App\Http\Controllers;
 
 use App\Models\Team;
 use App\Models\Sesi3;
+use App\Models\Wilayah;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Models\PertanyaanSesi3;
 
 class Sesi3Controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-        $now = Carbon::now()->format('Y-m-d');
-        $team = Team::with(['sesi3' => function ($query) use ($now) {
-            $query->whereDate('date', $now);
-        }])->get();
-        // dd($team);
-        
-        $sesi3 = Sesi3::all();
+        $wilayah = Wilayah::where('id', $request->wilayah_id)->first();
+        $pertanyaanSesi3s = PertanyaanSesi3::where('wilayah_id', $request->wilayah_id)->where('status', 1)->get();
+        $teams = Team::all();
 
-        return view('operator.jenispertanyaan.sesi3', compact('team', 'sesi3'));
+        return view('operator.jenispertanyaan.sesi3', compact(
+            'wilayah',
+            'pertanyaanSesi3s',
+            'teams',
+        ));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'wilayah_id' => 'required',
+            'pertanyaan' => 'required',
+            'jawaban' => 'required',
+        ]);
+
+        $array = [
+            'wilayah_id' => $request['wilayah_id'],
+            'pertanyaan' => $request['pertanyaan'],
+            'jawaban' => $request['jawaban'],
+        ];
+
+        PertanyaanSesi3::create($array);
+
+        return back()->with('success', 'Success');
     }
 
     public function setpoin(Request $request)
     {
-        $team = Team::findOrFail($request->team_id);
-        $now = Carbon::now()->format('Y-m-d');
-        $sesi = Sesi3::where('date', $now)->where('id_team', $request->team_id)->first();
+        $request->validate([
+            'id_team' => 'required',
+        ]);
 
-        if($sesi){
-            $sesi->poin += 10;
-            $sesi->save();
-        }else{
-            $sesi = new sesi3();
-            $sesi->poin += 10; // Increment points by 10
-            $sesi->date = Carbon::now(); // Set points to 10
-            $sesi->id_team = $team->id;
-            $sesi->save();
+        $sesi3 = Participant::where('id_team', $request->id_team)->where('sesi', 3)->first();
+
+        if (!$sesi3) {
+            $array = [
+                'id_pertanyaan' => null,
+                'id_team' => $request['id_team'],
+                'poin' => 10,
+                'tanggal' => now(),
+                'sesi' => 3,
+            ];
+    
+            Participant::create($array);
+        } else {
+            $sesi3->update([
+                'id_pertanyaan' => null,
+                'id_team' => $request['id_team'],
+                'poin' => $sesi3->poin + 10,
+                'tanggal' => now(),
+                'sesi' => 3,
+            ]);
         }
 
-        return response()->json(['points' => $sesi->poin]);
+
+        return back()->with('success', 'Success');
+
+        // $team = Team::findOrFail($request->team_id);
+        // $now = Carbon::now()->format('Y-m-d');
+        // $sesi = Sesi3::where('date', $now)->where('id_team', $request->team_id)->first();
+
+        // if($sesi){
+        //     $sesi->poin += 10;
+        //     $sesi->save();
+        // }else{
+        //     $sesi = new sesi3();
+        //     $sesi->poin += 10; // Increment points by 10
+        //     $sesi->date = Carbon::now(); // Set points to 10
+        //     $sesi->id_team = $team->id;
+        //     $sesi->save();
+        // }
+
+        // return response()->json(['points' => $sesi->poin]);
     }
 
     public function minpoin(Request $request)
     {
-        $now = Carbon::now()->format('Y-m-d');
-        $team = Team::findOrFail($request->team_id);
-        $sesi = Sesi3::where('date', $now)->where('id_team', $request->team_id)->first();
+        $request->validate([
+            'id_team' => 'required',
+        ]);
 
-        if ($sesi && $sesi->poin >= 10) {
-            $sesi->poin -= 10; // Decrement points by 10
-            $sesi->save();
+        $sesi3 = Participant::where('id_team', $request->id_team)->where('sesi', 3)->first();
+
+        if (!$sesi3) {
+            $sesi3->create([
+                'id_pertanyaan' => null,
+                'id_team' => $request['id_team'],
+                'poin' => -5,
+                'tanggal' => now(),
+                'sesi' => 3,
+            ]);
+        } else {
+            $sesi3->update([
+                'id_pertanyaan' => null,
+                'id_team' => $request['id_team'],
+                'poin' => $sesi3->poin - 5,
+                'tanggal' => now(),
+                'sesi' => 3,
+            ]);
         }
+
+
+        return back()->with('success', 'Success');
+
+        // $now = Carbon::now()->format('Y-m-d');
+        // $team = Team::findOrFail($request->team_id);
+        // $sesi = Sesi3::where('date', $now)->where('id_team', $request->team_id)->first();
+
+        // if ($sesi && $sesi->poin >= 10) {
+        //     $sesi->poin -= 10; // Decrement points by 10
+        //     $sesi->save();
+        // }
         
-        return response()->json(['points' => $sesi->poin]);
+        // return response()->json(['points' => $sesi->poin]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
     {
         //
     }
