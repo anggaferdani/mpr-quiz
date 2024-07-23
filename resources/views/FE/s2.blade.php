@@ -100,6 +100,18 @@
     });
     </script>
 
-
+    <script>
+        document.addEventListener('keydown', function (event) {
+            // Pastikan tombol yang ditekan adalah tombol panah kanan (keyCode 39)
+            if (event.keyCode === 39) {
+                // Lakukan pengalihan ke URL route yang diinginkan
+                window.location.href = '/sesi2-soal';
+            }
+            if (event.keyCode === 37) {
+                // Lakukan navigasi ke URL sebelumnya dalam riwayat browser
+                window.history.back();
+            }
+        });
+    </script>
   </body>
 </html>
