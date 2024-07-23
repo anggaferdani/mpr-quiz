@@ -31,7 +31,7 @@
   </div>
 </div>
 <div class="page-heading">
-    <h3>Tema Pertanyaan</h3>
+    <h3>Pernyataan</h3>
 </div>
 
 <div class="col-lg-12 grid-margin stretch-card">
@@ -61,8 +61,8 @@
                        <td class="text-center">{{$item->tema}}</td>
                        <td class="">
                         <div class="d-flex justify-content-center">
-                       <button type="button" data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled>Mulai</button>
-                       </div>
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled>Mulai</button>
+                        </div>
                         <div class="modal fade" id="Backdrop{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -190,36 +190,62 @@
                 </tbody>
             </table>
         </div>
-        <h5>Pilih Team</h5>
+
+        <h5 class="mt-4">Pilih Grup</h5>
         <div class="team-selection d-flex gap-4">
             @foreach($team as $item)
-            @php
-                $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
-            @endphp
-            <div class="form-check">
-            @if($selectedTeam)
-                <input class="form-check-input" type="checkbox" checked disabled>
-            @else
-            <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
-            @endif
-            <label class="form-check-label" for="team{{$item->id}}">
-                {{$item->name}}
-            </label>
+                @php
+                    $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
+                @endphp
+                <div class="form-check">
+                    @if($selectedTeam)
+                        <input class="pernyataan-radios form-check-input" type="checkbox" checked disabled>
+                    @else
+                        <input class="pernyataan-radios form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
+                    @endif
+
+                    <label class="form-check-label" for="team{{$item->id}}">
+                        {{$item->name}}
+                    </label>
+                </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
+
+        <h5 class="mt-4">Pilih Sisi</h5>
+        <div class="d-flex gap-4">
+            <div class="form-check">
+                <input type="radio" class="pernyataan-radios form-check-input" name="sisi_pernyataan" id="pro" value="pro">
+                <label class="form-check-label text-success font-weight-bold" for="pro">
+                    PRO
+                </label>
+            </div>
+
+            <div class="form-check">
+                <input type="radio" class="pernyataan-radios form-check-input" name="sisi_pernyataan" id="kontra" value="kontra">
+                <label class="form-check-label text-danger font-weight-bold" for="kontra">
+                    KONTRA
+                </label>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
 // Add event listener to check if any radio button is selected
 document.addEventListener('DOMContentLoaded', function() {
-    var radioButtons = document.querySelectorAll('input[name="idtim"]');
+    var radioButtons = document.querySelectorAll('.pernyataan-radios');
+
     var startButtons = document.querySelectorAll('.btn.btn-primary.btn-icon-text');
 
     radioButtons.forEach(function(radioButton) {
+
         radioButton.addEventListener('change', function() {
-            if (this.checked) {
+            const groupNameRadio = document.querySelector('.pernyataan-radios[name="idtim"]:checked');
+            const sisiPernyataanRadio = document.querySelector('.pernyataan-radios[name="sisi_pernyataan"]:checked');
+
+            const areBothChecked = groupNameRadio && sisiPernyataanRadio;
+
+            if (areBothChecked) {
                 startButtons.forEach(function(startButton) {
                     startButton.disabled = false; // Enable button if a radio button is selected
                 });
@@ -228,7 +254,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
 $(document).ready(function() {
     // Script untuk filter input pada saat modal muncul
@@ -256,6 +284,7 @@ $(document).ready(function() {
     });
 });
 </script>
+
 <script>
     $(document).on('click', '.tambahjawaban', function(){
     addInputField();
