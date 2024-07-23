@@ -60,6 +60,8 @@
                 // Get the value of class JawabanJuri
                 var jawabanJuri = $(this).text().trim();
 
+                // console.log("asdasd :" +data.message.jawaban)
+
                 // Check if the value matches with data.message.jawaban
                 if (jawabanJuri === data.message.jawaban) {
                     // Add the class 'JawabanJuriAktif' to the parent div
@@ -285,6 +287,7 @@
                   <h4 class="mb-0">GROUP</h4>
               </div>
               <div class="row justify-content-center">
+
                   @foreach ($team as $item)
                     <div class="col-md-4 my-2" data-id="{{ $item->id }}">
                       <div class="group">
@@ -297,6 +300,7 @@
                         </div>
                     </div>
                     @endforeach
+
                 </div>
           </div>
       </div>

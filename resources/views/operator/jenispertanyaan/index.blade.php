@@ -146,7 +146,10 @@
                             <div>
                                 <label class="form-selectgroup-item flex-fill my-2 d-flex gap-2 justify-content-between">
                                     <!-- Pass the ID of the hidden input field to the addPoints function -->
-                                    <button type="button" class="btn btn-primary benar" onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar</button>
+                                    <button type="button" class="btn btn-primary benar"
+                                            id="btn-{{str_replace(' ', '-', $jwb->jawaban)}}"
+                                            onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar
+                                    </button>
                                     <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
                                     <button type="button" class="btn btn-danger batal" onclick="cancelPoints(this, 'poin{{$tanya->id}}')"><i class="bi bi-x"></i></button>
                                 </label>
@@ -256,6 +259,46 @@ document.addEventListener('DOMContentLoaded', function() {
 <script>
     // Object to store click counts for each button
     var clickCounts = {};
+    // Initialize Pusher with Pusher app key from .env
+    const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+    const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+    const pusher = new Pusher(pusherKey, {
+        cluster: pusherCluster,
+        encrypted: true, // Add this if you have encryption enabled on Pusher
+    });
+
+    const channel3 = pusher.subscribe('channel-addPoints');
+    channel3.bind('event-addPoints', function (data) {
+        // Handle received quiz data
+        // console.log('Jawaban diterima:', data);
+
+        // $('.jawaban .JawabanJuri').each(function() {
+        //     // Get the value of class JawabanJuri
+        var jawabanJuri = data.message.jawaban.replace(/ /g, '-');
+        //
+        //     // console.log("asdasd :" +data.message.jawaban)
+        //
+        //     // Check if the value matches with data.message.jawaban
+        //     if (jawabanJuri === data.message.jawaban) {
+        //         // Add the class 'JawabanJuriAktif' to the parent div
+        //         $(this).closest('.jawaban').addClass('JawabanJuriAktif');
+        //     }
+        // });
+
+        var buttonId = 'btn-' + jawabanJuri;
+        let button = $('#' + buttonId);
+
+// Mengganti teks tombol
+        button.text('10 poin');
+
+// Menghapus kelas 'btn-primary' dan menambahkan kelas 'btn-success'
+        button.removeClass('btn-primary').addClass('btn-success');
+
+// Menonaktifkan tombol
+        button.prop('disabled', true);
+
+    });
+
 
     // Function to add points
     function addPoints(button, inputId, jawaban) {
@@ -291,14 +334,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update click count for this button
         clickCounts[inputId] = clickCount + 1;
 
-         // Initialize Pusher with Pusher app key from .env
-        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
-        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
-        const pusher = new Pusher(pusherKey, {
-            cluster: pusherCluster,
-            encrypted: true, // Add this if you have encryption enabled on Pusher
-        });
-            $.ajax({
+
+        $.ajax({
                 method: 'GET',
                 url: '/sesi1-juri',
                 data: {
