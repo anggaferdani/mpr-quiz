@@ -62,7 +62,7 @@
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 // Arahkan pengguna ke route sesi2
-                window.location.href = "/sesi1-spin";
+                window.location.href = "/sesi2-soal";
             }
         });
 

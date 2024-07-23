@@ -150,6 +150,46 @@
             font-weight: bold;
         }
 
+
+
+
+         .spinwheel {
+             height: 100vh;
+             margin-top: -2.5%;
+         }
+
+         @media only screen and (max-width: 700px) {
+             .spinwheel {
+                 scale: 60%;
+             }
+         }
+
+         #randomPernyataan {
+             text-align: center;
+             font-size: 28px;
+             font-weight: 800;
+             transition: transform 0.1s ease;
+         }
+
+         #randomSisi {
+             font-size: 40px;
+             font-weight: 800;
+             transition: transform 0.1s ease;
+         }
+
+         .animate {
+             animation: bounce 0.5s infinite;
+         }
+
+         @keyframes bounce {
+             0%, 100% {
+                 transform: translateY(0);
+             }
+             50% {
+                 transform: translateY(-10px);
+             }
+         }
+
     </style>
 
   </head>
@@ -167,11 +207,17 @@
     </div> --}} -->
 
    <div class="container" id="content-soal-sesi2">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-8">
-                <h2 class="fw-bolder text-center" id="showingDataPusher">{{ print_r($data, true) }}</h2>
-            </div>
-        </div>
+{{--        <div class="row align-items-center justify-content-center">--}}
+{{--            <div class="col-8">--}}
+{{--                <h2 class="fw-bolder text-center" id="showingDataPusher">{{ print_r($data, true) }}</h2>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+       <div class="container" style="width: 900px">
+           <div class="spinwheel d-flex flex-column align-items-center justify-content-center">
+               <div id="randomPernyataan">-</div>
+               <div class=" mt-5" id="randomSisi">-</div>
+           </div>
+       </div>
     </div>
     <div id="countdown-div" style="display: none;">
                 <div class="background-waktu-habis"></div>
@@ -188,46 +234,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+
     <script>
-            var countdownSeconds = 120; // Ubah kembali ke 20 jika menggunakan detik
-            var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
-            var countdownInterval;
+        var countdownSeconds = 120; // Ubah kembali ke 20 jika menggunakan detik
+        var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
+        var countdownInterval;
 
-            const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
-            const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
-            const pusher = new Pusher(pusherKey, {
-                cluster: pusherCluster,
-                encrypted: true, // Add this if you have encryption enabled on Pusher
+        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        const pusher = new Pusher(pusherKey, {
+            cluster: pusherCluster,
+            encrypted: true, // Add this if you have encryption enabled on Pusher
+        });
+
+        // Pindah sesi by operator
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi != 2) { window.location.href = `/sesi${sesi}`; }
+        });
+
+        function kirimCountdown() {
+            $.ajax({
+                method: 'GET',
+                url: '/sesi1-juri',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    pesan: 'StartCountdownSesi2',
+                },
+                success: function(response) {
+                    console.log('Question successfully sent to Pusher.');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Failed to send question to Pusher:', error);
+                }
             });
+        }
 
-            // Pindah sesi by operator
-            const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
-            ankorPindahSesi.bind('event-pindah-sesi', function(data) {
-                const sesi = data.message.sesi;
+        var alarmCountdown = new Audio('../images/alarmCountdown2.mp3');
 
-                if (sesi != 2) { window.location.href = `/sesi${sesi}`; }
-            });
-
-            function kirimCountdown() {
-                $.ajax({
-                    method: 'GET',
-                    url: '/sesi1-juri',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        pesan: 'StartCountdownSesi2',
-                    },
-                    success: function(response) {
-                        console.log('Question successfully sent to Pusher.');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Failed to send question to Pusher:', error);
-                    }
-                });
-            }
-
-            var alarmCountdown = new Audio('../images/alarmCountdown2.mp3');
-
-            function startCountdown() {
+        function startCountdown() {
             countdownInterval = setTimeout(function updateCountdown() {
                 var countdownElement = document.getElementById('countdown');
                 var countdownElementMilidetik = document.getElementById('countdown-milidetik');
@@ -285,15 +332,84 @@
 
         function handleEnterKey(event) {
             if (event.key === 'Enter') {
-                window.location.href = '/sesi1-nilai';
+                window.location.href = '/sesi2-nilai';
             }
         }
-            document.addEventListener('keydown', function(event) {
-                if (event.key === ' ') {
-                    startCountdown();
-                    kirimCountdown();
-                }
-            });
+        // document.addEventListener('keydown', function(event) {
+        //     if (event.key === ' ') {
+        //         startCountdown();
+        //         kirimCountdown();
+        //     }
+        // });
+        // Daftar pernyataan dan sisi
+        const choices =<?php echo json_encode($pernyataan->toArray()); ?>;
+        // const choices = [
+        //     {
+        //         pernyataan: 'Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!',
+        //         sisi: 'Pro'
+        //     },
+        //     {
+        //         pernyataan: 'BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 ',
+        //         sisi: 'Kontra'
+        //     }
+        // ];
+
+        $(document).on('keypress', function (e) {
+            if (e.which == 32) {
+                startRandom();
+            }
+        });
+
+        function startRandom() {
+            const intervalTime = 100; // Interval waktu dalam milidetik
+            const duration = 3000; // Durasi animasi dalam milidetik
+
+            const pernyataanElement = document.getElementById('randomPernyataan');
+            const sisiElement = document.getElementById('randomSisi');
+            let interval;
+
+            const startAnimation = () => {
+                pernyataanElement.classList.add('animate');
+                sisiElement.classList.add('animate');
+                interval = setInterval(() => {
+                    const randomIndex = Math.floor(Math.random() * choices.length);
+                    const choice = choices[randomIndex];
+                    pernyataanElement.textContent = choice.pernyataan;
+                    sisiElement.textContent = choice.sisi;
+
+                    // Ubah warna berdasarkan pilihan selama animasi
+                    // if (choice.sisi === 'Pro') {
+                    //     sisiElement.style.backgroundColor = 'lightgreen';
+                    // } else if (choice.sisi === 'Kontra') {
+                    //     sisiElement.style.backgroundColor = 'lightcoral';
+                    // }
+                }, intervalTime);
+            };
+
+            const stopAnimation = () => {
+                clearInterval(interval);
+                pernyataanElement.classList.remove('animate');
+                sisiElement.classList.remove('animate');
+                const finalIndex = Math.floor(Math.random() * choices.length);
+                const choice = choices[finalIndex];
+                pernyataanElement.textContent = choice.pernyataan;
+                sisiElement.textContent = choice.sisi;
+
+                // Ubah warna berdasarkan pilihan akhir
+                // if (choice.sisi === 'Pro') {
+                //     sisiElement.style.backgroundColor = 'lightgreen';
+                // } else if (choice.sisi === 'Kontra') {
+                //     sisiElement.style.backgroundColor = 'lightcoral';
+                // }
+
+                startCountdown();
+                kirimCountdown();
+                console.log(choice); // Hasilnya
+            };
+
+            startAnimation();
+            setTimeout(stopAnimation, duration);
+        }
     </script>
 
     <script>
