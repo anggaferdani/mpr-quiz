@@ -147,7 +147,7 @@
                                 <label class="form-selectgroup-item flex-fill my-2 d-flex gap-2 justify-content-between">
                                     <!-- Pass the ID of the hidden input field to the addPoints function -->
                                     <button type="button" class="btn btn-primary benar"
-                                            id="btn-{{str_replace(' ', '-', $jwb->jawaban)}}"
+                                            id="btn-{{str_replace([' ', '.'], '-', $jwb->jawaban)}}"
                                             onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar
                                     </button>
                                     <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
@@ -236,10 +236,17 @@
             @endforeach
         </div>
     </div>
+    <button onclick="testing()">testing</button>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"
+        integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
-// Add event listener to check if any radio button is selected
+
+
+    // Add event listener to check if any radio button is selected
 document.addEventListener('DOMContentLoaded', function() {
     var radioButtons = document.querySelectorAll('input[name="idtim"]');
     var startButtons = document.querySelectorAll('.btn.btn-primary.btn-icon-text');
@@ -254,87 +261,65 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+    $(document).ready(function () {
+        console.log("asdasd")
+    })
+
 </script>
 
 <script>
-    // Object to store click counts for each button
-    var clickCounts = {};
-    // Initialize Pusher with Pusher app key from .env
-    const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
-    const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
-    const pusher = new Pusher(pusherKey, {
-        cluster: pusherCluster,
-        encrypted: true, // Add this if you have encryption enabled on Pusher
-    });
 
-    const channel3 = pusher.subscribe('channel-addPoints');
-    channel3.bind('event-addPoints', function (data) {
-        // Handle received quiz data
-        // console.log('Jawaban diterima:', data);
-
-        // $('.jawaban .JawabanJuri').each(function() {
-        //     // Get the value of class JawabanJuri
-        var jawabanJuri = data.message.jawaban.replace(/ /g, '-');
-        //
-        //     // console.log("asdasd :" +data.message.jawaban)
-        //
-        //     // Check if the value matches with data.message.jawaban
-        //     if (jawabanJuri === data.message.jawaban) {
-        //         // Add the class 'JawabanJuriAktif' to the parent div
-        //         $(this).closest('.jawaban').addClass('JawabanJuriAktif');
-        //     }
-        // });
-
-        var buttonId = 'btn-' + jawabanJuri;
-        let button = $('#' + buttonId);
-
-// Mengganti teks tombol
-        button.text('10 poin');
-
-// Menghapus kelas 'btn-primary' dan menambahkan kelas 'btn-success'
-        button.removeClass('btn-primary').addClass('btn-success');
-
-// Menonaktifkan tombol
-        button.prop('disabled', true);
-
-    });
-
-
-    // Function to add points
-    function addPoints(button, inputId, jawaban, idJawaban) {
-        // Get the click count for this button
-        var clickCount = clickCounts[inputId] || 0;
-        // console.log('inputId', inputId)
-
-        // Exit function if maximum clicks reached
-        if (clickCount >= 10) {
-            return;
+        function testing() {
+            console.log('asdasdasd')
         }
 
-        // Get the hidden input field corresponding to this button
-        var poinInput = document.getElementById(inputId);
+{{--        // Object to store click counts for each button--}}
+        var clickCounts = {};
+{{--        // Initialize Pusher with Pusher app key from .env--}}
+{{--        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";--}}
+{{--        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";--}}
+{{--        const pusher = new Pusher(pusherKey, {--}}
+{{--            cluster: pusherCluster,--}}
+{{--            encrypted: true, // Add this if you have encryption enabled on Pusher--}}
+{{--        });--}}
 
-        // Get the current points and parse it as an integer
-        var currentPoints = parseInt(poinInput.value) || 0;
 
-        // Add 10 points
-        var newPoints = currentPoints + 10;
+        // Function to add points
+        function addPoints(button, inputId, jawaban, idJawaban) {
+            // Get the click count for this button
+            var clickCount = clickCounts[inputId] || 0;
+            // console.log('inputId', inputId)
 
-        // Set the new value to the hidden input field
-        poinInput.value = newPoints;
+            // Exit function if maximum clicks reached
+            if (clickCount >= 10) {
+                return;
+            }
 
-        // Update button text and classes
-        button.textContent = '10 poin';
-        button.classList.remove('btn-primary');
-        button.classList.add('btn-success');
-        button.disabled = true;
+            // Get the hidden input field corresponding to this button
+            var poinInput = document.getElementById(inputId);
 
-        var cancelButton = button.nextElementSibling; // Assuming the cancelPoints button is located immediately after the addPoints button
-        cancelButton.disabled = false;
-        // Update click count for this button
-        clickCounts[inputId] = clickCount + 1;
+            // Get the current points and parse it as an integer
+            var currentPoints = parseInt(poinInput.value) || 0;
 
-        $.ajax({
+            // Add 10 points
+            var newPoints = currentPoints + 10;
+
+            // Set the new value to the hidden input field
+            poinInput.value = newPoints;
+
+            // Update button text and classes
+            button.textContent = '10 poin';
+            button.classList.remove('btn-primary');
+            button.classList.add('btn-success');
+            button.disabled = true;
+
+            var cancelButton = button.nextElementSibling; // Assuming the cancelPoints button is located immediately after the addPoints button
+            cancelButton.disabled = false;
+            // Update click count for this button
+            clickCounts[inputId] = clickCount + 1;
+
+            $.ajax({
                 method: 'GET',
                 url: '/sesi1-juri',
                 data: {
@@ -342,33 +327,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     // status: 'Benar',
                     jawaban: jawaban,
                 },
-                success: function(response) {
+                success: function (response) {
                     console.log('Data jawaban successfully sent to Pusher.');
                     console.log('jawaban', jawaban)
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.error('Failed to send Data jawaban to Pusher:', error);
                 }
             });
-    }
+        }
 
-    function cancelPoints(button, inputId) {
-        // Get the hidden input field corresponding to this button
-        var poinInput = document.getElementById(inputId);
+        function cancelPoints(button, inputId) {
+            // Get the hidden input field corresponding to this button
+            var poinInput = document.getElementById(inputId);
 
-        // Set the points to 0
-        poinInput.value = 0;
+            // Set the points to 0
+            poinInput.value = 0;
 
-        // Update button text and classes
-        var addButton = button.previousElementSibling.previousElementSibling; // Assuming the addPoints button is located before the cancelPoints button
-        addButton.textContent = 'Benar';
-        addButton.classList.remove('btn-success');
-        addButton.classList.add('btn-primary');
-        addButton.disabled = false;
-    }
+            // Update button text and classes
+            var addButton = button.previousElementSibling.previousElementSibling; // Assuming the addPoints button is located before the cancelPoints button
+            addButton.textContent = 'Benar';
+            addButton.classList.remove('btn-success');
+            addButton.classList.add('btn-primary');
+            addButton.disabled = false;
+        }
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <script>
 $(document).ready(function() {
@@ -511,5 +495,40 @@ $(document).ready(function() {
 
             console.log(idJawaban);
         });
+
+
+        const channel3 = pusher.subscribe('channel-addPoints');
+        channel3.bind('event-addPoints', function (data) {
+            // Handle received quiz data
+            // console.log('Jawaban diterima:', data);
+
+            // $('.jawaban .JawabanJuri').each(function() {
+            //     // Get the value of class JawabanJuri
+            var jawabanJuri = data.message.jawaban.replace(/[\s.]/g, '-');
+            //     // console.log("asdasd :" +data.message.jawaban)
+            //
+            //     // Check if the value matches with data.message.jawaban
+            //     if (jawabanJuri === data.message.jawaban) {
+            //         // Add the class 'JawabanJuriAktif' to the parent div
+            //         $(this).closest('.jawaban').addClass('JawabanJuriAktif');
+            //     }
+            // });
+
+            var buttonId = 'btn-' + jawabanJuri;
+            let button = $('#' + buttonId);
+
+
+// Mengganti teks tombol
+            button.text('10 poin');
+
+// Menghapus kelas 'btn-primary' dan menambahkan kelas 'btn-success'
+            button.removeClass('btn-primary').addClass('btn-success');
+
+// Menonaktifkan tombol
+            button.prop('disabled', true);
+
+        });
+
+
     </script>
 @endpush

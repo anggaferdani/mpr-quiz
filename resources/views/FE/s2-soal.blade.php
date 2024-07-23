@@ -215,7 +215,7 @@
        <div class="container" style="width: 900px">
            <div class="spinwheel d-flex flex-column align-items-center justify-content-center">
                <div id="randomPernyataan">-</div>
-               <div class=" mt-5" id="randomSisi">-</div>
+               <div class=" mt-5" id="randomSisi">-</div>1
            </div>
        </div>
     </div>
