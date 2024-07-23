@@ -166,8 +166,10 @@ class FrontendController extends Controller
        $dataString = $request->query('data'); // Mendapatkan data dari query string
        $data = json_decode(urldecode($dataString), true); // Mendekode data dari string JSON
 
-       // Tampilkan tampilan /sesi2-soal
-       return view('FE.s2-soal', ['data' => $data]); // Mengirimkan data ke tampilan
+        $pernyataan = Pernyataan::all();
+
+        // Tampilkan tampilan /sesi2-soal
+       return view('FE.s2-soal', ['data' => $data,'pernyataan'=>$pernyataan]); // Mengirimkan data ke tampilan
     }
 
     public function openingSesi3(Request $request)

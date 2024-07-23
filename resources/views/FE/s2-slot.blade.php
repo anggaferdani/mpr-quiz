@@ -100,16 +100,9 @@
 </head>
 <body>
 <div class="container">
-{{--    <p class="text-danger">asdasd</p>--}}
-
     <div class="spinwheel d-flex flex-column align-items-center justify-content-center">
-        {{--    <div class="d-flex ">--}}
-
         <div id="randomPernyataan">-</div>
-        <div class="badge  mt-5" id="randomSisi">-</div>
-
-
-        {{--    </div>--}}
+        <div class=" mt-5" id="randomSisi">-</div>
     </div>
 </div>
 
@@ -151,11 +144,11 @@
                 sisiElement.textContent = choice.sisi;
 
                 // Ubah warna berdasarkan pilihan selama animasi
-                if (choice.sisi === 'Pro') {
-                    sisiElement.style.backgroundColor = 'lightgreen';
-                } else if (choice.sisi === 'Kontra') {
-                    sisiElement.style.backgroundColor = 'lightcoral';
-                }
+                // if (choice.sisi === 'Pro') {
+                //     sisiElement.style.backgroundColor = 'lightgreen';
+                // } else if (choice.sisi === 'Kontra') {
+                //     sisiElement.style.backgroundColor = 'lightcoral';
+                // }
             }, intervalTime);
         };
 
@@ -169,11 +162,11 @@
             sisiElement.textContent = choice.sisi;
 
             // Ubah warna berdasarkan pilihan akhir
-            if (choice.sisi === 'Pro') {
-                sisiElement.style.backgroundColor = 'lightgreen';
-            } else if (choice.sisi === 'Kontra') {
-                sisiElement.style.backgroundColor = 'lightcoral';
-            }
+            // if (choice.sisi === 'Pro') {
+            //     sisiElement.style.backgroundColor = 'lightgreen';
+            // } else if (choice.sisi === 'Kontra') {
+            //     sisiElement.style.backgroundColor = 'lightcoral';
+            // }
 
             console.log(choice); // Hasilnya
         };
