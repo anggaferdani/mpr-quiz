@@ -115,37 +115,35 @@
                                 </div>
                             </div> --}}
 
-                            @foreach($pernyataan->pointers as $pointer)
-                                <div class="modal fade" id="pernyataan-{{ $pernyataan->id }}-modal" data-modal-id="{{$pointer->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Poin Poin - <span class="textteam"></h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <form action="{{url('/op/savepoin')}}" method="post">
-                                                {{ csrf_field() }}
-                                                <div class="modal-body">
-
-                                                    @foreach($pointer->pointer as $jwb)
-                                                        <p class="fw-bold">{{$jwb->jawaban}}</p><br>
-                                                    @endforeach
-
-                                                    <input type="hidden" value="2" name="sesi">
-                                                    <input type="hidden" value="{{$pointer->id}}" name="id_pertanyaan">
-                                                    <input type="hidden" class="teamteam" name="id_team">
-                                                    <label for="">Input Poin<span class="text-danger">*</span></label>
-                                                    <input type="number" class="form-control" name="poin">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save Poin</button>
-                                                </div>
-                                            </form>
+                            <div class="modal fade" id="pernyataan-{{ $pernyataan->id }}-modal" data-modal-id="pernyataan-{{ $pernyataan->id }}-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Poin Poin - <span class="textteam"></h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
+                                        <form action="{{url('/op/savepoin')}}" method="post">
+                                            {{ csrf_field() }}
+                                            <div class="modal-body">
+
+                                                @foreach($pernyataan->pointers as $pointer)
+                                                    <p class="fw-bold">{{$pointer->penjelasan}}</p><br>
+                                                @endforeach
+
+                                                <input type="hidden" value="2" name="sesi">
+                                                {{-- <input type="hidden" value="{{$pointer->id}}" name="id_pertanyaan"> --}}
+                                                <input type="hidden" class="teamteam" name="id_team">
+                                                <label for="">Input Poin<span class="text-danger">*</span></label>
+                                                <input type="number" class="form-control" name="poin">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save Poin</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
-                            @endforeach
+                            </div>
 
                             {{-- <div class="modal fade" id="tanya{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tanyaLabel" aria-hidden="true">
                                 <div class="modal-dialog">

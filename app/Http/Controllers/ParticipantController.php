@@ -42,41 +42,56 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        
-            $newParticipant = new Participant();
-            $newParticipant->id_team = $request->id_team;
-            $newParticipant->poin = $request->poin;
-            $newParticipant->id_pertanyaan = $request->id_pertanyaan;
-            $newParticipant->tanggal = Carbon::now();
-            $newParticipant->sesi = $request->sesi;
-            $newParticipant->save();
+        $request->validate([
+            'id_team' => 'required|integer',
+            'poin' => 'required|integer'
+        ]);
 
-            // Mengirim data ke Pusher
-            $pusher = new Pusher(
-                env('PUSHER_APP_KEY'),
-                env('PUSHER_APP_SECRET'),
-                env('PUSHER_APP_ID'),
-                [
-                    'cluster' => env('PUSHER_APP_CLUSTER'),
-                    'useTLS' => true,
-                ]
-            );
+        $hasilSesiDua = Participant::firstOrCreate([
+            'id_team' => $request->id_team,
+            'sesi' => 2
+        ], [
+            'id_pertanyaan' => null,
+            'poin' => $request->poin,
+            'tanggal' => now()
+        ]);
 
-            // Data yang akan dikirimkan ke Pusher
-            $data = [
-                'id' => $newParticipant->id,
-                'id_team' => $newParticipant->id_team,
-                'poin' => $newParticipant->poin,
-                'id_pertanyaan' => $newParticipant->id_pertanyaan,
-                'tanggal' => $newParticipant->tanggal,
-                'sesi' => $newParticipant->sesi,
-            ];
+        // ! WIP
 
-            // Mengirim pesan ke Pusher
-            $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
+        // $newParticipant = new Participant();
 
-            return back();
+        // $newParticipant->id_team = $request->id_team;
+        // $newParticipant->poin = $request->poin;
+        // $newParticipant->id_pertanyaan = $request->id_pertanyaan;
+        // $newParticipant->tanggal = Carbon::now();
+        // $newParticipant->sesi = $request->sesi;
+        // $newParticipant->save();
+
+        // ! Mengirim data ke Pusher
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true,
+            ]
+        );
+
+        // ! Data yang akan dikirimkan ke Pusher
+        $data = [
+            'id' => $hasilSesiDua->id,
+            'id_team' => $hasilSesiDua->id_team,
+            'poin' => $hasilSesiDua->poin,
+            'id_pertanyaan' => $hasilSesiDua->id_pertanyaan,
+            'tanggal' => $hasilSesiDua->tanggal,
+            'sesi' => $hasilSesiDua->sesi,
+        ];
+
+        // ! Mengirim pesan ke Pusher
+        $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
+
+        return back();
     }
 
     /**
