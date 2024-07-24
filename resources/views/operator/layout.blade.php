@@ -67,6 +67,12 @@
     <div class="sidebar-menu">
         <ul class="menu">
             <li class="sidebar-title">Menu</li>
+            <li class="sidebar-item {{ (request()->is('op/perolehan-nilai')) ? 'active' :  '' }}">
+                <a href="/op/perolehan-nilai" class='sidebar-link'>
+                <i class="bi bi-check-circle"></i>
+                <span>Perolehan Nilai</span>
+                </a>
+            </li>
             <li class="sidebar-item {{ (request()->is('op/sesi-1')) ? 'active' :  '' }}" onclick="movesesimen('sesi-1')">
                 <a href="/op/sesi-1" class='sidebar-link' id="sesi-1-link" >
                 <i class="bi bi-1-square"></i>
@@ -77,12 +83,6 @@
                 <a href="/op/sesi-2" class='sidebar-link' id="sesi-2-link" >
                 <i class="bi bi-2-square"></i>
                     <span>Sesi 2</span>
-                </a>
-            </li>
-            <li class="sidebar-item {{ (request()->is('op/perolehan-nilai')) ? 'active' :  '' }}">
-                <a href="/op/perolehan-nilai" class='sidebar-link'>
-                <i class="bi bi-check-circle"></i>
-                <span>Perolehan Nilai</span>
                 </a>
             </li>
             @php

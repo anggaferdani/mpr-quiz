@@ -3,17 +3,18 @@
 use App\Events\Device2;
 use App\Events\Device3;
 use App\Events\DeviceSatu;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\JawabanController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ParticipantController;
-use App\Http\Controllers\PertanyaanController;
-use App\Http\Controllers\PusherController;
-use App\Http\Controllers\Sesi3Controller;
-use App\Http\Controllers\ShotcutController;
-use App\Http\Controllers\TemaPertanyaanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Sesi2Controller;
+use App\Http\Controllers\Sesi3Controller;
+use App\Http\Controllers\PusherController;
+use App\Http\Controllers\JawabanController;
+use App\Http\Controllers\ShotcutController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\TemaPertanyaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,7 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::get('/sesi-3', [Sesi3Controller::class, 'index'])->name('operator.sesi3');
     Route::post('/post/sesi-3', [Sesi3Controller::class, 'store'])->name('operator.post.sesi3');
     Route::get('/sesi-3', [Sesi3Controller::class, 'index'])->name('operator.sesi3');
+    Route::post('/sesi-2/setpoin', [Sesi2Controller::class, 'setpoin'])->name('operator.sesi2.setpoin');
     Route::post('/sesi-3/setpoin', [Sesi3Controller::class, 'setpoin'])->name('operator.sesi3.setpoin');
     Route::post('/sesi-3/minpoin', [Sesi3Controller::class, 'minpoin'])->name('operator.sesi3.minpoin');
     Route::get('/logout', [LoginController::class, 'logout'])->name('operator.logout');

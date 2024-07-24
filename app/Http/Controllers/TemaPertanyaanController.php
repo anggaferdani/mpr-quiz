@@ -110,7 +110,7 @@ class TemaPertanyaanController extends Controller
     {
         event(new PernyataanSesi2([
             'pernyataan' => $request->pernyataan,
-            'ponters' => $request->ponters,
+            'pointers' => $request->pointers,
             'selectedValue' => $request->selectedValue,
             "pernyataanId" => $request->pernyataanId,
             "no" => $request->no,

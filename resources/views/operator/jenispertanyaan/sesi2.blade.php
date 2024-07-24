@@ -105,7 +105,7 @@
                                     @php
                                         $pointers = [];
                                         foreach ($pernyataan->pointers as $pointer) {
-                                            $pointers[] = $pointer->penjelasan;
+                                            $pointers[] = $pointer;
                                         }
                                         $pointersJson = json_encode($pointers);
                                     @endphp
@@ -122,13 +122,13 @@
                                             <h1 class="modal-title fs-5" id="exampleModalLabel">Poin Poin - <span class="textteam"></h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <form action="{{url('/op/savepoin')}}" method="post">
-                                            {{ csrf_field() }}
+                                        <form action="{{ route('operator.sesi2.setpoin') }}" method="post">
+                                            @csrf
                                             <div class="modal-body">
 
-                                                @foreach($pernyataan->pointers as $pointer)
+                                                {{-- @foreach($pernyataan->pointers as $pointer)
                                                     <p class="fw-bold">{{$pointer->penjelasan}}</p><br>
-                                                @endforeach
+                                                @endforeach --}}
 
                                                 <input type="hidden" value="2" name="sesi">
                                                 <input type="hidden" value="{{ null }}" name="id_pertanyaan">
@@ -221,7 +221,7 @@
             method: 'POST',
             data: {
                 pernyataan: pernyataan,
-                ponters: pointers,
+                pointers: pointers,
                 selectedValue: selectedValue,
                 pernyataanId: pernyataanId,
                 no: no,
