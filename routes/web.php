@@ -35,6 +35,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/postlogin', [LoginController::class, 'postlogin']);
 
+Route::post('/sesi-2/pusher/kirim-pernyataan-sesi2', [TemaPertanyaanController::class, 'kirimPernyataanSesi2'])->name('operator.sesi2.pusher.kirim-pernyataan-sesi2');
 Route::post('/sesi-3/pusher/kirim-pertanyaan-sesi3', [Sesi3Controller::class, 'kirimPertanyaanSesi3'])->name('operator.sesi3.pusher.kirim-pertanyaan-sesi3');
 
 Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){

@@ -214,8 +214,8 @@
 {{--        </div>--}}
        <div class="container" style="width: 900px">
            <div class="spinwheel d-flex flex-column align-items-center justify-content-center">
-               <div id="randomPernyataan">-</div>
-               <div class=" mt-5" id="randomSisi">-</div>
+               <div id="pernyataanSesi2">-</div>
+               <div class=" mt-5" id="sisiSesi2">-</div>
            </div>
        </div>
     </div>
@@ -234,18 +234,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+    <script>
+        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        const pusher = new Pusher(pusherKey, {
+            cluster: pusherCluster,
+            encrypted: true,
+        });
+
+        const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
+        kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function(data) {
+            console.log(data);
+            document.getElementById('pernyataanSesi2').innerText = data.message.pernyataan;
+            document.getElementById('sisiSesi2').innerText = data.message.selectedValue;
+        });
+    </script>
+
 
     <script>
         var countdownSeconds = 120; // Ubah kembali ke 20 jika menggunakan detik
         var countdownMilliseconds = countdownSeconds * 1000; // Konversi detik ke milidetik
         var countdownInterval;
-
-        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
-        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
-        const pusher = new Pusher(pusherKey, {
-            cluster: pusherCluster,
-            encrypted: true, // Add this if you have encryption enabled on Pusher
-        });
 
         // Pindah sesi by operator
         const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
@@ -360,72 +369,72 @@
             }
         });
 
-        function startRandom() {
-            const intervalTime = 100; // Interval waktu dalam milidetik
-            const duration = 3000; // Durasi animasi dalam milidetik
+        // function startRandom() {
+        //     const intervalTime = 100; // Interval waktu dalam milidetik
+        //     const duration = 3000; // Durasi animasi dalam milidetik
 
-            const pernyataanElement = document.getElementById('randomPernyataan');
-            const sisiElement = document.getElementById('randomSisi');
-            let interval;
+        //     const pernyataanElement = document.getElementById('randomPernyataan');
+        //     const sisiElement = document.getElementById('randomSisi');
+        //     let interval;
 
-            const startAnimation = () => {
-                pernyataanElement.classList.add('animate');
-                sisiElement.classList.add('animate');
-                interval = setInterval(() => {
-                    const randomIndex = Math.floor(Math.random() * choices.length);
-                    const choice = choices[randomIndex];
-                    pernyataanElement.textContent = choice.pernyataan;
-                    sisiElement.textContent = choice.sisi;
+        //     const startAnimation = () => {
+        //         pernyataanElement.classList.add('animate');
+        //         sisiElement.classList.add('animate');
+        //         interval = setInterval(() => {
+        //             const randomIndex = Math.floor(Math.random() * choices.length);
+        //             const choice = choices[randomIndex];
+        //             pernyataanElement.textContent = choice.pernyataan;
+        //             sisiElement.textContent = choice.sisi;
 
-                    // Ubah warna berdasarkan pilihan selama animasi
-                    // if (choice.sisi === 'Pro') {
-                    //     sisiElement.style.backgroundColor = 'lightgreen';
-                    // } else if (choice.sisi === 'Kontra') {
-                    //     sisiElement.style.backgroundColor = 'lightcoral';
-                    // }
-                }, intervalTime);
-            };
+        //             // Ubah warna berdasarkan pilihan selama animasi
+        //             // if (choice.sisi === 'Pro') {
+        //             //     sisiElement.style.backgroundColor = 'lightgreen';
+        //             // } else if (choice.sisi === 'Kontra') {
+        //             //     sisiElement.style.backgroundColor = 'lightcoral';
+        //             // }
+        //         }, intervalTime);
+        //     };
 
-            const stopAnimation = () => {
-                clearInterval(interval);
-                pernyataanElement.classList.remove('animate');
-                sisiElement.classList.remove('animate');
-                const finalIndex = Math.floor(Math.random() * choices.length);
-                const choice = choices[finalIndex];
-                pernyataanElement.textContent = choice.pernyataan;
-                sisiElement.textContent = choice.sisi;
+        //     const stopAnimation = () => {
+        //         clearInterval(interval);
+        //         pernyataanElement.classList.remove('animate');
+        //         sisiElement.classList.remove('animate');
+        //         const finalIndex = Math.floor(Math.random() * choices.length);
+        //         const choice = choices[finalIndex];
+        //         pernyataanElement.textContent = choice.pernyataan;
+        //         sisiElement.textContent = choice.sisi;
 
-                // Ubah warna berdasarkan pilihan akhir
-                // if (choice.sisi === 'Pro') {
-                //     sisiElement.style.backgroundColor = 'lightgreen';
-                // } else if (choice.sisi === 'Kontra') {
-                //     sisiElement.style.backgroundColor = 'lightcoral';
-                // }
+        //         // Ubah warna berdasarkan pilihan akhir
+        //         // if (choice.sisi === 'Pro') {
+        //         //     sisiElement.style.backgroundColor = 'lightgreen';
+        //         // } else if (choice.sisi === 'Kontra') {
+        //         //     sisiElement.style.backgroundColor = 'lightcoral';
+        //         // }
 
-                startCountdown();
+        //         startCountdown();
 
-                kirimCountdown();
+        //         kirimCountdown();
 
-                $.ajax({
-                    method: 'GET',
-                    url: '/sesi2-soal',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        data_pernyataan: choice
-                    },
-                    success: function(response) {
-                        console.log('Question successfully sent to Pusher.');
-                    },
-                    error: function(xhr, status, error) {
-                        console.error('Failed to send question to Pusher:', error);
-                    }
-                });
-            };
+        //         $.ajax({
+        //             method: 'GET',
+        //             url: '/sesi2-soal',
+        //             data: {
+        //                 _token: '{{ csrf_token() }}',
+        //                 data_pernyataan: choice
+        //             },
+        //             success: function(response) {
+        //                 console.log('Question successfully sent to Pusher.');
+        //             },
+        //             error: function(xhr, status, error) {
+        //                 console.error('Failed to send question to Pusher:', error);
+        //             }
+        //         });
+        //     };
 
-            startAnimation();
+        //     startAnimation();
 
-            setTimeout(stopAnimation, duration);
-        }
+        //     setTimeout(stopAnimation, duration);
+        // }
     </script>
   </body>
 </html>

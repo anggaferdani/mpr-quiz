@@ -98,7 +98,19 @@
                         <td class="text-center">{{$pernyataan->pernyataan}}</td>
                         <td class="">
                             <div class="d-flex justify-content-center">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#pernyataan-{{ $pernyataan->id }}-modal" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled> Mulai </button>
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#pernyataan-{{ $pernyataan->id }}-modal" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled
+                                    data-pernyataan="{{ $pernyataan->pernyataan }}"
+                                    @php
+                                        $pointers = [];
+                                        foreach ($pernyataan->pointers as $pointer) {
+                                            $pointers[] = $pointer->penjelasan;
+                                        }
+                                        $pointersJson = json_encode($pointers);
+                                    @endphp
+                                    data-pointers='{{ $pointersJson }}'
+                                    >
+                                    Mulai
+                                </button>
                             </div>
 
                             <div class="modal fade" id="pernyataan-{{ $pernyataan->id }}-modal" data-modal-id="pernyataan-{{ $pernyataan->id }}-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -161,14 +173,14 @@
         <h5 class="mt-4">Pilih Sisi</h5>
         <div class="d-flex gap-4">
             <div class="form-check">
-                <input type="radio" class="pernyataan-radios form-check-input" name="sisi_pernyataan" id="pro" value="pro">
+                <input type="radio" class="pernyataan-radios form-check-input radio-sisi-sesi-2" name="sisi_pernyataan" id="pro" value="pro">
                 <label class="form-check-label text-success font-weight-bold" for="pro">
                     PRO
                 </label>
             </div>
 
             <div class="form-check">
-                <input type="radio" class="pernyataan-radios form-check-input" name="sisi_pernyataan" id="kontra" value="kontra">
+                <input type="radio" class="pernyataan-radios form-check-input radio-sisi-sesi-2" name="sisi_pernyataan" id="kontra" value="kontra">
                 <label class="form-check-label text-danger font-weight-bold" for="kontra">
                     KONTRA
                 </label>
@@ -176,34 +188,72 @@
         </div>
     </div>
 </div>
-
+@endsection
+@push('scripts')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-// Add event listener to check if any radio button is selected
-document.addEventListener('DOMContentLoaded', function() {
-    var radioButtons = document.querySelectorAll('.pernyataan-radios');
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.radio-sisi-sesi-2').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                let selectedValue = this.value;
+                window.selectedRadioValue = selectedValue;
+            });
+        });
 
-    var startButtons = document.querySelectorAll('.btn.btn-primary.btn-icon-text');
-
-    radioButtons.forEach(function(radioButton) {
-
-        radioButton.addEventListener('change', function() {
-            const groupNameRadio = document.querySelector('.pernyataan-radios[name="idtim"]:checked');
-            const sisiPernyataanRadio = document.querySelector('.pernyataan-radios[name="sisi_pernyataan"]:checked');
-
-            const areBothChecked = groupNameRadio && sisiPernyataanRadio;
-
-            if (areBothChecked) {
-                startButtons.forEach(function(startButton) {
-                    startButton.disabled = false; // Enable button if a radio button is selected
-                });
-            }
+        document.querySelectorAll('button[data-bs-toggle="modal"]').forEach(function(button) {
+            button.addEventListener('click', function() {
+                let pernyataan = this.getAttribute('data-pernyataan');
+                let pointers = JSON.parse(this.getAttribute('data-pointers'));
+                let selectedValue = window.selectedRadioValue;
+                sendPusherData(pernyataan, pointers, selectedValue);
+            });
         });
     });
-});
+
+
+    function sendPusherData(pernyataan, pointers, selectedValue) {
+        $.ajax({
+            url: '/sesi-2/pusher/kirim-pernyataan-sesi2',
+            method: 'POST',
+            data: {
+                pernyataan: pernyataan,
+                ponters: pointers,
+                selectedValue: selectedValue,
+                _token: $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var radioButtons = document.querySelectorAll('.pernyataan-radios');
 
+        var startButtons = document.querySelectorAll('.btn.btn-primary.btn-icon-text');
+
+        radioButtons.forEach(function(radioButton) {
+
+            radioButton.addEventListener('change', function() {
+                const groupNameRadio = document.querySelector('.pernyataan-radios[name="idtim"]:checked');
+                const sisiPernyataanRadio = document.querySelector('.pernyataan-radios[name="sisi_pernyataan"]:checked');
+
+                const areBothChecked = groupNameRadio && sisiPernyataanRadio;
+
+                if (areBothChecked) {
+                    startButtons.forEach(function(startButton) {
+                        startButton.disabled = false; // Enable button if a radio button is selected
+                    });
+                }
+            });
+        });
+    });
+</script>
 <script>
     function tambahInputPro() {
         const inputProContainer = document.getElementById('inputs-pro');
@@ -222,39 +272,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     }
 </script>
-
 <script>
-$(document).ready(function() {
-    // Script untuk filter input pada saat modal muncul
-    $('input[data-modalid]').on('input', function () {
-        // Mendapatkan nilai ID modal yang terkait dari atribut data
-        var modalId = $(this).data('modalid');
+    $(document).ready(function() {
+        // Script untuk filter input pada saat modal muncul
+        $('input[data-modalid]').on('input', function () {
+            // Mendapatkan nilai ID modal yang terkait dari atribut data
+            var modalId = $(this).data('modalid');
 
-        // Membuat ID input sesuai dengan ID modal yang terkait
-        var inputId = 'searchInput' + modalId;
+            // Membuat ID input sesuai dengan ID modal yang terkait
+            var inputId = 'searchInput' + modalId;
 
-        // Lakukan filter atau manipulasi sesuai kebutuhan Anda
-        var inputValue = $(this).val();
-        console.log('Input value for modal ' + modalId + ': ' + inputValue);
-        // Lakukan sesuatu dengan nilai input ...
-    });
+            // Lakukan filter atau manipulasi sesuai kebutuhan Anda
+            var inputValue = $(this).val();
+            console.log('Input value for modal ' + modalId + ': ' + inputValue);
+            // Lakukan sesuatu dengan nilai input ...
+        });
 
-    // Script untuk filter tabel
-    $('.filterPertanyaan').on('keyup', function() {
-        var value = $(this).val().toLowerCase();
-        var modalId = $(this).data('modalid');
-        // Menggunakan selektor yang tepat untuk mencari elemen yang perlu difilter
-        $('table tr.filterPertanyaan'+modalId).filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        // Script untuk filter tabel
+        $('.filterPertanyaan').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            var modalId = $(this).data('modalid');
+            // Menggunakan selektor yang tepat untuk mencari elemen yang perlu difilter
+            $('table tr.filterPertanyaan'+modalId).filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
     });
-});
 </script>
-
 <script>
     $(document).on('click', '.tambahjawaban', function(){
-    addInputField();
-});
+        addInputField();
+    });
 
     function addInputField(){
       var inputField =
@@ -275,7 +323,6 @@ $(document).ready(function() {
         $(this).parents(".form-row").remove();
     });
 </script>
-
 <script>
    $(document).ready(function() {
     // Additional code for setting the value from the foreach loop
@@ -303,9 +350,8 @@ $(document).ready(function() {
         $('.teamteam').val(selectedTeamId);
         $('.textteam').text(teamName);
     });
-});
+    });
 </script>
-
 <script>
     // Initialize Pusher with Pusher app key from .env
     const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
@@ -337,5 +383,4 @@ $(document).ready(function() {
         });
     }
 </script>
-
-@endsection
+@endpush
