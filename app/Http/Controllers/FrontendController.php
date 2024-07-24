@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Events\AddPoints;
-use App\Events\DeviceSatu;
 use App\Events\JawabanSesiSatu;
 use App\Events\KirimPertanyaanS2;
-use App\Events\MessageSent;
 use App\Events\moveSesi;
 use App\Events\PindahSesi;
 use App\Events\StartCountdown;
@@ -18,8 +16,6 @@ use App\Models\Setting;
 use App\Models\Team;
 use App\Models\TemaPertanyaan;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Pusher\Pusher;
 
 class FrontendController extends Controller
@@ -163,7 +159,7 @@ class FrontendController extends Controller
     //     return view('FE.s1-quiz', compact('pertanyaan'));
     // }
 
-    public function soalSesi2(Request $request)
+    public function soalSesi2(Request $request, $id)
     {
         $isAjaxPernyataan = $request->input('data_pernyataan');
 
@@ -187,7 +183,7 @@ class FrontendController extends Controller
        $dataString = $request->query('data'); // Mendapatkan data dari query string
        $data = json_decode(urldecode($dataString), true); // Mendekode data dari string JSON
 
-       $pernyataan = Pernyataan::all();
+       $pernyataan = Pernyataan::find($id);
 
         // Tampilkan tampilan /sesi2-soal
        return view('FE.s2-soal', ['data' => $data,'pernyataan'=>$pernyataan]); // Mengirimkan data ke tampilan

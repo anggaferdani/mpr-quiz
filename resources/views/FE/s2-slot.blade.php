@@ -11,7 +11,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
     <style>
@@ -25,155 +27,149 @@
             background-position: center;
         }
 
-        .swal2-container h2,
-        .swal2-title {
-            color: #fff !important;
-            font-size: 82px;
-            padding: 0 !important;
+        .box-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
         }
 
-        .swal2-popup {
-            padding: 1.5em 3em !important;
+        .box {
+            margin-left: 40px;
+            margin-right: 40px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border: 2px solid #CFAA5A;
+            background-color: white; /* Set default color to white */
         }
 
-        .swal2-show {
-            width: max-content !important;
-            padding: 5rem !important;
-            border-radius: 25px !important;
-            background: #E48F45 !important;
-            display: grid;
-        }
-
-        .swal2-confirm {
-            position: absolute;
-            left: -100vw;
-        }
-
-        .top-content h2 {
-            font-family: 'Press Start 2P', system-ui;
-            color: #5785DD;
-        }
-
-        .logo-top img {
-            width: 100%;
-            height: auto;
-            object-fit: contain;
+        .disabled {
+            border: 2px solid rgba(180, 164, 128, 0.66);
+            background-color: rgba(180, 164, 128, 0.66);
+        !important;
+            color: black !important;
         }
 
         .spinwheel {
             height: 100vh;
             margin-top: -2.5%;
         }
-
-        @media only screen and (max-width: 700px) {
-            .spinwheel {
-                scale: 60%;
-            }
-        }
-
-        #randomPernyataan {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 800;
-            transition: transform 0.1s ease;
-        }
-
-        #randomSisi {
-            font-size: 40px;
-            font-weight: 800;
-            transition: transform 0.1s ease;
-        }
-
-        .animate {
-            animation: bounce 0.5s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
     </style>
+
 </head>
 <body>
-<div class="container">
-    <div class="spinwheel d-flex flex-column align-items-center justify-content-center">
-        <div id="randomPernyataan">-</div>
-        <div class=" mt-5" id="randomSisi">-</div>
-    </div>
+
+<div class="spinwheel d-flex align-items-center justify-content-center">
+    <div class="box" id="box1">1</div>
+    <div class="box" id="box2">2</div>
+    <div class="box" id="box3">3</div>
+    <div class="box" id="box4">4</div>
+
+
 </div>
 
-<script>
-    // Daftar pernyataan dan sisi
-    const choices =<?php echo json_encode($pernyataan->toArray()); ?>;
-    // const choices = [
-    //     {
-    //         pernyataan: 'Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!',
-    //         sisi: 'Pro'
-    //     },
-    //     {
-    //         pernyataan: 'BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 ',
-    //         sisi: 'Kontra'
-    //     }
-    // ];
+<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
-    $(document).on('keypress', function (e) {
-        if (e.which == 32) {
-            startRandom();
-        }
+<script>
+    const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+    const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+    const pusher = new Pusher(pusherKey, {
+        cluster: pusherCluster,
+        encrypted: true,
     });
 
-    function startRandom() {
-        const intervalTime = 100; // Interval waktu dalam milidetik
-        const duration = 3000; // Durasi animasi dalam milidetik
+    const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
+    kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function (data) {
+        // console.log(data.message);
+        if (data.message.pernyataanId != null) {
+            location.href = "/sesi2-soal/" + data.message.pernyataanId + "?no=" + data.message.no + "&selectedValue=" + data.message.selectedValue
 
-        const pernyataanElement = document.getElementById('randomPernyataan');
-        const sisiElement = document.getElementById('randomSisi');
-        let interval;
+        }
 
-        const startAnimation = () => {
-            pernyataanElement.classList.add('animate');
-            sisiElement.classList.add('animate');
-            interval = setInterval(() => {
-                const randomIndex = Math.floor(Math.random() * choices.length);
-                const choice = choices[randomIndex];
-                pernyataanElement.textContent = choice.pernyataan;
-                sisiElement.textContent = choice.sisi;
+        // document.getElementById('pernyataanSesi2').innerText = data.message.pernyataan;
+        // document.getElementById('sisiSesi2').innerText = data.message.selectedValue;
+    });
+</script>
 
-                // Ubah warna berdasarkan pilihan selama animasi
-                // if (choice.sisi === 'Pro') {
-                //     sisiElement.style.backgroundColor = 'lightgreen';
-                // } else if (choice.sisi === 'Kontra') {
-                //     sisiElement.style.backgroundColor = 'lightcoral';
-                // }
-            }, intervalTime);
-        };
 
-        const stopAnimation = () => {
-            clearInterval(interval);
-            pernyataanElement.classList.remove('animate');
-            sisiElement.classList.remove('animate');
-            const finalIndex = Math.floor(Math.random() * choices.length);
-            const choice = choices[finalIndex];
-            pernyataanElement.textContent = choice.pernyataan;
-            sisiElement.textContent = choice.sisi;
+<script>
+    const boxes = document.querySelectorAll('.box');
+    const colors = ['#CFAA5A']; // Warna yang akan digunakan
+    let currentBoxIndex = 0;
+    let interval;
 
-            // Ubah warna berdasarkan pilihan akhir
-            // if (choice.sisi === 'Pro') {
-            //     sisiElement.style.backgroundColor = 'lightgreen';
-            // } else if (choice.sisi === 'Kontra') {
-            //     sisiElement.style.backgroundColor = 'lightcoral';
-            // }
-
-            console.log(choice); // Hasilnya
-        };
-
-        startAnimation();
-        setTimeout(stopAnimation, duration);
+    // Load status dari LocalStorage
+    function loadDisabledBoxes() {
+        boxes.forEach((box, index) => {
+            if (localStorage.getItem(`box${index + 1}`) === 'disabled') {
+                box.classList.add('disabled');
+            }
+        });
     }
+
+    // Simpan status ke LocalStorage
+    function saveDisabledBox(index) {
+        localStorage.setItem(`box${index + 1}`, 'disabled');
+    }
+
+    function startColorChange() {
+        interval = setInterval(() => {
+            // Cari box yang tidak di-disable
+            while (boxes[currentBoxIndex].classList.contains('disabled')) {
+                currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
+            }
+
+            // Reset semua box ke warna putih dan teks ke warna hitam
+            boxes.forEach(box => {
+                if (!box.classList.contains('disabled')) {
+                    box.style.backgroundColor = 'white';
+                    box.style.color = 'black';
+                }
+            });
+
+            // Ubah warna box saat ini dan teks ke warna putih
+            boxes[currentBoxIndex].style.backgroundColor = colors[0];
+            boxes[currentBoxIndex].style.color = 'white';
+
+            // Pindah ke box berikutnya
+            currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
+        }, 500); // Warna berubah setiap 500ms
+    }
+
+    function stopColorChange() {
+        clearInterval(interval);
+        boxes.forEach((box, index) => {
+            if (index === (currentBoxIndex - 1 + boxes.length) % boxes.length) {
+                // Simpan box yang terpilih sebagai disabled di LocalStorage
+                saveDisabledBox(index);
+                // box.classList.add('disabled');
+                box.style.backgroundColor = colors[0]; // Tetapkan warna yang sama
+                box.style.color = 'white'; // Tetapkan warna teks yang sama
+            } else {
+                // Reset box yang tidak dinonaktifkan ke warna putih
+                if (!box.classList.contains('disabled')) {
+                    box.style.backgroundColor = 'white'; // Kembali ke warna putih
+                    box.style.color = 'black'; // Kembali ke warna teks hitam
+                }
+            }
+        });
+    }
+
+    // Load status saat halaman di-load
+    document.addEventListener('DOMContentLoaded', loadDisabledBoxes);
+
+    document.addEventListener('keypress', function (e) {
+        if (e.which === 13) { // Jika tombol Enter ditekan
+            startColorChange();
+
+            // Tentukan waktu acak antara 5 dan 10 detik untuk menghentikan perubahan warna
+            const randomTime = Math.floor(Math.random() * 5000) + 5000; // 5000ms hingga 10000ms
+            setTimeout(stopColorChange, randomTime);
+        }
+    });
 </script>
 </body>
 </html>

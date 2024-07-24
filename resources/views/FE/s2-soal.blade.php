@@ -164,7 +164,7 @@
              }
          }
 
-         #randomPernyataan {
+         #pernyataanSesi2 {
              text-align: center;
              font-size: 28px;
              font-weight: 800;
@@ -213,9 +213,13 @@
 {{--            </div>--}}
 {{--        </div>--}}
        <div class="container" style="width: 900px">
+
            <div class="spinwheel d-flex flex-column align-items-center justify-content-center">
-               <div id="pernyataanSesi2">-</div>
-               <div class=" mt-5" id="sisiSesi2">-</div>
+               <div class="mb-5" id="pernyataanSesi2">Nomor {{request()->no ?? "-"}}</div>
+
+
+               <div id="pernyataanSesi2">{{$pernyataan->pernyataan}}</div>
+               <div class=" mt-5 text-capitalize" id="randomSisi" >{{request()->selectedValue ?? "-"}}</div>
            </div>
        </div>
     </div>
@@ -241,13 +245,13 @@
             cluster: pusherCluster,
             encrypted: true,
         });
-
-        const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
-        kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function(data) {
-            console.log(data);
-            document.getElementById('pernyataanSesi2').innerText = data.message.pernyataan;
-            document.getElementById('sisiSesi2').innerText = data.message.selectedValue;
-        });
+        //
+        // const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
+        // kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function(data) {
+        //     console.log(data);
+        //     document.getElementById('pernyataanSesi2').innerText = data.message.pernyataan;
+        //     document.getElementById('sisiSesi2').innerText = data.message.selectedValue;
+        // });
     </script>
 
 
@@ -411,7 +415,7 @@
         //         //     sisiElement.style.backgroundColor = 'lightcoral';
         //         // }
 
-        //         startCountdown();
+                startCountdown();
 
         //         kirimCountdown();
 

@@ -71,7 +71,7 @@ Route::get('/sesi1-nilai', [FrontendController::class, 'nilaiquizSesi1'])->name(
 Route::get('/sesi2', [FrontendController::class, 'openingSesi2'])->name('openingSesi2');
 Route::get('/sesi2-slot', [FrontendController::class, 'slotSesi2'])->name('slotSesi2');
 
-Route::get('/sesi2-soal', [FrontendController::class, 'soalSesi2'])->name('soalSesi2');
+Route::get('/sesi2-soal/{id}', [FrontendController::class, 'soalSesi2'])->name('soalSesi2');
 Route::get('/sesi2-nilai', [FrontendController::class, 'nilaiquizSesi2'])->name('nilaiquizSesi2');
 
 Route::get('/sesi3', [FrontendController::class, 'openingSesi3'])->name('openingSesi3');

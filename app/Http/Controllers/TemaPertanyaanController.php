@@ -3,15 +3,13 @@
 namespace App\Http\Controllers;
 
 // use App\Events\MessageSent;
-use App\Models\Team;
-use App\Models\Pernyataan;
-use App\Models\Pertanyaan;
-use App\Events\MessageSent;
-use App\Models\Participant;
-use Illuminate\Http\Request;
-use App\Models\TemaPertanyaan;
-use Illuminate\Support\Carbon;
 use App\Events\PernyataanSesi2;
+use App\Models\Participant;
+use App\Models\Pernyataan;
+use App\Models\Team;
+use App\Models\TemaPertanyaan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class TemaPertanyaanController extends Controller
 {
@@ -114,8 +112,10 @@ class TemaPertanyaanController extends Controller
             'pernyataan' => $request->pernyataan,
             'ponters' => $request->ponters,
             'selectedValue' => $request->selectedValue,
+            "pernyataanId" => $request->pernyataanId,
+            "no" => $request->no,
         ]));
-    
+
         return response()->json($request, 200);
     }
 }
