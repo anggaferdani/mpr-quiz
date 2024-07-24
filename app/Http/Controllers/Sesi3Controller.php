@@ -67,6 +67,15 @@ class Sesi3Controller extends Controller
             ];
 
             Participant::create($array);
+
+            $team = Team::where('id', $request->id_team)->first();
+
+            if ($team) {
+                event(new Setpoin([
+                    'poin' => $team->participant()->sum('poin'),
+                    'id_team' => $request['id_team'],
+                ]));
+            }
         } else {
             $sesi3->update([
                 'id_pertanyaan' => null,
@@ -75,16 +84,17 @@ class Sesi3Controller extends Controller
                 'tanggal' => now(),
                 'sesi' => 3,
             ]);
+
+            $team = Team::where('id', $sesi3->id_team)->first();
+    
+            if ($team) {
+                event(new Setpoin([
+                    'poin' => $team->participant()->sum('poin'),
+                    'id_team' => $sesi3->id_team,
+                ]));
+            }
         }
 
-        $team = Team::where('id', $sesi3->id_team)->first();
-
-        if ($team) {
-            event(new Setpoin([
-                'poin' => $team->participant()->sum('poin'),
-                'id_team' => $request['id_team'],
-            ]));
-        }
 
         return back()->with('success', 'Success');
 
