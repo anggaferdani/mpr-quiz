@@ -136,12 +136,14 @@ class FrontendController extends Controller
 
     public function openingSesi2Juri(Request $request)
     {
+        $setting = Setting::first();
+
         $berita = $request->input('berita');
         $id = $request->input('id');
         $pertanyaan = $request->input('pertanyaan');
         $jawabanArray = $request->input('jawabanArray');
         $pesan = $request->input('pesan');
-        $team = Team::all();
+        $team = Team::where("run", $setting->run)->get();
 
 
         // Semua variabel memiliki nilai yang valid, kirimkan event

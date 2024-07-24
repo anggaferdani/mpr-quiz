@@ -279,7 +279,7 @@
                                                         @endforeach
 
                                                         <input type="hidden" value="2" name="sesi">
-                                                        <input type="hidden" value="{{$tanya->id}}" name="id_pertanyaan">
+                                                        <input type="hidden" value="null" name="id_pertanyaan">
                                                         <input type="hidden" class="teamteam" name="id_team">
                                                         <label for="">Input Poin<span class="text-danger">*</span></label>
                                                         <input type="number" class="form-control" name="poin">
