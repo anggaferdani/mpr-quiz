@@ -48,6 +48,14 @@
             cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
             encrypted: true
         });
+
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            const sesi = data.message.sesi;
+
+            if (sesi != 2) { window.location.href = `/sesi${sesi}`; }
+        });
+
         var channel7 = pusher.subscribe('channel-move-sesi');
         channel7.bind('event-move-sesi', function(data) {
             console.log('event-move-sesi', data.message);
