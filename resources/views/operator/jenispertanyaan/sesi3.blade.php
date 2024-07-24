@@ -33,9 +33,9 @@
                       <td class="fw-bold">{{$pertanyaanSesi3->pertanyaan}}</td>
                       <td>
                           <div class="d-flex justify-content-center gap-2">
-                            <button 
+                            <button
                                 class="btn btn-primary"
-                                data-bs-toggle="modal" 
+                                data-bs-toggle="modal"
                                 data-bs-target="#modalTambahPoin{{ $pertanyaanSesi3->id }}"
                                 data-pertanyaan="{{ $pertanyaanSesi3->pertanyaan }}"
                                 data-jawaban="{{ $pertanyaanSesi3->jawaban }}"
@@ -102,7 +102,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Pilih grup<span class="text-danger">*</span></label>
-                        <select class="form-control" name="id_team" id="" required>
+                        <select class="form-control" name="id_team" required form="poinForm{{ $pertanyaanSesi3->id }}">
                             <option value="" disabled selected>Select</option>
                             @foreach ($teams as $team)
                             <option value="{{ $team->id }}">{{ $team->name }}</option>
@@ -170,6 +170,7 @@
           }
 
           btnBenar.on('click', function () {
+              // console.log(form.serialize())
               submitForm('{{ route('operator.sesi3.setpoin') }}');
           });
 

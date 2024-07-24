@@ -56,7 +56,6 @@ class Sesi3Controller extends Controller
         ]);
 
         $sesi3 = Participant::where('id_team', $request->id_team)->where('sesi', 3)->first();
-
         if (!$sesi3) {
             $array = [
                 'id_pertanyaan' => null,
@@ -175,7 +174,7 @@ class Sesi3Controller extends Controller
             'pertanyaan' => $request->pertanyaan,
             'jawaban' => $request->jawaban,
         ]));
-    
+
         return response()->json($request, 200);
     }
 

@@ -68,29 +68,29 @@
 
     <script>
         // Initiate pusher
-        const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-            cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
-            encrypted: true
-        });
+        {{--const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {--}}
+        {{--    cluster: '{{ env('PUSHER_APP_CLUSTER') }}',--}}
+        {{--    encrypted: true--}}
+        {{--});--}}
 
-        // Pindah sesi by operator
-        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
-        ankorPindahSesi.bind('event-pindah-sesi', function(data) {
-            const sesi = data.message.sesi;
+        {{--// Pindah sesi by operator--}}
+        {{--const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');--}}
+        {{--ankorPindahSesi.bind('event-pindah-sesi', function(data) {--}}
+        {{--    const sesi = data.message.sesi;--}}
 
-            if (sesi != 3) { window.location.href = `/sesi${sesi}`; }
-        });
+        {{--    if (sesi != 3) { window.location.href = `/sesi${sesi}`; }--}}
+        {{--});--}}
 
-        var channel = pusher.subscribe('channelKirimPertanyaanS2');
-        channel.bind('eventKirimPertanyaanS2', function (data) {
-            console.log(JSON.stringify(data));
+        {{--var channel = pusher.subscribe('channelKirimPertanyaanS2');--}}
+        {{--channel.bind('eventKirimPertanyaanS2', function (data) {--}}
+        {{--    console.log(JSON.stringify(data));--}}
 
-            if (data.message.berita === 'movesesi2') {
-                // Lakukan pengalihan ke URL route yang diinginkan dengan menyertakan variabel data sebagai query string
-                var dataString = JSON.stringify(data.message.pertanyaan); // Ganti 'data' dengan variabel yang ingin Anda bawa
-                window.location.href = '/sesi2-soal?data=' + encodeURIComponent(dataString);
-            }
-        });
+        {{--    if (data.message.berita === 'movesesi2') {--}}
+        {{--        // Lakukan pengalihan ke URL route yang diinginkan dengan menyertakan variabel data sebagai query string--}}
+        {{--        var dataString = JSON.stringify(data.message.pertanyaan); // Ganti 'data' dengan variabel yang ingin Anda bawa--}}
+        {{--        window.location.href = '/sesi2-soal?data=' + encodeURIComponent(dataString);--}}
+        {{--    }--}}
+        {{--});--}}
     </script>
 </body>
 </html>
