@@ -44,14 +44,15 @@ class ParticipantController extends Controller
     {
         $request->validate([
             'id_team' => 'required|integer',
-            'poin' => 'required|integer'
+            'poin' => 'required|integer',
+            'sesi' => 'required|integer'
         ]);
 
         $hasilSesiDua = Participant::firstOrCreate([
             'id_team' => $request->id_team,
-            'sesi' => 2
+            'sesi' => $request->sesi
         ], [
-            'id_pertanyaan' => null,
+            'id_pertanyaan' => $request->id_pertanyaan,
             'poin' => $request->poin,
             'tanggal' => now()
         ]);

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MPR Quiz | Juri I</title>
+    <title>MPR Quiz | Juri III</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -16,7 +16,6 @@
 
         const setpoin = pusher.subscribe('channel-setpoin');
         setpoin.bind('event-setpoin', function(data) {
-            console.log(data);
             const pointElement = document.getElementById(`poin_${data.message.id_team}`);
             pointElement.innerHTML = data.message.poin;
         });
@@ -326,7 +325,7 @@
     var channel = pusher.subscribe('channelKirimPertanyaanS3');
     channel.bind('eventKirimPertanyaanS3', function(data) {
         let pertanyaanS3 = JSON.parse(data.message);
-        
+
         document.getElementById('tampilkanPertanyaanSesi3').innerText = pertanyaanS3.pertanyaan;
         document.getElementById('tampilkanJawabanSesi3').innerHTML = `Jawaban : <span class="text-danger">${pertanyaanS3.jawaban}</span>`;
     });

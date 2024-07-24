@@ -161,7 +161,7 @@
                     <input type="hidden" value="1" name="sesi">
                     <input type="hidden" value="{{$tanya->id}}" name="id_pertanyaan">
                     <input type="hidden" class="teamteam" name="id_team">
-                    <input type="hidden"  value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
+                    <input type="hidden" value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

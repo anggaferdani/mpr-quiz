@@ -67,54 +67,6 @@
                                 <button type="button" data-bs-toggle="modal" data-bs-target="#pernyataan-{{ $pernyataan->id }}-modal" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled> Mulai </button>
                             </div>
 
-                            {{-- <div class="modal fade" id="Backdrop{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan - <span class="textteam"></h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <button type="button" data-bs-toggle="modal" data-bs-target="#tanya{{$item->id}}" class="btn d-block btn-primary btn-icon-text">Buat Pertanyaan</button>
-                                            <div class="table-responsive">
-                                            <input type="text" id="searchInput" class="mt-2 mb-1 border border-1 rounded filterPertanyaan" data-modalid="{{$item->id}}">
-                                                <table id="table1" class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="text-align: center;">No</th>
-                                                            <th style="text-align: center;">Pertanyaan</th>
-                                                            <th style="text-align: center;">Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($item->pointers as $tanya)
-                                                        @php
-                                                            $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
-                                                            $jawabanArray = [];
-                                                            foreach ($tanya->jawaban as $jawaban) {
-                                                                $jawabanArray[] = $jawaban->jawaban;
-                                                            }
-                                                        @endphp
-                                                        <tr class="filterPertanyaan{{$item->id}}">
-                                                            <td class="text-center">{{$loop->iteration}}</td>
-                                                            <td class="text-center">{{$tanya->pertanyaan}}</td>
-                                                            <td class="text-center"> <div class="d-flex justify-content-center">
-                                                            @if($participant)
-                                                                <button type="button" class="btn btn-success btn-icon-text" disabled><i class="bi bi-check-all"></i></button>
-                                                            @else
-                                                                <button type="button" onclick="pilihPertanyaan('{{$tanya->id}}', '{{$tanya->pertanyaan}}', {{ json_encode($jawabanArray) }})" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
-                                                            @endif
-                                                            </td>
-                                                        </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
                             <div class="modal fade" id="pernyataan-{{ $pernyataan->id }}-modal" data-modal-id="pernyataan-{{ $pernyataan->id }}-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -131,7 +83,7 @@
                                                 @endforeach
 
                                                 <input type="hidden" value="2" name="sesi">
-                                                {{-- <input type="hidden" value="{{$pointer->id}}" name="id_pertanyaan"> --}}
+                                                <input type="hidden" value="{{ null }}" name="id_pertanyaan">
                                                 <input type="hidden" class="teamteam" name="id_team">
                                                 <label for="">Input Poin<span class="text-danger">*</span></label>
                                                 <input type="number" class="form-control" name="poin">
@@ -144,48 +96,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {{-- <div class="modal fade" id="tanya{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tanyaLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Pernyataan</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="{{ url('/op/pilih-pertanyaan') }}" method="post" enctype="multipart/form-data">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" name="id_tema" value="{{$item->id}}">
-                                            <div class="form-group">
-                                                <label for="exampleInputUsername1" class=" text-start fw-bold">Pertanyaan<span class="text-danger">*</span></label>
-                                                <input type="text" class="form-control" value="{{ old('pertanyaan') }}" id="exampleInputUsername1" placeholder="Input Pertanyaan..." name="pertanyaan">
-                                                @error('pertanyaan')
-                                                    <p class="text-danger">{{ $message }}</p>
-                                                @enderror
-                                            </div>
-                                            <div class="form-group" id="jawaban">
-                                                <label for="exampleInputUsername1" class=" text-start fw-bold">Poin Poin<span class="text-danger">*</span></label>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <input type="text" class="form-control" name="jawaban[]" placeholder="Input Jawaban...">
-                                                    </div>
-                                                    <div class="col-auto">
-                                                        <button type="button" class="d-block mb-2 btn btn-icon btn-primary tambahjawaban"><i class="bi bi-plus"></i></button>
-                                                    </div>
-                                                </div>
-                                                <div class="jawab"></div>
-                                            </div>
-                                            <div class="modal-footer gap-1">
-                                            <button type="button" class="btn btn-outline-warning btn-icon-text" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                                                <button type="submit" id="dis" class="btn btn-outline-primary btn-icon-text">
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </td>
                     </tr>
                     @endforeach
@@ -193,154 +103,6 @@
             </table>
         </div>
         {{-- ! /Table by pernyataan --}}
-
-        {{-- ! Table by sub tema --}}
-        <div class="table-responsive">
-            <table id="table1">
-                <thead>
-                    <tr>
-                        <th style="text-align: center;">No</th>
-                        <th style="text-align: center;">Tema Pertanyaan</th>
-                        <th style="text-align: center;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($tema as $item)
-                   <tr>
-                       <td class="text-center">{{$loop->iteration}}</td>
-                       <td class="text-center">{{$item->tema}}</td>
-                       <td class="">
-                        <div class="d-flex justify-content-center">
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled>Mulai</button>
-                        </div>
-                        <div class="modal fade" id="Backdrop{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Pilih Pertanyaan - <span class="textteam"></h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                            <button type="button" data-bs-toggle="modal" data-bs-target="#tanya{{$item->id}}" class="btn d-block btn-primary btn-icon-text">Buat Pertanyaan</button>
-                                <div class="table-responsive">
-                                <input type="text" id="searchInput" class="mt-2 mb-1 border border-1 rounded filterPertanyaan" data-modalid="{{$item->id}}">
-                                    <table id="table1" class="table">
-                                        <thead>
-                                            <tr>
-                                                <th style="text-align: center;">No</th>
-                                                <th style="text-align: center;">Pertanyaan</th>
-                                                <th style="text-align: center;">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach($item->pertanyaan as $tanya)
-                                            @php
-                                                $participant = $tanya->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
-                                                $jawabanArray = [];
-                                                foreach ($tanya->jawaban as $jawaban) {
-                                                    $jawabanArray[] = $jawaban->jawaban;
-                                                }
-                                                // @dd($jawabanArray)
-
-                                            @endphp
-                                            <tr class="filterPertanyaan{{$item->id}}">
-                                                <td class="text-center">{{$loop->iteration}}</td>
-                                                <td class="text-center">{{$tanya->pertanyaan}}</td>
-                                                <td class="text-center"> <div class="d-flex justify-content-center">
-                                                @if($participant)
-                                                    <button type="button" class="btn btn-success btn-icon-text" disabled><i class="bi bi-check-all"></i></button>
-                                                @else
-                                                    <button type="button" onclick="pilihPertanyaan('{{$tanya->id}}', '{{$tanya->pertanyaan}}', {{ json_encode($jawabanArray) }})" data-bs-toggle="modal" data-bs-target="#jawaban{{$tanya->id}}" class="btn btn-primary btn-icon-text">Pilih</button>
-                                                @endif
-
-                                            </td>
-                                            </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                        @foreach($item->pertanyaan as $tanya)
-                        <div class="modal fade" id="jawaban{{$tanya->id}}" data-modal-id="{{$tanya->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Poin Poin - <span class="textteam"></h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <form action="{{url('/op/savepoin')}}" method="post">
-                                                        {{ csrf_field() }}
-                                                    <div class="modal-body">
-                                                        @foreach($tanya->jawaban as $jwb)
-                                                        <p class="fw-bold">{{$jwb->jawaban}}</p><br>
-                                                        @endforeach
-
-                                                        <input type="hidden" value="2" name="sesi">
-                                                        <input type="hidden" value="null" name="id_pertanyaan">
-                                                        <input type="hidden" class="teamteam" name="id_team">
-                                                        <label for="">Input Poin<span class="text-danger">*</span></label>
-                                                        <input type="number" class="form-control" name="poin">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="submit" class="btn btn-primary">Save Poin</button>
-                                                    </div>
-                                                </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                        <div class="modal fade" id="tanya{{$item->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tanyaLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Pertanyaan</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ url('/op/pilih-pertanyaan') }}" method="post" enctype="multipart/form-data">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="id_tema" value="{{$item->id}}">
-                                        <div class="form-group">
-                                            <label for="exampleInputUsername1" class=" text-start fw-bold">Pertanyaan<span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" value="{{ old('pertanyaan') }}" id="exampleInputUsername1" placeholder="Input Pertanyaan..." name="pertanyaan">
-                                            @error('pertanyaan')
-                                                    <p class="text-danger">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group" id="jawaban">
-                                            <label for="exampleInputUsername1" class=" text-start fw-bold">Poin Poin<span class="text-danger">*</span></label>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <input type="text" class="form-control" name="jawaban[]" placeholder="Input Jawaban...">
-                                                </div>
-                                                <div class="col-auto">
-                                                    <button type="button" class="d-block mb-2 btn btn-icon btn-primary tambahjawaban"><i class="bi bi-plus"></i></button>
-                                                </div>
-                                            </div>
-                                            <div class="jawab"></div>
-                                        </div>
-                                        <div class="modal-footer gap-1">
-                                        <button type="button" class="btn btn-outline-warning btn-icon-text" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                                            <button type="submit" id="dis" class="btn btn-outline-primary btn-icon-text">
-                                                Submit
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                        </td>
-                   </tr>
-                   @endforeach
-                </tbody>
-            </table>
-        </div>
-        {{-- ! /Table by sub tema --}}
 
         <h5 class="mt-4">Pilih Grup</h5>
         <div class="team-selection d-flex gap-4">
