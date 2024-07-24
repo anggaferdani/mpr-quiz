@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('pernyataans', function (Blueprint $table) {
             $table->id();
             $table->text("pernyataan");
-            $table->string("sisi");
+            $table->string("sisi")->nullable();
             $table->timestamps();
         });
     }

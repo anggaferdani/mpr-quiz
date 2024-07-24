@@ -11,6 +11,7 @@ use App\Models\Participant;
 use Illuminate\Http\Request;
 use App\Models\TemaPertanyaan;
 use Illuminate\Support\Carbon;
+use App\Events\PernyataanSesi2;
 
 class TemaPertanyaanController extends Controller
 {
@@ -105,5 +106,16 @@ class TemaPertanyaanController extends Controller
         $delete->delete();
         return back();
 
+    }
+
+    public function kirimPernyataanSesi2(Request $request)
+    {
+        event(new PernyataanSesi2([
+            'pernyataan' => $request->pernyataan,
+            'ponters' => $request->ponters,
+            'selectedValue' => $request->selectedValue,
+        ]));
+    
+        return response()->json($request, 200);
     }
 }

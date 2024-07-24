@@ -100,11 +100,17 @@
                     @endforeach
                 </ul>
             </li>
-            <li class="sidebar-item ">
-                <a href="{{ Route('operator.logout') }}" class='sidebar-link text-danger'>
-                <i class="bi bi-box-arrow-left text-danger"></i>
-                    <span>Logout</span>
+            <li class="sidebar-item  has-sub">
+                <a href="#" class="sidebar-link">
+                    <i class="bi bi-gear"></i>
+                    <span>Settings</span>
                 </a>
+                <ul class="submenu submenu-closed" style="--submenu-height: 86px;">
+                    <li class="submenu-item">
+                        <a href="{{ Route('operator.logout') }}" class="submenu-link">Logout</a>
+                        
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
