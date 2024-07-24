@@ -138,34 +138,34 @@ class DatabaseSeeder extends Seeder
 
         PertanyaanSesi3::insert([
             [
-                "pernyataan" => "Pemerintah menetapkan Hari Lahir Pancasila Setiap tanggal 1 Juni. Dasar hukum penetapan hari kelahiran Pancasila 1 Juni adalah?",
+                "pertanyaan" => "Pemerintah menetapkan Hari Lahir Pancasila Setiap tanggal 1 Juni. Dasar hukum penetapan hari kelahiran Pancasila 1 Juni adalah?",
                 "jawaban" => "Keputusan Presiden Nomor 24 Tahun 2016.",
             ], [
-                "pernyataan" => "Sebutkan Lembaga-Lembaga Negara yang dibentuk berdasarkan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945?",
+                "pertanyaan" => "Sebutkan Lembaga-Lembaga Negara yang dibentuk berdasarkan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945?",
                 "jawaban" => "1. MPR RI 2. Presiden 3. DPR RI 4. DPD RI 5.BPK 6. Mahkamah Konstitusi 7. Mahkamah Agung 8. Komisi Yudisial.",
             ], [
-                "pernyataan" => "Sebutkan Pasal terkait keadaan bahaya dan ihwal kegentingan yang memaksa menurut Undang-Undang Dasar NRI Tahun 1945?",
+                "pertanyaan" => "Sebutkan Pasal terkait keadaan bahaya dan ihwal kegentingan yang memaksa menurut Undang-Undang Dasar NRI Tahun 1945?",
                 "jawaban" => "Pasal 12 dan 22 ayat (1).",
             ], [
-                "pernyataan" => "Berdasarkan Ketetapan MPR Nomor I/MPR/2003, ketentuan dari pemberlakuan Ketetapan Majelis Permusyawaratan Rakyat Sementara Republik   Indonesia Nomor XXV/MPRS/1966 adalah?",
+                "pertanyaan" => "Berdasarkan Ketetapan MPR Nomor I/MPR/2003, ketentuan dari pemberlakuan Ketetapan Majelis Permusyawaratan Rakyat Sementara Republik   Indonesia Nomor XXV/MPRS/1966 adalah?",
                 "jawaban" => "Seluruh ketentuan dalam Ketetapan Majelis Permusyawaratan Rakyat Sementara Republik Indonesia Nomor XXV/MPRS/1966 ini, ke depan diberlakukan dengan berkeadilan dan menghormati hukum, prinsip demokrasi dan hak asasi manusia.",
             ], [
-                "pernyataan" => "Siapakah Konseptor Lambang Garuda Pancasila?",
+                "pertanyaan" => "Siapakah Konseptor Lambang Garuda Pancasila?",
                 "jawaban" => "Sultan Hamid II.",
             ], [
-                "pernyataan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 2 ayat (1) adalah?",
+                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 2 ayat (1) adalah?",
                 "jawaban" => "Majelis Permusyawaratan Rakyat terdiri atas anggota Dewan Perwakilan Rakyat dan anggota Dewan Perwakilan Daerah yang dipilih melalui pemilihan umum dan diatur lebih lanjut dengan undang-undang.",
             ], [
-                "pernyataan" => "Pahlawan nasional yang bernama Halim Perdana Kusuma merupakan tokoh masyarakat berasal dari Provinsi?",
+                "pertanyaan" => "Pahlawan nasional yang bernama Halim Perdana Kusuma merupakan tokoh masyarakat berasal dari Provinsi?",
                 "jawaban" => "Jawa Timur.",
             ], [
-                "pernyataan" => "Bunyi Sila Pertama Pancasila yaitu Ketuhanan Yang Maha Esa. Pada Alinea keberapa Pembukaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 terdapat kalimat tersebut?",
+                "pertanyaan" => "Bunyi Sila Pertama Pancasila yaitu Ketuhanan Yang Maha Esa. Pada Alinea keberapa Pembukaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 terdapat kalimat tersebut?",
                 "jawaban" => "Alinea ke-4.",
             ], [
-                "pernyataan" => "Pencipta lagu nasional Himne Guru adalah?",
+                "pertanyaan" => "Pencipta lagu nasional Himne Guru adalah?",
                 "jawaban" => "Sartono.",
             ], [
-                "pernyataan" => "Prolegnas merupakan skala prioritas program pembentukan Undang-Undang dalam rangka mewujudkan sistem hukum nasional. Sebutkan kepanjangan dari Prolegnas.",
+                "pertanyaan" => "Prolegnas merupakan skala prioritas program pembentukan Undang-Undang dalam rangka mewujudkan sistem hukum nasional. Sebutkan kepanjangan dari Prolegnas.",
                 "jawaban" => "Program Legislasi Nasional.",
             ],
         ]);
