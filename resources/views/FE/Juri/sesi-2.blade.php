@@ -115,11 +115,10 @@
                     <h2 class="py-4">SESI 2</h2>
                 </div>
                 <div class="pertanyaan">
-                    <p class="fw-bold" id="soalSesi2"></p>
+                    <p class="fw-bold" id="pernyataanSesi2"></p>
                 </div>
                 <div class="pointer p-3">
-                    <p id="sisi-pointer-container" class="fw-bold">POINTER :</p>
-                    <div id="loopingJawabanArray"></div>
+                    <div id="pointerSesi2"></div>
                 </div>
               </div>
           </div>
@@ -149,12 +148,60 @@
 
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
+        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        const pusher = new Pusher(pusherKey, {
+            cluster: pusherCluster,
+            encrypted: true,
+        });
+
+        const setpoinSesi2 = pusher.subscribe('channel-setpoin-sesi-2');
+        setpoinSesi2.bind('event-setpoin-sesi-2', function(data) {
+            const pointElement = document.getElementById(`poin_${data.message.id_team}`);
+            pointElement.innerHTML = data.message.poin;
+        });
+
+        const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
+        kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function(data) {
+            console.log(data);
+            document.getElementById('pernyataanSesi2').innerText = data.message.pernyataan;
+            const pointerContainer = document.getElementById('pointerSesi2');
+            pointerContainer.innerHTML = '';
+
+            const proPointers = data.message.pointers.filter(pointer => pointer.sisi === 'pro');
+            const kontraPointers = data.message.pointers.filter(pointer => pointer.sisi === 'kontra');
+
+            if (proPointers.length > 0) {
+                const proTitle = document.createElement('h3');
+                proTitle.innerText = 'Pro';
+                pointerContainer.appendChild(proTitle);
+
+                const proList = document.createElement('ul');
+                proPointers.forEach(pointer => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = pointer.penjelasan;
+                    proList.appendChild(listItem);
+                });
+                pointerContainer.appendChild(proList);
+            }
+
+            if (kontraPointers.length > 0) {
+                const kontraTitle = document.createElement('h3');
+                kontraTitle.innerText = 'Kontra';
+                pointerContainer.appendChild(kontraTitle);
+
+                const kontraList = document.createElement('ul');
+                kontraPointers.forEach(pointer => {
+                    const listItem = document.createElement('li');
+                    listItem.innerText = pointer.penjelasan;
+                    kontraList.appendChild(listItem);
+                });
+                pointerContainer.appendChild(kontraList);
+            }
+        });
+
         // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
-
-        var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
-            cluster: 'ap1'
-        });
 
         const pernyataanJuriChannel = pusher.subscribe('channelKirimPertanyaanS2');
         pernyataanJuriChannel.bind('eventKirimPertanyaanS2', function(data) {
