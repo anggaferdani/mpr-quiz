@@ -202,7 +202,7 @@
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
             const sesi = data.message.sesi;
 
-            if (sesi == 1) { window.location.href = `/sesi${sesi}-juri`; }
+            if (sesi == 3) { window.location.href = `/sesi${sesi}-juri`; }
         });
 
         var channel = pusher.subscribe('channelKirimPertanyaanS2');

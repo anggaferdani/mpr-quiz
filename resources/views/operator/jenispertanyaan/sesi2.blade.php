@@ -1,37 +1,71 @@
 @extends('operator.layout')
 
-@section('title', 'Jenis Pertanyaan')
+@section('title', 'Pro & Kontra')
 
 @section('layout')
+
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Tema</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form action="{{ url('/op/sesi-1') }}" method="post" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-group">
-                <label for="exampleInputUsername1" class="fw-bold">Tema Pertanyaan<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" value="{{ old('tema') }}" id="exampleInputUsername1" placeholder="Input Tema Pertanyaan..." name="tema">
-                @error('tema')
-                        <p class="text-danger">{{ $message }}</p>
-                @enderror
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Tema</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <input type="hidden" name="sesi" value="2">
-            <div class="modal-footer gap-1">
-            <button type="button" class="btn btn-outline-warning btn-icon-text" data-bs-dismiss="modal" aria-label="Close">Cancel</button>
-                <button type="submit" id="dis" class="btn btn-outline-primary btn-icon-text">
-                    Submit
-                </button>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1" class="fw-bold">Pernyataan<span class="text-danger">*</span></label>
+                            {{-- <input type="text" class="form-control" value="{{ old('pernyataan') }}" id="exampleInputUsername1" placeholder="Pernyataan..." name="pernyataan" required> --}}
+                            <textarea class="form-control mt-2" name="pernyataan" rows="4" placeholder="Pernyataan anda.."></textarea>
+                            @error('pernyataan')
+                                <p class="text-danger">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1" class="fw-bold">Pointer PRO<span class="text-danger">*</span></label>
+                            <div class="kontra-input d-flex justify-content-center items-align-center gap-4">
+                                <input type="text" class="form-control mt-2" value="" placeholder="Pointer pro..." name="pro[]" required>
+                                {{-- <button class="btn btn-primary" onclick="tambahInputPro()">Tambah</button> --}}
+                                {{-- <button class="btn btn-danger">Delete</button> --}}
+                            </div>
+                            <div id="inputs-pro"> </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label for="exampleInputUsername1" class="fw-bold">Pointer KONTRA<span class="text-danger">*</span></label>
+                            <div class="kontra-input d-flex justify-content-center items-align-center gap-4">
+                                <input type="text" class="form-control mt-2" value="" placeholder="Pointer kontra..." name="kontra[]" required>
+                                {{-- <button class="btn btn-primary">Tambah</button> --}}
+                                {{-- <button class="btn btn-danger">Delete</button> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form action="{{ url('/op/sesi-2') }}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+
+                    <input type="hidden" name="sesi" value="2">
+
+                    <div class="modal-footer gap-1">
+                        <button type="button" class="btn btn-outline-warning btn-icon-text" data-bs-dismiss="modal" aria-label="Close">
+                            Cancel
+                        </button>
+                        <button type="submit" id="dis" class="btn btn-outline-primary btn-icon-text">
+                            Submit
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
-      </div>
+        </div>
     </div>
-  </div>
 </div>
+
 <div class="page-heading">
     <h3>Pernyataan</h3>
 </div>
@@ -169,6 +203,25 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    function tambahInputPro() {
+        const inputProContainer = document.getElementById('inputs-pro');
+
+        const newInput =
+            '<div class="kontra-input d-flex justify-content-center items-align-center gap-4">' +
+            '<input type="text" class="form-control mt-2" value="" placeholder="Pointer pro..." name="pro[]" required>' +
+            '<button class="btn btn-danger" onclick="deletePro()">Delete</button>' +
+            '</div>'
+        ;
+
+        inputProContainer.innerHTML(newInput);
+    }
+
+    function deletePro() {
+
+    }
+</script>
 
 <script>
 $(document).ready(function() {

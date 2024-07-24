@@ -278,7 +278,7 @@
           <div class="col-7">
               <div class="container">
                 <div class="header d-flex justify-content-between align-items-center my-3">
-                    <h2>SESI 1</h2>
+                    <h2>SESI 3</h2>
                 </div>
                 <div class="content">
                     <div id="tampilkanPertanyaanSesi3" class="fs-5 mb-3"></div>

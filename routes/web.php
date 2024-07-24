@@ -44,6 +44,7 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::resource('/list-jawaban', JawabanController::class);
     Route::post('/savepoin', [ParticipantController::class, 'store']);
     Route::get('/sesi-2', [TemaPertanyaanController::class, 'sesi2']);
+    Route::post('/sesi-2', [TemaPertanyaanController::class, 'storePernyataan']);
     Route::get('/sesi-3', [Sesi3Controller::class, 'index'])->name('operator.sesi3');
     Route::post('/post/sesi-3', [Sesi3Controller::class, 'store'])->name('operator.post.sesi3');
     Route::get('/sesi-3', [Sesi3Controller::class, 'index'])->name('operator.sesi3');

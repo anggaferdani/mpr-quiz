@@ -18,7 +18,7 @@
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
             const sesi = data.message.sesi;
 
-            if (sesi == 2) { window.location.href = `/sesi${sesi}-juri`; }
+            if (sesi != 1) { window.location.href = `/sesi${sesi}-juri`; }
         });
 
         const channel = pusher.subscribe('channel-kirim-pertanyaan');
