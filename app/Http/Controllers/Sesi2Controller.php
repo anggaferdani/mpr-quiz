@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\SetpoinSesi2;
+use Pusher\Pusher;
 use App\Models\Team;
 use App\Models\Participant;
+use App\Events\SetpoinSesi2;
 use Illuminate\Http\Request;
 
 class Sesi2Controller extends Controller
@@ -36,6 +37,27 @@ class Sesi2Controller extends Controller
                     'id_team' => $request['id_team'],
                 ]));
             }
+
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                [
+                    'cluster' => env('PUSHER_APP_CLUSTER'),
+                    'useTLS' => true,
+                ]
+            );
+    
+            $data = [
+                'id' => $sesi3->id,
+                'id_team' => $sesi3->id_team,
+                'poin' => $sesi3->poin,
+                'id_pertanyaan' => $sesi3->id_pertanyaan,
+                'tanggal' => $sesi3->tanggal,
+                'sesi' => $sesi3->sesi,
+            ];
+    
+            $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
         } else {
             $sesi3->update([
                 'id_pertanyaan' => null,
@@ -53,8 +75,28 @@ class Sesi2Controller extends Controller
                     'id_team' => $sesi3->id_team,
                 ]));
             }
-        }
 
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+                env('PUSHER_APP_SECRET'),
+                env('PUSHER_APP_ID'),
+                [
+                    'cluster' => env('PUSHER_APP_CLUSTER'),
+                    'useTLS' => true,
+                ]
+            );
+    
+            $data = [
+                'id' => $sesi3->id,
+                'id_team' => $sesi3->id_team,
+                'poin' => $sesi3->poin,
+                'id_pertanyaan' => $sesi3->id_pertanyaan,
+                'tanggal' => $sesi3->tanggal,
+                'sesi' => $sesi3->sesi,
+            ];
+    
+            $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
+        }
 
         return back()->with('success', 'Success');
     }
