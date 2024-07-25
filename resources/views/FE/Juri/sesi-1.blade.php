@@ -259,9 +259,9 @@
               <div class="container">
                 <div class="header d-flex justify-content-between align-items-center my-3">
                     <h2>SESI 1</h2>
-                    <div class="countdown">
-                        <h3 id="countdown" class="mb-0">30</h3>
-                    </div>
+{{--                    <div class="countdown">--}}
+{{--                        <h3 id="countdown" class="mb-0">30</h3>--}}
+{{--                    </div>--}}
                 </div>
                 <div class="content">
                     <h3 class="fw-bold text-center" id="tampilkanPertanyaan"></h3>

@@ -62,9 +62,9 @@
             width: 100vw;
             overflow: hidden;
             background-image: url('../images/gif-s1-spin.gif'); /* Set the URL of your GIF */
-                background-size: cover; /* Set the size */
-                background-repeat: no-repeat; /* Set the repeat behavior */
-                background-position: center; /* Set the position */
+            background-size: cover; /* Set the size */
+            background-repeat: no-repeat; /* Set the repeat behavior */
+            background-position: center; /* Set the position */
         }
         div:where(.swal2-container) h2:where(.swal2-title){
             color: #ffff !important;
@@ -147,7 +147,7 @@
             @foreach ($tema as $t)
             {
                 id: '{{ $t->id }}',
-                name: '{{$t->tema}}',
+                name: '{!!$t->tema!!}',
                 color: @if ($t->id % 2 !== 0) '#FFBB70' @else '#ffffff' @endif
             },
             @endforeach

@@ -37,7 +37,7 @@
   <body>
     <div class="content text-center">
         <h1 id="lastNumber">{{$nilai->poin}}</h1>
-        <h2>POINT</h2>
+        <h2>POIN</h2>
         <p id="lastNumber"></p>
     </div>
 

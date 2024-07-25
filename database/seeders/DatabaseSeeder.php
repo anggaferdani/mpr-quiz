@@ -34,30 +34,47 @@ class DatabaseSeeder extends Seeder
         $Team = [
             [
                 'name' => 'Grup A',
+                'run' => 1,
             ],
             [
                 'name' => 'Grup B',
+                'run' => 1,
+
             ],
             [
                 'name' => 'Grup C',
+                'run' => 1,
+
             ],
             [
                 'name' => 'Grup D',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup E',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup F',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup G',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup H',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup I',
+                'run' => 0,
+
             ],
         ];
 
@@ -629,6 +646,62 @@ class DatabaseSeeder extends Seeder
             ], [
                 "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 28C ayat (2) adalah?",
                 "jawaban" => "Setiap orang berhak untuk memajukan dirinya dalam memperjuangkan haknya secara kolektif untuk membangun masyarakat, bangsa, dan negaranya.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 7B ayat (1)  adalah?",
+                "jawaban" => "Usul pemberhentian Presiden dan/atau Wakil Presiden dapat diajukan oleh Dewan Perwakilan Rakyat kepada Majelis Permusyawaratan Rakyat hanya dengan terlebih dahulu mengajukan permintaan kepada Mahkamah Konstitusi untuk memeriksa, mengadili, dan memutus pendapat Dewan Perwakilan Rakyat bahwa Presiden dan/atau Wakil Presiden telah melakukan pelanggaran hukum berupa pengkhianatan terhadap negara, korupsi, penyuapan, tindak pidana berat lainnya, atau perbuatan tercela; dan/atau pendapat bahwa Presiden dan/ atau Wakil Presiden tidak lagi memenuhi syarat sebagai Presiden dan/atau Wakil Presiden.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Danau Kerinci terletak di provinsi?",
+                "jawaban" => "Jambi.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Sesuai dengan Undang-Undang Nomor 15 Tahun 2006, jumlah anggota Badan Pemeriksa Keuangan Republik Indonesia adalah?",
+                "jawaban" => "9 (sembilan) Orang.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Setiap menteri membidangi urusan tertentu dalam pemerintahan. Pernyataan tersebut merupakan ketentuan dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 yaitu rumusan Pasal dan Ayat berapa?",
+                "jawaban" => "Pasal 17 ayat (3).",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Dewan Perwakilan Daerah memberikan pertimbangan kepada Dewan Perwakilan Rakyat atas rancangan undang-undang tentang?",
+                "jawaban" => "Rancangan undang-undang anggaran pendapatan dan belanja negara dan rancangan undang-undang yang berkaitan dengan pajak, pendidikan, dan agama.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Salah satu hasil pembahasan panitia Sembilan adalah piagam Jakarta yang menjadi intisari Pembukaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945, terdapat 7 kata yang dihilangkan dari rumusan piagam Jakarta tersebut dalam Pembukaan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945, sebutkan 7 kata tersebut?",
+                "jawaban" => "Dengan kewajiban menjalankan syariat Islam bagi pemeluk-pemeluknya.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Lagu nasional jembatan merah diciptakan oleh?",
+                "jawaban" => "Gesang.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 31 ayat (5) adalah?",
+                "jawaban" => "Pemerintah memajukan ilmu pengetahuan dan teknologi dengan menjunjung tinggi nilai-nilai agama dan persatuan bangsa untuk kemajuan peradaban serta kesejahteraan umat manusia.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 24 ayat (2) adalah Kekuasaan kehakiman dilakukan oleh sebuah Mahkamah Agung dan badan peradilan yang berada di bawahnya dalam lingkungan peradilan umum, lingkungan peradilan agama, lingkungan peradilan militer, lingkungan peradilan tata usaha negara, dan oleh sebuah Mahkamah Konstitusi. Wewenang Mahkamah Konstitusi menurut ketentuan Pasal 24C ayat (1) adalah?",
+                "jawaban" => "Mengadili pada tingkat pertama dan terakhir yang putusannya bersifat final untuk menguji undang-undang terhadap Undang-Undang Dasar, memutus sengketa kewenangan lembaga negara yang kewenangannya diberikan oleh Undang-Undang Dasar, memutus pembubaran partai politik, dan memutus perselisihan tentang hasil pemilihan umum.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Johannes Leimena adalah pahlawan nasional yang merupakan tokoh masyarakat berasal dari Provinsi?",
+                "jawaban" => "Maluku.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Menurut Undang-Undang Nomor 18 Tahun 2011 jumlah Anggota Komisi Yudisial adalah?",
+                "jawaban" => "7 (tujuh) orang.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Terbentuknya penyelenggara negara yang peka dan tanggap terhadap kepentingan dan aspirasi rakyat di seluruh wilayah negara termasuk daerah terpencil dan perbatasan, merupakan salah satu indikator dari Visi Indonesia Masa Depan tentang?",
+                "jawaban" => "Baik dan Bersih dalam Penyelenggaraan Negara.",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "H. Oemar Said Cokroaminoto adalah pahlawan nasional yang merupakan tokoh masyarakat berasal dari Provinsi?",
+                "jawaban" => "Jawa Timur",
+                'wilayah_id' => 1,
+            ], [
+                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 28J ayat (2) adalah",
+                "jawaban" => "Dalam menjalankan hak dan kebebasannya, setiap orang wajib tunduk kepada pembatasan yang ditetapkan dengan undang-undang dengan maksud semata-mata untuk menjamin pengakuan serta penghormatan atas hak dan kebebasan orang lain dan untuk memenuhi tuntutan yang adil sesuai dengan pertimbangan moral, nilai-nilai agama, keamanan, dan ketertiban umum dalam suatu masyarakat demokratis.",
                 'wilayah_id' => 1,
             ],
         ]);

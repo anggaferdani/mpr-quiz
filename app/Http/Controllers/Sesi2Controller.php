@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Pusher\Pusher;
 use App\Models\Team;
 use App\Models\Participant;
@@ -47,16 +48,14 @@ class Sesi2Controller extends Controller
                     'useTLS' => true,
                 ]
             );
-    
             $data = [
-                'id' => $sesi3->id,
-                'id_team' => $sesi3->id_team,
-                'poin' => $sesi3->poin,
-                'id_pertanyaan' => $sesi3->id_pertanyaan,
-                'tanggal' => $sesi3->tanggal,
-                'sesi' => $sesi3->sesi,
+                'id' => $request->id,
+                'id_team' => $request->id_team,
+                'poin' => $request->poin,
+                'id_pertanyaan' => $request->id_pertanyaan,
+                'tanggal' => Carbon::now(),
+                'sesi' => $request->sesi,
             ];
-    
             $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
         } else {
             $sesi3->update([
@@ -68,7 +67,7 @@ class Sesi2Controller extends Controller
             ]);
 
             $team = Team::where('id', $sesi3->id_team)->first();
-    
+
             if ($team) {
                 event(new SetpoinSesi2([
                     'poin' => $team->participant()->sum('poin'),
@@ -85,7 +84,7 @@ class Sesi2Controller extends Controller
                     'useTLS' => true,
                 ]
             );
-    
+
             $data = [
                 'id' => $sesi3->id,
                 'id_team' => $sesi3->id_team,
@@ -94,7 +93,7 @@ class Sesi2Controller extends Controller
                 'tanggal' => $sesi3->tanggal,
                 'sesi' => $sesi3->sesi,
             ];
-    
+
             $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
         }
 

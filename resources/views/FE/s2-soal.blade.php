@@ -195,7 +195,7 @@
   </head>
   <body>
 
-    <img src="../images/gif-sesi2.gif" class="bg-sesi2-soal" alt="">
+    <img src="../images/gif-bg-sesi2.gif" class="bg-sesi2-soal" alt="">
 
     <!-- {{-- <div class="d-flex justify-content-center">
         <div class="top-content d-flex align-items-center justify-content-between mb-2" style="position: absolute; top: 0; width: 85%">
