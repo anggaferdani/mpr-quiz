@@ -26,4 +26,6 @@ class MessageSent implements ShouldBroadcast
   {
       return 'my-event';
   }
+
+
 }

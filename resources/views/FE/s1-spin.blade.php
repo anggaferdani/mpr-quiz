@@ -36,6 +36,7 @@
             encrypted: true
         });
 
+
         // Pindah sesi by operator
         const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
 
@@ -44,6 +45,14 @@
 
             if (sesi != 1) { window.location.href = `/sesi${sesi}`; }
         });
+
+        var spinTrigger = pusher.subscribe('spin');
+        spinTrigger.bind("spin-trigger", function (data) {
+
+            // console.log("data")
+            $('#canvas').rouletteWheel('spin');
+        });
+
     </script>
     {{-- /Pusher script --}}
 
@@ -286,6 +295,9 @@
                     $('#canvas').rouletteWheel('spin');
                 }
             });
+
+
+
 
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'r') {

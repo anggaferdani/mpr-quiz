@@ -369,7 +369,7 @@
 
         $(document).on('keypress', function (e) {
             if (e.which == 32) {
-                startRandom();
+                startCountdown();
             }
         });
 
@@ -415,7 +415,6 @@
         //         //     sisiElement.style.backgroundColor = 'lightcoral';
         //         // }
 
-                startCountdown();
 
         //         kirimCountdown();
 

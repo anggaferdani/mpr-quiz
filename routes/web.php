@@ -113,6 +113,10 @@ Route::post('/set-run', [\App\Http\Controllers\TeamController::class, 'setRun'])
 
 
 
+Route::get('/spin-button', [FrontendController::class, 'spinButton'])->name('device1');
+Route::post('/spin-trigger', [PusherController::class, 'startSpin'])->name('device1');
+
+
 
 
 
