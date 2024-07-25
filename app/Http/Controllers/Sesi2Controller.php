@@ -48,7 +48,6 @@ class Sesi2Controller extends Controller
                     'useTLS' => true,
                 ]
             );
-
             $data = [
                 'id' => $request->id,
                 'id_team' => $request->id_team,
@@ -57,7 +56,6 @@ class Sesi2Controller extends Controller
                 'tanggal' => Carbon::now(),
                 'sesi' => $request->sesi,
             ];
-
             $pusher->trigger('my-KirimPointStoreS1', 'my-KirimPointStoreS1', $data);
         } else {
             $sesi3->update([

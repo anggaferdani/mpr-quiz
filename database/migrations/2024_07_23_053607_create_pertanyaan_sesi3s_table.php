@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('wilayah_id')->references('id')->on('wilayahs')->onDelete('cascade');
             $table->text('pertanyaan');
             $table->text('jawaban');
+            $table->integer('status_pertanyaan')->default(1);
             $table->integer('status')->default(1);
             $table->timestamps();
         });

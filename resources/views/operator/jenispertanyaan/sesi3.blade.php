@@ -43,9 +43,11 @@
                                     class="btn btn-primary"
                                     data-bs-toggle="modal"
                                     data-bs-target="#modalTambahPoin{{ $pertanyaanSesi3->id }}"
+                                    data-id-pertanyaan="{{ $pertanyaanSesi3->id }}"
                                     data-pertanyaan="{{ $pertanyaanSesi3->pertanyaan }}"
                                     data-jawaban="{{ $pertanyaanSesi3->jawaban }}"
-                                    onclick="sendPusherData('{{ $pertanyaanSesi3->pertanyaan }}', '{{ $pertanyaanSesi3->jawaban }}')"
+                                    onclick="sendPusherData('{{ $pertanyaanSesi3->id }}', '{{ $pertanyaanSesi3->pertanyaan }}', '{{ $pertanyaanSesi3->jawaban }}')"
+                                    @if($pertanyaanSesi3->status_pertanyaan == 0) @disabled(true) @endif
                                     >
                                     Pilih
                                 </button>
@@ -141,17 +143,19 @@
 @endsection
 @push('scripts')
 <script>
-    function sendPusherData(pertanyaan, jawaban) {
+    function sendPusherData(id, pertanyaan, jawaban) {
         $.ajax({
             url: '/sesi-3/pusher/kirim-pertanyaan-sesi3',
             method: 'POST',
             data: {
+                id: id,
                 pertanyaan: pertanyaan,
                 jawaban: jawaban,
                 _token: $('meta[name="csrf-token"]').attr('content'),
             },
             success: function(data) {
                 console.log(data);
+                $('[data-id-pertanyaan="' + id + '"]').prop('disabled', true);
             },
             error: function(xhr, status, error) {
                 console.error(error);
