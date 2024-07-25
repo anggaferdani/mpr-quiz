@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Events\MessageSent;
 
 use App\Events\Spin;
+use App\Events\SpinSesi2;
 use Illuminate\Http\Request;
 
 class PusherController extends Controller
@@ -19,6 +20,11 @@ class PusherController extends Controller
     {
         event(new Spin("tesing"));
         return response()->json(['status' => 'success']);
+    }
 
+    public function startSpinSesi2()
+    {
+        event(new SpinSesi2("tesing"));
+        return response()->json(['status' => 'success']);
     }
 }

@@ -335,6 +335,10 @@ class FrontendController extends Controller
     public function spinButton()
     {
         return view("FE.device.spin-trigger");
+    }
 
+    public function spinButtonSesi2()
+    {
+        return view("FE.device.spin-trigger-sesi-2");
     }
 }
