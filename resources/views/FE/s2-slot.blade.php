@@ -21,10 +21,10 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            background-image: url('../images/gif-s1-spin.gif');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
+            /*background-image: url('../images/gif-s1-spin.gif');*/
+            /*background-size: cover;*/
+            /*background-repeat: no-repeat;*/
+            /*background-position: center;*/
         }
 
         .box-container {
@@ -83,7 +83,7 @@
 
     const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
     kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function (data) {
-        // console.log(data.message);
+        console.log(data.message);
         if (data.message.pernyataanId != null) {
             location.href = "/sesi2-soal/" + data.message.pernyataanId + "?no=" + data.message.no + "&selectedValue=" + data.message.selectedValue
 
