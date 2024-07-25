@@ -141,8 +141,10 @@
                             <td class="">
                                 <div class="d-flex justify-content-center">
                                     <button type="button" data-bs-toggle="modal" data-bs-target="#pernyataan-{{ $pernyataan->id }}-modal" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled
-                                        data-pernyataan="{{ $pernyataan->pernyataan }}"
-                                        @php
+                                            data-pernyataan="{{ $pernyataan->pernyataan }}"
+                                            data-no="{{$loop->iteration}}"
+                                            data-pernyataan-id="{{$pernyataan->id}}"
+                                            @php
                                             $pointers = [];
                                             foreach ($pernyataan->pointers as $pointer) {
                                                 $pointers[] = $pointer;
@@ -205,18 +207,21 @@
             });
         });
 
-        document.querySelectorAll('button[data-bs-toggle="modal"]').forEach(function(button) {
-            button.addEventListener('click', function() {
+        document.querySelectorAll('button[data-bs-toggle="modal"]').forEach(function (button) {
+            button.addEventListener('click', function () {
                 let pernyataan = this.getAttribute('data-pernyataan');
+                let no = this.getAttribute('data-no');
                 let pointers = JSON.parse(this.getAttribute('data-pointers'));
+                let pernyataanId = JSON.parse(this.getAttribute('data-pernyataan-id'));
                 let selectedValue = window.selectedRadioValue;
-                sendPusherData(pernyataan, pointers, selectedValue);
+                sendPusherData(pernyataan, pointers, selectedValue, pernyataanId, no);
             });
         });
     });
 
 
-    function sendPusherData(pernyataan, pointers, selectedValue) {
+
+    function sendPusherData(pernyataan, pointers, selectedValue, pernyataanId, no) {
         $.ajax({
             url: '/sesi-2/pusher/kirim-pernyataan-sesi2',
             method: 'POST',
@@ -224,12 +229,14 @@
                 pernyataan: pernyataan,
                 pointers: pointers,
                 selectedValue: selectedValue,
+                pernyataanId: pernyataanId,
+                no: no,
                 _token: $('meta[name="csrf-token"]').attr('content'),
             },
-            success: function(data) {
+            success: function (data) {
                 console.log(data);
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(error);
             }
         });

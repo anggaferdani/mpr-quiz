@@ -122,6 +122,8 @@ class TemaPertanyaanController extends Controller
             'pernyataan' => $request->pernyataan,
             'pointers' => $request->pointers,
             'selectedValue' => $request->selectedValue,
+            "pernyataanId" => $request->pernyataanId,
+            "no" => $request->no,
         ]));
 
         return response()->json($request, 200);

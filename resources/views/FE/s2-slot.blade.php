@@ -63,10 +63,10 @@
 <body>
 
 <div class="spinwheel d-flex align-items-center justify-content-center">
-    <div class="box" id="box1">1</div>
-    <div class="box" id="box2">2</div>
-    <div class="box" id="box3">3</div>
-    <div class="box" id="box4">4</div>
+    <div class="box" id="box1"><b style="font-size: 70px">1</b></div>
+    <div class="box" id="box2"><b style="font-size: 70px">2</b></div>
+    <div class="box" id="box3"><b style="font-size: 70px">3</b></div>
+{{--    <div class="box" id="box4">4</div>--}}
 
 
 </div>
