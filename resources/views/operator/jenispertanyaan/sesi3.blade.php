@@ -11,44 +11,51 @@
   </div>
 @endif
 
-<x-tombol-pindah-sesi text="Arahkan ke sesi 3" sesi-tujuan="3"/>
-<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalTambahPertanyaan">Tambah Pertanyaan</button>
-
 <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card-body">
+    <div class="card-title d-flex justify-content-between mb-3">
+        <x-tombol-pindah-sesi text="Arahkan ke sesi 3" sesi-tujuan="3"/>
 
-        <div class="table-responsive">
-            <table id="table1">
-                <thead>
-                    <tr>
-                        <th style="text-align: center;">No</th>
-                        <th style="text-align: center;">Pertanyaan</th>
-                        <th style="text-align: center;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  @foreach($pertanyaanSesi3s as $pertanyaanSesi3)
-                  <tr>
-                      <td class="text-center fw-bold">{{$loop->iteration}}</td>
-                      <td class="fw-bold">{{$pertanyaanSesi3->pertanyaan}}</td>
-                      <td>
-                          <div class="d-flex justify-content-center gap-2">
-                            <button 
-                                class="btn btn-primary"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#modalTambahPoin{{ $pertanyaanSesi3->id }}"
-                                data-pertanyaan="{{ $pertanyaanSesi3->pertanyaan }}"
-                                data-jawaban="{{ $pertanyaanSesi3->jawaban }}"
-                                onclick="sendPusherData('{{ $pertanyaanSesi3->pertanyaan }}', '{{ $pertanyaanSesi3->jawaban }}')"
-                                >
-                                Pilih
-                            </button>
-                          </div>
-                      </td>
-                  </tr>
-                  @endforeach
-                </tbody>
-            </table>
+        <a data-bs-toggle="modal" data-bs-target="#modalTambahPertanyaan" class="btn btn-primary btn-lg btn-icon-text">
+            <i class="mdi mdi-upload btn-icon-prepend"></i>
+            +
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="table1">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Pertanyaan</th>
+                            <th style="text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach($pertanyaanSesi3s as $pertanyaanSesi3)
+                      <tr>
+                          <td class="text-center fw-bold">{{$loop->iteration}}</td>
+                          <td class="fw-bold">{{$pertanyaanSesi3->pertanyaan}}</td>
+                          <td>
+                              <div class="d-flex justify-content-center gap-2">
+                                <button 
+                                    class="btn btn-primary"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#modalTambahPoin{{ $pertanyaanSesi3->id }}"
+                                    data-pertanyaan="{{ $pertanyaanSesi3->pertanyaan }}"
+                                    data-jawaban="{{ $pertanyaanSesi3->jawaban }}"
+                                    onclick="sendPusherData('{{ $pertanyaanSesi3->pertanyaan }}', '{{ $pertanyaanSesi3->jawaban }}')"
+                                    >
+                                    Pilih
+                                </button>
+                              </div>
+                          </td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -100,7 +107,15 @@
                         <div>{{ $pertanyaanSesi3->pertanyaan }}</div>
                         <div class="">Jawaban : <span class="fw-bold text-danger">{{ $pertanyaanSesi3->jawaban }}</span></div>
                     </div>
-                    <div class="mb-3">
+                    @foreach ($teams as $team)
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="id_team" id="" checked="" value="{{ $team->id }}">
+                        <label class="form-check-label" for="">
+                            {{ $team->name }}
+                        </label>
+                    </div>
+                    @endforeach
+                    {{-- <div class="mb-3">
                         <label class="form-label">Pilih grup<span class="text-danger">*</span></label>
                         <select class="form-control" name="id_team" id="" required>
                             <option value="" disabled selected>Select</option>
@@ -109,7 +124,7 @@
                             @endforeach
                         </select>
                         @error('jawaban')<p class="text-danger">{{ $message }}</p>@enderror
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary w-100" id="btnTidakMenjawab{{ $pertanyaanSesi3->id }}">Tidak Menjawab</button>

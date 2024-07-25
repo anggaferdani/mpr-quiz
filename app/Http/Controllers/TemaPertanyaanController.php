@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Events\MessageSent;
 use App\Models\Team;
+use App\Models\Setting;
 use App\Models\Pernyataan;
 use App\Models\Pertanyaan;
 use App\Events\MessageSent;
@@ -21,7 +22,8 @@ class TemaPertanyaanController extends Controller
     public function index(Request $request)
     {
         $tema = TemaPertanyaan::where('sesi', 1)->latest()->get();
-        $team = Team::all();
+        $setting = Setting::first();
+        $team = Team::where('run', $setting->run)->get();
         $date = Carbon::now()->format('Y-m-d');
         $participant = Participant::where('tanggal', $date)->get();
 
@@ -32,13 +34,19 @@ class TemaPertanyaanController extends Controller
     {
         $pernyataans = Pernyataan::with('pointers')->get();
 
-        $team = Team::all();
+        $setting = Setting::first();
+        $team = Team::where('run', $setting->run)->get();
 
         // !Tema tidak diperlukan
         $tema = TemaPertanyaan::where('sesi', 2)->latest()->get();
         // !/Tema tidak diperlukan
 
-        return view('operator.jenispertanyaan.sesi2', compact('tema', 'pernyataans', 'team'));
+
+        return view('operator.jenispertanyaan.sesi2', compact(
+            'tema',
+            'pernyataans',
+            'team',
+        ));
     }
 
     /**

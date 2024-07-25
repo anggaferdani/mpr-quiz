@@ -1,6 +1,56 @@
 @extends('operator.layout')
 
 @section('title', 'Tema Pertanyaan')
+{{-- @push('styles')
+<style>
+    .custom-radio {
+        display: none;
+    }
+
+    .custom-radio-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100px;
+        margin: 5px;
+        padding: 10px;
+        border: 3px solid #ddd;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .custom-radio:checked + .custom-radio-label {
+        border-color: #007bff;
+        background-color: #e9ecef;
+    }
+
+    .custom-radio:disabled + .custom-radio-label {
+        border-color: #ccc;
+        background-color: #f5f5f5;
+        cursor: not-allowed;
+    }
+
+    .custom-radio:checked:disabled + .custom-radio-label {
+        border-color: #007bff;
+        background-color: #e9ecef;
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .custom-radio-label:hover {
+        border-color: #007bff;
+    }
+
+    .custom-radio-label:active {
+        background-color: #007bff;
+        color: white;
+    }
+
+</style>
+@endpush --}}
 
 @section('layout')
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -34,43 +84,87 @@
 </div>
 
 <div class="page-heading">
-    <h3>Tema Pertanyaan</h3>
+    <h3>Sesi 1</h3>
 </div>
 
 <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card-body">
-        <div class="card-title d-flex justify-content-between mb-5">
-            <x-tombol-pindah-sesi text="Arahkan ke sesi 1" sesi-tujuan="1"/>
-
-            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btn-lg btn-icon-text">
-                <i class="mdi mdi-upload btn-icon-prepend"></i>
-                +
-            </a>
-        </div>
-
-        <div class="table-responsive">
-        <table id="table1">
-    <thead>
-        <tr>
-            <th style="text-align: center;">No</th>
-            <th style="text-align: center;">Tema Pertanyaan</th>
-            <th style="text-align: center;">Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach($tema as $item)
-        <tr>
-            <td class="text-center">{{$loop->iteration}}</td>
-            <td class="text-center">{{$item->tema}}</td>
-            <td class="">
-                <div class="d-flex justify-content-center">
-                    <button type="button" data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-icon-text" disabled>Mulai</button>
+    {{-- <div class="card">
+        <div class="row g-1">
+            @foreach($team as $item)
+                @php
+                    $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
+                @endphp
+                <div class="col">
+                    @if($selectedTeam)
+                        <input type="checkbox" id="" name="" class="custom-radio" checked disabled>
+                    @else
+                        <input type="radio" name="idtim" class="custom-radio id_tim" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
+                    @endif
+                    <label for="team{{$item->id}}" class="custom-radio-label">{{$item->name}}</label>
                 </div>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+            @endforeach
+        </div>
+    </div> --}}
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="team-selection d-flex gap-4">
+                @foreach($team as $item)
+                    @php
+                        $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
+                    @endphp
+                    <div class="form-check">
+                        @if($selectedTeam)
+                            <input class="form-check-input" type="checkbox" checked disabled>
+                        @else
+                            <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
+                        @endif
+                        <label class="form-check-label" for="team{{$item->id}}">
+                            {{$item->name}}
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title d-flex justify-content-between mb-5">
+                <x-tombol-pindah-sesi text="Arahkan ke sesi 1" sesi-tujuan="1"/>
+    
+                <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btn-lg btn-icon-text">
+                    <i class="mdi mdi-upload btn-icon-prepend"></i>
+                    +
+                </a>
+            </div>
+    
+            <div class="table-responsive">
+            <table id="table1">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">No</th>
+                        <th style="text-align: center;">Tema Pertanyaan</th>
+                        <th style="text-align: center;">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($tema as $item)
+                    <tr>
+                        <td class="text-center">{{$loop->iteration}}</td>
+                        <td class="text-center">{{$item->tema}}</td>
+                        <td class="">
+                            <div class="d-flex justify-content-center">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#Backdrop{{$item->id}}" class="btn btn-primary btn-icon-text" disabled>Mulai</button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 @foreach($tema as $item)
 <!-- Modal for selecting questions -->
@@ -215,36 +309,9 @@
     </div>
 </div>
 @endforeach
-    </div>
-        <h5>Pilih Team</h5>
 
-        <div class="team-selection d-flex gap-4">
-            @foreach($team as $item)
-                @php
-                    $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 1)->first();
-                @endphp
-                <div class="form-check">
-                @if($selectedTeam)
-                    <input class="form-check-input" type="checkbox" checked disabled>
-                @else
-                    <input class="form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
-                @endif
-                <label class="form-check-label" for="team{{$item->id}}">
-                    {{$item->name}}
-                </label>
-            </div>
-            @endforeach
-        </div>
-    </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"
-        integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
-
-
     // Add event listener to check if any radio button is selected
 document.addEventListener('DOMContentLoaded', function() {
     var radioButtons = document.querySelectorAll('input[name="idtim"]');
