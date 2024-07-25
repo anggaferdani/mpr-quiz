@@ -67,8 +67,6 @@
     <div class="box" id="box2">2</div>
     <div class="box" id="box3">3</div>
     <div class="box" id="box4">4</div>
-
-
 </div>
 
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
@@ -169,6 +167,14 @@
             const randomTime = Math.floor(Math.random() * 5000) + 5000; // 5000ms hingga 10000ms
             setTimeout(stopColorChange, randomTime);
         }
+    });
+
+    const setpoin = pusher.subscribe('channel-spin-sesi-2');
+    setpoin.bind('event-spin-sesi-2', function(data) {
+            startColorChange();
+
+            const randomTime = Math.floor(Math.random() * 5000) + 5000;
+            setTimeout(stopColorChange, randomTime);
     });
 </script>
 </body>

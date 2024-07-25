@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Spin Sesi 1</title>
+    <title>Spin Sesi 2</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -123,28 +123,29 @@
 
 <script>
     function startSpin() {
-        const button = document.querySelector('.animated-btn');
-        button.disabled = true;
-        button.classList.add('disabled-btn');
 
-        setTimeout(() => {
-            button.disabled = false;
-            button.classList.remove('disabled-btn');
-        }, 3000);
+      const button = document.querySelector('.animated-btn');
+      button.disabled = true;
+      button.classList.add('disabled-btn');
 
-        $.ajax({
-            url: '/spin-trigger',
-            method: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-            },
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            }
-        });
+      setTimeout(() => {
+          button.disabled = false;
+          button.classList.remove('disabled-btn');
+      }, 3000);
+
+      $.ajax({
+          url: '/spin-trigger-sesi-2',
+          method: 'POST',
+          data: {
+              _token: '{{ csrf_token() }}',
+          },
+          success: function (data) {
+              console.log(data);
+          },
+          error: function (xhr, status, error) {
+              console.error(error);
+          }
+      });
     }
 </script>
 
