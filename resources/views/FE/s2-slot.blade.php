@@ -21,10 +21,12 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
+            background-image: url('../images/sesi1-spin.png'); /* Set the URL of your GIF */
+
             /*background-image: url('../images/gif-s1-spin.gif');*/
-            /*background-size: cover;*/
-            /*background-repeat: no-repeat;*/
-            /*background-position: center;*/
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .box-container {
