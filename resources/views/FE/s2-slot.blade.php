@@ -21,7 +21,9 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            background-image: url('../images/gif-s1-spin.gif');
+            /*background-image: url('../images/sesi1-spin.png'); !* Set the URL of your GIF *!*/
+
+            background-image: url('../images/gif-bg-slot.gif');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -36,12 +38,13 @@
         .box {
             margin-left: 40px;
             margin-right: 40px;
-            width: 100px;
-            height: 100px;
+            width: 250px;
+            height: 250px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 70px;
+            font-weight: bolder;
             border: 2px solid #CFAA5A;
             background-color: white; /* Set default color to white */
         }
@@ -66,7 +69,9 @@
     <div class="box" id="box1">1</div>
     <div class="box" id="box2">2</div>
     <div class="box" id="box3">3</div>
-    <div class="box" id="box4">4</div>
+{{--    <div class="box" id="box4">4</div>--}}
+
+
 </div>
 
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
@@ -81,7 +86,7 @@
 
     const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
     kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function (data) {
-        // console.log(data.message);
+        console.log(data.message);
         if (data.message.pernyataanId != null) {
             location.href = "/sesi2-soal/" + data.message.pernyataanId + "?no=" + data.message.no + "&selectedValue=" + data.message.selectedValue
 
@@ -98,6 +103,7 @@
     const colors = ['#CFAA5A']; // Warna yang akan digunakan
     let currentBoxIndex = 0;
     let interval;
+    let intervalTime = 100; // Memulai dengan interval cepat
 
     // Load status dari LocalStorage
     function loadDisabledBoxes() {
@@ -134,7 +140,14 @@
 
             // Pindah ke box berikutnya
             currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
-        }, 500); // Warna berubah setiap 500ms
+
+            // Kurangi kecepatan secara bertahap
+            if (intervalTime < 2000) {
+                clearInterval(interval);
+                intervalTime += 100; // Tambah interval sebanyak 100ms
+                startColorChange();
+            }
+        }, intervalTime);
     }
 
     function stopColorChange() {

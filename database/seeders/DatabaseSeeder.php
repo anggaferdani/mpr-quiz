@@ -34,30 +34,47 @@ class DatabaseSeeder extends Seeder
         $Team = [
             [
                 'name' => 'Grup A',
+                'run' => 1,
             ],
             [
                 'name' => 'Grup B',
+                'run' => 1,
+
             ],
             [
                 'name' => 'Grup C',
+                'run' => 1,
+
             ],
             [
                 'name' => 'Grup D',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup E',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup F',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup G',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup H',
+                'run' => 0,
+
             ],
             [
                 'name' => 'Grup I',
+                'run' => 0,
+
             ],
         ];
 

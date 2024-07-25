@@ -111,10 +111,17 @@
 </head>
 <body>
 
-<div class="text-center">
-    <button class="btn animated-btn text-white" onclick="startSpin()"><i class="fa fa-play mt-4 " style="font-size: 100px" ></i></button>
-</div>
 
+<button style="width: 900px; height: 400px" onclick="startSpin()" class="btn">
+    <div class="text-center">
+        <div class=" animated-btn text-white">
+            <div style="margin-top: 70px">
+                <i class="fa fa-play" style="font-size: 100px"></i>
+            </div>
+        </div>
+    </div>
+
+</button>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
