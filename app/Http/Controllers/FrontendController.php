@@ -209,7 +209,6 @@ class FrontendController extends Controller
         ];
 
         event(new JawabanSesiSatu($dataJawaban));
-
         event(new AddPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
         event(new moveSesi(['capecape' => $capecape]));

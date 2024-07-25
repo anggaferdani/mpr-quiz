@@ -21,9 +21,9 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            background-image: url('../images/sesi1-spin.png'); /* Set the URL of your GIF */
+            /*background-image: url('../images/sesi1-spin.png'); !* Set the URL of your GIF *!*/
 
-            /*background-image: url('../images/gif-s1-spin.gif');*/
+            background-image: url('../images/gif-bg-slot.gif');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
@@ -102,6 +102,7 @@
     const colors = ['#CFAA5A']; // Warna yang akan digunakan
     let currentBoxIndex = 0;
     let interval;
+    let intervalTime = 100; // Memulai dengan interval cepat
 
     // Load status dari LocalStorage
     function loadDisabledBoxes() {
@@ -138,7 +139,14 @@
 
             // Pindah ke box berikutnya
             currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
-        }, 500); // Warna berubah setiap 500ms
+
+            // Kurangi kecepatan secara bertahap
+            if (intervalTime < 2000) {
+                clearInterval(interval);
+                intervalTime += 100; // Tambah interval sebanyak 100ms
+                startColorChange();
+            }
+        }, intervalTime);
     }
 
     function stopColorChange() {

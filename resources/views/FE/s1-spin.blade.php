@@ -61,7 +61,7 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            background-image: url('../images/sesi1-spin.png'); /* Set the URL of your GIF */
+            background-image: url('../images/gif-s1-spin.gif'); /* Set the URL of your GIF */
             background-size: cover; /* Set the size */
             background-repeat: no-repeat; /* Set the repeat behavior */
             background-position: center; /* Set the position */
