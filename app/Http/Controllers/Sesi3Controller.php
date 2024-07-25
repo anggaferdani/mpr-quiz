@@ -182,6 +182,12 @@ class Sesi3Controller extends Controller
 
     public function kirimPertanyaanSesi3(Request $request)
     {
+        $pertanyaanSesi3 = PertanyaanSesi3::find($request->id);
+
+        $pertanyaanSesi3->update([
+            'status_pertanyaan' => 0,
+        ]);
+
         event(new PindahSesi([
             'pertanyaan' => $request->pertanyaan,
             'jawaban' => $request->jawaban,
