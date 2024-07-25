@@ -147,7 +147,7 @@
             @foreach ($tema as $t)
             {
                 id: '{{ $t->id }}',
-                name: '{{$t->tema}}',
+                name: '{!!$t->tema!!}',
                 color: @if ($t->id % 2 !== 0) '#FFBB70' @else '#ffffff' @endif
             },
             @endforeach

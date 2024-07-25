@@ -56,10 +56,11 @@ class FrontendController extends Controller
                 ->from('participants')
                 ->whereDate('tanggal', today()); // Mengganti today() sesuai dengan cara mendapatkan tanggal sekarang di Laravel Anda
         })
+            ->where("is_active", true)
             ->get()
             ->random();
-        $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
 
+        $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
         $pusher = new Pusher(
             env('PUSHER_APP_KEY'),
             env('PUSHER_APP_SECRET'),
@@ -71,6 +72,11 @@ class FrontendController extends Controller
         );
 
         $pusher->trigger('channel-kirim-pertanyaan', 'event-kirim-pertanyaan', ['quiz' => $quiz, 'jawaban' => $jawaban]);
+
+
+        $quiz->update([
+            "is_active" => false
+        ]);
 
         return view('FE.s1-quiz', compact('quiz'));
     }

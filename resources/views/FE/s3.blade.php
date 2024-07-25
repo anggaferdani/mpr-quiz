@@ -53,8 +53,8 @@
     <div class="container" style="display: flex; justify-content: center; align-items: center">
         <div class="row align-items-center justify-content-center">
             <div class="text-sesi w-fit m-auto" style="width: fit-content">
-                <div style="display: flex; justify-content: space-between; width: 100%">
-                    <h1>SESI</h1>
+                <div class="d-flex justify-content-between">
+                    <h1>SESI &nbsp;</h1>
                     <h1>3</h1>
                 </div>
                 <h3  class="text-center">REBUTAN</h3>
