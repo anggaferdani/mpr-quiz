@@ -304,7 +304,7 @@
             console.log('poinBaru', poinBaru)
 
             // Dapatkan elemen HTML yang sesuai dengan id tim
-            var poinElement = document.getElementById('poin_' + teamId);
+            // var poinElement = document.getElementById('poin_' + teamId);
 
             if (poinElement) {
                 // Dapatkan poin yang sudah ada di halaman
