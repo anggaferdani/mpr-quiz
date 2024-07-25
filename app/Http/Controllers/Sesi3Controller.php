@@ -7,6 +7,7 @@ use App\Models\Team;
 use App\Models\Sesi3;
 use App\Events\Minpoin;
 use App\Events\Setpoin;
+use App\Models\Setting;
 use App\Models\Wilayah;
 use App\Events\AddPoints;
 use App\Events\PindahSesi;
@@ -21,7 +22,8 @@ class Sesi3Controller extends Controller
     {
         $wilayah = Wilayah::where('id', $request->wilayah_id)->first();
         $pertanyaanSesi3s = PertanyaanSesi3::where('wilayah_id', $request->wilayah_id)->where('status', 1)->get();
-        $teams = Team::all();
+        $setting = Setting::first();
+        $teams = Team::where('run', $setting->run)->get();
 
         return view('operator.jenispertanyaan.sesi3', compact(
             'wilayah',

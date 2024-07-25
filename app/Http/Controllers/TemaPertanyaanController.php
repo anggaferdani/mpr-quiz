@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 // use App\Events\MessageSent;
-use App\Events\PernyataanSesi2;
-use App\Models\Participant;
-use App\Models\Pernyataan;
 use App\Models\Team;
-use App\Models\TemaPertanyaan;
+use App\Models\Setting;
+use App\Models\Pernyataan;
+use App\Models\Pertanyaan;
+use App\Events\MessageSent;
+use App\Models\Participant;
 use Illuminate\Http\Request;
+use App\Models\TemaPertanyaan;
 use Illuminate\Support\Carbon;
+use App\Events\PernyataanSesi2;
 
 class TemaPertanyaanController extends Controller
 {
@@ -19,7 +22,8 @@ class TemaPertanyaanController extends Controller
     public function index(Request $request)
     {
         $tema = TemaPertanyaan::where('sesi', 1)->latest()->get();
-        $team = Team::all();
+        $setting = Setting::first();
+        $team = Team::where('run', $setting->run)->get();
         $date = Carbon::now()->format('Y-m-d');
         $participant = Participant::where('tanggal', $date)->get();
 
@@ -30,13 +34,19 @@ class TemaPertanyaanController extends Controller
     {
         $pernyataans = Pernyataan::with('pointers')->get();
 
-        $team = Team::all();
+        $setting = Setting::first();
+        $team = Team::where('run', $setting->run)->get();
 
         // !Tema tidak diperlukan
         $tema = TemaPertanyaan::where('sesi', 2)->latest()->get();
         // !/Tema tidak diperlukan
 
-        return view('operator.jenispertanyaan.sesi2', compact('tema', 'pernyataans', 'team'));
+
+        return view('operator.jenispertanyaan.sesi2', compact(
+            'tema',
+            'pernyataans',
+            'team',
+        ));
     }
 
     /**
@@ -112,8 +122,6 @@ class TemaPertanyaanController extends Controller
             'pernyataan' => $request->pernyataan,
             'pointers' => $request->pointers,
             'selectedValue' => $request->selectedValue,
-            "pernyataanId" => $request->pernyataanId,
-            "no" => $request->no,
         ]));
 
         return response()->json($request, 200);

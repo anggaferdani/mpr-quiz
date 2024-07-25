@@ -67,125 +67,128 @@
 </div>
 
 <div class="page-heading">
-    <h3>Pernyataan</h3>
+    <h3>Sesi 2</h3>
 </div>
 
 <div class="col-lg-12 grid-margin stretch-card">
-    <div class="card-body">
-        <div class="card-title d-flex justify-content-between mb-5">
-            <x-tombol-pindah-sesi text="Arahkan ke sesi 2" sesi-tujuan="2"/>
+    <div class="card-title d-flex justify-content-between mb-3">
+        <x-tombol-pindah-sesi text="Arahkan ke sesi 2" sesi-tujuan="2"/>
 
-            <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btn-lg btn-icon-text">
-                <i class="mdi mdi-upload btn-icon-prepend"></i>
-                +
-            </a>
-        </div>
+        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btn-lg btn-icon-text">
+            <i class="mdi mdi-upload btn-icon-prepend"></i>
+            +
+        </a>
+    </div>
 
-        {{-- ! Table by pernyataan --}}
-        <div class="table-responsive">
-            <table id="table1">
-                <thead>
-                    <tr>
-                        <th style="text-align: center;">No</th>
-                        <th style="text-align: center;">Pernyataan</th>
-                        <th style="text-align: center;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($pernyataans as $pernyataan)
-                    <tr>
-                        <td class="text-center">{{$loop->iteration}}</td>
-                        <td class="text-center">{{$pernyataan->pernyataan}}</td>
-                        <td class="">
-                            <div class="d-flex justify-content-center">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#pernyataan-{{ $pernyataan->id }}-modal" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled
-                                        data-pernyataan="{{ $pernyataan->pernyataan }}"
-                                        data-pernyataan-id="{{ $pernyataan->id }}"
-                                        data-no="{{$loop->iteration}}"
-                                    @php
-                                        $pointers = [];
-                                        foreach ($pernyataan->pointers as $pointer) {
-                                            $pointers[] = $pointer;
-                                        }
-                                        $pointersJson = json_encode($pointers);
-                                    @endphp
-                                    data-pointers='{{ $pointersJson }}'
-                                    >
-                                    Mulai
-                                </button>
-                            </div>
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="">Pilih Grup</h5>
+            <div class="team-selection d-flex gap-4">
+                @foreach($team as $item)
+                    @php
+                        $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
+                    @endphp
+                    <div class="form-check">
+                        @if($selectedTeam)
+                            <input class="pernyataan-radios form-check-input" type="checkbox" checked disabled>
+                        @else
+                            <input class="pernyataan-radios form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
+                        @endif
 
-                            <div class="modal fade" id="pernyataan-{{ $pernyataan->id }}-modal" data-modal-id="pernyataan-{{ $pernyataan->id }}-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Poin Poin - <span class="textteam"></h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <form action="{{ route('operator.sesi2.setpoin') }}" method="post">
-                                            @csrf
-                                            <div class="modal-body">
-
-                                                {{-- @foreach($pernyataan->pointers as $pointer)
-                                                    <p class="fw-bold">{{$pointer->penjelasan}}</p><br>
-                                                @endforeach --}}
-
-                                                <input type="hidden" value="2" name="sesi">
-                                                <input type="hidden" value="{{ null }}" name="id_pertanyaan">
-                                                <input type="hidden" class="teamteam" name="id_team">
-                                                <label for="">Input Poin<span class="text-danger">*</span></label>
-                                                <input type="number" class="form-control" name="poin">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save Poin</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-        {{-- ! /Table by pernyataan --}}
-
-        <h5 class="mt-4">Pilih Grup</h5>
-        <div class="team-selection d-flex gap-4">
-            @foreach($team as $item)
-                @php
-                    $selectedTeam = $item->participant()->whereDate('tanggal', '=', now())->where('sesi', 2)->first();
-                @endphp
-                <div class="form-check">
-                    @if($selectedTeam)
-                        <input class="pernyataan-radios form-check-input" type="checkbox" checked disabled>
-                    @else
-                        <input class="pernyataan-radios form-check-input id_tim" type="radio" name="idtim" data-team-name="{{$item->name}}" id="team{{$item->id}}" value="{{$item->id}}">
-                    @endif
-
-                    <label class="form-check-label" for="team{{$item->id}}">
-                        {{$item->name}}
-                    </label>
-                </div>
-            @endforeach
-        </div>
-
-        <h5 class="mt-4">Pilih Sisi</h5>
-        <div class="d-flex gap-4">
-            <div class="form-check">
-                <input type="radio" class="pernyataan-radios form-check-input radio-sisi-sesi-2" name="sisi_pernyataan" id="pro" value="pro">
-                <label class="form-check-label text-success font-weight-bold" for="pro">
-                    PRO
-                </label>
+                        <label class="form-check-label" for="team{{$item->id}}">
+                            {{$item->name}}
+                        </label>
+                    </div>
+                @endforeach
             </div>
 
-            <div class="form-check">
-                <input type="radio" class="pernyataan-radios form-check-input radio-sisi-sesi-2" name="sisi_pernyataan" id="kontra" value="kontra">
-                <label class="form-check-label text-danger font-weight-bold" for="kontra">
-                    KONTRA
-                </label>
+            <h5 class="mt-4">Pilih Sisi</h5>
+            <div class="d-flex gap-4">
+                <div class="form-check">
+                    <input type="radio" class="pernyataan-radios form-check-input radio-sisi-sesi-2" name="sisi_pernyataan" id="pro" value="pro">
+                    <label class="form-check-label text-success font-weight-bold" for="pro">
+                        PRO
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input type="radio" class="pernyataan-radios form-check-input radio-sisi-sesi-2" name="sisi_pernyataan" id="kontra" value="kontra">
+                    <label class="form-check-label text-danger font-weight-bold" for="kontra">
+                        KONTRA
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- ! Table by pernyataan --}}
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="table1">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">No</th>
+                            <th style="text-align: center;">Pernyataan</th>
+                            <th style="text-align: center;">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($pernyataans as $pernyataan)
+                        <tr>
+                            <td class="text-center">{{$loop->iteration}}</td>
+                            <td class="text-center">{{$pernyataan->pernyataan}}</td>
+                            <td class="">
+                                <div class="d-flex justify-content-center">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#pernyataan-{{ $pernyataan->id }}-modal" class="btn btn-primary btn-icon-text d-flex justify-conten" disabled
+                                        data-pernyataan="{{ $pernyataan->pernyataan }}"
+                                        @php
+                                            $pointers = [];
+                                            foreach ($pernyataan->pointers as $pointer) {
+                                                $pointers[] = $pointer;
+                                            }
+                                            $pointersJson = json_encode($pointers);
+                                        @endphp
+                                        data-pointers='{{ $pointersJson }}'
+                                        >
+                                        Mulai
+                                    </button>
+                                </div>
+
+                                <div class="modal fade" id="pernyataan-{{ $pernyataan->id }}-modal" data-modal-id="pernyataan-{{ $pernyataan->id }}-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Poin Poin - <span class="textteam"></h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{ route('operator.sesi2.setpoin') }}" method="post">
+                                                @csrf
+                                                <div class="modal-body">
+
+                                                    {{-- @foreach($pernyataan->pointers as $pointer)
+                                                        <p class="fw-bold">{{$pointer->penjelasan}}</p><br>
+                                                    @endforeach --}}
+
+                                                    <input type="hidden" value="2" name="sesi">
+                                                    <input type="hidden" value="{{ null }}" name="id_pertanyaan">
+                                                    <input type="hidden" class="teamteam" name="id_team">
+                                                    <label for="">Input Poin<span class="text-danger">*</span></label>
+                                                    <input type="number" class="form-control" name="poin">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save Poin</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -205,17 +208,15 @@
         document.querySelectorAll('button[data-bs-toggle="modal"]').forEach(function(button) {
             button.addEventListener('click', function() {
                 let pernyataan = this.getAttribute('data-pernyataan');
-                let no = this.getAttribute('data-no');
                 let pointers = JSON.parse(this.getAttribute('data-pointers'));
-                let pernyataanId = JSON.parse(this.getAttribute('data-pernyataan-id'));
                 let selectedValue = window.selectedRadioValue;
-                sendPusherData(pernyataan, pointers, selectedValue, pernyataanId, no);
+                sendPusherData(pernyataan, pointers, selectedValue);
             });
         });
     });
 
 
-    function sendPusherData(pernyataan, pointers, selectedValue, pernyataanId, no) {
+    function sendPusherData(pernyataan, pointers, selectedValue) {
         $.ajax({
             url: '/sesi-2/pusher/kirim-pernyataan-sesi2',
             method: 'POST',
@@ -223,8 +224,6 @@
                 pernyataan: pernyataan,
                 pointers: pointers,
                 selectedValue: selectedValue,
-                pernyataanId: pernyataanId,
-                no: no,
                 _token: $('meta[name="csrf-token"]').attr('content'),
             },
             success: function(data) {
