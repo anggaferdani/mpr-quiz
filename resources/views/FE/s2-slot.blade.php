@@ -92,6 +92,16 @@
         // document.getElementById('pernyataanSesi2').innerText = data.message.pernyataan;
         // document.getElementById('sisiSesi2').innerText = data.message.selectedValue;
     });
+
+
+
+    const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+    ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+        const sesi = data.message.sesi;
+
+        if (sesi == 3) { window.location.href = `/sesi${sesi}`; }
+    });
+
 </script>
 
 

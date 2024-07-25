@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('id_tema');
             $table->text('pertanyaan');
+            $table->boolean("is_active")->default(true);
+            $table->integer("run")->default(0);
             $table->timestamps();
         });
     }

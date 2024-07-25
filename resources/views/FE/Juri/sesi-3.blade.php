@@ -29,17 +29,15 @@
 
         const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
-            console.log(data);
+            // console.log(data);
             document.getElementById('tampilkanPertanyaanSesi3').innerText = data.message.pertanyaan;
             document.getElementById('tampilkanJawabanSesi3').innerHTML = `Jawaban : <span class="text-danger">${data.message.jawaban}</span>`;
+            const sesi = data.message.sesi;
+            if (sesi == 1) { window.location.href = `/sesi${sesi}-juri`; }
+
         });
 
-        // const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
-        // ankorPindahSesi.bind('event-pindah-sesi', function(data) {
-        //     const sesi = data.message.sesi;
 
-        //     if (sesi == 2) { window.location.href = `/sesi${sesi}-juri`; }
-        // });
 
         const channel = pusher.subscribe('channel-kirim-pertanyaan');
         channel.bind('event-kirim-pertanyaan', function(data) {

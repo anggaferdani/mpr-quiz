@@ -11,7 +11,7 @@ class Pertanyaan extends Model
     protected $table= 'pertanyaans';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'id_tema', 'pertanyaan'
+        'id_tema', 'pertanyaan','is_active'
     ];
 
     public function tema(){

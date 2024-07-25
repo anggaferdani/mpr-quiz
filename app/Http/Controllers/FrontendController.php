@@ -51,15 +51,17 @@ class FrontendController extends Controller
 
     public function quizSesi1($id)
     {
-        $quiz = Pertanyaan::where('id_tema', $id)->whereNotIn('id', function($query) {
-            $query->select('id_pertanyaan')
-                ->from('participants')
-                ->whereDate('tanggal', today()); // Mengganti today() sesuai dengan cara mendapatkan tanggal sekarang di Laravel Anda
-        })
+        $quiz = Pertanyaan::where('id_tema', $id)
+//            ->whereNotIn('id', function($query) {
+//            $query->select('id_pertanyaan')
+//                ->from('participants')
+//                ->whereDate('tanggal', today()); // Mengganti today() sesuai dengan cara mendapatkan tanggal sekarang di Laravel Anda
+//        })
+            ->where("is_active", true)
             ->get()
             ->random();
-        $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
 
+        $jawaban = Jawaban::where('id_pertanyaan', $quiz->id)->get();
         $pusher = new Pusher(
             env('PUSHER_APP_KEY'),
             env('PUSHER_APP_SECRET'),
@@ -71,6 +73,11 @@ class FrontendController extends Controller
         );
 
         $pusher->trigger('channel-kirim-pertanyaan', 'event-kirim-pertanyaan', ['quiz' => $quiz, 'jawaban' => $jawaban]);
+
+
+        $quiz->update([
+            "is_active" => false
+        ]);
 
         return view('FE.s1-quiz', compact('quiz'));
     }
@@ -209,7 +216,6 @@ class FrontendController extends Controller
         ];
 
         event(new JawabanSesiSatu($dataJawaban));
-
         event(new AddPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
         event(new moveSesi(['capecape' => $capecape]));
