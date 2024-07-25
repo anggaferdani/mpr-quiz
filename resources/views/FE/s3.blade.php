@@ -51,13 +51,13 @@
 
 <body class="d-flex align-items-center" style="height: 100vh; background-repeat: no-repeat; object-fit: contain">
     <div class="container" style="display: flex; justify-content: center; align-items: center">
-        <div class="row align-items-center justify-center">
-            <div class="text-sesi w-fit" style="width: fit-content">
+        <div class="row align-items-center justify-content-center">
+            <div class="text-sesi w-fit m-auto" style="width: fit-content">
                 <div style="display: flex; justify-content: space-between; width: 100%">
                     <h1>SESI</h1>
                     <h1>3</h1>
                 </div>
-                <h3 style="width: fit-content;">BABAK REBUTAN</h3>
+                <h3  class="text-center">REBUTAN</h3>
             </div>
         </div>
     </div>
