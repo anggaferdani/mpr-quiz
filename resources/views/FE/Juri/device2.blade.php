@@ -40,12 +40,12 @@
             let $deviceShow = $('<div></div>').addClass('deviceShow').attr('id', latestItem.id);
             let $teamName = $('<h2></h2>').text(`${latestItem.name}`).css('display', 'block');
             let $totalPoints = $('<h1></h1>').text(`${latestItem.total_poin}`).css('display', 'block').addClass('totalPoint');
-            
+
             $deviceShow.append($teamName);
             $deviceShow.append($totalPoints);
-            
+
             totalPoin = latestItem.total_poin;
-            
+
             $('body').empty().append($deviceShow);
         });
 
@@ -56,7 +56,7 @@
         channel4.bind('my-KirimPointStoreS1', function(data) {
             // Update tampilan dengan data yang diterima dari Pusher
             console.log('KirimPointStoreS1', data);
-            
+
             // Dapatkan id tim dan poin yang diterima dari Pusher
             var teamId = data.id_team;
             console.log('teamId', teamId)
@@ -86,7 +86,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
@@ -107,6 +107,10 @@
             font-weight: bold;
             font-size: 20vw;
             color: #CE8F2E;
+        }
+        h2{
+            font-weight: bold;
+            font-size: 70px;
         }
         .deviceShow{
           text-align: center;
