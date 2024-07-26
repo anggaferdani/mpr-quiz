@@ -15,7 +15,7 @@ class TemaPertanyaanSeeder extends Seeder
     {
         $temaPertanyaans = [
             [
-                'tema' => 'PANCASILA, UUD NRI Tahun 1945 dan Ketetapan MPR',
+                'tema' => 'Pancasila, UUD NRI Tahun 1945 dan Ketetapan MPR',
                 'sesi' => 1
             ], [
                 'tema' => 'NKRI dan Bhinneka Tunggal Ika',
