@@ -21,7 +21,7 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            background-image: url('../images/gif-s1-spin.gif');
+            background-image: url('../images/NOMOR-SOAL.png');
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
