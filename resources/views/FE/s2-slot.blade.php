@@ -36,13 +36,13 @@
         .box {
             margin-left: 40px;
             margin-right: 40px;
-            width: 100px;
-            height: 100px;
+            width: 190px;
+            height: 190px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            border: 2px solid #CFAA5A;
+            border: 3px solid #CFAA5A;
             background-color: white; /* Set default color to white */
         }
 
