@@ -106,15 +106,17 @@
             font-family: "Poppins", sans-serif;
             font-weight: bold;
             font-size: 20vw;
-            color: #CE8F2E;
+            color: red;
         }
         h2{
             font-weight: bold;
-            font-size: 70px;
+            font-size: 200px;
         }
+
         .deviceShow{
-          text-align: center;
+            text-align: center;
         }
+
     </style>
 </head>
 <body>
