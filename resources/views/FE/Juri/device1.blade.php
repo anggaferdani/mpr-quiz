@@ -110,7 +110,7 @@
         }
         h2{
             font-weight: bold;
-            font-size: 200px;
+            font-size: 150px;
         }
 
         .deviceShow{
