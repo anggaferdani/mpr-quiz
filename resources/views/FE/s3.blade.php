@@ -36,7 +36,7 @@
         }
 
         body {
-            background-image: url(../images/nilaiJuriBg.png);
+            background-image: url(../images/CERDAS-CERMAT-SESI3.png);
             /* D:\application\mpr-quiz\public\images\bg-nilai-juri.png */
             background-repeat: no-repeat;
             background-size: 100% 100%;
@@ -53,11 +53,11 @@
     <div class="container" style="display: flex; justify-content: center; align-items: center">
         <div class="row align-items-center justify-content-center">
             <div class="text-sesi w-fit m-auto" style="width: fit-content">
-                <div class="d-flex justify-content-between">
-                    <h1>SESI &nbsp;</h1>
-                    <h1>3</h1>
-                </div>
-                <h3  class="text-center">REBUTAN</h3>
+{{--                <div class="d-flex justify-content-between">--}}
+{{--                    <h1>SESI &nbsp;</h1>--}}
+{{--                    <h1>3</h1>--}}
+{{--                </div>--}}
+{{--                <h3  class="text-center">REBUTAN</h3>--}}
             </div>
         </div>
     </div>
