@@ -17,7 +17,7 @@ class PertanyaanKotaSemarangSeeder extends Seeder
     {
         $dataSesi = [
             1 => [
-                'UUD NRI Tahun 1945 dan Ketetapan MPR' => [
+                'PANCASILA, UUD NRI Tahun 1945 dan Ketetapan MPR' => [
                     'Berdasarkan pada pasal 23B Undang-undang Dasar Negara Republik Indonesia Tahun 1945 menyebutkan macam dan harga mata uang ditetapkan dengan Undang-undang. Sebutkan mata uang pecahan Rupiah yang dikeluarkan oleh Bank Indonesia pada Tahun Emisi/Keluaran 2022?' => [
                         'Rp.100.000',
                         'Rp.  75.000',
