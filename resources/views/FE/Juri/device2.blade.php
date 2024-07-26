@@ -38,10 +38,10 @@
             updateLastItem(latestItem);
 
             let $deviceShow = $('<div></div>').addClass('deviceShow').attr('id', latestItem.id);
-            let $teamName = $('<h2></h2>').text(`${latestItem.name}`).css('display', 'block');
+            let $teamName = $('<h2></h2>').text(`Grup B`).css('display', 'block');
             let $totalPoints = $('<h1></h1>').text(`${latestItem.total_poin}`).css('display', 'block').addClass('totalPoint');
 
-            $deviceShow.append("Grup B");
+            $deviceShow.append($teamName);
             $deviceShow.append($totalPoints);
 
             totalPoin = latestItem.total_poin;
