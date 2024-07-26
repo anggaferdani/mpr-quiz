@@ -55,6 +55,7 @@
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
             const sesi = data.message.sesi;
 
+            console.log(data)
             if (sesi != 1) { window.location.href = `/sesi${sesi}`; }
         });
 

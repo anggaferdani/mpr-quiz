@@ -3,13 +3,13 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use App\Models\Team;
-use App\Models\User;
-use App\Models\Pointer;
-use App\Models\Setting;
-use App\Models\Wilayah;
 use App\Models\Pernyataan;
 use App\Models\PertanyaanSesi3;
+use App\Models\Pointer;
+use App\Models\Setting;
+use App\Models\Team;
+use App\Models\User;
+use App\Models\Wilayah;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -48,32 +48,32 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'name' => 'Grup D',
-                'run' => 0,
+                'run' => 2,
 
             ],
             [
                 'name' => 'Grup E',
-                'run' => 0,
+                'run' => 2,
 
             ],
             [
                 'name' => 'Grup F',
-                'run' => 0,
+                'run' => 2,
 
             ],
             [
                 'name' => 'Grup G',
-                'run' => 0,
+                'run' => 3,
 
             ],
             [
                 'name' => 'Grup H',
-                'run' => 0,
+                'run' => 3,
 
             ],
             [
                 'name' => 'Grup I',
-                'run' => 0,
+                'run' => 3,
 
             ],
         ];
@@ -101,28 +101,51 @@ class DatabaseSeeder extends Seeder
         Pernyataan::insert([
             [
                 "pernyataan" => "Penyelenggaraan pendidikan bela negara di Indonesia",
+                "run" => 1
             ], [
                 "pernyataan" => "Majelis Permusyawaratan Rakyat (MPR) perlu diberikan kembali wewenang untuk menetapkan Garis-garis Besar Haluan Negara (GBHN).",
+                "run" => 1
+
             ], [
                 "pernyataan" => "Presiden dan Wakil Presiden memegang jabatan selama lima tahun, dan sesudahnya dapat dipilih kembali dalam jabatan yang sama, hanya untuk satu kali masa jabatan.",
+                "run" => 1
+
             ], [
                 "pernyataan" => "Masyarakat diberikan kebebasan dalam memelihara dan mengembangkan nilai-nilai budaya daerah.",
+                "run" => 2
+
             ], [
                 "pernyataan" => "Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 perlu disempurnakan kembali.",
+                "run" => 2
+
             ], [
                 "pernyataan" => "Dalam Proses Pemberhentian Presiden dan/atau Wakil Presiden, apabila Putusan Mahkamah Konstitusi memutuskan bahwa Presiden dan/atau Wakil Presiden terbukti melakukan pelanggaran hukum, maka dalam sidangnya, MPR tidak harus memberhentikan Presiden dan/atau Wakil Presiden.",
+                "run" => 2
+
             ], [
                 "pernyataan" => "Pelaksanaan pembangunan proyek infrastruktur negara dengan sumber dana berasal dari biaya asing.",
+                "run" => 3
+
             ], [
                 "pernyataan" => "Penyelenggaraan pendidikan konstitusi bagi warga Negara Republik Indonesia.",
+                "run" => 3
+
             ], [
                 "pernyataan" => "Indonesia Yang Mandiri sebagaimana diamanatkan Ketetapan MPR RI Nomor VII/MPR/2001 tentang visi Indonesia belum sesuai harapan.",
+                "run" => 3
+
             ], [
                 "pernyataan" => "Presiden memiliki wewenang untuk menetapkan Peraturan Pemerintah pengganti Undang-Undang.",
+                "run" => 4
+
             ], [
                 "pernyataan" => "Pembatasan masa jabatan Anggota DPR selama 2 (dua) periode perlu diatur dalam Undang-Undang.",
+                "run" => 4
+
             ], [
                 "pernyataan" => "Pemberian bantuan langsung tunai dari Pemerintah kepada masyarakat yang dianggap tidak mampu.",
+                "run" => 4
+
             ],
         ]);
 

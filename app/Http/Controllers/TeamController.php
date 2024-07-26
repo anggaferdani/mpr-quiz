@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RefreshPage;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,12 @@ class TeamController extends Controller
         $team = Team::find($request->team_id);
         $team->run = $request->run;
         $team->save();
+        return redirect()->back();
+    }
+
+    public function refreshPoint()
+    {
+        event(new RefreshPage("Testig"));
         return redirect()->back();
     }
 

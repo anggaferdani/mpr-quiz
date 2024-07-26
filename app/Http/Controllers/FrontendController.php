@@ -87,13 +87,17 @@ class FrontendController extends Controller
     {
 
         $setting = Setting::first();
-//        dd($setting);
         $jawaban = $request->input('jawaban');
         $idJawaban = $request->input('id_jawaban');
         $pesan = $request->input('pesan');
         $capecape = $request->input('capecape');
         $team = Team::where("run", $setting->run)->get();
-
+        $groupNames = ['Group A', 'Group B', 'Group C'];
+        foreach ($team as $index => $t) {
+            if (isset($groupNames[$index])) {
+                $t->name = $groupNames[$index];
+            }
+        }
         // Sinkronkan jawaban
         $dataJawaban = [
             'id_jawaban' => $idJawaban
@@ -147,7 +151,12 @@ class FrontendController extends Controller
         $jawabanArray = $request->input('jawabanArray');
         $pesan = $request->input('pesan');
         $team = Team::where("run", $setting->run)->get();
-
+        $groupNames = ['Group A', 'Group B', 'Group C'];
+        foreach ($team as $index => $t) {
+            if (isset($groupNames[$index])) {
+                $t->name = $groupNames[$index];
+            }
+        }
 
         // Semua variabel memiliki nilai yang valid, kirimkan event
         event(new KirimPertanyaanS2(['berita' => $berita, 'id' => $id, 'pertanyaan' => $pertanyaan, 'jawabanArray' => $jawabanArray]));
@@ -210,7 +219,12 @@ class FrontendController extends Controller
         $pesan = $request->input('pesan');
         $capecape = $request->input('capecape');
         $team = Team::where("run", $setting->run)->get();
-
+        $groupNames = ['Group A', 'Group B', 'Group C'];
+        foreach ($team as $index => $t) {
+            if (isset($groupNames[$index])) {
+                $t->name = $groupNames[$index];
+            }
+        }
         $dataJawaban = [
             'id_jawaban' => $idJawaban
         ];

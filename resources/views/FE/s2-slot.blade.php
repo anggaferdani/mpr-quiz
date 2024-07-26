@@ -183,8 +183,8 @@
 
     const setpoin = pusher.subscribe('channel-spin-sesi-2');
     setpoin.bind('event-spin-sesi-2', function(data) {
+        console.log(data)
             startColorChange();
-
             const randomTime = Math.floor(Math.random() * 5000) + 5000;
             setTimeout(stopColorChange, randomTime);
     });

@@ -79,6 +79,8 @@
 
         const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+            localStorage.clear();
+
             const sesi = data.message.sesi;
 
             if (sesi == 1) { window.location.href = `/sesi${sesi}`; }

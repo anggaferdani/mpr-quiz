@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 // use App\Events\MessageSent;
-use App\Models\Team;
-use App\Models\Setting;
-use App\Models\Pernyataan;
-use App\Models\Pertanyaan;
-use App\Events\MessageSent;
-use App\Models\Participant;
-use Illuminate\Http\Request;
-use App\Models\TemaPertanyaan;
-use Illuminate\Support\Carbon;
 use App\Events\PernyataanSesi2;
+use App\Models\Participant;
+use App\Models\Pernyataan;
+use App\Models\Setting;
+use App\Models\Team;
+use App\Models\TemaPertanyaan;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class TemaPertanyaanController extends Controller
 {
@@ -24,6 +22,12 @@ class TemaPertanyaanController extends Controller
         $tema = TemaPertanyaan::where('sesi', 1)->latest()->get();
         $setting = Setting::first();
         $team = Team::where('run', $setting->run)->get();
+        $groupNames = ['Group A', 'Group B', 'Group C'];
+        foreach ($team as $index => $t) {
+            if (isset($groupNames[$index])) {
+                $t->name = $groupNames[$index];
+            }
+        }
         $date = Carbon::now()->format('Y-m-d');
         $participant = Participant::where('tanggal', $date)->get();
 
@@ -32,11 +36,17 @@ class TemaPertanyaanController extends Controller
 
     public function sesi2()
     {
-        $pernyataans = Pernyataan::with('pointers')->get();
 
         $setting = Setting::first();
         $team = Team::where('run', $setting->run)->get();
+        $pernyataans = Pernyataan::with('pointers')->where("run", $setting->run)->get();
 
+        $groupNames = ['Group A', 'Group B', 'Group C'];
+        foreach ($team as $index => $t) {
+            if (isset($groupNames[$index])) {
+                $t->name = $groupNames[$index];
+            }
+        }
         // !Tema tidak diperlukan
         $tema = TemaPertanyaan::where('sesi', 2)->latest()->get();
         // !/Tema tidak diperlukan

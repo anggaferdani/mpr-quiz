@@ -155,6 +155,10 @@
             encrypted: true,
         });
 
+        const channelrefreshPage = pusher.subscribe('channel-refreshPage');
+        channelrefreshPage.bind('event-refreshPage', function(data) {
+            location.reload();
+        });
         const setpoinSesi2 = pusher.subscribe('channel-setpoin-sesi-2');
         setpoinSesi2.bind('event-setpoin-sesi-2', function(data) {
             const pointElement = document.getElementById(`poin_${data.message.id_team}`);

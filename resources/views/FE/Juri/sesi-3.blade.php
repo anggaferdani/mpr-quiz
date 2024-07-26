@@ -14,6 +14,10 @@
             encrypted: true
         });
 
+        const channelrefreshPage = pusher.subscribe('channel-refreshPage');
+        channelrefreshPage.bind('event-refreshPage', function(data) {
+            location.reload();
+        });
         const setpoin = pusher.subscribe('channel-setpoin');
         setpoin.bind('event-setpoin', function(data) {
             const pointElement = document.getElementById(`poin_${data.message.id_team}`);

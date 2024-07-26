@@ -52,6 +52,18 @@
             console.log('Received quiz data ID:', data);
         });
 
+
+
+
+
+
+
+        const channelrefreshPage = pusher.subscribe('channel-refreshPage');
+        channelrefreshPage.bind('event-refreshPage', function(data) {
+            location.reload();
+        });
+
+
         const channel3 = pusher.subscribe('channel-addPoints');
         channel3.bind('event-addPoints', function(data) {
             // Handle received quiz data

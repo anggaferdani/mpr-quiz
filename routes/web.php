@@ -106,7 +106,10 @@ Route::get('/device-3', [FrontendController::class, 'device3'])->name('device3')
 Route::post('/kirim-pertanyaan', [PusherController::class, 'kirimPertanyaan']);
 
 
+
+
 Route::post('/set-run', [\App\Http\Controllers\TeamController::class, 'setRun'])->name("set-run");
+Route::get('/refresh-point', [\App\Http\Controllers\TeamController::class, 'refreshPoint'])->name("refresh-point");
 
 
 

@@ -24,7 +24,12 @@ class Sesi3Controller extends Controller
         $pertanyaanSesi3s = PertanyaanSesi3::where('wilayah_id', $request->wilayah_id)->where('status', 1)->get();
         $setting = Setting::first();
         $teams = Team::where('run', $setting->run)->get();
-
+        $groupNames = ['Group A', 'Group B', 'Group C'];
+        foreach ($teams as $index => $t) {
+            if (isset($groupNames[$index])) {
+                $t->name = $groupNames[$index];
+            }
+        }
         return view('operator.jenispertanyaan.sesi3', compact(
             'wilayah',
             'pertanyaanSesi3s',
@@ -87,7 +92,7 @@ class Sesi3Controller extends Controller
             ]);
 
             $team = Team::where('id', $sesi3->id_team)->first();
-    
+
             if ($team) {
                 event(new Setpoin([
                     'poin' => $team->participant()->sum('poin'),

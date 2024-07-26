@@ -122,6 +122,25 @@
 <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
 
 <script>
+    const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+        encrypted: true
+    });
+
+    const channelrefreshPage = pusher.subscribe('channel-refreshPage');
+    channelrefreshPage.bind('event-refreshPage', function(data) {
+        location.reload();
+    });
+
+    const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+    ankorPindahSesi.bind('event-pindah-sesi', function(data) {
+        console.log(data)
+        const sesi = data.message.sesi;
+        if (sesi == 1) { window.location.href = `/spin-button`; }
+    });
+
+
+
     function startSpin() {
 
       const button = document.querySelector('.animated-btn');

@@ -40,6 +40,10 @@
                                             data-bs-target="#round{{$item->id}}">
                                         Set Run
                                     </button>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#gantinilai{{$item->id}}">
+                                        Change Poin
+                                    </button>
                                 </div>
                             </td>
                         <!-- Modal -->
@@ -119,6 +123,47 @@
                                                    <input type="hidden" name="team_id" value="{{$item->id}}" >
                                                    <input type="number" class="form-control" value="{{$item->run}}" name="run">
                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                               </div>
+                                           </form>
+                                       </div>
+                                       <div class="modal-footer">
+                                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                           </button>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="modal fade" id="gantinilai{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                               <div class="modal-dialog">
+                                   <div class="modal-content">
+                                       <div class="modal-header">
+                                           <h1 class="modal-title fs-5" id="exampleModalLabel">Ganti Nilai</h1>
+                                           <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                   aria-label="Close"></button>
+                                       </div>
+                                       <div class="modal-body">
+                                           @php
+                                               $result = $item->participant()
+                                               ->leftJoin('teams', 'participants.id_team', '=', 'teams.id')
+                                               ->select('teams.name','teams.id', DB::raw('COALESCE(sum(participants.poin), 0) as total_poin'))
+                                               ->whereDate('tanggal', '=', now())
+                                               ->groupBy('teams.name','teams.id')
+                                               ->get();
+                                               if ($result->isEmpty()) {
+                                                   $defaultResult = [
+                                                       ['name' => $item->name, 'id' => $item->id, 'total_poin' => 0]
+                                                   ];
+                                                   $result = collect($defaultResult);
+                                               }
+                                           @endphp
+                                           <form action="{{route('refresh-point')}}" method="get" >
+                                               @csrf
+                                               <div class="d-flex justify-content-center gap-2">
+                                                   <button class="btn btn-primary">Refresh</button>
+{{--                                                   <input type="hidden" name="team_id" value="{{$item->id}}" >--}}
+{{--                                                   <input type="number" class="form-control" value="{{$item->run}}" name="run">--}}
+{{--                                                   <button type="submit" class="btn btn-primary">Save</button>--}}
                                                </div>
                                            </form>
                                        </div>
