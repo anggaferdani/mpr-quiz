@@ -41,7 +41,7 @@
             let $teamName = $('<h2></h2>').text(`${latestItem.name}`).css('display', 'block');
             let $totalPoints = $('<h1></h1>').text(`${latestItem.total_poin}`).css('display', 'block').addClass('totalPoint');
 
-            $deviceShow.append($teamName);
+            $deviceShow.append("Grup C");
             $deviceShow.append($totalPoints);
 
             totalPoin = latestItem.total_poin;
