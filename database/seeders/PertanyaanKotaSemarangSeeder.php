@@ -279,6 +279,7 @@ class PertanyaanKotaSemarangSeeder extends Seeder
                         'Australia',
                         'Austria',
                         'Azerbaijan',
+                        'Amerika Serikat',
                     ],
                     'Sebutkan organisasi masyarakat kebangsaan yang berperan mendorong kemerdekaan indonesia?' => [
                         'Budi Utomo',
