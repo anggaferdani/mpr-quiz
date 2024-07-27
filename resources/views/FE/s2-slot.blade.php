@@ -106,10 +106,44 @@
 
 
 <script>
+    const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+    const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+    const pusher = new Pusher(pusherKey, {
+        cluster: pusherCluster,
+        encrypted: true,
+    });
+
+    const kirimPernyataanSesi2 = pusher.subscribe('channel-kirim-pernyataan-sesi-2');
+    kirimPernyataanSesi2.bind('event-kirim-pernyataan-sesi-2', function (data) {
+        // console.log(data.message);
+        if (data.message.pernyataanId != null) {
+            location.href = "/sesi2-soal/" + data.message.pernyataanId + "?no=" + data.message.no + "&selectedValue=" + data.message.selectedValue
+
+        }
+
+        // document.getElementById('pernyataanSesi2').innerText = data.message.pernyataan;
+        // document.getElementById('sisiSesi2').innerText = data.message.selectedValue;
+    });
+
+
+    const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+    ankorPindahSesi.bind('event-pindah-sesi', function (data) {
+        const sesi = data.message.sesi;
+
+        if (sesi == 3) {
+            window.location.href = `/sesi${sesi}`;
+        }
+    });
+
+</script>
+
+
+<script>
     const boxes = document.querySelectorAll('.box');
     const colors = ['#CFAA5A']; // Warna yang akan digunakan
     let currentBoxIndex = 0;
     let interval;
+    let intervalDuration = 100; // Durasi awal 100ms
 
     // Load status dari LocalStorage
     function loadDisabledBoxes() {
@@ -126,31 +160,40 @@
     }
 
     function startColorChange() {
-        interval = setInterval(() => {
-            // Cari box yang tidak di-disable
-            while (boxes[currentBoxIndex].classList.contains('disabled')) {
-                currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
-            }
+        intervalDuration = 100; // Reset durasi interval ke nilai awal
+        changeColor(); // Mulai perubahan warna pertama kali
+    }
 
-            // Reset semua box ke warna putih dan teks ke warna hitam
-            boxes.forEach(box => {
-                if (!box.classList.contains('disabled')) {
-                    box.style.backgroundColor = 'white';
-                    box.style.color = 'black';
-                }
-            });
-
-            // Ubah warna box saat ini dan teks ke warna putih
-            boxes[currentBoxIndex].style.backgroundColor = colors[0];
-            boxes[currentBoxIndex].style.color = 'white';
-
-            // Pindah ke box berikutnya
+    function changeColor() {
+        // Cari box yang tidak di-disable
+        while (boxes[currentBoxIndex].classList.contains('disabled')) {
             currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
-        }, 500); // Warna berubah setiap 500ms
+        }
+
+        // Reset semua box ke warna putih dan teks ke warna hitam
+        boxes.forEach(box => {
+            if (!box.classList.contains('disabled')) {
+                box.style.backgroundColor = 'white';
+                box.style.color = 'black';
+            }
+        });
+
+        // Ubah warna box saat ini dan teks ke warna putih
+        boxes[currentBoxIndex].style.backgroundColor = colors[0];
+        boxes[currentBoxIndex].style.color = 'white';
+
+        // Pindah ke box berikutnya
+        currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
+
+        // Tingkatkan durasi interval untuk memperlambat perubahan warna
+        intervalDuration += 50;
+
+        // Set interval baru dengan durasi yang ditingkatkan
+        interval = setTimeout(changeColor, intervalDuration);
     }
 
     function stopColorChange() {
-        clearInterval(interval);
+        clearTimeout(interval);
         boxes.forEach((box, index) => {
             if (index === (currentBoxIndex - 1 + boxes.length) % boxes.length) {
                 // Simpan box yang terpilih sebagai disabled di LocalStorage
@@ -184,9 +227,9 @@
     const setpoin = pusher.subscribe('channel-spin-sesi-2');
     setpoin.bind('event-spin-sesi-2', function(data) {
         console.log(data)
-            startColorChange();
-            const randomTime = Math.floor(Math.random() * 5000) + 5000;
-            setTimeout(stopColorChange, randomTime);
+        startColorChange();
+        const randomTime = Math.floor(Math.random() * 5000) + 5000;
+        setTimeout(stopColorChange, randomTime);
     });
 </script>
 </body>

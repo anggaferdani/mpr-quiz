@@ -76,6 +76,21 @@ class DatabaseSeeder extends Seeder
                 'run' => 3,
 
             ],
+            [
+                'name' => 'Grup J',
+                'run' => 4,
+
+            ],
+            [
+                'name' => 'Grup K',
+                'run' => 4,
+
+            ],
+            [
+                'name' => 'Grup L',
+                'run' => 4,
+
+            ],
         ];
 
         foreach ($Team as $key => $seed) {
