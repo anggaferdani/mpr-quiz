@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Jawaban;
 use App\Models\Pertanyaan;
 use App\Models\TemaPertanyaan;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PertanyaanKotaSemarangSeeder extends Seeder
@@ -94,17 +93,26 @@ class PertanyaanKotaSemarangSeeder extends Seeder
                         'Sulawesi Utara',
                         'Gorontalo',
                     ],
-                    'Sebutkan contoh kata serapan dari bahasa sanskerta menjadi bahasa Indonesia yang berawalan dari huruf vokal?' => [
-                        'Agama (āgama)',
-                        'Aksara (akṣara)',
-                        'Aneka (aneka)',
-                        'Eka',
-                        'Irama (virama)',
-                        'Istana (āsthāna)',
-                        'Istimewa (āstām eva)',
-                        'Udara (udara)',
-                        'Unta (uṣṭra)',
-                        'Upaya (upāya)',
+                    'Indonesia dibagi menjadi tiga wilayah berdasarkan zona waktu yakni Waktu Indonesia Barat, Waktu Indonesia Tengah maupun Waktu Indonesia Timur. Sebutkan nama-nama kota yang termasuk dalam Waktu Indonesia Barat?' => [
+                        "Banda Aceh",
+                        "Medan",
+                        "Padang",
+                        "Pekanbaru",
+                        "Tanjung Pinang",
+                        "Pangkal Pinang",
+                        "Jambi",
+                        "Bengkulu",
+                        "Palembang",
+                        "Bandar Lampung",
+                        "Serang",
+                        "Jakarta",
+                        "Bandung",
+                        "Semarang",
+                        "Yogyakarta",
+                        "Surabaya",
+                        "Pontianak",
+                        "Palangkaraya",
+
                     ],
                     'Berdasarkan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 Pasal 32 ayat (2) negara menghormati dan memelihara Bahasa daerah sebagai kekayaan budaya nasional. Sebutkan dialek bahasa yang berada di jawa tengah?' => [
                         'Rumpun dialek Banyumas',
