@@ -86,7 +86,7 @@ class PertanyaanKotaSemarangSeeder extends Seeder
                         'PDIP',
                         'Gerindra',
                         'Golkar',
-                        'Nasdem',
+                        'NasDem',
                         'PKB',
                         'Demokrat',
                         'PKS',
