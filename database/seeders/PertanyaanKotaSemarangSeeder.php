@@ -287,7 +287,7 @@ class PertanyaanKotaSemarangSeeder extends Seeder
                         'Kip',
                         'Kyat',
                         'Riel',
-                        'Kina Timor',
+                        'Kina Timur',
                     ],
                 ],
             ],
