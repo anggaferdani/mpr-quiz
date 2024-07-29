@@ -43,46 +43,46 @@ class DatabaseSeeder extends Seeder
 
         $Team = [
             [
-                'name' => 'SMA Unggulan CT Foundation',
+                'name' => 'SMA UNGGULAN CT FOUNDATION',
                 'run' => 1,
             ],
             [
-                'name' => 'SMAN 1 Matauli Pandan',
-                'run' => 1,
-
-            ],
-            [
-                'name' => 'SMAN 1 Sunggal',
+                'name' => 'SMAN 1 MATAULI PANDAN',
                 'run' => 1,
 
             ],
             [
-                'name' => 'SMA Methodist Pematang Siantar',
+                'name' => 'SMAN 1 SUNGGAL',
+                'run' => 1,
+
+            ],
+            [
+                'name' => 'SMA METHODIST PEMATANGSIANTAR',
                 'run' => 2,
 
             ],
             [
-                'name' => 'SMAN 1 Medan',
+                'name' => 'SMAN 1 MEDAN',
                 'run' => 2,
 
             ],
             [
-                'name' => 'SMAN 1 Binjai',
+                'name' => 'SMAN 1 BINJAI',
                 'run' => 2,
 
             ],
             [
-                'name' => 'SMAN 2 Plus Penyabungan',
+                'name' => 'SMAN 2 PLUS PENYABUNGAN',
                 'run' => 3,
 
             ],
             [
-                'name' => 'SMAN Lintongnihuta',
+                'name' => 'SMAN 2 LINTONGNIHUTA',
                 'run' => 3,
 
             ],
             [
-                'name' => 'SMAN 2 Balige',
+                'name' => 'SMAN 2 BALIGE',
                 'run' => 3,
 
             ],

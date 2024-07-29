@@ -53,7 +53,7 @@
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
             const sesi = data.message.sesi;
 
-            if (sesi != 2) { window.location.href = `/sesi${sesi}`; }
+            if (sesi != 2 && typeof sesi !== "undefined") { window.location.href = `/sesi${sesi}`; }
         });
 
         var channel7 = pusher.subscribe('channel-move-sesi');

@@ -56,7 +56,7 @@
             const sesi = data.message.sesi;
 
             console.log(data)
-            if (sesi != 1) { window.location.href = `/sesi${sesi}`; }
+            if (sesi != 1 && typeof sesi !== "undefined") { window.location.href = `/sesi${sesi}`; }
         });
 
         var channel7 = pusher.subscribe('channel-move-sesi');
