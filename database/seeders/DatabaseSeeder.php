@@ -31,63 +31,73 @@ class DatabaseSeeder extends Seeder
             User::create($value);
         }
 
+
+
+
+
+
+
+
+
+
+
         $Team = [
             [
-                'name' => 'Grup A',
+                'name' => 'SMAN 2 BALIGE',
                 'run' => 1,
             ],
             [
-                'name' => 'Grup B',
-                'run' => 1,
-
-            ],
-            [
-                'name' => 'Grup C',
+                'name' => 'SMAN 1 MATAULI PANDAN',
                 'run' => 1,
 
             ],
             [
-                'name' => 'Grup D',
+                'name' => 'SMAN 1 MESAN',
+                'run' => 1,
+
+            ],
+            [
+                'name' => 'SMAN 2 PLUS PANYABUNGAN',
                 'run' => 2,
 
             ],
             [
-                'name' => 'Grup E',
+                'name' => 'SMAN 1 KOTA BINJAI',
                 'run' => 2,
 
             ],
             [
-                'name' => 'Grup F',
+                'name' => 'SMA UNGGULAN CT FOUNDATION',
                 'run' => 2,
 
             ],
             [
-                'name' => 'Grup G',
+                'name' => 'SMA METHODIST PEMATANGSIANTAR',
                 'run' => 3,
 
             ],
             [
-                'name' => 'Grup H',
+                'name' => 'SMAN 2 LINTONGNIHUTA',
                 'run' => 3,
 
             ],
             [
-                'name' => 'Grup I',
+                'name' => 'SMAN 1 SUNGGAL',
                 'run' => 3,
 
             ],
             [
-                'name' => 'Grup J',
+                'name' => 'SMAN-1',
                 'run' => 4,
 
             ],
             [
-                'name' => 'Grup K',
+                'name' => 'SMAN-1',
                 'run' => 4,
 
             ],
             [
-                'name' => 'Grup L',
+                'name' => 'SMAN-1',
                 'run' => 4,
 
             ],
@@ -646,7 +656,7 @@ class DatabaseSeeder extends Seeder
                 "jawaban" => "Sudharnoto.",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "1.	Salah satu nama Bandar Udara di Indonesia menggunakan nama pahlawan nasional yaitu Radin Inten II, yang merupakan tokoh masyarakat berasal dari Provinsi?",
+                "pertanyaan" => "1php artisan migrateSalah satu nama Bandar Udara di Indonesia menggunakan nama pahlawan nasional yaitu Radin Inten II, yang merupakan tokoh masyarakat berasal dari Provinsi?",
                 "jawaban" => "Lampung.",
                 'wilayah_id' => 1,
             ], [

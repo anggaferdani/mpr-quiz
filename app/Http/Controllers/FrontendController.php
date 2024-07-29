@@ -8,6 +8,7 @@ use App\Events\KirimPertanyaanS2;
 use App\Events\moveSesi;
 use App\Events\PindahSesi;
 use App\Events\StartCountdown;
+use App\Models\Bracket;
 use App\Models\Jawaban;
 use App\Models\Participant;
 use App\Models\Pernyataan;
@@ -86,6 +87,9 @@ class FrontendController extends Controller
     public function openingSesi1Juri(Request $request)
     {
 
+
+        $bracket = Bracket::orderBy('run')->get();
+
         $setting = Setting::first();
         $jawaban = $request->input('jawaban');
         $idJawaban = $request->input('id_jawaban');
@@ -94,6 +98,7 @@ class FrontendController extends Controller
         $team = Team::where("run", $setting->run)->get();
         $groupNames = ['Group A', 'Group B', 'Group C'];
         foreach ($team as $index => $t) {
+            $t->school = $t->name; // Mengambil nilai $t->name sebelum diubah
             if (isset($groupNames[$index])) {
                 $t->name = $groupNames[$index];
             }
@@ -109,7 +114,7 @@ class FrontendController extends Controller
         event(new AddPoints(['jawaban' => $jawaban]));
         event(new StartCountdown(['pesan' => $pesan]));
         event(new moveSesi(['capecape' => $capecape]));
-        return view('FE.Juri.sesi-1', compact('team'));
+        return view('FE.Juri.sesi-1', compact(['team', "bracket"]));
     }
 
     public function nilaiSesi1Juri(Request $request)
@@ -143,8 +148,8 @@ class FrontendController extends Controller
 
     public function openingSesi2Juri(Request $request)
     {
+        $bracket = Bracket::orderBy('run')->get();
         $setting = Setting::first();
-
         $berita = $request->input('berita');
         $id = $request->input('id');
         $pertanyaan = $request->input('pertanyaan');
@@ -162,7 +167,7 @@ class FrontendController extends Controller
         event(new KirimPertanyaanS2(['berita' => $berita, 'id' => $id, 'pertanyaan' => $pertanyaan, 'jawabanArray' => $jawabanArray]));
         event(new StartCountdown(['pesan' => $pesan]));
 
-        return view('FE.Juri.sesi-2', compact('team'));
+        return view('FE.Juri.sesi-2', compact(['team','bracket']));
     }
 
 
