@@ -160,30 +160,6 @@ class DatabaseSeeder extends Seeder
             ], [
                 "pernyataan" => "Majelis Permusyawaratan Rakyat (MPR) perlu diberikan kembali wewenang untuk menetapkan Garis-garis Besar Haluan Negara (GBHN).",
                 "run" => 1
-            ], [
-                "pernyataan" => "",
-                "run" => 1
-            ], [
-                "pernyataan" => "",
-                "run" => 1
-            ], [
-                "pernyataan" => "",
-                "run" => 1
-            ], [
-                "pernyataan" => "",
-                "run" => 1
-            ], [
-                "pernyataan" => "",
-                "run" => 1
-            ], [
-                "pernyataan" => "",
-                "run" => 1
-            ], [
-                "pernyataan" => "",
-                "run" => 1
-
-
-
             ],
         ]);
 
