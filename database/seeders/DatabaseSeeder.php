@@ -135,31 +135,31 @@ class DatabaseSeeder extends Seeder
                 "run" => 1
             ], [
                 "pernyataan" => "Indonesia Yang Religius sebagaimana diamanatkan Ketetapan MPR RI Nomor VII/MPR/2001 tentang Visi Indonesia belum sesuai harapan.",
-                "run" => 1
+                "run" => 2
             ], [
                 "pernyataan" => "Perlindungan Pemerintah terhadap warga negara yang berada/bekerja di luar negeri sudah baik.",
-                "run" => 1
+                "run" => 2
             ], [
                 "pernyataan" => "Kewenangan Pemerintah untuk melakukan pemblokiran situs tertentu",
-                "run" => 1
+                "run" => 2
             ], [
                 "pernyataan" => "Penegasan Negara Indonesia adalah negara hukum sudah berjalan baik.",
-                "run" => 1
+                "run" => 3
             ], [
                 "pernyataan" => "Hak warga negara untuk mendapat pendidikan di Indonesia sudah berjalan baik.",
-                "run" => 1
+                "run" => 3
             ], [
                 "pernyataan" => "Tanggung jawab negara untuk memelihara fakir miskin dan anak-anak terlantar sudah berjalan baik.",
-                "run" => 1
+                "run" => 3
             ], [
                 "pernyataan" => "Indonesia belum siap untuk berdemokrasi.",
-                "run" => 1
+                "run" => 4
             ], [
                 "pernyataan" => "Untuk mencapai kemandirian ekonomi, Indonesia tidak boleh mengadakan utang baru kepada negara lain.",
-                "run" => 1
+                "run" => 4
             ], [
                 "pernyataan" => "Majelis Permusyawaratan Rakyat (MPR) perlu diberikan kembali wewenang untuk menetapkan Garis-garis Besar Haluan Negara (GBHN).",
-                "run" => 1
+                "run" => 4
             ],
         ]);
 
