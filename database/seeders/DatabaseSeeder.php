@@ -776,7 +776,7 @@ class DatabaseSeeder extends Seeder
                 "jawaban" => "Undang-Undang Nomor 3 Tahun 2022 diubah dengan Undang-Undang Nomor 21 Tahun 2023 Tentang Ibu Kota Negara.",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "Pasal 4 TAP MPRS/TAP MPR Yang dinyatakan tetapi berlaku sampai dengan terbentuknya Undang-Undang pada TAP MPR Nomor berapa dan tahun berapa tentang penyelenggara negara yang bersih dan Bebas Korupsi, Kolusi dan Nepotisme?",
+                "pertanyaan" => "Pasal 4 TAP MPRS/TAP MPR yang dinyatakan tetapi berlaku sampai dengan terbentuknya Undang-Undang pada TAP MPR nomor berapa dan tahun berapa tentang penyelenggara negara yang bersih dan bebas korupsi, kolusi dan nepotisme?",
                 "jawaban" => "TAP MPR Nomor XI/MPR/1998",
                 'wilayah_id' => 1,
             ], [
