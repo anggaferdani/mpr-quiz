@@ -39,16 +39,15 @@
 
             let $deviceShow = $('<div></div>').addClass('deviceShow').attr('id', latestItem.id);
             let $teamName = $('<h2></h2>').text(`GRUP C`).css('display', 'block');
-            let $schoolName = $('<h3></h3>').text(`(${latestItem.name})`).css({
+            let $schoolName = $('<h3></h3>').text(`${latestItem.name}`).css({
                 'display': 'block',
-                'font-size': '70px'
+                'font-size': '80px'
             });
             let $totalPoints = $('<h1></h1>').text(`${latestItem.total_poin}`).css('display', 'block').addClass('totalPoint');
 
             $deviceShow.append($teamName);
-            $deviceShow.append($schoolName);
             $deviceShow.append($totalPoints);
-
+            $deviceShow.append($schoolName);
             totalPoin = latestItem.total_poin;
 
             $('body').empty().append($deviceShow);
