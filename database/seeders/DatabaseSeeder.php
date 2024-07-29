@@ -776,8 +776,8 @@ class DatabaseSeeder extends Seeder
                 "jawaban" => "Undang-Undang Nomor 3 Tahun 2022 diubah dengan Undang-Undang Nomor 21 Tahun 2023 Tentang Ibu Kota Negara.",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "Perubahan kedua Undang Undang Dasar Negara Republik Indonesia Tahun 1945 ditetapkan pada Sidang Tahunan MPR Tahun 2000. Salah satu hasil perubahan kedua adalah ditetapkannya BAB IXA (sembilan A) Undang Undang Dasar Negara Republik Indonesia Tahun 1945 yaitu tentang?",
-                "jawaban" => "Wilayah Negara.",
+                "pertanyaan" => "Pasal 4 TAP MPRS/TAP MPR Yang dinyatakan tetapi berlaku sampai dengan terbentuknya Undang-Undang pada TAP MPR Nomor berapa dan tahun berapa tentang penyelenggara negara yang bersih dan Bebas Korupsi, Kolusi dan Nepotisme?",
+                "jawaban" => "TAP MPR Nomor XI/MPR/1998",
                 'wilayah_id' => 1,
             ], [
                 "pertanyaan" => "Dewan Perwakilan Daerah memberikan pertimbangan kepada Dewan Perwakilan Rakyat atas rancangan undang-undang tentang?",
