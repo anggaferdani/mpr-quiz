@@ -14,6 +14,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card-title d-flex justify-content-between mb-3">
         <x-tombol-pindah-sesi text="Arahkan ke sesi 3" sesi-tujuan="3"/>
+        <x-tombol-pindah-sesi text="Arahkan ke Pengumuman" sesi-tujuan="4"/>
 
         <a data-bs-toggle="modal" data-bs-target="#modalTambahPertanyaan" class="btn btn-primary btn-lg btn-icon-text">
             <i class="mdi mdi-upload btn-icon-prepend"></i>

@@ -79,6 +79,7 @@ Route::get('/sesi2-nilai', [FrontendController::class, 'nilaiquizSesi2'])->name(
 Route::get('/sesi3', [FrontendController::class, 'openingSesi3'])->name('openingSesi3');
 
 Route::get('/sesi1-juri', [FrontendController::class, 'openingSesi1Juri'])->name('openingSesi1Juri');
+Route::get('/sesi4-juri', [FrontendController::class, 'pengumumanJuri'])->name('pengumumanJuri');
 // Route::get('/sesi1-juri-nilai', [FrontendController::class, 'nilaiSesi1Juri'])->name('nilaiSesi1Juri');
 Route::get('/sesi2-juri', [FrontendController::class, 'openingSesi2Juri'])->name('openingSesi2Juri');
 Route::get('/sesi3-juri', [FrontendController::class, 'openingSesi3Juri'])->name('openingSesi3Juri');

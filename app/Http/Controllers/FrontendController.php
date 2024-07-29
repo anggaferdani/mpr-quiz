@@ -33,6 +33,38 @@ class FrontendController extends Controller
         return view('FE.s1');
     }
 
+    public function pengumumanJuri()
+    {
+
+
+        $setting = Setting::first();
+
+        $groupNames = ['Group A', 'Group B', 'Group C'];
+
+        $teams = Team::where('run', $setting->run)
+            ->withSum('participant', 'poin')
+            ->get()
+            ->map(function ($team, $index) use ($groupNames) {
+                // Mengonversi participant_sum_poin menjadi integer
+                $team->participant_sum_poin = (int)$team->participant_sum_poin;
+
+                // Menyimpan nilai asli name
+                $team->school = $team->name;
+
+                // Menetapkan nilai baru name sesuai dengan $groupNames
+                if (isset($groupNames[$index])) {
+                    $team->name = $groupNames[$index];
+                }
+
+                return $team;
+            });
+
+        $teams = $teams->sortByDesc('participant_sum_poin')->values();
+
+        return view("FE.Juri.pengumuman", compact('teams'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -116,6 +148,7 @@ class FrontendController extends Controller
         event(new moveSesi(['capecape' => $capecape]));
         return view('FE.Juri.sesi-1', compact(['team', "bracket"]));
     }
+
 
     public function nilaiSesi1Juri(Request $request)
     {
