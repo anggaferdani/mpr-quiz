@@ -293,17 +293,18 @@
               </div>
           </div>
           <div class="col-5" id="kanan">
-              <div class="text-center text-white my-5">
-                  {{-- <p class="mb-0">POINT</p> --}}
-                  <h4 class="mb-0 fw-bold">POIN</h4>
+              <div class="text-center text-white my-4">
+                  <p class="mb-0">POIN</p>
+                  <h4 class="mb-0">GRUP</h4>
               </div>
               <div class="row justify-content-center">
+
                   @foreach ($team as $item)
-                      <div class="col-md-4 d-flex justify-content-center my-2" data-id="{{ $item->id }}">
+                      <div class="col-md-4 my-2" data-id="{{ $item->id }}">
                           <div class="group">
                               <div class="nama-group py-2">
                                   <p class="mb-0">{{ $item->name }}</p>
-                                  <p class="mb-0 mt-2" style="font-size:12px">( {{ $item->school }} )</p>
+                                  <p class="mb-0 mt-2" style="font-size:12px">{{ $item->school }}</p>
                               </div>
                               <div class="nilai-group py-3">
                                   <h4 id="poin_{{ $item->id }}">{{ $item->participant()->whereDate('tanggal', '=', now())->sum('poin') }}</h4>
@@ -311,6 +312,7 @@
                           </div>
                       </div>
                   @endforeach
+
               </div>
           </div>
       </div>

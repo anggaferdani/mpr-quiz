@@ -191,6 +191,7 @@ class FrontendController extends Controller
         $team = Team::where("run", $setting->run)->get();
         $groupNames = ['Group A', 'Group B', 'Group C'];
         foreach ($team as $index => $t) {
+            $t->school = $t->name; // Mengambil nilai $t->name sebelum diubah
             if (isset($groupNames[$index])) {
                 $t->name = $groupNames[$index];
             }
@@ -259,6 +260,7 @@ class FrontendController extends Controller
         $team = Team::where("run", $setting->run)->get();
         $groupNames = ['Group A', 'Group B', 'Group C'];
         foreach ($team as $index => $t) {
+            $t->school = $t->name; // Mengambil nilai $t->name sebelum diubah
             if (isset($groupNames[$index])) {
                 $t->name = $groupNames[$index];
             }
