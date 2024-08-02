@@ -36,18 +36,27 @@
   </head>
   <body>
     <div class="content text-center">
-        <h1 id="lastNumber">{{$nilai->poin}}</h1>
+        <h1 id="lastNumber">0</h1>
         <h2>POIN</h2>
         <p id="lastNumber"></p>
     </div>
 
     {{-- Pusher script --}}
     <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <script>
         const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
             cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
             encrypted: true
+        });
+
+
+        var channel4 = pusher.subscribe('my-KirimPointStoreS1');
+        channel4.bind('my-KirimPointStoreS1', function(data) {
+            console.log('KirimPointStoreS1', data);
+            $('#lastNumber').text(data.poin);
         });
 
         const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
@@ -79,20 +88,19 @@
             }
         });
 
-        $(document).ready(function() {
-            // Mendapatkan parameter URL terakhir
-            var lastParameter = window.location.href.split('/').pop(); // Mengambil bagian terakhir dari URL
-
-            // Mengambil angka dari parameter terakhir
-            var lastNumber = lastParameter.match(/\d+/); // Menggunakan regular expression untuk mencocokkan angka
-
-            // Menampilkan angka tersebut di halaman
-            $('#lastNumber').text(lastNumber);
-        });
+        // $(document).ready(function() {
+        //     // Mendapatkan parameter URL terakhir
+        //     var lastParameter = window.location.href.split('/').pop(); // Mengambil bagian terakhir dari URL
+        //
+        //     // Mengambil angka dari parameter terakhir
+        //     var lastNumber = lastParameter.match(/\d+/); // Menggunakan regular expression untuk mencocokkan angka
+        //
+        //     // Menampilkan angka tersebut di halaman
+        //     $('#lastNumber').text(lastNumber);
+        // });
 
 
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

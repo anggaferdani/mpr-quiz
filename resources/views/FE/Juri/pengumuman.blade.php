@@ -36,8 +36,10 @@
     <p class="greeting">Assalamu’alaikum Warahmatullahi Wabarakatuh,</p>
     <p>Salam Sejahtera Untuk Kita Sekalian,</p>
     <p>Berdasarkan perolehan nilai pada Sesi Pertama: Wawasan Empat Pilar MPR, Sesi Kedua: Sesi Tematik Empat Pilar MPR,
-        dan Sesi Ketiga: Rebutan Satu Lawan Satu, hasil perlombaan Babak Penyisihan 1/2/3 Lomba Cerdas Cermat Empat
-        Pilar MPR RI Tahun 2024 di PROVINSI SUMATERA UTARA adalah sebagai berikut:</p>
+        dan Sesi Ketiga: Rebutan Satu Lawan Satu, hasil perlombaan
+        Babak {{$setting->run == 4 ? "Final" :"Penyisihan ". $setting->run }}
+        Lomba Cerdas Cermat Empat
+        Pilar MPR RI Tahun 2024 di PROVINSI BALI adalah sebagai berikut:</p>
 
     <ul class="winner-list">
         <li class="winner-item">
@@ -58,8 +60,8 @@
             Dari <b>{{$teams[0]->school}}</b>.<br>
             Dengan nilai <b>{{$teams[0]->participant_sum_poin}}</b>.<br>
             <br>
-            Dengan demikian, Regu {{$teams[0]->name}}. Dari {{$teams[0]->school}}. sebagai Juara pada Babak
-            Penyisihan 1/2/3 dan berhak melanjutkan ke Babak Final.
+            Dengan demikian,<b> {{$teams[0]->name}}</b>. Dari <b>{{$teams[0]->school}}</b>. sebagai Juara pada Babak
+            {{$setting->run == 4 ? "Final Lomba Cerdas Cermat Empat Pilar MPR RI Tahun 2024 di PROVINSI BALI." : "Penyisihan ". $setting->run ." dan berhak melanjutkan ke Babak Final." }}
         </li>
     </ul>
 

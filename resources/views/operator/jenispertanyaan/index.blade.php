@@ -132,13 +132,13 @@
         <div class="card-body">
             <div class="card-title d-flex justify-content-between mb-5">
                 <x-tombol-pindah-sesi text="Arahkan ke sesi 1" sesi-tujuan="1"/>
-    
+
                 <a data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary btn-lg btn-icon-text">
                     <i class="mdi mdi-upload btn-icon-prepend"></i>
                     +
                 </a>
             </div>
-    
+
             <div class="table-responsive">
             <table id="table1">
                 <thead>
@@ -257,9 +257,13 @@
                     <input type="hidden" class="teamteam" name="id_team">
                     <input type="hidden" value="0" name="poin" id="poin{{$tanya->id}}"> <!-- Unique ID for each hidden input field -->
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex justify-content-between">
+                    <p >Poin : <b class="poin-sesi1" >0</b> </p>
+                    <div>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Save Poin</button>
+                    </div>
+
                 </div>
             </div>
         </form>
@@ -379,6 +383,10 @@ document.addEventListener('DOMContentLoaded', function() {
             button.classList.remove('btn-primary');
             button.classList.add('btn-success');
             button.disabled = true;
+
+
+            $('.poin-sesi1').text(newPoints)
+
 
             var cancelButton = button.nextElementSibling; // Assuming the cancelPoints button is located immediately after the addPoints button
             cancelButton.disabled = false;

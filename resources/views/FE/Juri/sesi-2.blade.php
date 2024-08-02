@@ -134,7 +134,7 @@
                           <div class="group">
                               <div class="nama-group py-2">
                                   <p class="mb-0">{{ $item->name }}</p>
-                                  <p class="mb-0 mt-2" style="font-size:12px">( {{ $item->school }} )</p>
+                                  <p class="mb-0 mt-2" style="font-size:12px">{{ $item->school }}</p>
                               </div>
                               <div class="nilai-group py-3">
                                   <h4 id="poin_{{ $item->id }}">{{ $item->participant()->whereDate('tanggal', '=', now())->sum('poin') }}</h4>

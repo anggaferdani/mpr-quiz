@@ -61,7 +61,7 @@ class FrontendController extends Controller
 
         $teams = $teams->sortByDesc('participant_sum_poin')->values();
 
-        return view("FE.Juri.pengumuman", compact('teams'));
+        return view("FE.Juri.pengumuman", compact(['teams','setting']));
 
     }
 
@@ -278,24 +278,25 @@ class FrontendController extends Controller
 
     public function nilaiquizSesi1()
     {
-        $nilai = Participant::get()->last();
+        $nilai = Participant::latest()->first();
+//        dd($nilai);
 
         // Inisialisasi Pusher dengan kredensial dari file .env
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            [
-                'cluster' => env('PUSHER_APP_CLUSTER'),
-                'encrypted' => true
-            ]
-        );
-
-        // Kirim data ke kanal Pusher
-        $pusher->trigger('channel-kirim-nilai-s1', 'event-kirim-nilai-s1', [
-            'command' => 'pindah',
-            'nilai' => $nilai->poin,
-        ]);
+//        $pusher = new Pusher(
+//            env('PUSHER_APP_KEY'),
+//            env('PUSHER_APP_SECRET'),
+//            env('PUSHER_APP_ID'),
+//            [
+//                'cluster' => env('PUSHER_APP_CLUSTER'),
+//                'encrypted' => true
+//            ]
+//        );
+//
+//        // Kirim data ke kanal Pusher
+//        $pusher->trigger('channel-kirim-nilai-s1', 'event-kirim-nilai-s1', [
+//            'command' => 'pindah',
+//            'nilai' => $nilai->poin,
+//        ]);
 
         // return response()->json(['message' => 'Nilai berhasil dikirim ke Pusher']);
 
@@ -303,24 +304,24 @@ class FrontendController extends Controller
     }
     public function nilaiquizSesi2()
     {
-        $nilai = Participant::get()->last();
+        $nilai = Participant::latest()->first();
 
         // Inisialisasi Pusher dengan kredensial dari file .env
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            [
-                'cluster' => env('PUSHER_APP_CLUSTER'),
-                'encrypted' => true
-            ]
-        );
-
-        // Kirim data ke kanal Pusher
-        $pusher->trigger('channel-kirim-nilai-s2', 'event-kirim-nilai-s2', [
-            'command' => 'pindah',
-            'nilai' => $nilai->poin,
-        ]);
+//        $pusher = new Pusher(
+//            env('PUSHER_APP_KEY'),
+//            env('PUSHER_APP_SECRET'),
+//            env('PUSHER_APP_ID'),
+//            [
+//                'cluster' => env('PUSHER_APP_CLUSTER'),
+//                'encrypted' => true
+//            ]
+//        );
+//
+//        // Kirim data ke kanal Pusher
+//        $pusher->trigger('channel-kirim-nilai-s2', 'event-kirim-nilai-s2', [
+//            'command' => 'pindah',
+//            'nilai' => $nilai->poin,
+//        ]);
 
         // return response()->json(['message' => 'Nilai berhasil dikirim ke Pusher']);
 
