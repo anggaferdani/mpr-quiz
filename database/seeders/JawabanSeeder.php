@@ -24,37 +24,34 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 100.000'
+                'jawaban' => 'Persatuan'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 75.000'
+                'jawaban' => 'Kedaulatan'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 50.000'
+                'jawaban' => 'Kehormatan'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 20.000'
+                'jawaban' => 'Kebangsaan'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 10.000'
+                'jawaban' => 'Kebhinnekatunggalikaan'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 5.000'
+                'jawaban' => 'Ketertiban'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 2.000'
+                'jawaban' => 'Kepastian Hukum'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 1.000 (kertas & koin)'
+                'jawaban' => 'Keseimbangan'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 500'
+                'jawaban' => 'Keserasian'
             ], [
                 'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 200'
-            ], [
-                'id_pertanyaan' => 1,
-                'jawaban' => 'Rp 100'
+                'jawaban' => 'Keselarasan'
             ],
 
             /**
@@ -64,76 +61,34 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Negara Indonesia (BNI)'
+                'jawaban' => 'Hak untuk hidup'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Rakyat Indonesia (BRI)'
+                'jawaban' => 'Hak untuk membentuk keluarga'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Tabungan Negara (BTN)'
+                'jawaban' => 'Hak untuk mengembangkan diri'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Mandiri'
+                'jawaban' => 'Hak untuk pengakuan yang sama dihadapan hukum'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Artha Graha Internasional'
+                'jawaban' => 'Hak untuk kebebasan memeluk agama'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Krom Bank Indonesia'
+                'jawaban' => 'Hak untuk berkomunikasi'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Bumi Arta'
+                'jawaban' => 'Hak untuk perlindungan diri pribadi'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Central Asia (BCA)'
+                'jawaban' => 'Hak untuk hidup sejahtera lahir dan batin'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Cimb Niaga'
+                'jawaban' => 'Hak untuk perlindungan terhadap perlakuan diskriminatif, pemajuan, penegakan, dan pemenuhan HAM adalah tanggung jawab negara, terutama pemerintah'
             ], [
                 'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Danamon'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank MNC Internasional'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Mayapada Internasional'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Mega'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank OCBC NISP'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Permata'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Raya Indonesia'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank BTPN Syariah'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Woori Saudara Indonesia'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Sinarmas'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Victoria Internasional'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Capital Indonesia'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank China Construction Bank Indonesia'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Syariah Indonesia (BSI)'
-            ], [
-                'id_pertanyaan' => 2,
-                'jawaban' => 'Bank Permata'
+                'jawaban' => 'Hak untuk berkewajiban menghargai hak asasi orang lain serta tunduk kepada pembatasan yang ditetapkan Undang-Undang.n'
             ],
 
             /**
@@ -143,52 +98,37 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Pertamina'
+                'jawaban' => 'TAP MPRS Nomor XXIX/MPRS/1966'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Telekomunikasi Indonesia'
+                'jawaban' => 'TAP MPR Nomor XI/MPR/1998'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT PLN'
+                'jawaban' => 'TAP MPR Nomor XV/MPR/ 1998'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Pelni (Pelayaran Nasional Indonesia)'
+                'jawaban' => 'TAP MPR Nomor III/MPR/2000'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Peruri (Percetakan Uang Republik Indonesia)'
+                'jawaban' => 'TAP MPR Nomor V/MPR/2000'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Garuda Indonesia'
+                'jawaban' => 'TAP MPR Nomor VI/MPR/2000'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Perusahaan Listrik Negara'
+                'jawaban' => 'TAP MPR Nomor VII/MPR/2000'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Kereta Api Indonesia'
+                'jawaban' => 'TAP MPR Nomor VI/MPR/2001'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Jasa Marga'
+                'jawaban' => 'TAP MPR Nomor VII/MPR/2001'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Semen Indonesia'
+                'jawaban' => 'TAP MPR Nomor VIII/MPR/2001'
             ], [
                 'id_pertanyaan' => 3,
-                'jawaban' => 'PT Bio Farma'
-            ], [
-                'id_pertanyaan' => 3,
-                'jawaban' => 'PT Krakatau Steel'
-            ], [
-                'id_pertanyaan' => 3,
-                'jawaban' => 'PT Mineral Industri Indonesia'
-            ], [
-                'id_pertanyaan' => 3,
-                'jawaban' => 'PT Pupuk Indonesia'
-            ], [
-                'id_pertanyaan' => 3,
-                'jawaban' => 'PT Taspen'
-            ], [
-                'id_pertanyaan' => 3,
-                'jawaban' => 'Perusahaan Umum Damri'
+                'jawaban' => 'TAP MPR Nomor IX/MPR/2001'
             ],
 
             /**
@@ -199,73 +139,37 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Aceh'
+                'jawaban' => 'Pendidikan Agama'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Sumatera Utara'
+                'jawaban' => 'Pendidikan Pancasila'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Sumatera Selatan'
+                'jawaban' => 'Bahasa Indonesia'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Kepulauan Bangka Belitung'
+                'jawaban' => 'Matematika'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Banten'
+                'jawaban' => 'Ilmu Pengetahuan Alam: Fisika, Kimia, Biologi'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'DKI Jakarta'
+                'jawaban' => 'Ilmu Pengetahuan Sosial: Sosiologi, Ekonomi, Sejarah, Geografi'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Jawa Barat'
+                'jawaban' => 'Bahasa Inggris'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Jawa Tengah'
+                'jawaban' => 'Pendidikan Jasmani Olahraga dan Kesehatan'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Kalimantan Barat'
+                'jawaban' => 'Informatika'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Kalimantan Timur'
+                'jawaban' => 'Seni, Budaya, dan Prakarya'
             ], [
                 'id_pertanyaan' => 4,
-                'jawaban' => 'Sulawesi Barat'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Sulawesi Tenggara'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Bali'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Gorontalo'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Sulawesi Selatan'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Nusa Tenggara Barat'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Nusa Tenggara Timur'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Papua'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Papua Barat Daya'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Papua Barat'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Papua Tengah'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Papua Pegunungan'
-            ], [
-                'id_pertanyaan' => 4,
-                'jawaban' => 'Papua Selatan'
+                'jawaban' => 'Muatan Lokal'
             ],
 
             /**
@@ -275,37 +179,40 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Kalimantan Utara'
+                'jawaban' => 'Departemen Dalam Negeri'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Kalimantan Timur'
+                'jawaban' => 'Departemen Luar Negeri'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Kalimantan Selatan'
+                'jawaban' => 'Departemen Keuangan'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Bali'
+                'jawaban' => 'Departemen Kehakiman'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Nusa Tenggara Timur'
+                'jawaban' => 'Departemen Kemakmuran'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Nusa Tenggara Barat'
+                'jawaban' => 'Departemen Keamanan Rakyat'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Sulawesi Barat'
+                'jawaban' => 'Departemen Pengajaran'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Sulawesi Tengah'
+                'jawaban' => 'Departemen Penerangan'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Sulawesi Selatan'
+                'jawaban' => 'Departemen Sosial'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Sulawesi Utara'
+                'jawaban' => 'Departemen Kesehatan'
             ], [
                 'id_pertanyaan' => 5,
-                'jawaban' => 'Gorontalo'
+                'jawaban' => 'Departemen Pekerja Umum'
+            ], [
+                'id_pertanyaan' => 5,
+                'jawaban' => 'Departemen Perhubungan'
             ],
 
             /**
@@ -314,34 +221,55 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Agama (āgama)'
+                'jawaban' => 'Istana Presiden dan Wakil Presiden'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Aksara (akṣara)'
+                'jawaban' => 'Kantor Lembaga Negara'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Aneka (aneka)'
+                'jawaban' => 'Kantor Lembaga Pemerintah'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Eka'
+                'jawaban' => 'Kantor Lembaga Pemerintah non Kementerian'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Irama (virama)'
+                'jawaban' => 'Lembaga Pemerintah Daerah'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Istana (āsthāna)'
+                'jawaban' => 'Kantor DPRD'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Istimewa (āstām eva)'
+                'jawaban' => 'Kantor Perwakilan RI di Luar Negeri'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Udara (udara)'
+                'jawaban' => 'Halaman Satuan Pendidikan'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Unta (uṣṭra)'
+                'jawaban' => 'Kantor Swasta'
             ], [
                 'id_pertanyaan' => 6,
-                'jawaban' => 'Upaya (upāya)'
+                'jawaban' => 'Rumah Jabatan Presiden dan Wakil Presiden'
+            ], [
+                'id_pertanyaan' => 6,
+                'jawaban' => 'Rumah Jabatan Pimpinan Lembaga Negara'
+            ], [
+                'id_pertanyaan' => 6,
+                'jawaban' => 'Rumah Jabatan Menteri'
+            ], [
+                'id_pertanyaan' => 6,
+                'jawaban' => 'Rumah Jabatan Pimpinan Lembaga Pemerintahan non Kementerian'
+            ], [
+                'id_pertanyaan' => 6,
+                'jawaban' => 'Rumah Jabatan Gubernur, Bupati, Walikota dan Camat'
+            ], [
+                'id_pertanyaan' => 6,
+                'jawaban' => 'Pos Perbatasan dan Pulau-pulau Terluar NKRI'
+            ], [
+                'id_pertanyaan' => 6,
+                'jawaban' => 'Lingkungan TNI dan Kepolisian RI'
+            ], [
+                'id_pertanyaan' => 6,
+                'jawaban' => 'Taman Makam Pahlawan Nasional'
             ],
 
             /**
@@ -352,49 +280,64 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Abdulrachman Saleh'
+                'jawaban' => 'Pulau Benggala'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Adisucipto'
+                'jawaban' => 'Pulau Breueh'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Ahmad Yani'
+                'jawaban' => 'Pulau Gosong Gulawan'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Blimbingsari'
+                'jawaban' => 'Kepulauan Banyak'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Halim Perdanakusuma'
+                'jawaban' => 'Pulau Balai'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Husein Sastranegara'
+                'jawaban' => 'Pulau Batee'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Adisumarmo'
+                'jawaban' => 'Pulau Bunta'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Juanda'
+                'jawaban' => 'Pulau Lekon'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Soekarno–Hatta'
+                'jawaban' => 'Pulau Lumpat'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Yogyakarta'
+                'jawaban' => 'Pulau Mincau'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Pondok Cabe'
+                'jawaban' => 'Pulau Reusam'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Pulau Panjang'
+                'jawaban' => 'Pulau Tapah'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Tanjung Lesung'
+                'jawaban' => 'Pulau Raya'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Wiriadinata'
+                'jawaban' => 'Pulau Rondo'
             ], [
                 'id_pertanyaan' => 7,
-                'jawaban' => 'Gading'
+                'jawaban' => 'Pulau Klah'
+            ], [
+                'id_pertanyaan' => 7,
+                'jawaban' => 'Pulau Rubiah'
+            ], [
+                'id_pertanyaan' => 7,
+                'jawaban' => 'Pulau Seulako'
+            ], [
+                'id_pertanyaan' => 7,
+                'jawaban' => 'Pulau Simeulue Cut'
+            ], [
+                'id_pertanyaan' => 7,
+                'jawaban' => 'Pulau Simeulue'
+            ], [
+                'id_pertanyaan' => 7,
+                'jawaban' => 'Pulau Weh'
             ],
 
             /**
@@ -403,40 +346,64 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Alas purwo'
+                'jawaban' => 'Aneuk Nanggroe'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Baluran'
+                'jawaban' => 'Ranub Lampuan'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Bromo tengger semeru'
+                'jawaban' => 'Meutani'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Gunung ciremai'
+                'jawaban' => 'Tanoh Lon Sayang'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Gede pangrango'
+                'jawaban' => 'Bungong Seulanga'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Halimun salak'
+                'jawaban' => 'Gaseh Han Sampoe'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Gunung merapi'
+                'jawaban' => 'Seulanga'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Gunung merbabu'
+                'jawaban' => 'Bungong Jeumpa'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Karimun jawa'
+                'jawaban' => 'Bungong Lawang'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Kep. Seribu'
+                'jawaban' => 'Aceh Membangun'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Meru betiri'
+                'jawaban' => 'Publo Bungong'
             ], [
                 'id_pertanyaan' => 8,
-                'jawaban' => 'TN Ujung kulon'
+                'jawaban' => 'Bungong Keupula'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Utang'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Garipo'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Dendang Chacharia'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Geremukunah'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Anek Yatim'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Sabang'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Di babah Pinto'
+            ], [
+                'id_pertanyaan' => 8,
+                'jawaban' => 'Jambo'
             ],
 
             /**
@@ -445,22 +412,19 @@ class JawabanSeeder extends Seeder
 
             [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Banda Aceh'
+                'jawaban' => 'Sumatera Utara'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Medan'
+                'jawaban' => 'Sumatera Barat'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Padang'
+                'jawaban' => 'Riau'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Pekanbaru'
+                'jawaban' => 'Kepulauan Riau'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Tanjung Pinang'
-            ], [
-                'id_pertanyaan' => 9,
-                'jawaban' => 'Pangkal Pinang'
+                'jawaban' => 'Kepulauan Bangka Belitung'
             ], [
                 'id_pertanyaan' => 9,
                 'jawaban' => 'Jambi'
@@ -469,34 +433,34 @@ class JawabanSeeder extends Seeder
                 'jawaban' => 'Bengkulu'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Palembang'
+                'jawaban' => 'Sumatera Selatan'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Bandar Lampung'
+                'jawaban' => 'Lampung'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Serang'
+                'jawaban' => 'Banten'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Jakarta'
+                'jawaban' => 'DKI Jakarta'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Bandung'
+                'jawaban' => 'Jawa Barat'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Semarang'
+                'jawaban' => 'Jawa Tengah'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Yogyakarta'
+                'jawaban' => 'Daerah Istimewa Yogyakarta'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Surabaya'
+                'jawaban' => 'Jawa Timur'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Pontianak'
+                'jawaban' => 'Kalimantan Barat'
             ], [
                 'id_pertanyaan' => 9,
-                'jawaban' => 'Palangkaraya'
+                'jawaban' => 'Kalimantan Tengah'
             ],
 
             /**
@@ -507,53 +471,224 @@ class JawabanSeeder extends Seeder
              */
 
             ['id_pertanyaan' => 10,
-            'jawaban' => 'Penyelidikan usaha-usaha kemerdekaan Indonesia'],
+            'jawaban' => 'Gunung Puncak Jaya'],
             ['id_pertanyaan' => 10,
-            'jawaban' => 'Mempersiapkan kemerdekaan'],
+            'jawaban' => 'Gunung Mandala'],
             ['id_pertanyaan' => 10,
-            'jawaban' => 'Merumuskan dasar negara'],
+            'jawaban' => 'Gunung Trikora'],
             ['id_pertanyaan' => 10,
-            'jawaban' => 'Penyusunan naskah konstitusi'],
+            'jawaban' => 'Gunung Ngga Pilimsit'],
             ['id_pertanyaan' => 10,
-            'jawaban' => 'Menyelidiki situasi politik dan sosial'],
+            'jawaban' => 'Gunung Kerinci'],
             ['id_pertanyaan' => 10,
-            'jawaban' => 'Merumuskan tujuan dan cita-cita kemerdekaan'],
+            'jawaban' => 'Gunung Rinjani'],
             ['id_pertanyaan' => 10,
-            'jawaban' => 'Konsultasi dengan berbagai pihak'],
+            'jawaban' => 'Gunung Semeru'],
+            ['id_pertanyaan' => 10,
+            'jawaban' => 'Gunung Sanggar'],
+            ['id_pertanyaan' => 10,
+            'jawaban' => 'Gunung Rante Mario'],
+            ['id_pertanyaan' => 10,
+            'jawaban' => 'Gunung Slamet'],
 
             /**
              * Konferensi Meja Bundar adalah sebuah pertemuan yang dilaksanakan di Den Haag, Belanda pada 23 Agustus 1949. Jelaskan hasil dari konferensi tersebut!
              */
 
             ['id_pertanyaan' => 11,
-            'jawaban' => 'Pembentukan Uni Belanda- Republik Indonesia Serikat'],
+            'jawaban' => 'Tari Laweut'],
             ['id_pertanyaan' => 11,
-            'jawaban' => 'Soekarno dan Moh. Hatta akan menjabat sebagai Presiden dan Wakil Presiden Republik Indonesia Serikat untuk periode 1949-1950'],
+            'jawaban' => 'Tari Likok Pulo'],
             ['id_pertanyaan' => 11,
-            'jawaban' => 'Irian Barat masih dikuasai Belanda dan tidak dimasukkan ke dalam Republik Indonesia Serikat sampai dilakukan perundingan lebih lanjut'],
+            'jawaban' => 'Tari Pho'],
             ['id_pertanyaan' => 11,
-            'jawaban' => 'Pemerintah Indonesia harus menanggung hutang negeri Hindia Belanda sebesar 4,3 Milyar gulden'],
+            'jawaban' => 'Tari Rabbani Wahed'],
             ['id_pertanyaan' => 11,
-            'jawaban' => 'Belanda akan menyerahkan kedaulatan kepada Republik Indonesia Serikat paling lambat tahun 1949'],
+            'jawaban' => 'Tari Ranup lam Puan'],
             ['id_pertanyaan' => 11,
-            'jawaban' => 'Pasukan Tentara Kerajaan Hindia Belanda (KNIL) akan bergabung dalam pasukan Angkatan Perang RIS (APRIS) dan secara bertahap akan mengambil alih penjagaan keamanan di seluruh wilayah RIS'],
+            'jawaban' => 'Tari Rapaii Geleng'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Rateb Meuseukat'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Ratoh Duek'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Seudati'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Tarek Pukat'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Saman'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Bines'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Didong'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Guel'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Munalu'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Turun Ku Aih Aunen'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Mesekat'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Pelabat'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Landok Alun'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Ula-ula Lembing'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Landok Sampot'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Dampeng'],
+            ['id_pertanyaan' => 11,
+            'jawaban' => 'Tari Nandong'],
 
             /**
              * Jelaskan makna dari Negara Kesatuan dalam Undang-Undang Dasar 1945!
              */
 
             ['id_pertanyaan' => 12,
-            'jawaban' => 'Negara Indonesia ialah Negara Kesatuan, yang berbentuk Republik'],
+            'jawaban' => '100.000 : Ir. Soekarno dan Drs. Mohammad Hatta'],
             ['id_pertanyaan' => 12,
-            'jawaban' => 'Negara Kesatuan Republik Indonesia dibagi atas daerah-daerah provinsi dan daerah provinsi itu dibagi atas kabupaten dan kota, yang tiap-tiap provinsi, kabupaten, dan kota itu mempunyai pemerintahan daerah, yang diatur dengan undang-undang'],
+            'jawaban' => '50.000 : Djuanda Kartawidjaja'],
             ['id_pertanyaan' => 12,
-            'jawaban' => 'Negara mengakui dan menghormati satuan-satuan pemerintahan daerah yang bersifat khusus atau bersifat istimewa yang diatur dengan undang-undang'],
+            'jawaban' => '20.000 : Sam Ratulangi'],
             ['id_pertanyaan' => 12,
-            'jawaban' => 'Negara mengakui dan menghormati kesatuan-kesatuan masyarakat hukum adat beserta hak-hak tradisionalnya sepanjang masih hidup dan sesuai dengan perkembangan masyarakat dan prinsip Negara Kesatuan Republik Indonesia, yang diatur dalam undang-undang'],
+            'jawaban' => '10.000 : Frans Kaisiepo'],
             ['id_pertanyaan' => 12,
-            'jawaban' => 'Negara Kesatuan Republik Indonesia adalah sebuah negara kepulauan yang berciri Nusantara dengan wilayah yang batas-batas dan hak-haknya ditetapkan dengan undang-undang'],
+            'jawaban' => '5.000 : Idham Chalid'],
             ['id_pertanyaan' => 12,
-            'jawaban' => 'Khusus mengenai bentuk Negara Kesatuan Republik Indonesia tidak dapat dilakukan perubahan']
+            'jawaban' => '2.000 : M.H Thamrin'],
+            ['id_pertanyaan' => 12,
+            'jawaban' => '1.000 : Tjut Meutia'],
+            ['id_pertanyaan' => 12,
+            'jawaban' => '1.000 (Logam) : I Ketut Pudja'],
+            ['id_pertanyaan' => 12,
+            'jawaban' => '500 (Logam) : TB Simatupang'],
+            ['id_pertanyaan' => 12,
+            'jawaban' => '200 (Logam) : Tjipto Mangunkusumo'],
+            ['id_pertanyaan' => 12,
+            'jawaban' => '100 (Logam) : Ir. Herman Johannes'],
+            
+            /**
+             * Jelaskan makna dari Negara Kesatuan dalam Undang-Undang Dasar 1945!
+             */
+
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Brunei Darussalam'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Indonesia'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Kamboja'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Laos'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Malaysia'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Myanmar'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Filipina'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Singapura'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Thailand'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Vietnam'],
+            ['id_pertanyaan' => 13,
+            'jawaban' => 'Timor Leste'],
+
+                 /**
+             * Jelaskan makna dari Negara Kesatuan dalam Undang-Undang Dasar 1945!
+             */
+
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Jawa Barat'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'DKI Jakarta'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Jawa Timur'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Sumatera Utara'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Jawa Tengah'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Aceh'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Bali'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Kalimantan Timur'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'DIY'],
+            ['id_pertanyaan' => 14,
+            'jawaban' => 'Lampung'],    /**
+             * Jelaskan makna dari Negara Kesatuan dalam Undang-Undang Dasar 1945!
+             */
+
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Yordania'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Afghanistan'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Uni Emirat Arab (UEA)'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Indonesia'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Uzbekistan'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Iran'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Pakistan'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Bahrain'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Arab Saudi'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Suriah'],
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Oman'], 
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Palestina'], 
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Qatar'], 
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Kuwait'], 
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Lebanon'], 
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Malaysia'], 
+            ['id_pertanyaan' => 15,
+            'jawaban' => 'Yaman'], 
+
+             /**
+             * Jelaskan makna dari Negara Kesatuan dalam Undang-Undang Dasar 1945!
+             */
+
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Yordan'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Indonesia'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Malaysia'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Thailand'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Singapura'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Filipina'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Vietnam'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Laos'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Kamboja'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Myanmar'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Brunei Darussalam'],
+            ['id_pertanyaan' => 16,
+            'jawaban' => 'Timor Leste'],
+
+
+            
         ];
 
         foreach ($jawabans as $jawaban) {

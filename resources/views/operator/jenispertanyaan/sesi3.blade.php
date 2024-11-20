@@ -68,7 +68,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5">Tambah Pertanyaann</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <button type="button" class="btn-close text-light" style="text-color:white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form action="{{ route('operator.post.sesi3') }}" method="POST">
           @csrf
@@ -101,7 +101,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5">Pilih</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close text-light" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="poinForm{{ $pertanyaanSesi3->id }}" action="" method="POST">
                 @csrf

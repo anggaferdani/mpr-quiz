@@ -23,13 +23,16 @@ class PertanyaanSeeder extends Seeder
 
             [
                 'id_tema' => 1,
-                'pertanyaan' => 'Berdasarkan pada pasal 23B Undang-undang Dasar Negara Republik Indonesia Tahun 1945 menyebutkan macam dan harga mata uang ditetapkan dengan Undang-undang. Sebutkan mata uang pecahan Rupiah yang dikeluarkan oleh Bank Indonesia pada Tahun Emisi/Keluaran 2022?'
+                'pertanyaan' => 'Pada Undang-undang Negara Republik Indonesia Nomor 24 Tahun 2009 pada Pasal 2 tentang Bendera, Bahasa, dan Lambang Negara serta Lagu Kebangsaan; Pengaturan bendera, bahasa, dan lambang negara, serta lagu kebangsaan sebagai simbol identitas wujud eksistensi bangsa dan Negara Kesatuan Republik Indonesia dilaksanakan berdasarkan pada asas?'
             ], [
                 'id_tema' => 1,
-                'pertanyaan' => 'Menurut Undang-undang Nomor 4 Tahun 2023 tentang Pengembangan dan Penguatan Sektor Keuangan. Pada undang-undang tersebut mengatur tentang Lembaga Penjamin Simpanan (LPS). Sebutkan nama-nama bank yang masuk menjadi anggota LPS yang berbadan hukum terbuka, namun bukan bank milik daerah?'
+                'pertanyaan' => 'Hak asasi manusia diatur dalam Pasal 28 A sampai 28 J Undang-Undang Dasar Negara Republik Indonesia Tahun 1945. Sebutkan hak asasi manusia yang diatur dalam pasal-pasal tersebut!'
             ], [
                 'id_tema' => 1,
-                'pertanyaan' => 'Berdasarkan Undang-undang Dasar Negara Republik Indonesia 1945 Pasal 33 ayat 2 cabang-cabang produksi yang penting bagi negara dan yang menguasai hajat hidup orang banyak dikuasai oleh negara. Badan Usaha Milik Negara (BUMN) yang dikenal sebagai perusahaan milik negara. Perusahaan apa saja yang termasuk ke dalam BUMN!'
+                'pertanyaan' => 'Ketetapan MPRS dan MPR RI yang dinyatakan tetap berlaku sampai dengan terbentuknya Undang-Undang sesuai dengan ketentuan Pasal 4 Ketetapan MPR RI Nomor I/MPR/2003 adalah?'
+            ], [
+                'id_tema' => 1,
+                'pertanyaan' => 'Pemerintah harus selalu mengupdate sistem pendidikan nasional khususnya melalui penyesuaian kurikulum sebagai “jantung” pendidikan dan senantiasa mengikuti perkembangan ilmu pengetahuan dan teknologi sebagai realisasi dari Pasal 31 ayat (5) Undang-Undang Dasar Negara Republik Indonesia tahun 1945. Terkait dengan hal tersebut, sebutkan mata pelajaran SMA kelas X /Fase E pada kurikulum merdeka!'
             ],
 
             /**
@@ -38,13 +41,16 @@ class PertanyaanSeeder extends Seeder
 
             [
                 'id_tema' => 2,
-                'pertanyaan' => 'Negara Kesatuan Republik Indonesia (NKRI) dibagi atas daerah-daerah provinsi. Sepanjang tahun 2022-2023 telah dilantik Penjabat Gubernur. Sebutkan provinsi mana sajakah yang saat ini dijabat oleh Penjabat Gubernur (PJ)?'
+                'pertanyaan' => 'Hasil Sidang PPKI Kedua Tanggal 19 Agustus 1945 salah satunya adalah Pembentukan Dua Belas Departemen dan Empat Menteri Negara. Sebutkan nama-nama departemen tersebut!'
             ], [
                 'id_tema' => 2,
-                'pertanyaan' => 'NKRI dibagi menjadi tiga wilayah berdasarkan zona waktu yakni Waktu Indonesia Barat, Waktu Indonesia Tengah maupun Waktu Indonesia Timur. Sebutkan provinsi yang termasuk dalam Waktu Indonesia Bagian Tengah?'
+                'pertanyaan' => 'Berdasarkan ketentuan Pasal 9 ayat (1) Undang-Undang No. 24 Tahun 2009 tentang Bendera, Bahasa, dan Lambang Negara, serta Lagu Kebangsaan, penggunaan Bendera Negara Sang Merah Putih wajib dikibarkan setiap hari. Sebutkan tempat dimana bendera Negara Sang Merah Putih dikibarkan?'
             ], [
                 'id_tema' => 2,
-                'pertanyaan' => 'Sebutkan contoh kata serapan dari bahasa sansekerta menjadi bahasa Indonesia yang berawalan dari huruf vokal?'
+                'pertanyaan' => 'Ketentuan Pasal 25A Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 meyebutkan bahwa Negara Kesatuan Republik Indonesia adalah sebuah negara kepulauan yang berciri Nusantara dengan wilayah yang batas-batas dan hak-haknya ditetapkan dengan undang-undang. Pertanyannya, sebutkan pulau-pulau yang terdapat di Provinsi Aceh!'
+            ], [
+                'id_tema' => 2,
+                'pertanyaan' => 'Berdasarkan ketentuan Pasal 32 ayat (1) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 menyebutkan bahwa Negara memajukan kebudayaan nasional Indonesia di tengah peradaban dunia dengan menjamin kebebasan masyarakat dalam memelihara dan mengembangkan nilai-nilai budayanya. Pertanyannya adalah sebutkan lagu-lagu daerah yang berasal dari Provinsi Aceh!'
             ],
 
             /**
@@ -53,30 +59,36 @@ class PertanyaanSeeder extends Seeder
 
             [
                 'id_tema' => 3,
-                'pertanyaan' => 'Bandar udara sebagai tempat pesawat udara mendarat dan lepas landas. Sebutkan nama Bandar udara yang berada di pulau Jawa!'
+                'pertanyaan' => 'Pembagian waktu di Indonesia diatur melalui Keputusan Presiden Republik Indonesia Nomor 41 Tahun 1987 yang ditetapkan pada tanggal 26 November 1987 oleh Presiden Soeharto. Indonesia terbagi dalam tiga waktu yaitu Waktu Indonesia Barat (WIB), Waktu Indonesia Tengah (WITA), Waktu Indonesia Timur (WIT). Provinsi Aceh masuk zona Waktu Indonesia Barat. Sebutkan nama-nama Provinsi selain Provinsi Aceh yang masuk di zona Waktu Indonesia Barat!'
             ], [
                 'id_tema' => 3,
-                'pertanyaan' => 'Taman nasional adalah kawasan pelestarian alam yang mempunyai ekosistem asli. Sebutkan taman nasional apa saja yang berada di pulau Jawa?'
+                'pertanyaan' => 'Indonesia merupakan negara kepulauan yang terletak di lingkaran api Pasifik, dikenal memiliki banyak gunung berapi yang tersebar di seluruh wilayahnya. Di antara ribuan gunung tersebut, sebutkan 10 gunung tertinggi di Indonesia!'
             ], [
                 'id_tema' => 3,
-                'pertanyaan' => 'Indonesia dibagi menjadi tiga wilayah berdasarkan zona waktu yakni Waktu Indonesia Barat, Waktu Indonesia Tengah maupun Waktu Indonesia Timur. Sebutkan nama-nama kota yang termasuk dalam Waktu Indonesia Barat?'
+                'pertanyaan' => 'Pasal 32 ayat (1) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 menyebutkan bahwa “Negara memajukan kebudayaan nasional Indonesia di tengah peradaban dunia dengan menjamin kebebasan masyarakat dalam memelihara dalam mengembangkan nilai-nilai budayanya”. Sebutkan tarian tradisional dari Provinsi Aceh!'
+            ], [
+                'id_tema' => 3,
+                'pertanyaan' => 'Sebutkan gambar pahlawan nasional yang ada di mata uang rupiah Indonesia!'
             ],
 
             /**
-             * Sesi 2
+             * Sesi 1
              *
-             * NKRI.
+             * NASIONAL & INTERNASIONAL.
              */
 
             [
                 'id_tema' => 4,
-                'pertanyaan' => 'Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan atau yang dikenal dengan BPUPKI dibentuk pada masa pendudukan Jepang di Indonesia. Sebutkan tugas-tugas yang diberikan kepada BPUPKI saat melaksanakan persidangan pada tanggal 29 Mei sampai 01 Juni 1945 dan 10 sampai 17 Juli 1945!'
+                'pertanyaan' => 'Perhimpunan Bangsa-Bangsa Asia Tenggara (ASEAN) didirikan pada tahun 1967. Sebutkan anggota negara ASEAN saat ini?'
             ], [
                 'id_tema' => 4,
-                'pertanyaan' => 'Konferensi Meja Bundar adalah sebuah pertemuan yang dilaksanakan di Den Haag, Belanda pada 23 Agustus 1949. Jelaskan hasil dari konferensi tersebut!'
+                'pertanyaan' => 'Pekan Olahraga Nasional 2024 disingkat dengan PON XXI/PON ACEH-SUMUT 2024 penyelenggaraan ke-21 yang merupakan ajang multi-olahraga nasional utama berlangsung dari 8 s.d 20 September 2024 dengan Aceh dan Sumatera Utara sebagai tuan rumah. Sebutkan 10 provinsi teratas yang mendapatkan medali emas terbanyak pada penyelenggaraan PON XXI Aceh-Sumut 2024?'
             ], [
                 'id_tema' => 4,
-                'pertanyaan' => 'Jelaskan makna dari Negara Kesatuan dalam Undang-Undang Dasar 1945!'
+                'pertanyaan' => 'Organisasi Kerja Sama Islam (OKI) didirikan berdasarkan pertemuan tingkat tinggi di Rabat, Maroko, pada 25 September 1969 setelah insiden pembakaran bagian dari Masjid Al-Aqsa pada 21 Agustus 1969. Sebutkan Negara anggota OKI yang berasal di Asia dari tahun 1969-1972!'
+            ], [
+                'id_tema' => 4,
+                'pertanyaan' => 'Kawasan Asia Tenggara memiliki kerjasama perdagangan bebas yang disebut AFTA (ASEAN Free Trade Area). Sebutkan daftar negara-negara anggota organisasi AFTA!'
             ],
         ];
 
