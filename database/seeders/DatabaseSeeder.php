@@ -32,57 +32,48 @@ class DatabaseSeeder extends Seeder
         }
 
 
-
-
-
-
-
-
-
-
-
         $Team = [
             [
-                'name' => 'SMAN 2 NEGARA',
+                'name' => 'SMAS Fatih Bilingual',
                 'run' => 1,
             ],
             [
-                'name' => 'SMAN 1 SINGARAJA',
-                'run' => 1,
-
-            ],
-            [
-                'name' => 'SMAN 1 KUTA UTARA',
+                'name' => 'SMAN 3 Langsa',
                 'run' => 1,
 
             ],
             [
-                'name' => 'SMKN 1 AMLAPURA',
+                'name' => 'SMAN 2 Banda Aceh',
+                'run' => 1,
+
+            ],
+            [
+                'name' => 'SMAS Labschool Unsyiah',
                 'run' => 2,
 
             ],
             [
-                'name' => 'SMAN 1 BANGLI',
+                'name' => 'SMAS Sukma Bangsa Lhokseumawe',
                 'run' => 2,
 
             ],
             [
-                'name' => 'SMAN 1 UBUD',
+                'name' => 'SMAN 10 Fajar Harapan Banda Aceh',
                 'run' => 2,
 
             ],
             [
-                'name' => 'SMAN 1 TABANAN',
+                'name' => 'SMAN 3 Banda Aceh',
                 'run' => 3,
 
             ],
             [
-                'name' => 'SMAN 2 SEMARAPURA',
+                'name' => 'SMAN 4 Banda Aceh',
                 'run' => 3,
 
             ],
             [
-                'name' => 'SMAN 3 DENPASAR',
+                'name' => 'SMAN Modal Bangsa Aceh Besar',
                 'run' => 3,
 
             ],
@@ -114,7 +105,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PertanyaanKotaSemarangSeeder::class);
 
         $wilayahs = [
-            'Semarang',
+            'Aceh',
         ];
 
         foreach ($wilayahs as $role) {
@@ -125,40 +116,40 @@ class DatabaseSeeder extends Seeder
 
         Pernyataan::insert([
             [
-                "pernyataan" => "Pemerintah sudah secara memadai memberikan perlindungan, pemajuan, penegakan dan pemenuhan hak asasi manusia.",
+                "pernyataan" => "1.	Pemekaran daerah sangat baik untuk perkembangan daerah provinsi, kabupaten dan/atau kota.",
                 "run" => 1
             ], [
-                "pernyataan" => "Majelis Permusyawaratan Rakyat (MPR) perlu diberikan kembali wewenang untuk menetapkan Garis-garis Besar Haluan Negara (GBHN).",
+                "pernyataan" => "2.	Wewenang Dewan Perwakilan Daerah perlu setara dengan wewenang Dewan Perwakilan Rakyat.",
                 "run" => 1
             ], [
-                "pernyataan" => "Putusan Mahkamah Konstitusi bersifat final.",
+                "pernyataan" => "3.	Pemindahan ibu kota negara dari Jakarta ke Ibu Kota Nusantara (IKN).",
                 "run" => 1
             ], [
-                "pernyataan" => "Hak interpelasi, hak angket dan hak menyatakan pendapat sudah tepat merupakan hak Dewan Perwakilan Rakyat dalam menerapkan sistem checks and balances.",
+                "pernyataan" => "4.	Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 perlu disempurnakan kembali.",
                 "run" => 2
             ], [
-                "pernyataan" => "Menggunakan dan membawa alat komunikasi genggam (handphone) ke sekolah.",
+                "pernyataan" => "5.	Penerapan hukuman mati di Indonesia bagi pengedar narkoba.",
                 "run" => 2
             ], [
-                "pernyataan" => "Penggunaan Tenaga Kerja Asing di perusahaan Indonesia.",
+                "pernyataan" => "6.	Indonesia Yang Religius sebagaimana diamanatkan Ketetapan MPR RI Nomor VII/MPR/2001 tentang Visi Indonesia belum sesuai harapan.",
                 "run" => 2
             ], [
-                "pernyataan" => "Penegasan dan implementasi negara Indonesia adalah negara hukum sudah berjalan baik.",
+                "pernyataan" => "7.	Hak setiap orang untuk hidup sejahtera lahir dan batin, bertempat tinggal, dan mendapatkan lingkungan hidup yang baik dan sehat serta berhak memperoleh pelayanan kesehatan sudah berjalan dengan baik.",
                 "run" => 3
             ], [
-                "pernyataan" => "Adanya persyaratan untuk mengakomodasi putra daerah dalam proses pemilihan kepala daerah",
+                "pernyataan" => "8.	Masyarakat diberikan kebebasan dalam memelihara dan mengembangkan nilai-nilai budaya daerah.",
                 "run" => 3
             ], [
-                "pernyataan" => "Penyelenggaraan pendidikan bela negara di Indonesia.",
+                "pernyataan" => "9.	Indonesia Yang Mandiri sebagaimana diamanatkan Ketetapan MPR RI Nomor VII/MPR/2001 tentang visi Indonesia belum sesuai harapan.",
                 "run" => 3
             ], [
-                "pernyataan" => "Presiden dan Wakil Presiden memegang jabatan selama lima tahun, dan sesudahnya dapat dipilih kembali dalam jabatan yang sama, hanya untuk satu kali masa jabatan.",
+                "pernyataan" => "10.	Presiden dan Wakil Presiden memegang jabatan selama lima tahun, dan sesudahnya dapat dipilih kembali dalam jabatan yang sama, hanya untuk satu kali masa jabatan.",
                 "run" => 4
             ], [
-                "pernyataan" => "Pelaksanaan pembangunan proyek infrastruktur negara dengan sumber dana berasal dari biaya asing",
+                "pernyataan" => "11.	Dalam Proses Pemberhentian Presiden dan/atau Wakil Presiden, apabila Putusan Mahkamah Konstitusi memutuskan bahwa Presiden dan/atau Wakil Presiden terbukti melakukan pelanggaran hukum, maka dalam sidangnya, MPR tidak harus memberhentikan Presiden dan/atau Wakil Presiden.",
                 "run" => 4
             ], [
-                "pernyataan" => "Pembatasan masa jabatan Anggota DPR selama 2 (dua) periode perlu diatur dalam Undang-Undang.",
+                "pernyataan" => "12.	Penyelenggaraan pendidikan konstitusi bagi warga Negara Republik Indonesia.",
                 "run" => 4
             ],
 
@@ -166,66 +157,63 @@ class DatabaseSeeder extends Seeder
         Pointer::insert([
             [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Kerangka Hukum yang Kuat Indonesia telah menetapkan berbagai undang-undang dan peraturan yang memberikan landasan hukum bagi perlindungan hak asasi manusia, menunjukkan komitmen untuk memajukan dan menegakkan hak-hak tersebut.',
+                'penjelasan' => '●	Dengan pemekaran, pemerintahan daerah dapat lebih dekat dengan masyarakat, sehingga pelayanan publik menjadi lebih cepat dan responsif terhadap kebutuhan lokal.',
                 'sisi' => 'pro'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Partisipasi dalam Konvensi Internasional seperti International Covenant on Civil and Political Rights (ICCPR) dan International Covenant on Economic, Social and Cultural Rights (ICESCR), yang menunjukkan niat baik untuk melindungi dan memajukan hak asasi manusia.`',
+                'penjelasan' => '●	Pemekaran daerah dapat mendorong kemandirian daerah, pertumbuhan ekonomi dengan menciptakan kesempatan kerja baru, meningkatkan investasi, dan pengembangan infrastruktur yang lebih baik.',
                 'sisi' => 'pro'
             ],
-//            [
-//                'pernyataan_id' => 1,
-//                'penjelasan' => 'MPR mencerminkan masyarakat Indonesia dalam melakukan proses kedaulatan rakyat',
-//                'sisi' => 'pro'
-//            ],
-
             [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Lembaga Perlindungan seperti Komnas HAM (Komisi Nasional Hak Asasi Manusia) yang berfungsi untuk memantau, meneliti, dan memberikan rekomendasi terkait perlindungan hak asasi manusia, menunjukkan bahwa pemerintah telah membentuk mekanisme untuk penegakan hak tersebut.',
+                'penjelasan' => '●	Pemekaran memberikan kesempatan bagi masyarakat untuk berpartisipasi lebih aktif dalam pemerintahan dan pengambilan keputusan yang memengaruhi kehidupan mereka.',
                 'sisi' => 'pro'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Kebijakan dan Program Pemerintah dengan berbagai program dan kebijakan yang bertujuan untuk meningkatkan kesejahteraan rakyat, termasuk program-program yang fokus pada pengurangan kemiskinan, pendidikan, dan kesehatan, yang merupakan bagian dari pemenuhan hak asasi manusia.',
+                'penjelasan' => '●	Pemekaran daerah dapat memperkuat identitas lokal dan mendorong kemandirian daerah dalam mengelola sumber daya serta pembangunan, sesuai dengan potensi dan kebutuhan spesifik daerah tersebut.',
                 'sisi' => 'pro'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Pendidikan dan Sosialisasi untuk meningkatkan kesadaran masyarakat tentang hak asasi manusia melalui pendidikan dan sosialisasi, termasuk program-program di sekolah dan lembaga pendidikan, menunjukkan komitmen pemerintah dalam memajukan pemahaman hak asasi manusia.',
+                'penjelasan' => '●	Dasar Hukum Undang-Undang Dasar Negara Republik Indonesia tahun 1945 Pasal 18: Pasal ini mengatur tentang pembagian wilayah negara yang dapat diatur lebih lanjut oleh undang-undang. Ini memberikan landasan konstitusional bagi pemekaran daerah.',
                 'sisi' => 'pro'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Pasal 28I menegaskan bahwa setiap orang berhak atas perlindungan hak asasi manusia, termasuk hak untuk hidup, hak untuk tidak disiksa, dan hak untuk tidak diperlakukan secara sewenang-wenang.',
+                'penjelasan' => '●	UU No. 23 Tahun 2014 tentang Pemerintahan Daerah: undang-undang ini mengatur tentang pembentukan daerah otonom, dan mengamanatkan bahwa pemekaran daerah dapat dilakukan untuk meningkatkan efisiensi, efektivitas, dan akuntabilitas pemerintahan.',
                 'sisi' => 'pro'
-            ], [
+            ],
+            [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Undang-Undang Nomor 39 Tahun 1999 tentang Hak Asasi Manusia yang mengatur secara rinci tentang pengakuan, perlindungan, dan pemenuhan hak asasi manusia di Indonesia. Undang-undang ini menunjukkan komitmen pemerintah untuk memberikan perlindungan terhadap hak asasi manusia.',
-                'sisi' => 'pro'
-
-            ], [
-                'pernyataan_id' => 1,
-                'penjelasan' => 'Perlindungan yang Tidak Merata, pemerintah belum secara memadai memberikan perlindungan, pemajuan, penegakan dan pemenuhan hak asasi manusia, khususnya bagi kelompok rentan seperti masyarakat adat, pekerja migran, dan kelompok minoritas seksual. Undang-Undang Nomor 39 Tahun 1999 tentang Hak Asasi Manusia Pasal 1 angka 1 menyebutkan bahwa HAM adalah sekumpulan hak yang melekat pada hakikat dan keberadaan manusia sebagai ciptaan Tuhan Yang Maha Esa.',
+                'penjelasan' => '●	Pemekaran daerah membutuhkan biaya besar untuk membentuk infrastruktur pemerintahan baru, seperti kantor pemerintahan, fasilitas pelayanan publik, dan gaji pegawai. ',
                 'sisi' => 'kontra'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Pelanggaran HAM terhadap masyarakat adat konflik agraria yang berujung pada penggusuran paksa, pelanggaran hak atas tanah, dan kriminalisasi aktivis. Pelanggaran HAM terhadap pekerja migran seperti perdagangan orang, eksploitasi, dan penyiksaan di negara tujuan. Pelanggaran HAM terhadap kelompok minoritas seksual seperti diskriminasi, kekerasan, dan penolakan akses terhadap pelayanan kesehatan.',
+                'penjelasan' => '●	Pemekaran tidak selalu menjamin perbaikan pelayanan publik, terutama jika pemekaran dilakukan atas dasar politik atau kepentingan elite lokal, bukan kebutuhan riil masyarakat. Daerah hasil pemekaran sering menghadapi masalah koordinasi, infrastruktur yang terbatas, dan lemahnya kapasitas birokrasi.',
                 'sisi' => 'kontra'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Pemerintah belum efektif dalam melakukan edukasi dan sosialisasi mengenai HAM kepada masyarakat luas, sehingga kesadaran akan pentingnya HAM masih rendah.',
+                'penjelasan' => '●	Dasar Hukum: Pasal 18 Undang-Undang Dasar Negara Republik Indonesia tahun 1945 mengatur otonomi daerah agar meningkatkan kesejahteraan, namun dalam praktiknya, banyak pemekaran hanya menambah birokrasi tanpa memperbaiki kualitas layanan publik.',
                 'sisi' => 'kontra'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Anggaran negara yang dialokasikan untuk perlindungan dan pemajuan HAM masih belum memadai, sehingga menghambat upaya-upaya konkret di lapangan.',
+                'penjelasan' => '●	Pemekaran bisa menimbulkan konflik antardaerah terkait pembagian aset, wilayah, atau sumber daya alam, serta memunculkan sentimen kedaerahan dan fragmentasi sosial. Hal ini justru dapat menghambat pembangunan dan merusak stabilitas sosial di tingkat lokal.',
                 'sisi' => 'kontra'
             ], [
                 'pernyataan_id' => 1,
-                'penjelasan' => 'Pemerintah belum konsisten dalam menegakkan hukum bagi pelaku pelanggaran HAM, sehingga menimbulkan impunitas dan mengurangi kepercayaan masyarakat terhadap sistem hukum.',
+                'penjelasan' => '●	Banyak daerah baru hasil pemekaran mengalami keterbatasan tenaga profesional dan kompeten di bidang pemerintahan. Pembentukan daerah baru seringkali diikuti dengan perekrutan pegawai secara besar-besaran tanpa mempertimbangkan kualitas, yang berdampak pada lemahnya tata kelola pemerintahan.',
                 'sisi' => 'kontra'
 
             ], [
-                'pernyataan_id' => 2,
-                'penjelasan' => 'Kepastian Arah Pembangunan, GBHN memberikan arah dan tujuan yang jelas bagi pembangunan nasional. Kembalinya wewenang MPR untuk menetapkan GBHN akan membantu memastikan bahwa setiap kebijakan pemerintah selaras dengan visi dan misi yang telah disepakati secara nasional.',
-                'sisi' => 'pro'
-            ], [
+                'pernyataan_id' => 1,
+                'penjelasan' => '●	Pemekaran daerah sering dimanfaatkan oleh kelompok-kelompok tertentu untuk memperoleh kekuasaan politik atau akses terhadap anggaran daerah. Banyak daerah baru mengalami peningkatan kasus korupsi dan maladministrasi karena lemahnya pengawasan dan transparansi.',
+                'sisi' => 'kontra'
+            ],
+
+
+
+
+
+
+            [
                 'pernyataan_id' => 2,
                 'penjelasan' => 'Koordinasi dan Sinergi Kebijakan dengan adanya GBHN, berbagai sektor dan kebijakan diharapkan dapat terkoordinasi dengan baik, mengurangi tumpang tindih dan konflik kebijakan yang sering terjadi ketika tidak ada pedoman yang jelas.',
                 'sisi' => 'pro'
@@ -749,39 +737,39 @@ class DatabaseSeeder extends Seeder
         ]);
         PertanyaanSesi3::insert([
             [
-                "pertanyaan" => "1.	Pasal 8 ayat (3) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 mengatur adanya Triumvirat untuk melaksanakan tugas kepresidenan, dalam hal Presiden  dan Wakil Presiden mangkat, berhenti, diberhentikan atau tidak dapat melakukan kewajibannya dalam masa jabatannya secara bersamaan. Sebutkan Menteri-Menteri yang dimaksud dengan Triumvirat tersebut!",
+                "pertanyaan" => "Pasal 8 ayat (3) Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 mengatur adanya Triumvirat untuk melaksanakan tugas kepresidenan, dalam hal Presiden  dan Wakil Presiden mangkat, berhenti, diberhentikan atau tidak dapat melakukan kewajibannya dalam masa jabatannya secara bersamaan. Sebutkan Menteri-Menteri yang dimaksud dengan Triumvirat tersebut!",
                 "jawaban" => "Menteri Luar Negeri, Menteri Dalam Negeri, dan Menteri Pertahanan secara bersama-sama.",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "2.	Apakah tujuan dilakukannya Amandemen Pertama Undang-Undang Dasar Republik Indonesia Tahun 1945?",
+                "pertanyaan" => "Apakah tujuan dilakukannya Amandemen Pertama Undang-Undang Dasar Republik Indonesia Tahun 1945?",
                 "jawaban" => "Tujuannya adalah mengubah kekuasaan pembentuk Undang-Undang dari Presiden ke DPR.",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "3.	Sebutkan pasal-pasal pada Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 yang diamandemen pada tahun 1999?",
-                "jawaban" => "Pemerintah menjalankan Anggaran Pendapatan dan Belanja Negara tahun yang lalu.",
+                "pertanyaan" => "Sebutkan pasal-pasal pada Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 yang diamandemen pada tahun 1999?",
+                "jawaban" => "Pasal 5,7,9,13,14,15,17,20 dan 21",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "4.	Siapakah pahlawan yang dikenal sebagai Bapak Proklamator Kemerdekaan Indonesia?",
+                "pertanyaan" => "Siapakah pahlawan yang dikenal sebagai Bapak Proklamator Kemerdekaan Indonesia?",
                 "jawaban" => ": Ir Soekarno dan Dr. Drs. H. Mohammad Hatta",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "5.	Kapan dan di mana istilah Bhineka Tunggal Ika ditemukan?",
+                "pertanyaan" => "Kapan dan di mana istilah Bhineka Tunggal Ika ditemukan?",
                 "jawaban" => "Bhineka Tunggal Ika ditemukan pertama kali pada abad XIV pada masa Kerajaan Majapahit dalam Kitab Sutasoma karya Mpu Tantular.",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "6.	Sebutkan rumusan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 pasal 6A ayat (2)!",
+                "pertanyaan" => "Sebutkan rumusan Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 pasal 6A ayat (2)!",
                 "jawaban" => '“Pasangan calon Presiden dan Wakil Presiden diusulkan oleh partai politik atau gabungan partai politik peserta pemilihan umum sebelum pelaksanaan pemilihan umum”.',
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "7.	“Segala putusan Majelis Permusyawaratan Rakyat ditetapkan dengan suara yang terbanyak”. Kalimat dimaksud termaktub dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 Sebutkan rumusan pasal dan ayat tersebut!",
+                "pertanyaan" => "“Segala putusan Majelis Permusyawaratan Rakyat ditetapkan dengan suara yang terbanyak”. Kalimat dimaksud termaktub dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 Sebutkan rumusan pasal dan ayat tersebut!",
                 "jawaban" => "pasal 2 ayat (3).",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "8.	Sebutkan rumusan Pasal II Aturan Tambahan pada Undang-Undang Dasar Negara Republik Indonesia Tahun 1945!",
+                "pertanyaan" => "Sebutkan rumusan Pasal II Aturan Tambahan pada Undang-Undang Dasar Negara Republik Indonesia Tahun 1945!",
                 "jawaban" => '“Dengan ditetapkannya perubahan Undang-Undang Dasar ini, Undang-Undang Dasar Negara Republik Indonesia tahun 1945 terdiri atas Pembukaan dan pasal-pasal”.',
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => "9.	Berasal dari provinsi manakah pahlawan nasional Frans Kaisiepo?",
+                "pertanyaan" => "Berasal dari provinsi manakah pahlawan nasional Frans Kaisiepo?",
                 "jawaban" => "Papua",
                 'wilayah_id' => 1,
             ], [
@@ -789,132 +777,146 @@ class DatabaseSeeder extends Seeder
                 "jawaban" => "Nomor VI/MPR/2001",
                 'wilayah_id' => 1,
             ], [
-                "pertanyaan" => '11.“Majelis Permusyawaratan Rakyat wajib menyelenggarakan sidang untuk memutuskan usul Dewan Perwakilan Rakyat tersebut paling lambat tiga puluh hari sejak Majelis Permusyawaratan Rakyat menerima usul tersebut”. Pada tahun keberapa ketentuan tersebut terdapat dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 rumusan Pasal 7B ayat (6) yang ditetapkan pada sidang paripurna Majelis Permusyawaratan Rakyat?',
-                "jawaban" => "Tahun 2001",
-                'wilayah_id' => 1
-            ], [
-                "pertanyaan" => "1.	Sebutkan pencipta lagu nasional “Indonesia Pusaka”!",
+                "pertanyaan" => "Sebutkan pencipta lagu nasional “Indonesia Pusaka”!",
                 "jawaban" => "Ismail Marzuki.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "2.	Pasal 10 Undang-Undang Nomor 13 Tahun 2019 Tentang perubahan ketiga atas Undang-Undang Nomor 17 Tahun 2014 tentang Majelis Permusyawaratan Rakyat, Dewan Perwakilan Rakyat, Dewan Perwakilan Daerah, Dan Dewan Perwakilan Rakyat Daerah, mengatur tentang hak anggota MPR. Sebutkan hak-hak tersebut?",
+                "pertanyaan" => "Pasal 10 Undang-Undang Nomor 13 Tahun 2019 Tentang perubahan ketiga atas Undang-Undang Nomor 17 Tahun 2014 tentang Majelis Permusyawaratan Rakyat, Dewan Perwakilan Rakyat, Dewan Perwakilan Daerah, Dan Dewan Perwakilan Rakyat Daerah, mengatur tentang hak anggota MPR. Sebutkan hak-hak tersebut?",
                 "jawaban" => "Anggota MPR berhak mengajukan usul pengubahan pasal Undang-Undang Dasar Negara Republik Indonesia Tahun 1945, Menentukan sikap dan pilihan dalam pengambilan keputusan, Memilih dan dipilih, Membela diri, Imunitas, Protokoler; dan Keuangan dan administratif.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "3.	Siapa pahlawan yang dikenal sebagai 'Sang Ratu Adil'?",
+                "pertanyaan" => "Siapa pahlawan yang dikenal sebagai “Sang Ratu Adil?“",
                 "jawaban" => "Pangeran Diponegoro.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "4.	Pada tanggal 16 Agustus 1945 para pemimpin bangsa “diculik” oleh kelompok pemuda Indonesia. Peristiwa itu dikenal dengan nama?",
+                "pertanyaan" => "Pada tanggal 16 Agustus 1945 para pemimpin bangsa “diculik” oleh kelompok pemuda Indonesia. Peristiwa itu dikenal dengan nama?",
                 "jawaban" => "Peristiwa Rengasdengklok",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "5.	Jumlah bab, pasal, dan ayat Undang Undang Dasar Negara Republik Indonesia Tahun 1945 setelah diubah tahun 1999-2002 adalah 21 bab, 73 pasal, 170 ayat, 3 pasal aturan peralihan, dan 2 pasal aturan tambahan. Perubahan Undang-Undang Dasar Negara Republik Indonesia tahun 1945 pada tahun 1999 – 2002 dilakukan dengan cara?",
+                "pertanyaan" => "Jumlah bab, pasal, dan ayat Undang Undang Dasar Negara Republik Indonesia Tahun 1945 setelah diubah tahun 1999-2002 adalah 21 bab, 73 pasal, 170 ayat, 3 pasal aturan peralihan, dan 2 pasal aturan tambahan. Perubahan Undang-Undang Dasar Negara Republik Indonesia tahun 1945 pada tahun 1999 – 2002 dilakukan dengan cara?",
                 "jawaban" => "Addendum",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "6.	Sesuai dengan Undang-Undang Nomor 15 Tahun 2006, jumlah anggota Badan Pemeriksa Keuangan Republik Indonesia adalah?",
+                "pertanyaan" => "Sesuai dengan Undang-Undang Nomor 15 Tahun 2006, jumlah anggota Badan Pemeriksa Keuangan Republik Indonesia adalah?",
                 "jawaban" => "9 (sembilan) Orang",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "7.	Presiden dapat memberi grasi dan rehabilitasi dengan memperhatikan pertimbangan MA, diatur dalam Undang-Undang Dasar Negara Republik Indonesia tahun 1945. Sebutkan pasal yang mengatur hal tersebut!",
+                "pertanyaan" => "Presiden dapat memberi grasi dan rehabilitasi dengan memperhatikan pertimbangan MA, diatur dalam Undang-Undang Dasar Negara Republik Indonesia tahun 1945. Sebutkan pasal yang mengatur hal tersebut!",
                 "jawaban" => "Pasal 14 ayat (1)",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "8.	Sebutkan tahun dilakukannya amandemen Undang-Undang Dasar Negara Republik Indonesia Tahun 1945?",
+                "pertanyaan" => "Sebutkan tahun dilakukannya amandemen Undang-Undang Dasar Negara Republik Indonesia Tahun 1945?",
                 "jawaban" => "Tahun 1999, tahun 2000, tahun 2001, dan tahun 2002.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "9.	Sebutkan rumusan Undang-Undang Dasar Negara Republik Indonesia tahun 1945 pasal 36A!",
+                "pertanyaan" => "Sebutkan rumusan Undang-Undang Dasar Negara Republik Indonesia tahun 1945 pasal 36A!",
+                "jawaban" => "Lambang Negara ialah garuda pancasila dengan semboyan Bhinneka Tunggal Ika.",
+                'wilayah_id' => 1
+            ], [
+                "pertanyaan" => "Pada tanggal 25 November diperingati dengan Hari Guru. Sebutkan pencipta lagu nasional Himne Guru!",
                 "jawaban" => "Sartono",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945 sebelum diubah terdiri atas 16 bab, 37 pasal, dan 49 ayat, 4 pasal aturan peralihan, dan 2 ayat aturan tambahan. Setelah perubahan, jumlah bab, pasal, ayat, aturan peralihan, dan aturan tambahan adalah?",
-                "jawaban" => "21 bab, 73 pasal, 170 ayat, 3 pasal aturan peralihan, dan 2 pasal aturan tambahan.",
+                "pertanyaan" => "Sebutkan pasal terkait negara menghormati dan memelihara bahasa daerah sebagai kekayaan budaya nasional menurut Undang-Undang Dasar Negara Republik Indonesia tahun 1945!",
+                "jawaban" => "Pasal 32",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Pengelompokan Ketetapan MPRS dan Ketetapan MPR berdasarkan Pasal 6 Ketetapan MPR Nomor I/MPR/2003 adalah?",
-                "jawaban" => "Ketetapan Majelis Permusyawaratan Rakyat Sementara dan Ketetapan Majelis Permusyawaratan Rakyat Republik Indonesia yang tidak perlu dilakukan tindakan hukum lebih lanjut, baik karena bersifat einmalig (final), telah dicabut, maupun telah selesai dilaksanakan.",
+                "pertanyaan" => "Semboyan nasional Bhinneka Tunggal Ika sudah dikenal dalam kitab sutasoma karangan Mpu Tantular. Pada zaman kerajaan apa kitab itu ditulis!",
+                "jawaban" => "Kerajaan Majapahit.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Setiap menteri membidangi urusan tertentu dalam pemerintahan. Pernyataan tersebut merupakan ketentuan dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 yaitu rumusan Pasal dan Ayat berapa?",
-                "jawaban" => "Pasal 17 ayat (3).",
+                "pertanyaan" => "Siapakah Konseptor Lambang Garuda Pancasila?",
+                "jawaban" => "Sultan Hamid II.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Gunung Rinjani adalah salah satu gunung di Indonesia yang terletak di provinsi?",
-                "jawaban" => "Nusa Tenggara Barat.",
+                "pertanyaan" => "Undang-Undang Dasar Negara Republik Indonesia tahun 1945 mengatur kondisi negara dalam keadaan bahaya. Pada pasal berapakah hal tersebut diatur?",
+                "jawaban" => "pasal 12 Undang-Undang Dasar Negara Republik Indonesia tahun 1945.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 23F ayat (1) adalah?",
-                "jawaban" => "Anggota Badan Pemeriksa Keuangan dipilih oleh Dewan Perwakilan Rakyat dengan memperhatikan pertimbangan Dewan Perwakilan Daerah dan diresmikan oleh Presiden.",
+                "pertanyaan" => "UUD NRI Tahun 1945 mengatur adanya non amandement articles pada pasal 37 ayat (5) sebutkan rumusan pasal tersebut!",
+                "jawaban" => "Khusus mengenai bentuk NKRI tidak dapat dilakukan perubahan",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Yang dimaksud dengan rehabilitasi adalah?",
-                "jawaban" => "Pemulihan nama baik yang diberikan oleh Presiden kepada seseorang yang telah dinyatakan bersalah oleh pengadilan, tetapi di kemudian hari ternyata terdapat kekeliruan dalam putusan pengadilan tersebut.",
+                "pertanyaan" => "Di dalam pasal 28 A sampai 28 J, terdapat ketentuan non delegable right (hak yang tidak dapat dikurangi dalam bentuk apapun). Sebutkan minimal 5 (lima) hak-hak tersebut! ",
+                "jawaban" => "</br>-&nbsp;Hak untuk hidup</br>-&nbsp;Hak untuk membentuk keluarga</br>-&nbsp;Hak untuk mengembangkan diri</br>-&nbsp;Hak untuk pengakuan yang sama dihadapan hukum</br>-&nbsp;Hak untuk kebebasan memeluk agama</br>-&nbsp;Hak untuk berkomunikasi</br>-&nbsp;Hak untuk perlindungan diri pribadi</br>-&nbsp;Hak untuk hidup sejahtera lahir dan batin</br>-&nbsp;Hak untuk perlindungan terhadap perlakuan diskriminatif, pemajuan, penegakan, dan pemenuhan</br>-&nbsp;HAM adalah tanggung jawab negara, terutama pemerintah</br>-&nbsp;Hak untuk berkewajiban menghargai hak asasi orang lain serta tunduk kepada pembatasan yang ditetapkan Undang-Undang.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945 rumusan Pasal 1 ayat (3) adalah?",
-                "jawaban" => "Negara Indonesia adalah negara hukum.",
+                "pertanyaan" => "Sebutkan TAP MPR terkait Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 sebagai konstitusi Negara Kesatuan Republik Indonesia ditetapkan sebagai sumber hukum dan atau urutan perundang-undangan RI!",
+                "jawaban" => "TAP. MPR No. III/MPR/2000.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Danau Sentani yang terletak di provinsi?",
-                "jawaban" => "Papua.",
+                "pertanyaan" => "Siapakah yang mengusulkan semboyan Bhinneka Tunggal Ika pada saat sidang BPUPKI?",
+                "jawaban" => "Moh Yamin.",
+                'wilayah_id' => 1
+            ],
+            [
+                "pertanyaan" => "Siapakah Pencipta Lagu Bungong Jeumpa?",
+                "jawaban" => "Abraham Abduh",
+                'wilayah_id' => 1
+            ],
+            [
+                "pertanyaan" => "Cabang-cabang produksi yang penting bagi negara dan yang menguasai hajat hidup orang banyak dikuasai oleh negara. Pernyataan tersebut merupakan rumusan Pasal dan Ayat berapa dalam Undang Undang Dasar Negara Republik Indonesia Tahun 1945?",
+                "jawaban" => "Pasal 33 ayat (2).",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 18 ayat (1) adalah?",
-                "jawaban" => "Negara Kesatuan Republik Indonesia dibagi atas daerah-daerah provinsi dan daerah provinsi itu dibagi atas kabupaten dan kota, yang tiap-tiap provinsi, kabupaten, dan kota itu mempunyai pemerintahan daerah, yang diatur dengan undang-undang.",
+                "pertanyaan" => 'Jelaskan apa yang dimaksud dengan “Asas ius soli”?',
+                "jawaban" => "Asas yang menetapkan kewarganegaraan seseorang sesuai dengan tempat ia dilahirkan",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Bab VI Undang Undang Dasar Negara Republik Indonesia Tahun 1945 mengatur tentang?",
-                "jawaban" => "Pemerintahan Daerah.",
+                "pertanyaan" => "Sebutkan tanggal terkait Undang-Undang Dasar Sementara 1950 yang pernah berlaku di Indonesia!",
+                "jawaban" => "17 Agustus 1950 s.d 5 Juli 1959.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 8 ayat (2) adalah?",
-                "jawaban" => "Dalam hal terjadi kekosongan Wakil Presiden, selambat-lambatnya dalam waktu enam puluh hari, Majelis Permusyawaratan Rakyat menyelenggarakan sidang untuk memilih Wakil Presiden dari dua calon yang diusulkan oleh Presiden.",
+                "pertanyaan" => "Sebutkan latar belakang dikeluarkannya Tap MPR RI Nomor XVIII/MPR/1998!",
+                "jawaban" => "Karena Pedoman Penghayatan dan Pengamalan Pancasila (P4) atau Ekaprasetya Pancakarsa yang dicanangkan dianggap telah disalahgunakan oleh pemerintahan Orde Baru.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Segala putusan Majelis Permusyawaratan Rakyat ditetapkan dengan suara yang terbanyak. Pernyataan tersebut merupakan rumusan Pasal dan Ayat berapa dalam Undang Undang Dasar Negara Republik Indonesia Tahun 1945?",
-                "jawaban" => "Pasal 2 ayat (3).",
+                "pertanyaan" => "Jelaskan latar belakang pembentukan lembaga Dewan Perwakilan Daerah dalam sistem ketatanegaraan Indonesia!",
+                "jawaban" => "Memperkuat ikatan daerah-daerah dalam wadah Negara Kesatuan Republik Indonesia dan memperteguh persatuan kebang¬saan seluruh daerah; meningkatkan agregasi dan akomodasi aspirasi dan kepentingan daerah-daerah dalam perumusan kebijakan nasional berkaitan dengan negara dan daerah; mendorong percepatan demokrasi, pembangunan dan kemajuan daerah secara serasi dan seimbang.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "BAB I Undang Undang Dasar Negara Republik Indonesia Tahun 1945 mengatur tentang?",
-                "jawaban" => "Bentuk dan Kedaulatan.",
+                "pertanyaan" => "Sebutkan rumusan yang tercantum pada Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 terkait pancasila yang benar dan perlu dihayati serta diamalkan!",
+                "jawaban" => "Pembukaan UUD 1945.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 28C ayat (2) adalah?",
-                "jawaban" => "Setiap orang berhak untuk memajukan dirinya dalam memperjuangkan haknya secara kolektif untuk membangun masyarakat, bangsa, dan negaranya.",
+                "pertanyaan" => "Sebutkan minimal 5 (lima) pasal pada Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 yang mengalami perubahan saat pengesahan amandemen!",
+                "jawaban" => "Pasal 1, 2, 3, 5, 6, 7, 8, 9, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30, 31, 32, 33, 34, 36, dan 37",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Pencipta lagu rayuan pulau kelapa adalah?",
-                "jawaban" => "Ismail Marzuki.",
+                "pertanyaan" => "Presiden dan wakil presiden periode 2024-2029 mengucapkan sumpah/janji di sidang paripurna MPR RI pada tanggal berapa?",
+                "jawaban" => "20 Oktober 2024",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Danau tiga warna yang terletak di gunung kelimutu terletak di provinsi?",
-                "jawaban" => "Nusa Tenggara Timur.",
+                "pertanyaan" => "Sebutkan nama-nama fraksi/kelompok DPD di MPR Periode 2024-2029!",
+                "jawaban" => "PDI Perjuangan, Partai Golkar, Partai Gerindra, Partai Nasdem, Partai Kebangkitan Bangsa (PKB), Partai Keadilan Sejahtera (PKS), Partai Amanat Nasional (PAN), Partai Demokrat, dan Kelompok DPD",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 9 ayat (2) adalah?",
-                "jawaban" => "Jika Majelis Permusyawaratan Rakyat atau Dewan Perwakilan Rakyat tidak dapat mengadakan sidang, Presiden dan Wakil Presiden bersumpah menurut agama, atau berjanji dengan sungguh-sungguh di hadapan pimpinan Majelis Permusyawaratan Rakyat dengan disaksikan oleh Pimpinan Mahkamah Agung.",
+                "pertanyaan" => "Sebutkan Ketetapan Majelis Permusyawaratan Rakyat Republik Indonesia Nomor VI/MPR/2000!",
+                "jawaban" => "Pemisahan Tentara Nasional Indonesia dan Kepolisian Negara Republik Indonesia.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Presiden memberi gelar, tanda jasa, dan lain-lain tanda kehormatan yang diatur dengan undang-undang. Pernyataan tersebut merupakan rumusan Pasal berapa dalam Undang Undang Dasar Negara Republik Indonesia Tahun 1945?",
-                "jawaban" => "Pasal 15.",
+                "pertanyaan" => "Jelaskan tentang Hak Angket?",
+                "jawaban" => "Hak angket adalah hak Dewan Perwakilan Rakyat untuk melakukan penyelidikan terhadap pelaksanaan suatu undang-undang/kebijakan pemerintah yang berkaitan dengan hal penting, strategis, dan berdampak luas pada kehidupan bermasyarakat, berbangsa, dan bernegara yang diduga bertentangan dengan peraturan perundang-undangan.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Tuanku Imam Bonjol adalah pahlawan nasional yang merupakan tokoh masyarakat berasal dari Provinsi?",
-                "jawaban" => "Sumatera Barat.",
+                "pertanyaan" => "Pemerintah menetapkan Hari Lahir Pancasila Setiap tanggal 1 Juni. Dasar hukum penetapan hari kelahiran Pancasila 1 Juni adalah?",
+                "jawaban" => "Keputusan Presiden Nomor 24 Tahun 2016.",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 30 ayat (5) adalah?",
-                "jawaban" => "Susunan dan kedudukan Tentara Nasional Indonesia, Kepolisian Negara Republik Indonesia, hubungan kewenangan Tentara Nasional Indonesia dan Kepolisian Negara Republik Indonesia di dalam menjalankan tugasnya, syarat-syarat keikutsertaan warga negara dalam usaha pertahanan dan keamanan negara, serta hal-hal yang terkait dengan pertahanan dan keamanan diatur dengan undang-undang.",
+                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 23 ayat (3) adalah?",
+                "jawaban" => "Apabila Dewan Perwakilan Rakyat tidak menyetujui rancangan anggaran pendapatan dan belanja negara yang diusulkan oleh Presiden, Pemerintah menjalankan Anggaran Pendapatan dan Belanja Negara tahun yang lalu.",
+                'wilayah_id' => 1
+            ], [
+                "pertanyaan" => "Dalam hal tidak ada pasangan calon Presiden dan Wakil Presiden terpilih, dua pasangan calon yang memperoleh suara terbanyak pertama dan kedua dalam pemilihan umum dipilih oleh rakyat secara langsung dan pasangan yang memperoleh suara rakyat terbanyak dilantik sebagai Presiden dan Wakil Presiden. Ketentuan tersebut merupakan rumusan Pasal 6A ayat (4) yang ditetapkan dalam Sidang Majelis Permusyawaratan Rakyat Tahun berapa?",
+                "jawaban" => "2002",
+                'wilayah_id' => 1
+            ], [
+                "pertanyaan" => "Salah satu nama Bandar Udara di Indonesia menggunakan nama pahlawan nasional yaitu Radin Inten II, yang merupakan tokoh masyarakat berasal dari Provinsi?",
+                "jawaban" => "Lampung",
                 'wilayah_id' => 1
             ], [
                 "pertanyaan" => "Menurut Undang-Undang Nomor 18 Tahun 2011 jumlah Anggota Komisi Yudisial adalah?",
                 "jawaban" => "7 (tujuh) orang.",
-                'wilayah_id' => 1
-            ], [
-                "pertanyaan" => "Terbentuknya penyelenggara negara yang peka dan tanggap terhadap kepentingan dan aspirasi rakyat di seluruh wilayah negara termasuk daerah terpencil dan perbatasan, merupakan salah satu indikator dari Visi Indonesia Masa Depan tentang?",
-                "jawaban" => "Baik dan Bersih dalam Penyelenggaraan Negara.",
                 'wilayah_id' => 1
             ], [
                 "pertanyaan" => "H. Oemar Said Cokroaminoto adalah pahlawan nasional yang merupakan tokoh masyarakat berasal dari Provinsi?",
@@ -926,27 +928,19 @@ class DatabaseSeeder extends Seeder
                 'wilayah_id' => 1
             ], [
                 "pertanyaan" => "Pemerintah menetapkan Hari Lahir Pancasila Setiap tanggal 1 Juni. Dasar hukum penetapan hari kelahiran Pancasila 1 Juni adalah?",
-                "jawaban" => "Keputusan Presiden Nomor 24 Tahun 2016.",
+                "jawaban" => "Keputusan Presiden Nomor 24 Tahun 2016",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Tema Hari Ulang Tahun Kemerdekaan Republik Indonesia ke-79 Adalah Nusantara Maju, Indonesia Baru. Apa dasar hukum pembentukan Ibu Kota Nusantara? ",
-                "jawaban" => "Undang-Undang Nomor 3 Tahun 2022 diubah dengan Undang-Undang Nomor 21 Tahun 2023 Tentang Ibu Kota Negara.",
+                "pertanyaan" => "Kota yang menjadi Ibu Kota Provinsi Papua Barat adalah Manokwari, sedangkan Ibu Kota Provinsi Papua adalah?",
+                "jawaban" => "Jayapura",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Pada pasal 4 TAP MPRS/MPR yang dinyatakan tetap berlaku sampai dengan terbentuknya Undang-Undang pada TAP MPR nomor berapa dan tahun berapa tentang penyelenggara Negara yang bersih dan bebas korupsi, kolusi dan nepotisme?",
-                "jawaban" => "TAP MPR Nomor XI/MPR/1998",
+                "pertanyaan" => "Perubahan kedua Undang Undang Dasar Negara Republik Indonesia Tahun 1945 ditetapkan pada Sidang Tahunan MPR Tahun 2000. Salah satu hasil perubahan kedua adalah ditetapkannya BAB IXA (sembilan A) Undang Undang Dasar Negara Republik Indonesia Tahun 1945 yaitu tentang?",
+                "jawaban" => "Wilayah Negara",
                 'wilayah_id' => 1
             ], [
-                "pertanyaan" => "Dewan Perwakilan Daerah memberikan pertimbangan kepada Dewan Perwakilan Rakyat atas rancangan undang-undang tentang?",
-                "jawaban" => "Rancangan undang-undang anggaran pendapatan dan belanja negara dan rancangan undang-undang yang berkaitan dengan pajak, pendidikan, dan agama",
-                'wilayah_id' => 1
-            ], [
-                "pertanyaan" => "Undang Undang Dasar Negara Republik Indonesia Tahun 1945, rumusan Pasal 24 ayat (2) adalah Kekuasaan kehakiman dilakukan oleh sebuah Mahkamah Agung dan badan peradilan yang berada di bawahnya dalam lingkungan peradilan umum, lingkungan peradilan agama, lingkungan peradilan militer, lingkungan peradilan tata usaha negara, dan oleh sebuah Mahkamah Konstitusi. Wewenang Mahkamah Konstitusi menurut ketentuan Pasal 24C ayat (1) adalah?",
-                "jawaban" => "Mengadili pada tingkat pertama dan terakhir yang putusannya bersifat final untuk menguji undang-undang terhadap Undang-Undang Dasar, memutus sengketa kewenangan lembaga negara yang kewenangannya diberikan oleh Undang-Undang Dasar, memutus pembubaran partai politik, dan memutus perselisihan tentang hasil pemilihan umum.",
-                'wilayah_id' => 1
-            ], [
-                "pertanyaan" => "Yang dimaksud tidak pernah mengkhianati negara adalah?",
-                "jawaban" => "Tidak pernah terlibat gerakan separatis, tidak pernah melakukan gerakan secara inkonstitusional atau dengan kekerasan untuk mengubah dasar negara serta tidak pernah melanggar Undang-Undang Dasar Negara Republik Indonesia Tahun 1945.",
+                "pertanyaan" => '“Majelis Permusyawaratan Rakyat wajib menyelenggarakan sidang untuk memutuskan usul Dewan Perwakilan Rakyat tersebut paling lambat tiga puluh hari sejak Majelis Permusyawaratan Rakyat menerima usul tersebut”. Pada tahun keberapa ketentuan tersebut terdapat dalam Undang-Undang Dasar Negara Republik Indonesia Tahun 1945 rumusan Pasal 7B ayat (6) yang ditetapkan pada sidang paripurna Majelis Permusyawaratan Rakyat?',
+                "jawaban" => "Tahun 2001",
                 'wilayah_id' => 1
             ]
         ]);

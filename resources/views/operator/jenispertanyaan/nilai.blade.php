@@ -5,6 +5,11 @@
     <h3>Perolehan Poin</h3>
 </div>
 
+<div class="d-flex jusi">
+    <button class="btn btn-primary mb-3" id="refresh-juri-poin">Refresh Point</button>
+{{--    <button class="btn btn-primary mb-3" id="refresh-juri-poin">Set Run</button>--}}
+</div>
+
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
@@ -244,6 +249,29 @@ $(document).ready(function() {
 <script>
 // Document 3
 $(document).ready(function() {
+
+    $("#refresh-juri-poin").on("click", function () {
+        const pusherKey = "{{ env('PUSHER_APP_KEY') }}";
+        const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+        const pusher = new Pusher(pusherKey, {
+            cluster: pusherCluster,
+            encrypted: true, // Add this if you have encryption enabled on Pusher
+        });
+        $.ajax({
+            url: "/juri-refresh-trigger",
+            type: "POST",
+            success: function (response) {
+                // Handle the response here
+                console.log(response);
+            },
+            error: function (xhr, status, error) {
+                // Handle errors here
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+
     $(".send-data3").on("click", function() {
         let data = $(this).data('team');
         const pusherKey = "{{ env('PUSHER_APP_KEY') }}";

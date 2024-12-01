@@ -155,6 +155,21 @@
             }
         });
 
+        var channel8 = pusher.subscribe('my-channel');
+        channel8.bind('my-event', function (data) {
+            if (data.message == "poin-juri-refresh") {
+                $.ajax({
+                    url: '/sync-juri-poin',
+                    type: 'GET',
+                    success: function (response) {
+                        response.map(function (item) {
+                            $('#poin_' + item.id).text(item.poin);
+                        });
+                    }
+                });
+            }
+        });
+
         function MulaiCountdown(){
             var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik
             var countdownInterval;

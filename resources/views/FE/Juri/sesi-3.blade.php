@@ -33,7 +33,7 @@
 
         const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
         ankorPindahSesi.bind('event-pindah-sesi', function(data) {
-            // console.log(data);
+            console.log(data);
             document.getElementById('tampilkanPertanyaanSesi3').innerText = data.message.pertanyaan;
             document.getElementById('tampilkanJawabanSesi3').innerHTML = `Jawaban : <span class="text-danger">${data.message.jawaban}</span>`;
             const sesi = data.message.sesi;
@@ -165,6 +165,22 @@
                 window.location.href = "/sesi2-juri";
             }
         });
+
+        var channel8 = pusher.subscribe('my-channel');
+        channel8.bind('my-event', function (data) {
+            if (data.message == "poin-juri-refresh") {
+                $.ajax({
+                    url: '/sync-juri-poin',
+                    type: 'GET',
+                    success: function (response) {
+                        response.map(function (item) {
+                            $('#poin_' + item.id).text(item.poin);
+                        });
+                    }
+                });
+            }
+        });
+
 
         function MulaiCountdown(){
             var countdownSeconds = 30; // Ubah kembali ke 20 jika menggunakan detik

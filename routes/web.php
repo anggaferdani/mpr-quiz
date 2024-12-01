@@ -3,18 +3,18 @@
 use App\Events\Device2;
 use App\Events\Device3;
 use App\Events\DeviceSatu;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\PertanyaanController;
+use App\Http\Controllers\PusherController;
 use App\Http\Controllers\Sesi2Controller;
 use App\Http\Controllers\Sesi3Controller;
-use App\Http\Controllers\PusherController;
-use App\Http\Controllers\JawabanController;
 use App\Http\Controllers\ShotcutController;
-use App\Http\Controllers\FrontendController;
-use App\Http\Controllers\PertanyaanController;
-use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\TemaPertanyaanController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,12 +54,14 @@ Route::middleware(['op', 'auth:web'])->prefix('/op')->group(function(){
     Route::post('/sesi-3/setpoin', [Sesi3Controller::class, 'setpoin'])->name('operator.sesi3.setpoin');
     Route::post('/sesi-3/minpoin', [Sesi3Controller::class, 'minpoin'])->name('operator.sesi3.minpoin');
     Route::get('/logout', [LoginController::class, 'logout'])->name('operator.logout');
-    Route::resource('/perolehan-nilai', ParticipantController::class);
+    Route::resource('/perolehan-nilai', ParticipantController::class)->withoutMiddleware("auth:web");
     Route::resource('/shortcut', ShotcutController::class);
     Route::post('/pindah-sesi', [FrontendController::class, 'pindahSesi'])->name('pindah.sesi');
 });
 Route::post('/setpoin', [Sesi3Controller::class, 'setpoin'])->name('setpoin');
 Route::post('/minpoin', [Sesi3Controller::class, 'minpoin'])->name('minpoin');
+
+Route::get('/sync-juri-poin', [ParticipantController::class, 'syncJuriPoin'])->name('sync-juri-poin');
 
 Route::get('/', function () { return redirect()->route('openingSesi1'); });
 Route::get('/sesi1', [FrontendController::class, 'openingSesi1'])->name('openingSesi1');
@@ -121,6 +123,8 @@ Route::get('/spin-button', [FrontendController::class, 'spinButton'])->name('dev
 Route::post('/spin-trigger', [PusherController::class, 'startSpin'])->name('device1');
 Route::get('/spin-button-sesi-2', [FrontendController::class, 'spinButtonSesi2'])->name('spin-button-sesi-2');
 Route::post('/spin-trigger-sesi-2', [PusherController::class, 'startSpinSesi2'])->name('spin-trigger-sesi-2');
+
+Route::post('/juri-refresh-trigger', [PusherController::class, 'juriRefreshPoint'])->name('juriRefreshPoint');
 
 
 

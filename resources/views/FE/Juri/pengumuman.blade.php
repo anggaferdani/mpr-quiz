@@ -39,7 +39,7 @@
         dan Sesi Ketiga: Rebutan Satu Lawan Satu, hasil perlombaan
         Babak {{$setting->run == 4 ? "Final" :"Penyisihan ". $setting->run }}
         Lomba Cerdas Cermat Empat
-        Pilar MPR RI Tahun 2024 di PROVINSI BALI adalah sebagai berikut:</p>
+        Pilar MPR RI Tahun 2024 di Provinsi Aceh adalah sebagai berikut:</p>
 
     <ul class="winner-list">
         <li class="winner-item">
@@ -61,7 +61,7 @@
             Dengan nilai <b>{{$teams[0]->participant_sum_poin}}</b>.<br>
             <br>
             Dengan demikian,<b> {{$teams[0]->name}}</b>. Dari <b>{{$teams[0]->school}}</b>. sebagai Juara pada Babak
-            {{$setting->run == 4 ? "Final Lomba Cerdas Cermat Empat Pilar MPR RI Tahun 2024 di PROVINSI BALI." : "Penyisihan ". $setting->run ." dan berhak melanjutkan ke Babak Final." }}
+            {{$setting->run == 4 ? "Final Lomba Cerdas Cermat Empat Pilar MPR RI Tahun 2024 di Provinsi Aceh." : "Penyisihan ". $setting->run ." dan berhak melanjutkan ke Babak Final." }}
         </li>
     </ul>
 

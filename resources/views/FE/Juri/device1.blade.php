@@ -21,6 +21,8 @@
         // Variabel global untuk menyimpan total poin
         let totalPoin = 0;
 
+        let school;
+
         let lastItem = '';
         console.log('lastItemGlobal', lastItem)
         function updateLastItem(item) {
@@ -36,6 +38,7 @@
             console.log('latestItem', latestItem);
 
             updateLastItem(latestItem);
+            school = latestItem.name;
 
             let $deviceShow = $('<div></div>').addClass('deviceShow').attr('id', latestItem.id);
             let $teamName = $('<h2></h2>').text(`GRUP A`).css({'display': 'block'});
@@ -50,7 +53,16 @@
             $deviceShow.append($schoolName);
             totalPoin = latestItem.total_poin;
 
-            $('body').empty().append($deviceShow);
+            $('body').css({
+                'background-image': 'url(../images/nilaiJuriBg.png)',
+                'background-repeat': 'no-repeat',
+                'background-size': '100% 100%',
+                'height': '100vh',
+                'background-position': 'center center',
+                'display': 'flex',
+                'justify-content': 'center',
+                'align-items': 'center'
+            }).empty().append($deviceShow);
         });
 
 
@@ -86,6 +98,42 @@
 
         });
 
+
+        const ankorPindahSesi = pusher.subscribe('channel-pindah-sesi');
+        ankorPindahSesi.bind('event-pindah-sesi', function (data) {
+            // console.log(data)
+            const sesi = data.message.sesi;
+            if (sesi == 3) {
+                let $deviceShow = $('<div></div>').addClass('deviceShow');
+                let $totalPoints = $('<h1></h1>').text(`A`).css('display', 'block').addClass('totalPoint');
+                let $schoolName = $('<h2></h2>').text(`${school}`).css({
+                    'display': 'block',
+                    'font-size': '70px',
+                    'white-space': 'nowrap',
+                    'position': 'absolute',
+                    'bottom': '55px',
+                    'left': '50%',
+                    'color': "white",
+                    'width': "100%",
+                    'transform': 'translateX(-50%)',
+                    'text-align': 'center'
+                }).addClass('text-uppercase');
+                $deviceShow.append($totalPoints);
+                $deviceShow.append($schoolName);
+                $('body').css({
+                    'background-image': 'url(../images/CERDAS-CERMAT-37.png)',
+                    'background-repeat': 'no-repeat',
+                    'background-size': '100% 100%',
+                    'height': '100vh',
+                    'background-position': 'center center',
+                    'display': 'flex',
+                    'justify-content': 'center',
+                    'align-items': 'center'
+                }).empty().append($deviceShow);
+            }
+        });
+
+
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -97,8 +145,8 @@
     <style>
         body{
             background-image: url(../images/nilaiJuriBg.png);
-            /* D:\application\mpr-quiz\public\images\bg-nilai-juri.png */
             background-repeat: no-repeat;
+
             background-size: 100% 100%;
             height: 100vh;
             background-position: center center;
@@ -106,6 +154,8 @@
             justify-content: center;
             align-items: center;
         }
+
+
         h1{
             font-family: "Poppins", sans-serif;
             font-weight: bold;
@@ -116,6 +166,7 @@
             font-weight: bold;
             font-size: 150px;
         }
+
 
         .deviceShow{
           text-align: center;

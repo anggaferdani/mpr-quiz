@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Pusher\Pusher;
-
-use App\Models\Team;
 use App\Models\Participant;
+use App\Models\Setting;
+use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Pusher\Pusher;
 
 class ParticipantController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $now = Carbon::now()->format('Y-m-d');
         $team = Team::all();
@@ -26,7 +26,23 @@ class ParticipantController extends Controller
         ->orderBy('id_team')
         ->get();
 
+
         return view('operator.jenispertanyaan.nilai', compact('participants', 'now', 'team'));
+    }
+
+
+    public function syncJuriPoin()
+    {
+        $setting = Setting::first();
+        $teams = Team::where("run", $setting->run)->get()->each(function ($team) {
+            $team->poin = Participant::where('id_team', $team->id)
+                ->where('tanggal', Carbon::now()->format('Y-m-d'))
+                ->sum('poin');
+        });
+
+
+        return $teams;
+//        return view('operator.jenispertanyaan.nilai', compact('participants', 'now', 'team'));
     }
 
     /**
