@@ -35,11 +35,11 @@
 <div class="container">
     <p class="greeting">Assalamu’alaikum Warahmatullahi Wabarakatuh,</p>
     <p>Salam Sejahtera Untuk Kita Sekalian,</p>
-    <p>Berdasarkan perolehan nilai pada Sesi Pertama: Wawasan Empat Pilar MPR, Sesi Kedua: Sesi Tematik Empat Pilar MPR,
+    <p>Berdasarkan perolehan nilai pada Sesi Pertama: Wawasan Empat Pilar MPR RI, Sesi Kedua: Sesi Tematik Empat Pilar MPR RI,
         dan Sesi Ketiga: Rebutan Satu Lawan Satu, hasil perlombaan
         Babak {{$setting->run == 4 ? "Final" :"Penyisihan ". $setting->run }}
         Lomba Cerdas Cermat Empat
-        Pilar MPR RI Tahun 2024 di Provinsi Aceh adalah sebagai berikut:</p>
+        Pilar MPR RI Tahun 2024 di Provinsi Jawa Barat adalah sebagai berikut:</p>
 
     <ul class="winner-list">
         <li class="winner-item">
@@ -61,7 +61,7 @@
             Dengan nilai <b>{{$teams[0]->participant_sum_poin}}</b>.<br>
             <br>
             Dengan demikian,<b> {{$teams[0]->name}}</b>. Dari <b>{{$teams[0]->school}}</b>. sebagai Juara pada Babak
-            {{$setting->run == 4 ? "Final Lomba Cerdas Cermat Empat Pilar MPR RI Tahun 2024 di Provinsi Aceh." : "Penyisihan ". $setting->run ." dan berhak melanjutkan ke Babak Final." }}
+            {{$setting->run == 4 ? "Final Lomba Cerdas Cermat Empat Pilar MPR RI Tahun 2024 di Provinsi Jawa Barat." : "Penyisihan ". $setting->run ." dan berhak melanjutkan ke Babak Final." }}
         </li>
     </ul>
 
@@ -70,7 +70,7 @@
 </div>
 </body>
 
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="{{asset("/lib/pusher.min.js")}}"></script>
 <script>
     const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
         cluster: '{{ env('PUSHER_APP_CLUSTER') }}',

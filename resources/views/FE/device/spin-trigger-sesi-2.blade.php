@@ -119,7 +119,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="{{asset("/lib/pusher.min.js")}}"></script>
 
 <script>
     const pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {

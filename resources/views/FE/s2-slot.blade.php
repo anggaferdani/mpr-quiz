@@ -71,7 +71,7 @@
 
 </div>
 
-<script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+<script src="{{asset("/lib/pusher.min.js")}}"></script>
 
 <script>
     const pusherKey = "{{ env('PUSHER_APP_KEY') }}";

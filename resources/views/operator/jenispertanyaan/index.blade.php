@@ -242,7 +242,7 @@
                                     <!-- Pass the ID of the hidden input field to the addPoints function -->
                                     <button type="button" class="btn btn-primary benar"
                                             id="btn-{{str_replace([' ', '.'], '-', $jwb->jawaban)}}"
-                                            onclick="addPoints(this, 'poin{{$tanya->id}}', '{{$jwb->jawaban}}')">Benar
+                                            onclick="addPoints(this, 'poin{{$tanya->id}}', `{{$jwb->jawaban}}`)">Benar
                                     </button>
                                     <div class="form-selectgroup-label-content d-flex align-items-center">{{$jwb->jawaban}}</div>
                                     <button type="button" class="btn btn-danger batal" onclick="cancelPoints(this, 'poin{{$tanya->id}}')"><i class="bi bi-x"></i></button>
@@ -549,7 +549,7 @@ $(document).ready(function() {
 @endsection
 
 @push('header.javascript')
-    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="{{asset("/lib/pusher.min.js")}}"></script>
 
     <script>
         // Initiate pusher

@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script src="{{asset("/lib/pusher.min.js")}}"></script>
 
     <link rel="stylesheet" href="{{asset('dist/assets/extensions/simple-datatables/style.css')}}">
     <link rel="stylesheet" href="{{asset('dist/assets/css/pages/simple-datatables.css')}}">
@@ -112,7 +112,7 @@
                 <ul class="submenu submenu-closed" style="--submenu-height: 86px;">
                     <li class="submenu-item">
                         <a href="{{ Route('operator.logout') }}" class="submenu-link">Logout</a>
-                        
+
                     </li>
                 </ul>
             </li>
@@ -159,7 +159,7 @@
 <script type="text/javascript" src="{{asset('image-uploader/dist/image-uploader.min.js')}}"></script>
 @stack('scripts')
 
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="{{asset("/lib/pusher.min.js")}}"></script>
 
 
 {{-- PUSHER --}}
